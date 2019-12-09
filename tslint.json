@@ -131,6 +131,17 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-unused-variable": true
-  }
+    "no-unused-variable": true,
+    "prefer-mapped-imports": [
+      true,
+      {
+        "prefix": "@src/",
+        "prefix-mapped-to": "src/",
+        "base-url": "src/"
+      }
+    ]
+  },
+  "extends": [
+    "@nativescript/tslint-rules"
+  ]
 }

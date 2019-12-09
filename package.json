@@ -10,6 +10,10 @@
     "url": "https://github.com/akveo/ngx-admin/issues"
   },
   "scripts": {
+    "android": "tns run android",
+    "ios": "tns run ios",
+    "mobile": "tns run",
+    "preview": "tns preview",
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
     "start": "ng serve",
@@ -29,6 +33,11 @@
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
+    "nativescript-angular": "~8.20.0",
+    "nativescript-theme-core": "~1.0.4",
+    "reflect-metadata": "~0.1.12",
+    "tns-core-modules": "~6.2.0",
+    "tslib": "1.10.0",
     "@agm/core": "^1.0.0-beta.5",
     "@angular/animations": "^8.0.0",
     "@angular/cdk": "^8.0.0",
@@ -63,6 +72,9 @@
     "@angular/fire": "5.2.3"
   },
   "devDependencies": {
+    "nativescript-dev-webpack": "~1.3.0",
+    "@nativescript/schematics": "~0.7.0",
+    "@nativescript/tslint-rules": "~0.0.2",
     "@angular-devkit/build-angular": "~0.800.2",
     "@angular/cli": "^8.0.2",
     "@angular/compiler-cli": "^8.0.0",
@@ -91,5 +103,11 @@
     "tslint-language-service": "^0.9.9",
     "typescript": "3.4.5",
     "@angular/fire": "5.2.3"
+  },
+  "nativescript": {
+    "id": "org.nativescript.ngsample",
+    "tns-android": {
+      "version": "6.2.0"
+    }
   }
 }
