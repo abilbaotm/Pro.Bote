@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "dw-bote": {
+      "hosting": {
+        "black-dashboard-angular": [
+          "dw-bote"
+        ]
+      }
+    }
+  }
+}
