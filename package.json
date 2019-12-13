@@ -80,6 +80,7 @@
     "firebase": ">= 5.5.7 <8"
   },
   "devDependencies": {
+    "cordova": "9.0.0",
     "@angular-devkit/build-angular": "0.800.3",
     "@angular/cli": "8.0.3",
     "@angular/compiler-cli": "8.0.2",

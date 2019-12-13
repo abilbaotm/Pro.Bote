@@ -25,7 +25,7 @@ export class FirestoreService {
     return this.firestore.collection('cats').doc(documentId).set(data);
   }
 
-  public guardar() {
-    return this.firestore.collection('test').add({"Test":"test"});
+  public guardar(data: any) {
+    return this.firestore.collection('test').add({"test": data});
   }
 }

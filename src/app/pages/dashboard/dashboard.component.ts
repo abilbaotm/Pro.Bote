@@ -474,7 +474,10 @@ export class DashboardComponent implements OnInit {
   public cats = [];
 
   enviarFirebase() {
-    this.firestoreService.guardar();
+    let data;
+    data =  new Date().toString();
+
+    this.firestoreService.guardar(this.data);
     /*this.firestoreService.getCats().subscribe((catsSnapshot) => {
       this.cats = [];
       catsSnapshot.forEach((catData: any) => {
