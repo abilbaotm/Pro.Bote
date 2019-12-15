@@ -10,6 +10,7 @@ import {AuthGuard} from "./core/auth.guard";
 import {UserComponent} from "./pages/user/user.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {RegisterComponent} from "./register/register.component";
+import {UserResolver} from "./pages/user/user.resolver";
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
         path: "",
         canActivate: [AuthGuard],
         loadChildren:
-          "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
+          "./layouts/admin-layout/admin-layout.module#AdminLayoutModule",
+        resolve: { data: UserResolver}
       }
     ],
 }

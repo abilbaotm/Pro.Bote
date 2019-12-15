@@ -23,6 +23,7 @@ import {AuthService} from "./core/auth.service";
 import {UserService} from "./core/user.service";
 import {AuthGuard} from "./core/auth.guard";
 import {RegisterComponent} from "./register/register.component";
+import {UserResolver} from "./pages/user/user.resolver";
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import {RegisterComponent} from "./register/register.component";
     // imports firebase/storage only needed for storage features
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, RegisterComponent],
-  providers: [AuthService, UserService, AuthGuard],
+  providers: [AuthService, UserService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
