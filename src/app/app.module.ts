@@ -7,7 +7,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from "./app.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -42,7 +41,7 @@ import {UserResolver} from "./pages/user/user.resolver";
     ReactiveFormsModule,
     // imports firebase/storage only needed for storage features
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
 })
