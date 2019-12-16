@@ -30,6 +30,14 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: value.displayName
+        }).then(function() {
+          // Update successful.
+        }, function(error) {
+          // An error happened.
+        });
         resolve(res);
       }, err => reject(err))
     })

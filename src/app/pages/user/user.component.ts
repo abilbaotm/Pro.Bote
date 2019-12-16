@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {FirebaseUserModel} from "../../core/user.model";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-user",
@@ -10,12 +11,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class UserComponent implements OnInit {
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
-  private fb: FormBuilder;
 
 
   constructor(
     private route: ActivatedRoute,
-    ) {}
+    public userService: UserService,
+    private fb: FormBuilder,
+) {}
 
   ngOnInit():void {
     this.route.data.subscribe(routeData => {
@@ -34,6 +36,10 @@ export class UserComponent implements OnInit {
   }
 
 
-
-
+  save(value){
+    this.userService.updateCurrentUser(value)
+      .then(res => {
+        console.log(res);
+      }, err => console.log(err))
+  }
 }
