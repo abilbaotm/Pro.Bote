@@ -1,0 +1,16 @@
+build:
+  stage: build
+  image: trion/ng-cli
+  before_script:
+    - npm ci
+
+  script:
+    - ng build --prod
+
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+
+  tags:
+    - docker
