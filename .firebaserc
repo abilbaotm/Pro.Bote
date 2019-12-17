@@ -1,4 +1,7 @@
 {
+   "projects": {
+     "default": "dw-bote"
+   },
   "targets": {
     "dw-bote": {
       "hosting": {
