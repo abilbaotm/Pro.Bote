@@ -65,7 +65,7 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: false
+      useHash: true
     })
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
