@@ -1,22 +1,17 @@
 
 <div class=" content">
   <div class="row">
-      <div class="col-12 col-md-6" *ngFor="let viaje of viajes">
+      <div class="col-12">
         <div class=" card card-stats">
           <div class=" card-body">
             <div class=" row">
               <div class=" col-12">
-                <p class=" cart-title">{{viaje.data.descripcion}}</p>
+                <p class=" cart-title">{{viaje.descripcion}}</p>
                 <p class=" card-category">Usuarios:
-                  <span *ngFor="let usuario of viaje.data.usuarios">{{usuario}} </span>
+                  <span *ngFor="let usuario of viaje.usuarios">{{usuario}} </span>
                 </p>
               </div>
             </div>
-          </div>
-          <div class=" card-footer">
-            <hr>
-            <div class=" stats" routerLink="{{viaje.id}}">
-              <i class=" tim-icons icon-sound-wave"></i> Acceder partida </div>
           </div>
         </div>
       </div>

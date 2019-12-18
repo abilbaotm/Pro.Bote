@@ -37,7 +37,9 @@ export class FirestoreService {
       return ref.where('admin', '==', user.uid);
     }).snapshotChanges();
   }
-
+  public getViaje(documentId: string) {
+    return this.firestore.collection('viajes').doc(documentId).snapshotChanges();
+  }
 
   public guardar(data: any) {
     return this.firestore.collection('test').add({"test": data});
