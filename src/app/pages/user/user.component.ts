@@ -39,6 +39,7 @@ export class UserComponent implements OnInit {
   save(value){
     this.userService.updateCurrentUser(value)
       .then(res => {
+        this.user.name=value.name;
         console.log(res);
       }, err => console.log(err))
   }
