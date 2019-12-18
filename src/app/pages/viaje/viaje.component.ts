@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ViajeComponent implements OnInit {
   private idViaje: string;
-  public viaje: unknown = [];
+  public viaje = {};
 
   constructor(
     private firestoreService: FirestoreService,
