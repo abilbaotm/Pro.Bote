@@ -23,6 +23,7 @@ import {UserService} from "./core/user.service";
 import {AuthGuard} from "./core/auth.guard";
 import {RegisterComponent} from "./register/register.component";
 import {UserResolver} from "./pages/user/user.resolver";
+import {ViajeComponent} from "./pages/viaje/viaje.component";
 
 @NgModule({
   imports: [
