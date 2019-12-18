@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargarViajes();
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
@@ -471,7 +472,7 @@ export class DashboardComponent implements OnInit {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();
   }
-  public cats = [];
+  public viajes = [];
 
   enviarFirebase() {
     let data;
@@ -487,5 +488,18 @@ export class DashboardComponent implements OnInit {
         });
       })
     });*/
+  }
+  cargarViajes() {
+    this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
+      this.viajes = [];
+      viajesSnapshot.forEach((viajeData: any) => {
+        this.viajes.push({
+          id: viajeData.payload.doc.id,
+          data: viajeData.payload.doc.data()
+        });
+        console.log( viajeData.payload.doc.data())
+
+      })
+    });
   }
 }

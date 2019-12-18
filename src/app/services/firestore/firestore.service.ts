@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {FirebaseUserModel} from "../../core/user.model";
+import * as firebase from "firebase";
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
+  user: FirebaseUserModel = new FirebaseUserModel();
+
   constructor(
     private firestore: AngularFirestore
   ) {}
@@ -24,6 +28,16 @@ export class FirestoreService {
   public updateCat(documentId: string, data: any) {
     return this.firestore.collection('cats').doc(documentId).set(data);
   }
+
+
+  public getViajes() {
+    var user = firebase.auth().currentUser;
+
+    return this.firestore.collection('viajes', ref => {
+      return ref.where('admin', '==', user.uid);
+    }).snapshotChanges();
+  }
+
 
   public guardar(data: any) {
     return this.firestore.collection('test').add({"test": data});
