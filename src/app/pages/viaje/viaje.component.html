@@ -6,9 +6,9 @@
           <div class=" card-body">
             <div class=" row">
               <div class=" col-12">
-                <p class=" cart-title">{{viaje.descripcion}}</p>
+                <p class=" cart-title">{{viaje[0].descripcion}}</p>
                 <p class=" card-category">Usuarios:
-                  <span *ngFor="let usuario of viaje.usuarios">{{usuario}} </span>
+                  <span *ngFor="let usuario of viaje[0].usuarios">{{usuario}} </span>
                 </p>
               </div>
             </div>

@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ViajeComponent implements OnInit {
   private idViaje: string;
-  public viaje = {};
+  public viaje = [];
 
   constructor(
     private firestoreService: FirestoreService,
@@ -25,7 +25,7 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
       console.log(dbviaje.payload.data())
-      this.viaje = dbviaje.payload.data()
+      this.viaje.push(dbviaje.payload.data())
     });
 
     console.log(this.idViaje)
