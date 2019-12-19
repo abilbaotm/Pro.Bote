@@ -503,7 +503,5 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  nuevoViaje() {
-    this.firestoreService.nuevoViaje().then()
-  }
+
 }

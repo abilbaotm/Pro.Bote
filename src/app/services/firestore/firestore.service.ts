@@ -45,9 +45,9 @@ export class FirestoreService {
     return this.firestore.collection('test').add({"test": data});
   }
 
-  nuevoViaje() {
+  nuevoViaje(descriptcion: string) {
     var user = firebase.auth().currentUser;
 
-    return this.firestore.collection( 'viajes').add({"admin": user.uid, "descripcion": "Test", "usuarios": ["Pablo", "Asier"]})
+    return this.firestore.collection( 'viajes').add({"admin": user.uid, "descripcion": descriptcion, "usuarios": ["Pablo", "Asier"]})
   }
 }

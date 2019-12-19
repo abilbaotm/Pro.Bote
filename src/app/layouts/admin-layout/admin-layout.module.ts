@@ -11,6 +11,7 @@ import { UserComponent } from "../../pages/user/user.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {ViajeComponent} from "../../pages/viaje/viaje.component";
+import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {ViajeComponent} from "../../pages/viaje/viaje.component";
     DashboardComponent,
     UserComponent,
     ViajeComponent,
+    NuevoviajeComponent,
     NotificationsComponent,
     // RtlComponent
   ]

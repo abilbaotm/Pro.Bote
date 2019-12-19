@@ -1,0 +1,17 @@
+
+<div class=" content">
+  <div class="row">
+      <div class="col-12">
+        <form (ngSubmit)="nuevoViaje(nuevoViajeForm.value)" [formGroup]="nuevoViajeForm">
+
+          <label for="descripcion">Descripcion</label>
+          <input type="text" formControlName="descripcion">
+
+          <input type="submit" class="btn--blue btn--add" [disabled]="!nuevoViajeForm.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
+        </form>
+      </div>
+  </div>
+
+
+
+</div>
