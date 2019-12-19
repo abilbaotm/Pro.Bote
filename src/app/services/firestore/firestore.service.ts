@@ -50,4 +50,8 @@ export class FirestoreService {
 
     return this.firestore.collection( 'viajes').add({"admin": user.uid, "descripcion": descriptcion, "usuarios": ["Pablo", "Asier"]})
   }
+
+  borrarViaje(id: string) {
+    return this.firestore.collection('viajes').doc(id).delete()
+  }
 }

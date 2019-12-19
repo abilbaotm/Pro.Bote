@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: "app-dashboard",
@@ -14,7 +14,8 @@ export class ViajeComponent implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
 
 
 ) { }
@@ -33,4 +34,10 @@ export class ViajeComponent implements OnInit {
 
   }
 
+  borrarViaje() {
+    this.firestoreService.borrarViaje(this.idViaje).then(() => {
+        this.router.navigate(['/dashboard'])
+      }
+    )
+  }
 }
