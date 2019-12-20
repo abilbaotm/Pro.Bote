@@ -12,6 +12,7 @@ import { UserComponent } from "../../pages/user/user.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {ViajeComponent} from "../../pages/viaje/viaje.component";
 import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
+import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
     UserComponent,
     ViajeComponent,
     NuevoviajeComponent,
+    NuevogastoComponent,
     NotificationsComponent,
     // RtlComponent
   ]
