@@ -59,6 +59,7 @@ export class FirestoreService {
   }
 
   borrarViaje(id: string) {
+    // TODO: borrar 'gastos'. Se quedaran documentos huérfanos hasta arreglar esto.
     return this.firestore.collection('viajes').doc(id).delete()
   }
 }
