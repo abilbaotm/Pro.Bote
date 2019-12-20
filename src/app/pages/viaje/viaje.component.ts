@@ -19,6 +19,7 @@ export class ViajeComponent implements OnInit {
 
 
 ) { }
+  public gastos = [];
 
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
@@ -29,7 +30,19 @@ export class ViajeComponent implements OnInit {
       this.viaje.push(dbviaje.payload.data())
     });
 
-    console.log(this.idViaje)
+    this.firestoreService.getGastos(this.idViaje).subscribe((viajesSnapshot) => {
+      this.gastos = [];
+      viajesSnapshot.forEach((viajeData: any) => {
+        this.gastos.push({
+          id: viajeData.payload.doc.id,
+          data: viajeData.payload.doc.data()
+        });
+
+      })
+      console.log(this.gastos)
+
+    });
+
 
 
   }

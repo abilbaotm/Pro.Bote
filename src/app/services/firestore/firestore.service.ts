@@ -41,6 +41,13 @@ export class FirestoreService {
     return this.firestore.collection('viajes').doc(documentId).snapshotChanges();
   }
 
+  public getGastos(documentId: string) {
+    return this.firestore.collection('viajes').doc(documentId).collection("gastos").snapshotChanges()
+  }
+
+  public getGasto(documentId: string, id: string) {
+    return this.firestore.collection('viajes').doc(documentId).collection("gastos").doc(id).snapshotChanges()
+  }
   public guardar(data: any) {
     return this.firestore.collection('test').add({"test": data});
   }
