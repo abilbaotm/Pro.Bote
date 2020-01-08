@@ -3,29 +3,67 @@ import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FirebaseUserModel} from "../../core/user.model";
 
 @Component({
   selector: "app-nuevoviaje",
   templateUrl: "nuevoviaje.component.html"
 })
 export class NuevoviajeComponent implements OnInit {
+  user: FirebaseUserModel = new FirebaseUserModel();
   private idViaje: string;
   public viaje = [];
-  public nuevoViajeForm = new FormGroup({
-    descripcion: new FormControl('', Validators.required),
-    //usuarios: new FormControl('', Validators.required),
-  });
+  public form 			: FormGroup;
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router,
+    private _FB          : FormBuilder
 
 
-) { }
+) {
+    this.form = this._FB.group({
+      descripcion : ['', Validators.required],
+      terceros     : this._FB.array([
+        this.initTechnologyFields()
+      ])
+    });
+  }
 
+  initTechnologyFields() : FormGroup
+  {
+    return this._FB.group({
+      //TODO: controlar tipo de dato
+      nombre 		: ['', Validators.required],
+      email 		: ['', Validators.required]
+    });
+  }
+  addNewInputField() : void
+  {
+    const control = <FormArray>this.form.controls.terceros;
+    control.push(this.initTechnologyFields());
+  }
+  removeInputField(i : number) : void
+  {
+    const control = <FormArray>this.form.controls.terceros;
+    control.removeAt(i);
+  }
+  manage(val : any) : void
+  {
+    console.dir(val);
+  }
   ngOnInit() {
+
+    this.route.data.subscribe(routeData => {
+      let data = routeData['data'];
+      if (data) {
+        this.user = data;
+      }
+    })
+
+
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
 
 
@@ -41,8 +79,7 @@ export class NuevoviajeComponent implements OnInit {
   public documentId = null;
   public currentStatus = 1;
   nuevoViaje(form, documentId = this.documentId) {
-
-    this.firestoreService.nuevoViaje(form.descripcion).then( (docRef => {
+    this.firestoreService.nuevoViaje(form).then( (docRef => {
       console.log(docRef);
       this.router.navigate([`/viaje/${docRef.id}`])
     } ) )

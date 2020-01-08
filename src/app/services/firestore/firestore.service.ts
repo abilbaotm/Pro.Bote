@@ -52,10 +52,20 @@ export class FirestoreService {
     return this.firestore.collection('test').add({"test": data});
   }
 
-  nuevoViaje(descriptcion: string) {
+  nuevoViaje(formdata: any) {
     var user = firebase.auth().currentUser;
 
-    return this.firestore.collection( 'viajes').add({"admin": user.uid, "descripcion": descriptcion, "usuarios": ["Pablo", "Asier"]})
+    console.log(formdata.terceros.unshift({
+      email: user.email,
+      nombre: user.displayName
+    }));
+    return this.firestore.collection( 'viajes').add(
+      {
+        "admin": user.uid,
+        "descripcion": formdata.descripcion,
+        "terceros": formdata.terceros
+      }
+    )
   }
 
   borrarViaje(id: string) {

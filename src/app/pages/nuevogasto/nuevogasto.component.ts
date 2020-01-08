@@ -42,7 +42,7 @@ export class NuevogastoComponent implements OnInit {
   public currentStatus = 1;
   nuevoViaje(form, documentId = this.documentId) {
 
-    this.firestoreService.nuevoViaje(form.descripcion).then( (docRef => {
+    this.firestoreService.nuevoViaje(form).then( (docRef => {
       console.log(docRef);
       this.router.navigate([`/viaje/${docRef.id}`])
     } ) )

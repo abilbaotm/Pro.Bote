@@ -2,12 +2,65 @@
 <div class=" content">
   <div class="row">
       <div class="col-12">
-        <form (ngSubmit)="nuevoViaje(nuevoViajeForm.value)" [formGroup]="nuevoViajeForm">
+        <form (ngSubmit)="nuevoViaje(form.value)" [formGroup]="form">
 
-          <label for="descripcion">Descripcion</label>
-          <input type="text" formControlName="descripcion">
 
-          <input type="submit" class="btn--blue btn--add" [disabled]="!nuevoViajeForm.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
+
+          <input
+            type="text"
+            maxlength="40"
+            formControlName="descripcion" />
+
+          <div
+            formArrayName="terceros"
+            margin-bottom>
+
+            Nombre: <input
+              class=""
+              type="text"
+              disabled=""
+              value="{{user.name}}"
+            />
+            Email: <input
+            class=""
+            type="text"
+            disabled=""
+            value="{{user.email}}"
+          />
+
+
+            <section
+              [formGroupName]="i"
+              *ngFor="let tech of form.controls.terceros.controls; let i = index">
+                  Nombre: <input
+                    type="text"
+                    maxlength="50"
+                    formControlName="nombre" />
+
+                  Email: <input
+                    type="email"
+                    maxlength="50"
+                    formControlName="email" />
+
+
+                <!-- Allow generated input field to be removed -->
+                <span
+                  *ngIf="form.controls.terceros.length > 1"
+                  (click)="removeInputField(i)">
+                     Remove
+                  </span>
+            </section>
+          </div>
+
+
+          <!-- Allow new input field to be generated/added -->
+          <span
+            (click)="addNewInputField()">
+               Añadir persona
+         </span>
+          <br/>
+          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
+
         </form>
       </div>
   </div>
