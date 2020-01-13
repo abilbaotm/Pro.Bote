@@ -26,10 +26,11 @@ export class ViajeComponent implements OnInit {
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
-      console.log(dbviaje.payload.data())
       this.viaje.push(dbviaje.payload.data())
     });
 
+    console.log("this.viaje")
+    console.log(this.viaje)
     this.firestoreService.getGastos(this.idViaje).subscribe((viajesSnapshot) => {
       this.gastos = [];
       viajesSnapshot.forEach((viajeData: any) => {

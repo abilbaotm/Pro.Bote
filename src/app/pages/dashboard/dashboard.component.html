@@ -16,7 +16,9 @@
               <div class=" col-12">
                 <p class=" cart-title">{{viaje.data.descripcion}}</p>
                 <p class=" card-category">Usuarios:
-                  <span *ngFor="let usuario of viaje.data.terceros">{{usuario["nombre"]}} </span>
+                  <span *ngFor="let usuario of viaje.data.permitidos | keyvalue">
+                    {{usuario.value["nombre"]}}
+                  </span>
                 </p>
               </div>
             </div>

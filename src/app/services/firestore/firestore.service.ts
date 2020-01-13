@@ -34,7 +34,8 @@ export class FirestoreService {
     var user = firebase.auth().currentUser;
 
     return this.firestore.collection('viajes', ref => {
-      return ref.where('admin', '==', user.uid);
+      var path = new firebase.firestore.FieldPath('permitidos', user.email ,'activo');
+      return ref.where(path, '==', true);
     }).snapshotChanges();
   }
   public getViaje(documentId: string) {
@@ -55,15 +56,27 @@ export class FirestoreService {
   nuevoViaje(formdata: any) {
     var user = firebase.auth().currentUser;
 
-    console.log(formdata.terceros.unshift({
-      email: user.email,
-      nombre: user.displayName
-    }));
+
+    var permitidos = {};
+    permitidos[user.email] = {
+      nombre: user.displayName,
+      activo: true,
+      owner: true
+    }
+    formdata.terceros.forEach(function (ter) {
+      permitidos[ter.email] = {
+        nombre: ter.nombre,
+        activo: true,
+        owner: false,
+      }
+    });
+
+
     return this.firestore.collection( 'viajes').add(
       {
         "admin": user.uid,
         "descripcion": formdata.descripcion,
-        "terceros": formdata.terceros
+        "permitidos": permitidos
       }
     )
   }

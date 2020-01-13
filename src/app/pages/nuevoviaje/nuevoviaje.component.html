@@ -31,7 +31,7 @@
 
             <section
               [formGroupName]="i"
-              *ngFor="let tech of form.controls.terceros.controls; let i = index">
+              *ngFor="let tech of form.controls.terceros['controls']; let i = index">
                   Nombre: <input
                     type="text"
                     maxlength="50"
