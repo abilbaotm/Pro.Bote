@@ -3,6 +3,47 @@
   <div class="row">
       <div class="col-12">
         <h1>FORMULARIO GASTO NUEVO</h1>
+        <form (ngSubmit)="nuevoGasto(form.value)" [formGroup]="form">
+
+
+
+          Descipcion: <input
+            type="text"
+            maxlength="40"
+            formControlName="descripcion" />
+          <br>
+          Cantidad: <input type="number" formControlName="cantidad"/>
+          <br>
+           <input type="checkbox" formControlName="iguales" checked> partes iguales
+          <br>
+
+          <section
+            [formGroupName]="i"
+            *ngFor="let tech of form.controls.terceros['controls']; let i = index">
+            Nombre: <input
+            type="text"
+            maxlength="50"
+            formControlName="nombre" />
+
+            Email: <input
+            type="email"
+            maxlength="50"
+            formControlName="email" />
+
+
+            <!-- Allow generated input field to be removed -->
+            <span
+              *ngIf="form.controls.terceros.length > 1"
+              (click)="removeInputField(i)">
+                     Remove
+                  </span>
+          </section>
+
+
+
+          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
+
+        </form>
       </div>
   </div>
 

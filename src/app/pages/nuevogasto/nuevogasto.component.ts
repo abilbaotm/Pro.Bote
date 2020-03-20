@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: "app-nuevogasto",
@@ -12,18 +12,20 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class NuevogastoComponent implements OnInit {
   private idViaje: string;
   public viaje = [];
-  public nuevoViajeForm = new FormGroup({
-    descripcion: new FormControl('', Validators.required),
-    //usuarios: new FormControl('', Validators.required),
-  });
+  public form 			: FormGroup;
+
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router,
+    private _FB          : FormBuilder
 
-
-) { }
+) {     this.form = this._FB.group({
+    descripcion : ['', Validators.required],
+    cantidad : ['', Validators.required]
+  });
+  }
 
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
@@ -46,5 +48,11 @@ export class NuevogastoComponent implements OnInit {
       console.log(docRef);
       this.router.navigate([`/viaje/${docRef.id}`])
     } ) )
+  }
+
+  nuevoGasto(form, documentId = this.documentId) {
+    this.firestoreService.nuevoGasto(this.idViaje, form).then(
+
+    )
   }
 }

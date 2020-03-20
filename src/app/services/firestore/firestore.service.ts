@@ -85,4 +85,16 @@ export class FirestoreService {
     // TODO: borrar 'gastos'. Se quedaran documentos huérfanos hasta arreglar esto.
     return this.firestore.collection('viajes').doc(id).delete()
   }
+
+  nuevoGasto(idViaje: string, form: any) {
+    var user = firebase.auth().currentUser;
+
+    return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
+      {
+        "creador": user.uid,
+        "descripcion": form.descripcion,
+        "cantidad": form.cantidad
+      }
+    )
+  }
 }
