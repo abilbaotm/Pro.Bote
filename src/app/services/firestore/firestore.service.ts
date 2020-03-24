@@ -69,11 +69,13 @@ export class FirestoreService {
     });
     formdata.terceros.forEach(function (ter) {
       if (ter.email!="") {
+
         permitidos[ter.email] = {
-          nombre: ter.nombre,
           activo: true,
           owner: false,
         }
+      } else {
+        ter.email = null
       }
       personas.push({
         "nombre": ter.nombre, "email": ter.email
