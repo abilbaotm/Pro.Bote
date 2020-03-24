@@ -93,7 +93,9 @@ export class FirestoreService {
       {
         "creador": user.uid,
         "descripcion": form.descripcion,
-        "cantidad": form.cantidad
+        "cantidad": form.cantidad,
+        "partes": {},
+        "moneda": "EUR"
       }
     )
   }

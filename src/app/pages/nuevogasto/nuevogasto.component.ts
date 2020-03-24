@@ -3,7 +3,10 @@ import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Viaje} from "../../models/viaje.model";
+import {map} from "rxjs/operators";
+
 
 @Component({
   selector: "app-nuevogasto",
@@ -11,7 +14,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class NuevogastoComponent implements OnInit {
   private idViaje: string;
-  public viaje = [];
+  public viaje: Viaje;
   public form 			: FormGroup;
 
 
@@ -21,9 +24,15 @@ export class NuevogastoComponent implements OnInit {
     private router: Router,
     private _FB          : FormBuilder
 
-) {     this.form = this._FB.group({
-    descripcion : ['', Validators.required],
-    cantidad : ['', Validators.required]
+) {
+    this.viaje = new Viaje();
+
+    this.form = this._FB.group({
+      descripcion : ['', Validators.required],
+      cantidad : ['', Validators.required],
+      fecha:['', Validators.required],
+      terceros     : this._FB.array([])
+
   });
   }
 
@@ -31,28 +40,38 @@ export class NuevogastoComponent implements OnInit {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
 
 
-    this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
-      console.log(dbviaje.payload.data())
-      this.viaje.push(dbviaje.payload.data())
-    });
+    this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
+      console.log(this.viaje)
+      this.viaje = dbviaje.payload.data() as Viaje;
+      console.log(this.viaje)
+      const controla = <FormArray>this.form.controls.terceros;
 
-    console.log(this.idViaje)
+      for (let perso in this.viaje.permitidos) {
+        controla.push(this.initTechnologyFields(perso));
+      }
 
+      });
 
   }
   public documentId = null;
   public currentStatus = 1;
-  nuevoViaje(form, documentId = this.documentId) {
-
-    this.firestoreService.nuevoViaje(form).then( (docRef => {
-      console.log(docRef);
-      this.router.navigate([`/viaje/${docRef.id}`])
-    } ) )
-  }
 
   nuevoGasto(form, documentId = this.documentId) {
     this.firestoreService.nuevoGasto(this.idViaje, form).then(
 
     )
+  }
+  initTechnologyFields(perso) : FormGroup
+  {
+    return this._FB.group({
+      //TODO: controlar tipo de dato
+      id 		: [perso, Validators.required],
+      nombre 		: [perso, Validators.required],
+      cantidad 		: ['', Validators.required]
+    });
+  }
+
+  removeInputField(i: number) {
+
   }
 }

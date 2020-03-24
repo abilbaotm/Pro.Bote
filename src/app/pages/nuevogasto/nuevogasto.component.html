@@ -11,34 +11,32 @@
             type="text"
             maxlength="40"
             formControlName="descripcion" />
+
+          Fecha: <input type="datetime-local" formControlName="fecha">
           <br>
           Cantidad: <input type="number" formControlName="cantidad"/>
           <br>
-           <input type="checkbox" formControlName="iguales" checked> partes iguales
+          <input type="checkbox" checked> partes iguales
           <br>
+          <div
+            formArrayName="terceros"
+            margin-bottom>
 
           <section
             [formGroupName]="i"
             *ngFor="let tech of form.controls.terceros['controls']; let i = index">
-            Nombre: <input
+            Ref: <input
             type="text"
             maxlength="50"
             formControlName="nombre" />
 
-            Email: <input
-            type="email"
+            Cantidad: <input
+            type="number"
             maxlength="50"
-            formControlName="email" />
+            formControlName="cantidad" />
 
-
-            <!-- Allow generated input field to be removed -->
-            <span
-              *ngIf="form.controls.terceros.length > 1"
-              (click)="removeInputField(i)">
-                     Remove
-                  </span>
           </section>
-
+          </div>
 
 
           <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">

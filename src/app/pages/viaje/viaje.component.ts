@@ -29,8 +29,8 @@ export class ViajeComponent implements OnInit {
       this.viaje.push(dbviaje.payload.data())
     });
 
-    console.log("this.viaje")
-    console.log(this.viaje)
+    console.log("this.viaje");
+    console.log(this.viaje);
     this.firestoreService.getGastos(this.idViaje).subscribe((viajesSnapshot) => {
       this.gastos = [];
       viajesSnapshot.forEach((viajeData: any) => {
@@ -39,7 +39,7 @@ export class ViajeComponent implements OnInit {
           data: viajeData.payload.doc.data()
         });
 
-      })
+      });
       console.log(this.gastos)
 
     });
