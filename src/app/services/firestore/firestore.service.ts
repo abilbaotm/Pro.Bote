@@ -58,18 +58,28 @@ export class FirestoreService {
 
 
     var permitidos = {};
+    var personas = [];
     permitidos[user.email] = {
       nombre: user.displayName,
       activo: true,
       owner: true
-    }
-    formdata.terceros.forEach(function (ter) {
-      permitidos[ter.email] = {
-        nombre: ter.nombre,
-        activo: true,
-        owner: false,
-      }
+    };
+    personas.push({
+      "nombre": user.displayName, "email": user.email
     });
+    formdata.terceros.forEach(function (ter) {
+      if (ter.email!="") {
+        permitidos[ter.email] = {
+          nombre: ter.nombre,
+          activo: true,
+          owner: false,
+        }
+      }
+      personas.push({
+        "nombre": ter.nombre, "email": ter.email
+      })
+    });
+
 
 
     return this.firestore.collection( 'viajes').add(
@@ -77,6 +87,13 @@ export class FirestoreService {
         "admin": user.uid,
         "descripcion": formdata.descripcion,
         "permitidos": permitidos
+      }
+    ).then(
+      docRef => {
+        for( let pers in personas) {
+          this.firestore.collection( 'viajes/' + docRef.id + '/personas').add(personas[pers])
+        }
+        return docRef
       }
     )
   }
