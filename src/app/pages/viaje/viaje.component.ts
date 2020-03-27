@@ -15,6 +15,7 @@ export class ViajeComponent implements OnInit {
   private idViaje: string;
   public viaje: Viaje = new Viaje();
   public personas = new Array<Persona>();
+  public personasIndex = {};
   public gastos = new Array<Gasto>();
 
   constructor(
@@ -36,7 +37,8 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         personasSnapshot.forEach(perso => {
-          this.personas.push(perso.payload.doc.data() as Persona)
+          this.personas.push(perso.payload.doc.data() as Persona);
+          this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
         })
       }
     );
