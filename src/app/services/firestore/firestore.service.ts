@@ -93,7 +93,9 @@ export class FirestoreService {
       {
         "admin": user.uid,
         "descripcion": formdata.descripcion,
-        "permitidos": permitidos
+        "permitidos": permitidos,
+        "monedaPrincipal": formdata.monedaPrincipal,
+        "monedasAdicionales": formdata.monedasAdicionales
       }
     ).then(
       docRef => {
@@ -127,6 +129,8 @@ export class FirestoreService {
       "fecha": gastoForm.fecha,
       "cantidad": gastoForm.cantidad,
       "partesIguales": gastoForm.partesIguales,
+      "moneda":gastoForm.moneda,
+      "ratio": gastoForm.ratio,
       "personas": personas
     };
 

@@ -14,10 +14,15 @@
           <div class=" card-body">
             <div class=" row">
               <div class=" col-12">
-                <p class=" cart-title">{{viaje[0].descripcion}}</p>
-                <p class=" card-category">Usuarios:
-                  <span *ngFor="let usuario of viaje[0].permitidos | keyvalue">
-                    {{usuario.value["nombre"]}}
+                <p class=" cart-title">{{viaje.descripcion}}</p>
+                <p class=" card-description">Usuarios permitidos:<br>
+                  <span *ngFor="let usuario of viaje.permitidos | keyvalue">
+                    - {{usuario.value["nombre"]}} <{{usuario["key"]}}> <span *ngIf="usuario.value['owner']" class="label label-primary">Creador</span><br>
+                  </span>
+                </p>
+                <p class=" card-description">Participantes:<br>
+                  <span *ngFor="let persona of personas">
+                    - {{persona.nombre}} <{{persona.email | lowercase}}> <br>
                   </span>
                 </p>
               </div>
@@ -26,7 +31,32 @@
         </div>
       </div>
     <div class="col-12">
-      <h3>Gastos</h3>
+
+      <div class=" card card-stats">
+        <div class=" card-body">
+          <div class=" row">
+            <div class=" col-12">
+              <h3>Gastos</h3>
+              <table style="width: 100%">
+                <tr>
+                  <th>Desc</th>
+                  <th>Cantidad</th>
+                  <th>Cantidad Moneda Principal</th>
+                  <th>Pagador</th>
+                  <th>Fecha</th>
+                </tr>
+                <tr *ngFor="let gasto of gastos">
+                  <td>{{gasto.descripcion}}</td>
+                  <td>{{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</td>
+                  <td>{{(gasto.cantidad * gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                  <td>{{gasto.pagador}}</td>
+                  <td>{{gasto.fecha}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>

@@ -16,11 +16,18 @@
           <br>
           Cantidad: <input type="number" formControlName="cantidad"/>
           <br>
-          <input type="checkbox" formControlName="partesIguales"> partes iguales
+          <input type="checkbox" formControlName="partesIguales"> partes iguales <br>
+          <select formControlName="moneda">
+            <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
+          </select>
+          Ratio <input type="number" formControlName="ratio"/>
+
           <br>
           <div
             formArrayName="terceros"
             margin-bottom>
+
+
 
           <section
             [formGroupName]="i"
@@ -33,11 +40,10 @@
             maxlength="50"
             formControlName="nombre" disabled/>
 
-            Cantidad: <input
+            Cantidad (moneda local): <input
             type="number"
             maxlength="50"
             formControlName="cantidad" />
-
           </section>
           </div>
 

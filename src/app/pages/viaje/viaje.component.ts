@@ -3,6 +3,9 @@ import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Viaje} from "../../models/viaje.model";
+import {Persona} from "../../models/persona.model";
+import {Gasto} from "../../models/gasto.model";
 
 @Component({
   selector: "app-dashboard",
@@ -10,7 +13,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ViajeComponent implements OnInit {
   private idViaje: string;
-  public viaje = [];
+  public viaje: Viaje = new Viaje();
+  public personas = new Array<Persona>();
+  public gastos = new Array<Gasto>();
 
   constructor(
     private firestoreService: FirestoreService,
@@ -19,31 +24,29 @@ export class ViajeComponent implements OnInit {
 
 
 ) { }
-  public gastos = [];
 
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
-      this.viaje.push(dbviaje.payload.data())
+      this.viaje = (dbviaje.payload.data()) as Viaje
     });
 
-    console.log("this.viaje");
-    console.log(this.viaje);
-    this.firestoreService.getGastos(this.idViaje).subscribe((viajesSnapshot) => {
-      this.gastos = [];
-      viajesSnapshot.forEach((viajeData: any) => {
-        this.gastos.push({
-          id: viajeData.payload.doc.id,
-          data: viajeData.payload.doc.data()
-        });
 
+    this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
+        personasSnapshot.forEach(perso => {
+          this.personas.push(perso.payload.doc.data() as Persona)
+        })
+      }
+    );
+
+    this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
+      gastosSnapshot.forEach(gast => {
+        this.gastos.push(gast.payload.doc.data() as Gasto)
       });
       console.log(this.gastos)
-
-    });
-
+    })
 
 
   }

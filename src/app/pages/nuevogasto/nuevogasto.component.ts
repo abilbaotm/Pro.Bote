@@ -17,6 +17,7 @@ export class NuevogastoComponent implements OnInit {
   private idViaje: string;
   public viaje: Viaje;
   public form 			: FormGroup;
+  public monedas: String[] = new Array<String>();
 
 
   constructor(
@@ -31,6 +32,8 @@ export class NuevogastoComponent implements OnInit {
     this.form = this._FB.group({
       descripcion : ['', Validators.required],
       cantidad : ['', Validators.required],
+      moneda : ['', Validators.required],
+      ratio: [1.00, Validators.required],
       fecha:['', Validators.required],
       partesIguales:[true, Validators.required],
       terceros     : this._FB.array([])
@@ -46,6 +49,12 @@ export class NuevogastoComponent implements OnInit {
       console.log(this.viaje);
       this.viaje = dbviaje.payload.data() as Viaje;
       console.log(this.viaje)
+
+      this.monedas.push(this.viaje.monedaPrincipal);
+      for (let monedasAdicionalesKey in this.viaje.monedasAdicionales) {
+        this.monedas.push(this.viaje.monedasAdicionales[monedasAdicionalesKey])
+      }
+      this.form.controls['moneda'].setValue(this.viaje.monedaPrincipal);
 
 
     });
