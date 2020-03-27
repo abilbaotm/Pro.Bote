@@ -23,6 +23,9 @@
           Ratio <input type="number" formControlName="ratio"/>
 
           <br>
+          Paga: <select formControlName="pagador">
+            <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
+          </select>
           <div
             formArrayName="terceros"
             margin-bottom>

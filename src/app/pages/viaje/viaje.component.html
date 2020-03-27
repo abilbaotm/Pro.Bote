@@ -43,6 +43,7 @@
                   <th>Cantidad</th>
                   <th>Cantidad Moneda Principal</th>
                   <th>Pagador</th>
+                  <th>Creador</th>
                   <th>Fecha</th>
                 </tr>
                 <tr *ngFor="let gasto of gastos">
@@ -50,6 +51,7 @@
                   <td>{{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</td>
                   <td>{{(gasto.cantidad * gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                   <td>{{gasto.pagador}}</td>
+                  <td>{{gasto.creador}}</td>
                   <td>{{gasto.fecha}}</td>
                 </tr>
               </table>

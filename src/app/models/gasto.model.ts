@@ -6,6 +6,7 @@ export class Gasto {
   ratio: number;
   moneda: string;
   pagador: string;
+  creador: string;
   personas: {};
 
   constructor() {

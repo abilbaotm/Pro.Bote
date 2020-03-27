@@ -123,6 +123,7 @@ export class FirestoreService {
       console.log(personasKey)
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
     }
+    var user = firebase.auth().currentUser;
 
     gasto = {
       "descripcion": gastoForm.descripcion,
@@ -131,7 +132,9 @@ export class FirestoreService {
       "partesIguales": gastoForm.partesIguales,
       "moneda":gastoForm.moneda,
       "ratio": gastoForm.ratio,
-      "personas": personas
+      "personas": personas,
+      "creador": user.uid,
+      "pagador": gastoForm.pagador
     };
 
 
@@ -144,7 +147,6 @@ export class FirestoreService {
     personas
 
      */
-    var user = firebase.auth().currentUser;
 
     return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
       gasto
