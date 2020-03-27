@@ -7,6 +7,8 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {Viaje} from "../../models/viaje.model";
 import {map} from "rxjs/operators";
 import {Persona} from "../../models/persona.model";
+import * as firebase from "firebase";
+import * as moment from "moment";
 
 
 @Component({
@@ -17,6 +19,8 @@ export class NuevogastoComponent implements OnInit {
   private idViaje: string;
   public viaje: Viaje;
   public form 			: FormGroup;
+  public monedas: String[] = new Array<String>();
+  public personasViaje: Persona[] = new Array<Persona>();
 
 
   constructor(
@@ -31,21 +35,31 @@ export class NuevogastoComponent implements OnInit {
     this.form = this._FB.group({
       descripcion : ['', Validators.required],
       cantidad : ['', Validators.required],
+      moneda : ['', Validators.required],
+      ratio: [1.00, Validators.required],
       fecha:['', Validators.required],
       partesIguales:[true, Validators.required],
-      terceros     : this._FB.array([])
+      terceros     : this._FB.array([]),
+      pagador: ['', Validators.required]
 
   });
   }
 
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
+    this.form.controls['fecha'].setValue( moment().format( moment.HTML5_FMT.DATETIME_LOCAL));
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
       console.log(this.viaje);
       this.viaje = dbviaje.payload.data() as Viaje;
-      console.log(this.viaje)
+      console.log(this.viaje);
+
+      this.monedas.push(this.viaje.monedaPrincipal);
+      for (let monedasAdicionalesKey in this.viaje.monedasAdicionales) {
+        this.monedas.push(this.viaje.monedasAdicionales[monedasAdicionalesKey])
+      }
+      this.form.controls['moneda'].setValue(this.viaje.monedaPrincipal);
 
 
     });
@@ -57,8 +71,9 @@ export class NuevogastoComponent implements OnInit {
         persona = viajeData.payload.doc.data() as Persona;
         persona.id = viajeData.payload.doc.id;
         controla.push(this.initTechnologyFields(persona));
+        this.personasViaje.push(persona as Persona)
+      });
 
-      })
 
     })
 

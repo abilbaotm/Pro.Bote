@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
+import * as moment from "moment";
 @Injectable({
   providedIn: 'root'
 })
@@ -93,7 +94,9 @@ export class FirestoreService {
       {
         "admin": user.uid,
         "descripcion": formdata.descripcion,
-        "permitidos": permitidos
+        "permitidos": permitidos,
+        "monedaPrincipal": formdata.monedaPrincipal,
+        "monedasAdicionales": formdata.monedasAdicionales
       }
     ).then(
       docRef => {
@@ -121,13 +124,18 @@ export class FirestoreService {
       console.log(personasKey)
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
     }
+    var user = firebase.auth().currentUser;
 
     gasto = {
       "descripcion": gastoForm.descripcion,
-      "fecha": gastoForm.fecha,
+      "fecha":  moment(gastoForm.fecha).unix()* 1000,
       "cantidad": gastoForm.cantidad,
       "partesIguales": gastoForm.partesIguales,
-      "personas": personas
+      "moneda":gastoForm.moneda,
+      "ratio": gastoForm.ratio,
+      "personas": personas,
+      "creador": user.uid,
+      "pagador": gastoForm.pagador
     };
 
 
@@ -140,7 +148,6 @@ export class FirestoreService {
     personas
 
      */
-    var user = firebase.auth().currentUser;
 
     return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
       gasto

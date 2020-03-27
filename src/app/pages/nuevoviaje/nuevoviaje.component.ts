@@ -26,6 +26,8 @@ export class NuevoviajeComponent implements OnInit {
 ) {
     this.form = this._FB.group({
       descripcion : ['', Validators.required],
+      monedaPrincipal : ['EUR', Validators.required],
+      monedasAdicionales : [],
       terceros     : this._FB.array([
         this.initTechnologyFields()
       ])

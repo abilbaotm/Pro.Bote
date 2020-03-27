@@ -3,8 +3,8 @@ export class Viaje {
   admin: string;
   permitidos: {
   };
-  moneda: string;
-  monedas_adiconales: {
+  monedaPrincipal: string;
+  monedasAdicionales: {
     moneda: string;
     ratio: number;
   };
