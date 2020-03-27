@@ -16,7 +16,7 @@
           <br>
           Cantidad: <input type="number" formControlName="cantidad"/>
           <br>
-          <input type="checkbox" checked> partes iguales
+          <input type="checkbox" formControlName="partesIguales"> partes iguales
           <br>
           <div
             formArrayName="terceros"
@@ -31,7 +31,7 @@
             Ref: <input
             type="text"
             maxlength="50"
-            formControlName="nombre" />
+            formControlName="nombre" disabled/>
 
             Cantidad: <input
             type="number"

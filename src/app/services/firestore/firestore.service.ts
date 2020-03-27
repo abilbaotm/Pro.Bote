@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
+import {Gasto} from "../../models/gasto.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -110,16 +111,39 @@ export class FirestoreService {
   }
 
   nuevoGasto(idViaje: string, form: any) {
+    let gastoForm;
+    gastoForm = form ;
+
+    let gasto;
+    let personas = {};
+    console.log(gastoForm);
+    for (let personasKey in gastoForm.terceros) {
+      console.log(personasKey)
+      personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
+    }
+
+    gasto = {
+      "descripcion": gastoForm.descripcion,
+      "fecha": gastoForm.fecha,
+      "cantidad": gastoForm.cantidad,
+      "partesIguales": gastoForm.partesIguales,
+      "personas": personas
+    };
+
+
+
+    /* cantidad:
+    partesIguales:
+    ratio:
+    moneda:
+    pagador:
+    personas
+
+     */
     var user = firebase.auth().currentUser;
 
     return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
-      {
-        "creador": user.uid,
-        "descripcion": form.descripcion,
-        "cantidad": form.cantidad,
-        "partes": {},
-        "moneda": "EUR"
-      }
+      gasto
     )
   }
 }

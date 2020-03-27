@@ -32,6 +32,7 @@ export class NuevogastoComponent implements OnInit {
       descripcion : ['', Validators.required],
       cantidad : ['', Validators.required],
       fecha:['', Validators.required],
+      partesIguales:[true, Validators.required],
       terceros     : this._FB.array([])
 
   });
@@ -67,9 +68,9 @@ export class NuevogastoComponent implements OnInit {
   public currentStatus = 1;
 
   nuevoGasto(form, documentId = this.documentId) {
-    this.firestoreService.nuevoGasto(this.idViaje, form).then(
-
-    )
+    this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
+      this.router.navigate([`/viaje/${this.idViaje}`])
+    } ) )
   }
   initTechnologyFields(perso: Persona) : FormGroup
   {
