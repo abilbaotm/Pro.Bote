@@ -50,7 +50,7 @@
                   <td>{{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</td>
                   <td>{{(gasto.cantidad * gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                   <td>{{personasIndex[gasto.pagador]}}</td>
-                  <td>{{gasto.fecha | date:'HH:MM d/M/yyyy zzzz'}}</td>
+                  <td>{{gasto.fecha | date:'HH:mm d/M/yyyy zzzz'}}</td>
                 </tr>
               </table>
             </div>

@@ -8,6 +8,7 @@ import {Viaje} from "../../models/viaje.model";
 import {map} from "rxjs/operators";
 import {Persona} from "../../models/persona.model";
 import * as firebase from "firebase";
+import * as moment from "moment";
 
 
 @Component({
@@ -46,6 +47,7 @@ export class NuevogastoComponent implements OnInit {
 
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
+    this.form.controls['fecha'].setValue( moment().format( moment.HTML5_FMT.DATETIME_LOCAL));
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
