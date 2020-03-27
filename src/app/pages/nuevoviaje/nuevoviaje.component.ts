@@ -37,7 +37,7 @@ export class NuevoviajeComponent implements OnInit {
     return this._FB.group({
       //TODO: controlar tipo de dato
       nombre 		: ['', Validators.required],
-      email 		: ['', Validators.required]
+      email 		: ['']
     });
   }
   addNewInputField() : void
@@ -80,7 +80,6 @@ export class NuevoviajeComponent implements OnInit {
   public currentStatus = 1;
   nuevoViaje(form, documentId = this.documentId) {
     this.firestoreService.nuevoViaje(form).then( (docRef => {
-      console.log(docRef);
       this.router.navigate([`/viaje/${docRef.id}`])
     } ) )
   }
