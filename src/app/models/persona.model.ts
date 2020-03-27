@@ -1,5 +1,5 @@
 export class Persona {
-  ref: string;
+  id: string;
   nombre: string;
   email: string;
 }

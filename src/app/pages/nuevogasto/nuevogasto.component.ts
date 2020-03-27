@@ -52,7 +52,10 @@ export class NuevogastoComponent implements OnInit {
     this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       const controla = <FormArray>this.form.controls.terceros;
       personasSnapshot.forEach((viajeData: any) => {
-        controla.push(this.initTechnologyFields(viajeData.payload.doc.data() as Persona));
+        let persona;
+        persona = viajeData.payload.doc.data() as Persona;
+        persona.id = viajeData.payload.doc.id;
+        controla.push(this.initTechnologyFields(persona));
 
       })
 
@@ -72,7 +75,7 @@ export class NuevogastoComponent implements OnInit {
   {
     return this._FB.group({
       //TODO: controlar tipo de dato
-      id 		: [perso.ref, Validators.required],
+      id 		: [perso.id, Validators.required],
       nombre 		: [perso.nombre, Validators.required],
       cantidad 		: ['', Validators.required]
     });

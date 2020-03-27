@@ -25,6 +25,9 @@
           <section
             [formGroupName]="i"
             *ngFor="let tech of form.controls.terceros['controls']; let i = index">
+            <input
+              type="hidden"
+              formControlName="id" />
             Ref: <input
             type="text"
             maxlength="50"
