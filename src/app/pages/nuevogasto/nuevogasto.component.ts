@@ -34,7 +34,7 @@ export class NuevogastoComponent implements OnInit {
 
     this.form = this._FB.group({
       descripcion : ['', Validators.required],
-      cantidad : ['', Validators.required],
+      cantidad : [0, Validators.required],
       moneda : ['', Validators.required],
       ratio: [1.00, Validators.required],
       fecha:['', Validators.required],
@@ -71,16 +71,70 @@ export class NuevogastoComponent implements OnInit {
         persona = viajeData.payload.doc.data() as Persona;
         persona.id = viajeData.payload.doc.id;
         controla.push(this.initTechnologyFields(persona));
-        this.personasViaje.push(persona as Persona)
+        this.personasViaje.push(persona as Persona);
+        this.cantidadPersona.push(0)
+
+
+
       });
 
 
-    })
+      // sumas
+      (this.form.get('terceros') as FormArray).valueChanges.subscribe(elemento => {
+        if (!this.form.get('partesIguales').value) {
+          console.log(elemento);
+          let total = 0.00;
+          for (let elementoKey in elemento) {
+            total += elemento[elementoKey].cantidad
+          }
+          this.form.get('cantidad').setValue(total);
+        }
+      });
+      /*
+      (this.form.get('terceros') as FormArray).controls.forEach( elemento => {
+        elemento.get('cantidad').valueChanges.subscribe(subCantidad => {
+          console.log(subCantidad)
+        })
+      });
 
+       */
+
+    });
+
+    //sumas
+    this.form.get('cantidad').valueChanges.subscribe(x => {
+      if (this.form.get('partesIguales').value) {
+
+        let totalADividir = this.form.get('terceros')['controls'].length;
+        for (let tercerosKey in this.form.get('terceros')['controls']) {
+          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').setValue(x / totalADividir)
+        }
+        console.log(x / totalADividir)
+      }
+    });
+
+
+
+
+    this.form.get('partesIguales').valueChanges.subscribe(x => {
+      if (!x)  {
+        this.form.get('cantidad').disable();
+        for (let tercerosKey in this.form.get('terceros')['controls']) {
+          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').enable()
+        }
+      } else {
+        this.form.get('cantidad').enable();
+        for (let tercerosKey in this.form.get('terceros')['controls']) {
+          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').disable()
+        }
+      }
+    })
 
   }
   public documentId = null;
   public currentStatus = 1;
+  cantidadPersona = [];
+  partesIguales: boolean = true;
 
   nuevoGasto(form, documentId = this.documentId) {
     this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
