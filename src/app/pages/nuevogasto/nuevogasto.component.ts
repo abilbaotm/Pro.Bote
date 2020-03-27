@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Viaje} from "../../models/viaje.model";
 import {map} from "rxjs/operators";
+import {Persona} from "../../models/persona.model";
 
 
 @Component({
@@ -41,16 +42,22 @@ export class NuevogastoComponent implements OnInit {
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
-      console.log(this.viaje)
+      console.log(this.viaje);
       this.viaje = dbviaje.payload.data() as Viaje;
       console.log(this.viaje)
+
+
+    });
+
+    this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       const controla = <FormArray>this.form.controls.terceros;
+      personasSnapshot.forEach((viajeData: any) => {
+        controla.push(this.initTechnologyFields(viajeData.payload.doc.data() as Persona));
 
-      for (let perso in this.viaje.permitidos) {
-        controla.push(this.initTechnologyFields(perso));
-      }
+      })
 
-      });
+    })
+
 
   }
   public documentId = null;
@@ -61,12 +68,12 @@ export class NuevogastoComponent implements OnInit {
 
     )
   }
-  initTechnologyFields(perso) : FormGroup
+  initTechnologyFields(perso: Persona) : FormGroup
   {
     return this._FB.group({
       //TODO: controlar tipo de dato
-      id 		: [perso, Validators.required],
-      nombre 		: [perso, Validators.required],
+      id 		: [perso.ref, Validators.required],
+      nombre 		: [perso.nombre, Validators.required],
       cantidad 		: ['', Validators.required]
     });
   }
