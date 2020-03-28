@@ -66,15 +66,6 @@ export class NuevoviajeComponent implements OnInit {
     })
 
 
-    this.idViaje = this.route.snapshot.paramMap.get("viaje");
-
-
-    this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
-      console.log(dbviaje.payload.data())
-      this.viaje.push(dbviaje.payload.data())
-    });
-
-    console.log(this.idViaje)
 
 
   }
