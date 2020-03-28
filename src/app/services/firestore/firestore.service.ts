@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
-import * as moment from "moment";
+import * as moment from 'moment-timezone';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -119,16 +120,39 @@ export class FirestoreService {
 
     let gasto;
     let personas = {};
+    let numPersonas = 0;
     console.log(gastoForm);
     for (let personasKey in gastoForm.terceros) {
-      console.log(personasKey)
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
+      numPersonas++;
     }
-    var user = firebase.auth().currentUser;
 
+    // calcular totales
+    if (gastoForm.partesIguales) {
+      const total = gastoForm.cantidad / numPersonas;
+      console.log("total");
+      console.log(total);
+      for (let personasKey in personas) {
+        personas[personasKey]['cantidad'] = total;
+
+      }
+    } else {
+      let total = 0.00;
+      for (let personasKey in personas) {
+        total += personas[personasKey]['cantidad'];
+      }
+      console.log("total");
+      console.log(total);
+      gastoForm.cantidad = total;
+    }
+
+
+
+    var user = firebase.auth().currentUser;
     gasto = {
       "descripcion": gastoForm.descripcion,
       "fecha":  moment(gastoForm.fecha).unix()* 1000,
+      "timezone": moment.tz.guess(),
       "cantidad": gastoForm.cantidad,
       "partesIguales": gastoForm.partesIguales,
       "moneda":gastoForm.moneda,

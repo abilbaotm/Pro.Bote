@@ -7,6 +7,7 @@ export class Gasto {
   moneda: string;
   pagador: string;
   creador: string;
+  timezone: string;
   personas: {};
 
   constructor() {

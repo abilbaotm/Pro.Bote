@@ -81,7 +81,8 @@
     "zone.js": "0.9.1",
     "firebase": ">= 5.5.7 <8",
     "rxjs-compat": "^6.3.3",
-    "moment": "2.24.0"
+    "moment": "2.24.0",
+    "moment-timezone": "0.5.28"
   },
   "devDependencies": {
     "tslib": "1.10.0",
