@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Viaje} from "../../models/viaje.model";
 import {Persona} from "../../models/persona.model";
 import {Gasto} from "../../models/gasto.model";
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: "app-dashboard",
@@ -45,7 +46,11 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
       gastosSnapshot.forEach(gast => {
-        this.gastos.push(gast.payload.doc.data() as Gasto)
+        let nuevoGasto;
+        nuevoGasto = gast.payload.doc.data() as Gasto;
+        nuevoGasto.fechaLocal = moment.tz(nuevoGasto.fecha, nuevoGasto.timezone).format('HH:mm DD/M/YYYY Z z');
+
+        this.gastos.push(nuevoGasto)
       });
       console.log(this.gastos)
     })

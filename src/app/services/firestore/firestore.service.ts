@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
-import * as moment from "moment";
+import * as moment from 'moment-timezone';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -125,10 +126,10 @@ export class FirestoreService {
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
     }
     var user = firebase.auth().currentUser;
-
     gasto = {
       "descripcion": gastoForm.descripcion,
       "fecha":  moment(gastoForm.fecha).unix()* 1000,
+      "timezone": moment.tz.guess(),
       "cantidad": gastoForm.cantidad,
       "partesIguales": gastoForm.partesIguales,
       "moneda":gastoForm.moneda,
