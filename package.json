@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-prod" : "ng build --prod",
+    "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -82,7 +82,9 @@
     "firebase": ">= 5.5.7 <8",
     "rxjs-compat": "^6.3.3",
     "moment": "2.24.0",
-    "moment-timezone": "0.5.28"
+    "moment-timezone": "0.5.28",
+    "@sweetalert2/ngx-sweetalert2": "~7.3.0",
+    "sweetalert2": "9.10.7"
   },
   "devDependencies": {
     "tslib": "1.10.0",

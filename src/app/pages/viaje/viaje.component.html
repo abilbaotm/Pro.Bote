@@ -5,9 +5,21 @@
         <button routerLink="nuevogasto" class=" btn btn-link" type="button" >
           Nuevo gasto
         </button>
-        <button (click)="borrarViaje()" class=" btn btn-link" type="button" >
+        <button  [swal]="deleteSwal" class=" btn btn-link" type="button" >
           Borrar
         </button>
+        <swal
+          #deleteSwal
+          title="Eliminar viaje {{viaje.descripcion}}?"
+          text="Esta acción no se puede deshacer"
+          icon="warning"
+          cancelButtonText="Cancelar"
+          confirmButtonText="Borrar"
+          [showCancelButton]="true"
+          [focusCancel]="true"
+          (confirm)="borrarViaje()">
+        </swal>
+
       </div>
       <div class="col-12">
         <div class=" card card-stats">

@@ -13,6 +13,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {ViajeComponent} from "../../pages/viaje/viaje.component";
 import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
 import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    SweetAlert2Module,
   ],
   declarations: [
     DashboardComponent,

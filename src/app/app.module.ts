@@ -24,6 +24,7 @@ import {AuthGuard} from "./core/auth.guard";
 import {RegisterComponent} from "./register/register.component";
 import {UserResolver} from "./pages/user/user.resolver";
 import {ViajeComponent} from "./pages/viaje/viaje.component";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import {ViajeComponent} from "./pages/viaje/viaje.component";
     AngularFireStorageModule,
     ReactiveFormsModule,
     // imports firebase/storage only needed for storage features
+    SweetAlert2Module.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],
