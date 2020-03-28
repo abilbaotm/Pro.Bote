@@ -9,6 +9,8 @@ import {map} from "rxjs/operators";
 import {Persona} from "../../models/persona.model";
 import * as firebase from "firebase";
 import * as moment from "moment";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -21,13 +23,14 @@ export class NuevogastoComponent implements OnInit {
   public form 			: FormGroup;
   public monedas: String[] = new Array<String>();
   public personasViaje: Persona[] = new Array<Persona>();
-
+  private ratios: number[] = new Array<number>();
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router,
-    private _FB          : FormBuilder
+    private _FB          : FormBuilder,
+    private httpClient: HttpClient
 
 ) {
     this.viaje = new Viaje();
@@ -60,6 +63,20 @@ export class NuevogastoComponent implements OnInit {
         this.monedas.push(this.viaje.monedasAdicionales[monedasAdicionalesKey])
       }
       this.form.controls['moneda'].setValue(this.viaje.monedaPrincipal);
+
+      //vamos a por los ratios
+      const currencies = this.viaje.monedasAdicionales.toString();
+      const url = `${environment.URLEXTAPI}?base=${this.viaje.monedaPrincipal}&symbols=${currencies}`;
+      this.httpClient
+        .get(url)
+        .subscribe(apiData => {
+          console.log(apiData)
+          this.ratios = apiData['rates'];
+          this.ratios[this.viaje.monedaPrincipal] = 1.00;
+        });
+      this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
+        this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
+      })
 
 
     });

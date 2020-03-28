@@ -10,4 +10,5 @@ export const environment = {
     appId: "1:53136915015:web:04ecdbdb6a53e212020f62",
     measurementId: "G-PKD6CKZGBE"
   },
+  URLEXTAPI: 'https://api.exchangeratesapi.io/latest'
 };
