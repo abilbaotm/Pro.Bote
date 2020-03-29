@@ -14,7 +14,8 @@
           <div class=" card-body">
             <div class=" row">
               <div class=" col-12">
-                <p class=" cart-title">{{viaje.data.descripcion}}</p>
+                <p class=" cart-title">{{viaje.data.descripcion}} <span *ngIf="viaje.data.borrado" class="label label-primary">Pendiente de borrar</span></p>
+
                 <p class=" card-category">Usuarios:
                   <span *ngFor="let usuario of viaje.data.permitidos | keyvalue">
                     {{usuario.value["nombre"]}}

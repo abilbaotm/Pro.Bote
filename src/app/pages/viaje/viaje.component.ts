@@ -68,4 +68,9 @@ export class ViajeComponent implements OnInit {
       }
     )
   }
+
+  cancelarBorrado() {
+    this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {}
+    )
+  }
 }

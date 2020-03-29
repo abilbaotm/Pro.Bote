@@ -2,6 +2,7 @@ import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
 
 export class Viaje {
+  borrado: boolean;
   descripcion: string;
   admin: string;
   permitidos: {

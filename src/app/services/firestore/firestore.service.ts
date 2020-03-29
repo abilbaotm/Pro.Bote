@@ -91,7 +91,6 @@ export class FirestoreService {
       })
     });
 
-console.log(formdata.fechas)
 
     return this.firestore.collection( 'viajes').add(
       {
@@ -105,6 +104,7 @@ console.log(formdata.fechas)
             end: formdata.fechas.endDate.toDate(),
           },
         "timezone": moment.tz.guess(),
+        "borrado": false
       }
     ).then(
       docRef => {
@@ -117,8 +117,11 @@ console.log(formdata.fechas)
   }
 
   borrarViaje(id: string) {
-    // TODO: borrar 'gastos'. Se quedaran documentos huérfanos hasta arreglar esto.
-    return this.firestore.collection('viajes').doc(id).delete()
+    return this.firestore.collection('viajes').doc(id).set({'borrado': true}, { merge: true })
+  }
+
+  borrarViajeCancelar(idViaje: string) {
+    return this.firestore.collection('viajes').doc(idViaje).set({'borrado': false}, { merge: true })
   }
 
   nuevoGasto(idViaje: string, form: any) {
