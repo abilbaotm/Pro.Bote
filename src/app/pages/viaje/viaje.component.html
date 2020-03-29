@@ -26,6 +26,9 @@
           <div class=" card-body">
             <div class=" row">
               <div class=" col-12">
+                <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
+                  Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()">Cancelar</a>
+                </div>
                 <p class=" cart-title">{{viaje.descripcion}}</p>
                 <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
                 </p>
