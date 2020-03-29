@@ -5,6 +5,8 @@ import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FirebaseUserModel} from "../../core/user.model";
+import * as moment from 'moment';
+import {Moment} from "moment";
 
 @Component({
   selector: "app-nuevoviaje",
@@ -30,7 +32,8 @@ export class NuevoviajeComponent implements OnInit {
       monedasAdicionales : [],
       terceros     : this._FB.array([
         this.initTechnologyFields()
-      ])
+      ]),
+      fechas: ['', Validators.required],
     });
   }
 
@@ -71,6 +74,7 @@ export class NuevoviajeComponent implements OnInit {
   }
   public documentId = null;
   public currentStatus = 1;
+  selected: {start: Moment, end: Moment};
   nuevoViaje(form, documentId = this.documentId) {
     this.firestoreService.nuevoViaje(form).then( (docRef => {
       this.router.navigate([`/viaje/${docRef.id}`])

@@ -18,6 +18,8 @@ export class ViajeComponent implements OnInit {
   public personas = new Array<Persona>();
   public personasIndex = {};
   public gastos = new Array<Gasto>();
+  fechasFin: String;
+  fechasInicio: String;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -32,7 +34,9 @@ export class ViajeComponent implements OnInit {
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
-      this.viaje = (dbviaje.payload.data()) as Viaje
+      this.viaje = (dbviaje.payload.data()) as Viaje;
+      this.fechasInicio = moment.tz(this.viaje.fechas.start.toDate(), this.viaje.timezone).format('DD/M/YYYY');
+      this.fechasFin = moment.tz(this.viaje.fechas.end.toDate(), this.viaje.timezone).format('DD/M/YYYY');
     });
 
 

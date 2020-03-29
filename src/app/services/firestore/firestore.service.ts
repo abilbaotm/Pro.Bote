@@ -91,7 +91,7 @@ export class FirestoreService {
       })
     });
 
-
+console.log(formdata.fechas)
 
     return this.firestore.collection( 'viajes').add(
       {
@@ -99,7 +99,12 @@ export class FirestoreService {
         "descripcion": formdata.descripcion,
         "permitidos": permitidos,
         "monedaPrincipal": formdata.monedaPrincipal,
-        "monedasAdicionales": formdata.monedasAdicionales
+        "monedasAdicionales": formdata.monedasAdicionales,
+        "fechas": {
+            start: formdata.fechas.startDate.toDate(),
+            end: formdata.fechas.endDate.toDate(),
+          },
+        "timezone": moment.tz.guess(),
       }
     ).then(
       docRef => {
