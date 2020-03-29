@@ -14,17 +14,19 @@ import {ViajeComponent} from "../../pages/viaje/viaje.component";
 import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
 import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    ReactiveFormsModule,
-    SweetAlert2Module,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        ReactiveFormsModule,
+        SweetAlert2Module,
+        NgxDaterangepickerMd,
+    ],
   declarations: [
     DashboardComponent,
     UserComponent,

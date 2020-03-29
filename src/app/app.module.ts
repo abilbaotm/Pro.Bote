@@ -25,6 +25,10 @@ import {RegisterComponent} from "./register/register.component";
 import {UserResolver} from "./pages/user/user.resolver";
 import {ViajeComponent} from "./pages/viaje/viaje.component";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
+import * as moment from 'moment';
+import * as localization from 'moment/locale/es';
+moment.locale('es', localization);
 
 @NgModule({
   imports: [
@@ -42,7 +46,13 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
     AngularFireStorageModule,
     ReactiveFormsModule,
     // imports firebase/storage only needed for storage features
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgxDaterangepickerMd.forRoot({
+      daysOfWeek: ["do", "lu", "ma", "mi", "ju", "vi", "sá"],
+      monthNames: ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."],
+      firstDay: 1,
+      applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
+    })
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],

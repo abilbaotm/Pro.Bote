@@ -1,3 +1,6 @@
+import Timestamp = firebase.firestore.Timestamp;
+import * as firebase from 'firebase';
+
 export class Viaje {
   descripcion: string;
   admin: string;
@@ -8,4 +11,9 @@ export class Viaje {
     moneda: string;
     ratio: number;
   };
+  fechas: {
+    start: Timestamp,
+    end: Timestamp
+  };
+  timezone: string
 }
