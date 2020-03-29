@@ -24,7 +24,7 @@ export class NuevogastoComponent implements OnInit {
   public monedas: String[] = new Array<String>();
   public personasViaje: Persona[] = new Array<Persona>();
   private ratios: number[] = new Array<number>();
-  private msgRatio: string;
+  public msgRatio: string;
 
   constructor(
     private firestoreService: FirestoreService,
