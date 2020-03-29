@@ -48,9 +48,9 @@ moment.locale('es', localization);
     // imports firebase/storage only needed for storage features
     SweetAlert2Module.forRoot(),
     NgxDaterangepickerMd.forRoot({
-      daysOfWeek: moment.weekdaysMin(),
-      monthNames: moment.monthsShort(),
-      firstDay: moment.localeData().firstDayOfWeek(),
+      daysOfWeek: ["do", "lu", "ma", "mi", "ju", "vi", "sá"],
+      monthNames: ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."],
+      firstDay: 1,
       applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
     })
   ],
