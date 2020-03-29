@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
+import Unsplash, { toJson } from "unsplash-js";
 
 @Component({
   selector: "app-dashboard",
@@ -22,6 +23,16 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const unsplash = new Unsplash({
+      accessKey: "sMiNyfb3_4aGOkoW3V3al1l0-oxTotd-7ZDKmB78sBk",
+      secret: "OQotJKCbCgjsYh_2yasNG1TwRZe_4nNDgkc9_Y6DkNc"
+    });
+    unsplash.search.photos("viaje tokyo", 1)
+      .then(toJson)
+      .then(json => {
+        console.log(json["results"][0])
+        unsplash.photos.downloadPhoto(json["results"][0]);
+      });
     this.cargarViajes();
 
   }
