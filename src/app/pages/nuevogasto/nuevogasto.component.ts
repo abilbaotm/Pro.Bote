@@ -24,6 +24,7 @@ export class NuevogastoComponent implements OnInit {
   public monedas: String[] = new Array<String>();
   public personasViaje: Persona[] = new Array<Persona>();
   private ratios: number[] = new Array<number>();
+  public msgRatio: string;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -66,7 +67,7 @@ export class NuevogastoComponent implements OnInit {
 
       //vamos a por los ratios
       const currencies = this.viaje.monedasAdicionales.toString();
-      const url = `${environment.URLEXTAPI}?base=${this.viaje.monedaPrincipal}&symbols=${currencies}`;
+      const url = `${environment.URLEXTAPI}?base=${this.viaje.monedaPrincipal}`;
       this.httpClient
         .get(url)
         .subscribe(apiData => {
@@ -75,7 +76,13 @@ export class NuevogastoComponent implements OnInit {
           this.ratios[this.viaje.monedaPrincipal] = 1.00;
         });
       this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
-        this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
+        if (this.ratios[monedaSnapshot]!=undefined) {
+          this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
+          this.msgRatio = "";
+        } else {
+          this.form.get('ratio').setValue(1.00);
+          this.msgRatio = "Ratio no disponible para esta divisa";
+        }
       })
 
 

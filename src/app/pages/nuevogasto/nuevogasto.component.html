@@ -20,7 +20,7 @@
           <select formControlName="moneda">
             <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
           </select>
-          Ratio <input type="number" formControlName="ratio"/>
+          Ratio <input type="number" formControlName="ratio"/> {{msgRatio}}
 
           <br>
           Paga: <select formControlName="pagador">
