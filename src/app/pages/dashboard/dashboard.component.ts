@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
   }
   cargarViajes() {
     this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
+      this.todosViajes = {"Activos": [],"Futuros": [],"Archivados": [],"Pendientes de Borrar": []};
       viajesSnapshot.forEach((viajeData: any) => {
         var datosViaje = viajeData.payload.doc.data();
         datosViaje.fechasInicio = moment.tz(datosViaje.fechas.start.toDate(), datosViaje.timezone).format('DD/M/YYYY');
