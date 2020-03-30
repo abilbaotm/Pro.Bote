@@ -97,6 +97,39 @@
       </div>
     </div>
 
+
+    <div class="col-12">
+
+      <div class=" card card-stats">
+        <div class=" card-body">
+          <div class=" row">
+            <div class=" col-12">
+              <h3>Pagos</h3>
+              <table style="width: 100%">
+                <tr>
+                  <th>Pagador</th>
+                  <th>Beneficiario</th>
+                  <th>Nota</th>
+                  <th>Cantidad</th>
+                  <th>Cantidad Moneda Principal</th>
+                  <th>Fecha</th>
+                </tr>
+                <tr *ngFor="let pago of pagos">
+                  <td>{{personasIndex[pago.pagador]}}</td>
+                  <td>{{personasIndex[pago.beneficiario]}}</td>
+                  <td>{{pago.nota}}</td>
+                  <td>{{pago.cantidad | number : '0.2-2'}} {{pago.moneda}}</td>
+                  <td>{{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                  <td>{{pago.fechaLocal }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 
 

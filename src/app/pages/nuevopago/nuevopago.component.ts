@@ -37,7 +37,7 @@ export class NuevopagoComponent implements OnInit {
     this.viaje = new Viaje();
 
     this.form = this._FB.group({
-      nota : ['', Validators.required],
+      nota : [''],
       cantidad : [0, Validators.required],
       moneda : ['', Validators.required],
       ratio: [1.00, Validators.required],

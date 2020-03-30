@@ -56,6 +56,11 @@ export class FirestoreService {
     }).snapshotChanges()
   }
 
+  getPagos(documentId: string) {
+    return this.firestore.collection('viajes').doc(documentId).collection('pagos',ref => {
+      return ref.orderBy('fecha')
+    }).snapshotChanges()
+  }
   public getGasto(documentId: string, id: string) {
     return this.firestore.collection('viajes').doc(documentId).collection("gastos").doc(id).snapshotChanges()
   }

@@ -7,6 +7,7 @@ import {Viaje} from "../../models/viaje.model";
 import {Persona} from "../../models/persona.model";
 import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
+import {Pago} from "../../models/pago.model";
 
 @Component({
   selector: "app-dashboard",
@@ -20,6 +21,7 @@ export class ViajeComponent implements OnInit {
   public gastos = new Array<Gasto>();
   fechasFin: String;
   fechasInicio: String;
+  public pagos = new Array<Pago>();
 
   constructor(
     private firestoreService: FirestoreService,
@@ -58,6 +60,18 @@ export class ViajeComponent implements OnInit {
         this.gastos.push(nuevoGasto)
       });
       console.log(this.gastos)
+    })
+
+    this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
+      this.pagos = new Array<Pago>();
+      gastosSnapshot.forEach(pag => {
+        let nuevoPago;
+        nuevoPago = pag.payload.doc.data() as Pago;
+        nuevoPago.fechaLocal = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('HH:mm DD/M/YYYY Z z');
+
+        this.pagos.push(nuevoPago)
+      });
+      console.log(this.pagos)
     })
 
 
