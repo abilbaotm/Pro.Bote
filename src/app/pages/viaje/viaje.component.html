@@ -19,6 +19,20 @@
           [focusCancel]="true"
           (confirm)="borrarViaje()">
         </swal>
+        <button  [swal]="archivarSwal" class=" btn btn-link" type="button" >
+          Archivar
+        </button>
+        <swal
+          #archivarSwal
+          title="Archivar viaje {{viaje.descripcion}}?"
+          text="Esta acción no se puede deshacer"
+          icon="warning"
+          cancelButtonText="Cancelar"
+          confirmButtonText="Archivar"
+          [showCancelButton]="true"
+          [focusCancel]="true"
+          (confirm)="archivarViaje()">
+        </swal>
 
       </div>
       <div class="col-12">

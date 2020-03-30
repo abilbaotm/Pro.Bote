@@ -104,7 +104,8 @@ export class FirestoreService {
             end: formdata.fechas.endDate.toDate(),
           },
         "timezone": moment.tz.guess(),
-        "borrado": false
+        "borrado": false,
+        "archivado": false
       }
     ).then(
       docRef => {
@@ -118,6 +119,10 @@ export class FirestoreService {
 
   borrarViaje(id: string) {
     return this.firestore.collection('viajes').doc(id).set({'borrado': true}, { merge: true })
+  }
+
+  archivarViaje(id: string) {
+    return this.firestore.collection('viajes').doc(id).set({'archivado': true}, {merge: true})
   }
 
   borrarViajeCancelar(idViaje: string) {

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 
 export class Viaje {
   borrado: boolean;
+  archivado: boolean;
   descripcion: string;
   admin: string;
   permitidos: {
