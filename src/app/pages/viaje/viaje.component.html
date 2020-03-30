@@ -1,7 +1,7 @@
 
 <div class=" content">
   <div class="row">
-      <div class=" col-12">
+      <div class=" col-12" *ngIf="!viaje.archivado && !viaje.borrado">
         <button routerLink="nuevogasto" class=" btn btn-link" type="button" >
           Nuevo gasto
         </button>
@@ -10,7 +10,7 @@
         </button>
         <swal
           #deleteSwal
-          title="Eliminar viaje {{viaje.descripcion}}?"
+          title="¿Eliminar {{viaje.descripcion}}?"
           text="Esta acción no se puede deshacer"
           icon="warning"
           cancelButtonText="Cancelar"
@@ -24,9 +24,9 @@
         </button>
         <swal
           #archivarSwal
-          title="Archivar viaje {{viaje.descripcion}}?"
-          text="Esta acción no se puede deshacer"
-          icon="warning"
+          title="¿Archivar {{viaje.descripcion}}?"
+          text=""
+          icon="info"
           cancelButtonText="Cancelar"
           confirmButtonText="Archivar"
           [showCancelButton]="true"
@@ -42,6 +42,9 @@
               <div class=" col-12">
                 <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
                   Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()">Cancelar</a>
+                </div>
+                <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
+                  Este viaje ha sido archivado. <a (click)="cancelarArchivado()">Cancelar</a>
                 </div>
                 <p class=" cart-title">{{viaje.descripcion}}</p>
                 <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
