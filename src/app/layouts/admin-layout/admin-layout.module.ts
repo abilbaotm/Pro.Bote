@@ -13,6 +13,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {ViajeComponent} from "../../pages/viaje/viaje.component";
 import {NuevoviajeComponent} from "../../pages/nuevoviaje/nuevoviaje.component";
 import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
+import {NuevopagoComponent} from "../../pages/nuevopago/nuevopago.component";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 
@@ -33,6 +34,7 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
     ViajeComponent,
     NuevoviajeComponent,
     NuevogastoComponent,
+    NuevopagoComponent,
     NotificationsComponent,
     // RtlComponent
   ]

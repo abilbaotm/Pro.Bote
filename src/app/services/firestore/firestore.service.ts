@@ -5,6 +5,7 @@ import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
+import {Pago} from "../../models/pago.model";
 
 @Injectable({
   providedIn: 'root'
@@ -194,6 +195,32 @@ export class FirestoreService {
 
     return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
       gasto
+    )
+  }
+
+  nuevopago(idViaje: string, form: any) {
+    let pagoForm;
+    pagoForm = form ;
+    let pago: Pago;
+
+    var user = firebase.auth().currentUser;
+    pago = {
+      "pagador": pagoForm.pagador,
+      "beneficiario": pagoForm.beneficiario,
+      "fecha": moment(pagoForm.fecha).unix()* 1000,
+      "creador": user.uid,
+      "timezone": moment.tz.guess(),
+      "cantidad":  pagoForm.cantidad,
+      "ratio": pagoForm.ratio,
+      "moneda":  pagoForm.moneda,
+      "nota":  pagoForm.nota,
+
+
+
+    };
+    console.log(pago)
+    return this.firestore.collection( 'viajes/'+idViaje+'/pagos').add(
+      pago
     )
   }
 }
