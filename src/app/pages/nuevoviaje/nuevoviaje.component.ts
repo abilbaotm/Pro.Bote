@@ -56,7 +56,7 @@ export class NuevoviajeComponent implements OnInit {
       //TODO: controlar tipo de dato
       nombre 		: ['', Validators.required],
       email 		: [''],
-      id        : ['',  Validators.required]
+      id        : ['']
     });
   }
   addNewInputField() : void
