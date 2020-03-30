@@ -104,6 +104,7 @@ export class NuevoviajeComponent implements OnInit {
       this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         const control = <FormArray> this.form.controls.terceros
           this.totalTerceros=personasSnapshot.length;
+          let primero = true;
           personasSnapshot.forEach(perso => {
             this.personas.push(perso.payload.doc.data() as Persona);
             this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
@@ -112,6 +113,11 @@ export class NuevoviajeComponent implements OnInit {
             pers.get('nombre').setValue((perso.payload.doc.data() as Persona).nombre)
             pers.get('email').setValue((perso.payload.doc.data() as Persona).email)
             pers.get('id').setValue(perso.payload.doc.ref.id)
+
+            if(primero) {
+              pers.disable();
+              primero=false;
+            }
             control.push(pers)
 
 
