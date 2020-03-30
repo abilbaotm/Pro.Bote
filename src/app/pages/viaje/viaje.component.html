@@ -5,6 +5,9 @@
         <button routerLink="nuevogasto" class=" btn btn-link" type="button" >
           Nuevo gasto
         </button>
+        <button routerLink="editarviaje" class=" btn btn-link" type="button" >
+          Editar
+        </button>
         <button  [swal]="deleteSwal" class=" btn btn-link" type="button" >
           Borrar
         </button>
@@ -33,6 +36,7 @@
           [focusCancel]="true"
           (confirm)="archivarViaje()">
         </swal>
+
 
       </div>
       <div class="col-12">

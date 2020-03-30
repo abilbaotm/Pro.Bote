@@ -14,5 +14,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "viaje/:viaje", component: ViajeComponent },
   { path: "viaje/:viaje/nuevogasto", component: NuevogastoComponent },
   { path: "nuevoviaje", component: NuevoviajeComponent },
+  { path: "viaje/:viaje/editarviaje", component: NuevoviajeComponent },
 
 ];

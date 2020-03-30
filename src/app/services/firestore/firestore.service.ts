@@ -192,4 +192,46 @@ export class FirestoreService {
       gasto
     )
   }
+
+  updateViaje(form: any, idViaje: string) {
+    let documento = this.firestore.collection('cats').doc(idViaje)
+
+    var user = firebase.auth().currentUser;
+
+
+    var permitidos = {};
+    permitidos[user.email] = {
+      nombre: user.displayName,
+      activo: true,
+      owner: true
+    };
+    form.terceros.forEach(function (ter) {
+      if (ter.email!="") {
+
+        permitidos[ter.email] = {
+          activo: true,
+          owner: false,
+        }
+      } else {
+        ter.email = null
+      }
+    });
+
+
+    return documento.update(
+      {
+        "descripcion": form.descripcion,
+        "permitidos": permitidos,
+        "monedaPrincipal": form.monedaPrincipal,
+        "monedasAdicionales": form.monedasAdicionales,
+        "fechas": {
+          start: form.fechas.startDate.toDate(),
+          end: form.fechas.endDate.toDate(),
+        },
+        "timezone": moment.tz.guess(),
+        "borrado": false,
+        "archivado": false
+      }
+    )
+  }
 }
