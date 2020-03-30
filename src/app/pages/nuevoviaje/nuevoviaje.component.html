@@ -356,24 +356,36 @@
             formArrayName="terceros"
             margin-bottom>
 
-            Nombre: <input
+
+           <div *ngIf="currentStatus == 1">
+             <input
+               type="hidden"
+               formControlName="id" />
+
+              Nombre: <input
+                class=""
+                type="text"
+                disabled=""
+                value="{{user.name}}"
+              />
+              Email: <input
               class=""
               type="text"
               disabled=""
-              value="{{user.name}}"
-            />
-            Email: <input
-            class=""
-            type="text"
-            disabled=""
-            value="{{user.email}}"
-          />
+              value="{{user.email}}"
+              />
+           </div>
 
 
 
             <section
               [formGroupName]="i"
               *ngFor="let tech of form.controls.terceros['controls']; let i = index">
+
+              <input
+                type="hidden"
+                formControlName="id" />
+
                   Nombre: <input
                     type="text"
                     maxlength="50"
@@ -386,10 +398,10 @@
 
 
                 <!-- Allow generated input field to be removed -->
-                <span
+                <span *ngIf="currentStatus == 1 || i >= totalTerceros"
                   (click)="removeInputField(i)">
                      Remove
-                  </span>
+                </span>
             </section>
           </div>
 

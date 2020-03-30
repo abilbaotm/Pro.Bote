@@ -5,8 +5,10 @@ import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FirebaseUserModel} from "../../core/user.model";
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import {Moment} from "moment";
+import {Viaje} from "../../models/viaje.model";
+import {Persona} from "../../models/persona.model";
 
 @Component({
   selector: "app-nuevoviaje",
@@ -14,8 +16,21 @@ import {Moment} from "moment";
 })
 export class NuevoviajeComponent implements OnInit {
   user: FirebaseUserModel = new FirebaseUserModel();
-  private idViaje: string;
+  public idViaje: string;
   public viaje = [];
+
+  public viajeupdate: Viaje = new Viaje();
+  fechasFin: String;
+  fechasInicio: String;
+
+  public totalTerceros = 0;
+
+  public personas = new Array<Persona>();
+  public personasIndex = {};
+
+  public documentId = null;
+  public currentStatus = 1;
+
   public form 			: FormGroup;
 
   constructor(
@@ -30,9 +45,7 @@ export class NuevoviajeComponent implements OnInit {
       descripcion : ['', Validators.required],
       monedaPrincipal : ['EUR', Validators.required],
       monedasAdicionales : [],
-      terceros     : this._FB.array([
-        this.initTechnologyFields()
-      ]),
+      terceros     : this._FB.array([]),
       fechas: ['', Validators.required],
     });
   }
@@ -42,7 +55,8 @@ export class NuevoviajeComponent implements OnInit {
     return this._FB.group({
       //TODO: controlar tipo de dato
       nombre 		: ['', Validators.required],
-      email 		: ['']
+      email 		: [''],
+      id        : ['',  Validators.required]
     });
   }
   addNewInputField() : void
@@ -67,17 +81,67 @@ export class NuevoviajeComponent implements OnInit {
         this.user = data;
       }
     })
+    this.idViaje = this.route.snapshot.paramMap.get("viaje");
+    if(this.idViaje != null) {
+
+      this.currentStatus = 2;
+
+      this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
+        this.viajeupdate = (dbviaje.payload.data()) as Viaje;
+        this.fechasInicio = moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone).format('DD/M/YYYY');
+        this.fechasFin = moment.tz(this.viajeupdate.fechas.end.toDate(), this.viajeupdate.timezone).format('DD/M/YYYY');
+
+
+        this.form.get('descripcion').setValue(this.viajeupdate.descripcion);
+        this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
+        this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
+
+        this.form.get('fechas').setValue({startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone), endDate: moment.tz(this.viajeupdate.fechas.end.toDate(), this.viajeupdate.timezone)})
+
+
+      });
+
+      this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
+        const control = <FormArray> this.form.controls.terceros
+          this.totalTerceros=personasSnapshot.length;
+          let primero = true;
+          personasSnapshot.forEach(perso => {
+            this.personas.push(perso.payload.doc.data() as Persona);
+            this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
+
+            let pers = this.initTechnologyFields();
+            pers.get('nombre').setValue((perso.payload.doc.data() as Persona).nombre)
+            pers.get('email').setValue((perso.payload.doc.data() as Persona).email)
+            pers.get('id').setValue(perso.payload.doc.ref.id)
+
+            if(primero) {
+              pers.disable();
+              primero=false;
+            }
+            control.push(pers)
+
+
+          })
+        }
+      );
+
+
+    }
 
 
 
 
   }
-  public documentId = null;
-  public currentStatus = 1;
   selected: {start: Moment, end: Moment};
   nuevoViaje(form, documentId = this.documentId) {
-    this.firestoreService.nuevoViaje(form).then( (docRef => {
-      this.router.navigate([`/viaje/${docRef.id}`])
-    } ) )
+    if( this.currentStatus == 1) {
+      this.firestoreService.nuevoViaje(form).then((docRef => {
+        this.router.navigate([`/viaje/${docRef.id}`])
+      }))
+    } else {
+      this.firestoreService.updateViaje(form, this.idViaje).then((docRef => {
+        this.router.navigate([`/viaje/${this.idViaje}`])
+      }))
+    }
   }
 }
