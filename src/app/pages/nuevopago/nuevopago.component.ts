@@ -104,11 +104,19 @@ export class NuevopagoComponent implements OnInit {
   public currentStatus = 1;
   cantidadPersona = [];
   partesIguales: boolean = true;
+  public formError: string;
 
   nuevoPago(form, documentId = this.documentId) {
-    this.firestoreService.nuevopago(this.idViaje, form).then((docRef => {
-      this.router.navigate([`/viaje/${this.idViaje}`])
-    } ) )
+    if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
+      this.firestoreService.nuevopago(this.idViaje, form).then((docRef => {
+        this.router.navigate([`/viaje/${this.idViaje}`])
+      })
+      )
+    } else {
+      this.formError = "Pagador y beneficiario no puede ser la misma persona";
+    }
+
+
   }
   initTechnologyFields(perso: Persona) : FormGroup
   {

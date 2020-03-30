@@ -31,6 +31,8 @@
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
+          {{formError}}
+
 
 
           <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
