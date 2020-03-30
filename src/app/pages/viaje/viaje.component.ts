@@ -49,6 +49,7 @@ export class ViajeComponent implements OnInit {
     );
 
     this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
+      this.gastos = new Array<Gasto>();
       gastosSnapshot.forEach(gast => {
         let nuevoGasto;
         nuevoGasto = gast.payload.doc.data() as Gasto;
