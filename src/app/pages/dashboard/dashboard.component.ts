@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
 
         for (let todosViajeKey in this.todosViajes[categorias]) {
 
-          unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1,  { orientation: "landscape"})
+          unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1,  {})
             .then(toJson)
             .then(json => {
               console.log(json["results"][0])
