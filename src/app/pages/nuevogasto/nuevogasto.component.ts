@@ -66,25 +66,28 @@ export class NuevogastoComponent implements OnInit {
       this.form.controls['moneda'].setValue(this.viaje.monedaPrincipal);
 
       //vamos a por los ratios
-      const currencies = this.viaje.monedasAdicionales.toString();
-      const url = `${environment.URLEXTAPI}?base=${this.viaje.monedaPrincipal}`;
-      this.httpClient
-        .get(url)
-        .subscribe(apiData => {
-          console.log(apiData)
-          this.ratios = apiData['rates'];
-          this.ratios[this.viaje.monedaPrincipal] = 1.00;
-        });
-      this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
-        if (this.ratios[monedaSnapshot]!=undefined) {
-          this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
-          this.msgRatio = "";
-        } else {
-          this.form.get('ratio').setValue(1.00);
-          this.msgRatio = "Ratio no disponible para esta divisa";
-        }
-      })
+      if (this.viaje.monedasAdicionales) {
 
+        const currencies = this.viaje.monedasAdicionales.toString();
+        const url = `${environment.URLEXTAPI}?base=${this.viaje.monedaPrincipal}`;
+        this.httpClient
+          .get(url)
+          .subscribe(apiData => {
+            console.log(apiData)
+            this.ratios = apiData['rates'];
+            this.ratios[this.viaje.monedaPrincipal] = 1.00;
+          });
+        this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
+          if (this.ratios[monedaSnapshot]!=undefined) {
+            this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
+            this.msgRatio = "";
+          } else {
+            this.form.get('ratio').setValue(1.00);
+            this.msgRatio = "Ratio no disponible para esta divisa";
+          }
+        })
+
+      }
 
     });
 
