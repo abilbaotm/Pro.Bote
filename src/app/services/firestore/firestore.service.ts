@@ -129,6 +129,10 @@ export class FirestoreService {
     return this.firestore.collection('viajes').doc(idViaje).set({'borrado': false}, { merge: true })
   }
 
+  archivarViajeCancelar(idViaje: string) {
+    return this.firestore.collection('viajes').doc(idViaje).set({'archivado': false}, { merge: true })
+  }
+
   nuevoGasto(idViaje: string, form: any) {
     let gastoForm;
     gastoForm = form ;
