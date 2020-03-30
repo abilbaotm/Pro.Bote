@@ -194,7 +194,7 @@ export class FirestoreService {
   }
 
   updateViaje(form: any, idViaje: string) {
-    let documento = this.firestore.collection('cats').doc(idViaje)
+    let documento = this.firestore.collection('viajes').doc(idViaje);
 
     var user = firebase.auth().currentUser;
 
