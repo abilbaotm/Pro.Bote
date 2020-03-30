@@ -24,16 +24,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const unsplash = new Unsplash({
-      accessKey: "sMiNyfb3_4aGOkoW3V3al1l0-oxTotd-7ZDKmB78sBk",
-      secret: "OQotJKCbCgjsYh_2yasNG1TwRZe_4nNDgkc9_Y6DkNc"
-    });
-    unsplash.search.photos("viaje tokyo", 1)
-      .then(toJson)
-      .then(json => {
-        console.log(json["results"][0])
-        unsplash.photos.downloadPhoto(json["results"][0]);
-      });
+
+
     this.cargarViajes();
 
   }
@@ -89,7 +81,35 @@ export class DashboardComponent implements OnInit {
         }
 
       })
+
+
+
+
+      const unsplash = new Unsplash({
+        accessKey: "sMiNyfb3_4aGOkoW3V3al1l0-oxTotd-7ZDKmB78sBk",
+        secret: "OQotJKCbCgjsYh_2yasNG1TwRZe_4nNDgkc9_Y6DkNc"
+      });
+
+      for (let categorias in this.todosViajes) {
+
+        for (let todosViajeKey in this.todosViajes[categorias]) {
+
+          unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1,  { orientation: "landscape"})
+            .then(toJson)
+            .then(json => {
+              console.log(json["results"][0])
+              this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+            });
+
+
+
+        }
+
+      }
     });
+
+
+
   }
 
 
