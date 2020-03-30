@@ -69,6 +69,13 @@ export class ViajeComponent implements OnInit {
     )
   }
 
+  archivarViaje() {
+    this.firestoreService.archivarViaje(this.idViaje).then(() => {
+        this.router.navigate(['/dashboard'])
+      }
+    )
+  }
+
   cancelarBorrado() {
     this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {}
     )
