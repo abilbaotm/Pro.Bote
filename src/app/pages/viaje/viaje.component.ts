@@ -23,6 +23,8 @@ export class ViajeComponent implements OnInit {
   fechasInicio: String;
   public pagos = new Array<Pago>();
 
+  public resumenPagos = {};
+
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
@@ -44,8 +46,10 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         personasSnapshot.forEach(perso => {
-          this.personas.push(perso.payload.doc.data() as Persona);
-          this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
+          let persoTemp: Persona= perso.payload.doc.data() as Persona;
+          persoTemp.id = perso.payload.doc.ref.id;
+          this.personas.push(persoTemp);
+          this.personasIndex[perso.payload.doc.ref.id] = (persoTemp).nombre
         })
       }
     );
@@ -59,8 +63,28 @@ export class ViajeComponent implements OnInit {
 
         this.gastos.push(nuevoGasto)
       });
-      console.log(this.gastos)
-    })
+      console.log(this.gastos);
+
+      this.personas.forEach( persoA => {
+        if (this.resumenPagos[persoA.id] == undefined) {
+          this.resumenPagos[persoA.id] = {}
+        }
+        if (this.resumenPagos[persoA.id].debe == undefined) {
+          this.resumenPagos[persoA.id].debe = {};
+          this.personas.forEach( persoB => {
+            this.resumenPagos[persoA.id].debe[persoB.id] = 0
+          })
+        }
+      });
+
+      this.gastos.forEach(gasto => {
+        for (let personasKey in gasto.personas) {
+          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio )
+        }
+
+      })
+
+    });
 
     this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
       this.pagos = new Array<Pago>();
@@ -71,7 +95,22 @@ export class ViajeComponent implements OnInit {
 
         this.pagos.push(nuevoPago)
       });
-      console.log(this.pagos)
+
+      this.personas.forEach( persoA => {
+        if (this.resumenPagos[persoA.id] == undefined) {
+          this.resumenPagos[persoA.id] = {}
+        }
+        if (this.resumenPagos[persoA.id].pagos == undefined) {
+          this.resumenPagos[persoA.id].pagos = {};
+          this.personas.forEach( persoB => {
+            this.resumenPagos[persoA.id].pagos[persoB.id] = 0
+          })
+        }
+      });
+      this.pagos.forEach(pago => {
+        this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )
+      });
+      console.log(this.resumenPagos)
     })
 
 
@@ -99,5 +138,12 @@ export class ViajeComponent implements OnInit {
   cancelarArchivado() {
     this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {}
     )
+  }
+
+  public idPersonaCuentasActiva: string;
+  verCuentasPersona(id: string) {
+    this.idPersonaCuentasActiva = id;
+    console.log(id)
+
   }
 }

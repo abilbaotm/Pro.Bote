@@ -8,7 +8,7 @@ export class Gasto {
   pagador: string;
   creador: string;
   timezone: string;
-  personas: {};
+  personas: {string: {cantidad: number}};
 
   constructor() {
     this.fecha = new Date();
