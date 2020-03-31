@@ -16,7 +16,7 @@
       <div class="col-12 col-md-6" *ngFor="let viaje of todosViajes[categoria]">
         <div class=" card card-stats ">
           <div *ngIf="viaje.data.foto != undefined" class="crop" >
-            <p>Foto por <a href="{{viaje.data.foto.links.html}}" target="_blank">{{viaje.data.foto.user.name}}</a> on <a href="https://unsplash.com/?utm_source=Pro.Bote&utm_medium=referral" target="_blank">Unsplash</a></p>
+            <p>Foto por <a href="{{viaje.data.foto.user.links.html}}?utm_source=Pro.Bote&utm_medium=referral" target="_blank">{{viaje.data.foto.user.name}}</a> en <a href="https://unsplash.com/?utm_source=Pro.Bote&utm_medium=referral" target="_blank">Unsplash</a></p>
             <img src="{{viaje.data.foto.urls.full}}" class="" style="border-bottom-right-radius: 0rem; border-bottom-left-radius: 0rem;object-fit: cover;">
           </div>
           <style>
