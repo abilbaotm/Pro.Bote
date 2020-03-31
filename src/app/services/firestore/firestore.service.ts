@@ -5,6 +5,7 @@ import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
+import {Persona} from "../../models/persona.model";
 
 @Injectable({
   providedIn: 'root'
@@ -198,13 +199,16 @@ export class FirestoreService {
 
     var user = firebase.auth().currentUser;
 
-
+    var personas = [];
     var permitidos = {};
     permitidos[user.email] = {
       nombre: user.displayName,
       activo: true,
       owner: true
     };
+    personas.push({
+      "nombre": user.displayName, "email": user.email
+    });
     form.terceros.forEach(function (ter) {
       if (ter.email!="") {
 
@@ -215,8 +219,10 @@ export class FirestoreService {
       } else {
         ter.email = null
       }
+      personas.push({
+        "nombre": ter.nombre, "email": ter.email
+      })
     });
-
 
     return documento.update(
       {
@@ -231,6 +237,29 @@ export class FirestoreService {
         "timezone": moment.tz.guess(),
         "borrado": false,
         "archivado": false
+      }
+    ).then(
+      docRef => {
+        for( let pers in personas) {
+          let esta = false
+          console.log("Nombre Persona en pers: " + personas[pers].nombre)
+          console.log("Email Persona en pers: " + personas[pers].email)
+          this.getPersonas(idViaje).subscribe((personasSnapshot) => {
+            personasSnapshot.forEach(perso => {
+              console.log("Nombre Persona en perso: " + (perso.payload.doc.data() as Persona).nombre)
+              console.log("Email Persona en pers: " + (perso.payload.doc.data() as Persona).email)
+              if(personas[pers].nombre == (perso.payload.doc.data() as Persona).nombre && personas[pers].email == (perso.payload.doc.data() as Persona).email) {
+                esta = true;
+              }
+            })
+          })
+          console.log(esta)
+          if(!esta) {
+            //this.firestore.collection('viajes/' + idViaje + '/personas').add(personas[pers])
+          }
+
+        }
+        return docRef
       }
     )
   }
