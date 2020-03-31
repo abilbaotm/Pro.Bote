@@ -7,6 +7,7 @@ import {Viaje} from "../../models/viaje.model";
 import {Persona} from "../../models/persona.model";
 import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
+import {Pago} from "../../models/pago.model";
 
 @Component({
   selector: "app-dashboard",
@@ -20,6 +21,9 @@ export class ViajeComponent implements OnInit {
   public gastos = new Array<Gasto>();
   fechasFin: String;
   fechasInicio: String;
+  public pagos = new Array<Pago>();
+
+  public resumenPagos = {};
 
   constructor(
     private firestoreService: FirestoreService,
@@ -42,8 +46,10 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         personasSnapshot.forEach(perso => {
-          this.personas.push(perso.payload.doc.data() as Persona);
-          this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
+          let persoTemp: Persona= perso.payload.doc.data() as Persona;
+          persoTemp.id = perso.payload.doc.ref.id;
+          this.personas.push(persoTemp);
+          this.personasIndex[perso.payload.doc.ref.id] = (persoTemp).nombre
         })
       }
     );
@@ -57,7 +63,52 @@ export class ViajeComponent implements OnInit {
 
         this.gastos.push(nuevoGasto)
       });
-      console.log(this.gastos)
+      console.log(this.gastos);
+
+      this.personas.forEach( persoA => {
+        if (this.resumenPagos[persoA.id] == undefined) {
+          this.resumenPagos[persoA.id] = {}
+        }
+        this.resumenPagos[persoA.id].debe = {};
+        this.personas.forEach( persoB => {
+          this.resumenPagos[persoA.id].debe[persoB.id] = 0
+        })
+
+      });
+
+      this.gastos.forEach(gasto => {
+        for (let personasKey in gasto.personas) {
+          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio )
+        }
+
+      })
+
+    });
+
+    this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
+      this.pagos = new Array<Pago>();
+      gastosSnapshot.forEach(pag => {
+        let nuevoPago;
+        nuevoPago = pag.payload.doc.data() as Pago;
+        nuevoPago.fechaLocal = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('HH:mm DD/M/YYYY Z z');
+
+        this.pagos.push(nuevoPago)
+      });
+
+      this.personas.forEach( persoA => {
+        if (this.resumenPagos[persoA.id] == undefined) {
+          this.resumenPagos[persoA.id] = {}
+        }
+        this.resumenPagos[persoA.id].pagos = {};
+        this.personas.forEach( persoB => {
+          this.resumenPagos[persoA.id].pagos[persoB.id] = 0
+        })
+
+      });
+      this.pagos.forEach(pago => {
+        this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )
+      });
+      console.log(this.resumenPagos)
     })
 
 
@@ -80,5 +131,17 @@ export class ViajeComponent implements OnInit {
   cancelarBorrado() {
     this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {}
     )
+  }
+
+  cancelarArchivado() {
+    this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {}
+    )
+  }
+
+  public idPersonaCuentasActiva: string;
+  verCuentasPersona(id: string) {
+    this.idPersonaCuentasActiva = id;
+    console.log(id)
+
   }
 }

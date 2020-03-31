@@ -14,10 +14,10 @@ import {environment} from "../../../environments/environment";
 
 
 @Component({
-  selector: "app-nuevogasto",
-  templateUrl: "nuevogasto.component.html"
+  selector: "app-nuevopago",
+  templateUrl: "nuevopago.component.html"
 })
-export class NuevogastoComponent implements OnInit {
+export class NuevopagoComponent implements OnInit {
   private idViaje: string;
   public viaje: Viaje;
   public form 			: FormGroup;
@@ -37,14 +37,13 @@ export class NuevogastoComponent implements OnInit {
     this.viaje = new Viaje();
 
     this.form = this._FB.group({
-      descripcion : ['', Validators.required],
+      nota : [''],
       cantidad : [0, Validators.required],
       moneda : ['', Validators.required],
       ratio: [1.00, Validators.required],
       fecha:['', Validators.required],
-      partesIguales:[true, Validators.required],
-      terceros     : this._FB.array([]),
-      pagador: ['', Validators.required]
+      pagador: ['', Validators.required],
+      beneficiario: ['', Validators.required]
 
   });
   }
@@ -92,81 +91,32 @@ export class NuevogastoComponent implements OnInit {
     });
 
     this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
-      const controla = <FormArray>this.form.controls.terceros;
       personasSnapshot.forEach((viajeData: any) => {
         let persona;
         persona = viajeData.payload.doc.data() as Persona;
         persona.id = viajeData.payload.doc.id;
-        controla.push(this.initTechnologyFields(persona));
         this.personasViaje.push(persona as Persona);
-        this.cantidadPersona.push(0)
-
-
-
       });
-
-
-      // sumas
-      (this.form.get('terceros') as FormArray).valueChanges.subscribe(elemento => {
-        if (!this.form.get('partesIguales').value) {
-          console.log(elemento);
-          let total = 0.00;
-          for (let elementoKey in elemento) {
-            total += elemento[elementoKey].cantidad
-          }
-          this.form.get('cantidad').setValue(total);
-        }
-      });
-      /*
-      (this.form.get('terceros') as FormArray).controls.forEach( elemento => {
-        elemento.get('cantidad').valueChanges.subscribe(subCantidad => {
-          console.log(subCantidad)
-        })
-      });
-
-       */
-
     });
-
-    //sumas
-    this.form.get('cantidad').valueChanges.subscribe(x => {
-      if (this.form.get('partesIguales').value) {
-
-        let totalADividir = this.form.get('terceros')['controls'].length;
-        for (let tercerosKey in this.form.get('terceros')['controls']) {
-          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').setValue(x / totalADividir)
-        }
-        console.log(x / totalADividir)
-      }
-    });
-
-
-
-
-    this.form.get('partesIguales').valueChanges.subscribe(x => {
-      if (!x)  {
-        this.form.get('cantidad').disable();
-        for (let tercerosKey in this.form.get('terceros')['controls']) {
-          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').enable()
-        }
-      } else {
-        this.form.get('cantidad').enable();
-        for (let tercerosKey in this.form.get('terceros')['controls']) {
-          (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').disable()
-        }
-      }
-    })
 
   }
   public documentId = null;
   public currentStatus = 1;
   cantidadPersona = [];
   partesIguales: boolean = true;
+  public formError: string;
 
-  nuevoGasto(form, documentId = this.documentId) {
-    this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
-      this.router.navigate([`/viaje/${this.idViaje}`])
-    } ) )
+  nuevoPago(form, documentId = this.documentId) {
+    if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
+      this.firestoreService.nuevopago(this.idViaje, form).then((docRef => {
+        this.router.navigate([`/viaje/${this.idViaje}`])
+      })
+      )
+    } else {
+      this.formError = "Pagador y beneficiario no puede ser la misma persona";
+    }
+
+
   }
   initTechnologyFields(perso: Persona) : FormGroup
   {

@@ -1,0 +1,46 @@
+
+<div class=" content">
+  <div class="row">
+      <div class="col-12">
+        <h1>FORMULARIO PAGO NUEVO</h1>
+        <form (ngSubmit)="nuevoPago(form.value)" [formGroup]="form">
+
+          nota: <input
+            type="text"
+            maxlength="40"
+            formControlName="nota" />
+
+          Fecha: <input type="datetime-local" formControlName="fecha">
+          <br>
+          Cantidad: <input type="number" formControlName="cantidad"/>
+          <br>
+
+          <select formControlName="moneda">
+            <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
+          </select>
+          Ratio <input type="number" formControlName="ratio"/> {{msgRatio}}
+
+          <br>
+          Pagador:
+          <select formControlName="pagador">
+            <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
+          </select>
+
+          Beneficiario:
+          <select formControlName="beneficiario">
+            <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
+          </select>
+
+          {{formError}}
+
+
+
+          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
+
+        </form>
+      </div>
+  </div>
+
+
+
+</div>
