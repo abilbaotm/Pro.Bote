@@ -117,10 +117,11 @@
               <table style="width: 100%">
                 <tr>
                   <th></th>
-                  <th>Total habido por pago de gastos</th>
                   <th>Total debido por pago de gastos</th>
+                  <th>Total habido por pago de gastos</th>
+                  <th>Balance pagos por gastos</th>
                   <th>Balance pagos directos</th>
-                  <th>Balance (debido-pagos)</th>
+                  <th>Pendiente de pago</th>
                 </tr>
                 <ng-container *ngIf="false && idPersonaCuentasActiva">
                   <ng-container *ngFor="let perso of personas">
@@ -139,10 +140,11 @@
                   <ng-container *ngFor="let perso of personas">
                     <tr *ngIf="perso.id != idPersonaCuentasActiva">
                       <td>{{perso.nombre}}</td>
-                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                       <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                       <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
-                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] +  resumenPagos[idPersonaCuentasActiva].debe[perso.id] - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                     </tr>
                   </ng-container>
                 </ng-container>
