@@ -1,5 +1,5 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-
+const firebase_tools = require('firebase-tools');
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
@@ -33,7 +33,10 @@ exports.eliminar = functions.https.onRequest(async (request , response) => {
 
   function deleteCollection(db, collectionPath, batchSize) {
     let collectionRef = db.collection(collectionPath);
-    let query = collectionRef.orderBy('__name__').where('borrado', '==', true).limit(batchSize);
+    let query;
+
+    query = collectionRef.orderBy('__name__').limit(batchSize);
+
 
     return new Promise((resolve, reject) => {
       deleteQueryBatch(db, query, batchSize, resolve, reject);
@@ -72,13 +75,38 @@ exports.eliminar = functions.https.onRequest(async (request , response) => {
       .catch(reject);
   }
 
-  deleteCollection(db, 'viajes', 2000).then( res => {
-    response.status(202).json({
-      status: 'Accepted'
-    });
-    }
 
-  );
+
+  let collectionRef = db.collection('viajes');
+  let query = collectionRef.where('borrado', '==', true);
+  query.get()
+    .then((snapshot) => {
+      // When there are no documents left, we are done
+      if (snapshot.size === 0) {
+        response.status(200).json({
+          success: "Nada que hacer"
+        });
+        return;
+      }
+        snapshot.docs.forEach((doc) => {
+          deleteCollection(db, doc.ref.path+"/personas", 200 );
+          deleteCollection(db, doc.ref.path+"/pagos", 200);
+          deleteCollection(db, doc.ref.path+"/gastos", 200);
+          let batch = db.batch();
+          snapshot.docs.forEach((doc) => {
+            batch.delete(doc.ref);
+          });
+          batch.commit()
+
+        });
+        response.status(200).json({
+          success: "Procesando..."
+        });
+        return;
+
+    }
+    );
+
 
 
 });
