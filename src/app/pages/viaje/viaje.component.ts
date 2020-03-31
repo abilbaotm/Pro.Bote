@@ -69,12 +69,11 @@ export class ViajeComponent implements OnInit {
         if (this.resumenPagos[persoA.id] == undefined) {
           this.resumenPagos[persoA.id] = {}
         }
-        if (this.resumenPagos[persoA.id].debe == undefined) {
-          this.resumenPagos[persoA.id].debe = {};
-          this.personas.forEach( persoB => {
-            this.resumenPagos[persoA.id].debe[persoB.id] = 0
-          })
-        }
+        this.resumenPagos[persoA.id].debe = {};
+        this.personas.forEach( persoB => {
+          this.resumenPagos[persoA.id].debe[persoB.id] = 0
+        })
+
       });
 
       this.gastos.forEach(gasto => {
@@ -100,12 +99,11 @@ export class ViajeComponent implements OnInit {
         if (this.resumenPagos[persoA.id] == undefined) {
           this.resumenPagos[persoA.id] = {}
         }
-        if (this.resumenPagos[persoA.id].pagos == undefined) {
-          this.resumenPagos[persoA.id].pagos = {};
-          this.personas.forEach( persoB => {
-            this.resumenPagos[persoA.id].pagos[persoB.id] = 0
-          })
-        }
+        this.resumenPagos[persoA.id].pagos = {};
+        this.personas.forEach( persoB => {
+          this.resumenPagos[persoA.id].pagos[persoB.id] = 0
+        })
+
       });
       this.pagos.forEach(pago => {
         this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )

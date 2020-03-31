@@ -113,15 +113,16 @@
                 </li>
               </ul>
 
-              <p>El participante {{personasIndex[idPersonaCuentasActiva]}} debe a...</p>
+              <p>Cuentas pendientes de todos los participantes a {{personasIndex[idPersonaCuentasActiva]}}...</p>
               <table style="width: 100%">
                 <tr>
                   <th></th>
-                  <th>Total debido (excluido pagos)</th>
-                  <th>Pagos</th>
+                  <th>Total habido por pago de gastos</th>
+                  <th>Total debido por pago de gastos</th>
+                  <th>Balance pagos directos</th>
                   <th>Balance (debido-pagos)</th>
                 </tr>
-                <ng-container *ngIf="idPersonaCuentasActiva">
+                <ng-container *ngIf="false && idPersonaCuentasActiva">
                   <ng-container *ngFor="let perso of personas">
                     <tr *ngIf="perso.id != idPersonaCuentasActiva">
                       <td>{{perso.nombre}}</td>
@@ -131,29 +132,22 @@
                     </tr>
                   </ng-container>
                 </ng-container>
-              </table>
 
 
 
-              <p>Al participante {{personasIndex[idPersonaCuentasActiva]}} se le debe por...</p>
-              <table style="width: 100%">
-                <tr>
-                  <th></th>
-                  <th>Total debido (excluido pagos)</th>
-                  <th>Pagos</th>
-                  <th>Balance (debido-pagos)</th>
-                </tr>
                 <ng-container *ngIf="idPersonaCuentasActiva">
                   <ng-container *ngFor="let perso of personas">
                     <tr *ngIf="perso.id != idPersonaCuentasActiva">
-                      <td>{{personasIndex[perso.id]}}</td>
-                      <td *ngIf="resumenPagos[perso.id]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
-                      <td *ngIf="resumenPagos[perso.id]">{{resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
-                      <td *ngIf="resumenPagos[perso.id]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td>{{perso.nombre}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
+                      <td *ngIf="resumenPagos[idPersonaCuentasActiva]">{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] +  resumenPagos[idPersonaCuentasActiva].debe[perso.id] - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</td>
                     </tr>
                   </ng-container>
                 </ng-container>
               </table>
+
               <p>* Los importes son mostrados en {{viaje.monedaPrincipal}}. Ratio de conversión de divisa aplicado. Este resumen está sujeto a cambios por ratio de divisa.</p>
               <br>
 
