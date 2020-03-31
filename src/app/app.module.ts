@@ -52,7 +52,8 @@ moment.locale('es', localization);
       monthNames: ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."],
       firstDay: 1,
       applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
-    })
+    }),
+    NgbModule
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],
