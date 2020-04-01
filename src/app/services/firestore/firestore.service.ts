@@ -250,6 +250,7 @@ export class FirestoreService {
         permitidos[ter.email] = {
           activo: true,
           owner: false,
+          "nombre": ter.nombre,
         }
       } else {
         ter.email = null
