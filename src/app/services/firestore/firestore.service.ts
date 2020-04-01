@@ -235,16 +235,15 @@ export class FirestoreService {
 
     var user = firebase.auth().currentUser;
 
-    var personas = [];
+    var personas = {};
     var permitidos = {};
+    var nuevasPersonas = [];
     permitidos[user.email] = {
       nombre: user.displayName,
       activo: true,
       owner: true
     };
-    personas.push({
-      "nombre": user.displayName, "email": user.email
-    });
+    console.log(form)
     form.terceros.forEach(function (ter) {
       if (ter.email!="") {
 
@@ -255,9 +254,18 @@ export class FirestoreService {
       } else {
         ter.email = null
       }
-      personas.push({
-        "nombre": ter.nombre, "email": ter.email
-      })
+      if (ter.id != "") {
+        personas[ter.id] = {
+          "nombre": ter.nombre,
+          "email": ter.email
+        }
+      } else {
+        nuevasPersonas.push({
+          "nombre": ter.nombre,
+          "email": ter.email
+        })
+      }
+
     });
 
     return documento.update(
@@ -277,23 +285,11 @@ export class FirestoreService {
     ).then(
       docRef => {
         for( let pers in personas) {
-          let esta = false
-          console.log("Nombre Persona en pers: " + personas[pers].nombre)
-          console.log("Email Persona en pers: " + personas[pers].email)
-          this.getPersonas(idViaje).subscribe((personasSnapshot) => {
-            personasSnapshot.forEach(perso => {
-              console.log("Nombre Persona en perso: " + (perso.payload.doc.data() as Persona).nombre)
-              console.log("Email Persona en pers: " + (perso.payload.doc.data() as Persona).email)
-              if(personas[pers].nombre == (perso.payload.doc.data() as Persona).nombre && personas[pers].email == (perso.payload.doc.data() as Persona).email) {
-                esta = true;
-              }
-            })
-          })
-          console.log(esta)
-          if(!esta) {
-            //this.firestore.collection('viajes/' + idViaje + '/personas').add(personas[pers])
-          }
+          this.firestore.collection('viajes/' + idViaje + '/personas').doc(pers).update(personas[pers]).then(r => {})
 
+        }
+        for( let pers in nuevasPersonas) {
+          this.firestore.collection( 'viajes/' + idViaje + '/personas').add(nuevasPersonas[pers])
         }
         return docRef
       }
