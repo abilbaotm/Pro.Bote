@@ -94,6 +94,7 @@ export class NuevoviajeComponent implements OnInit {
 
         this.form.get('descripcion').setValue(this.viajeupdate.descripcion);
         this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
+        this.form.controls['monedaPrincipal'].disable();
         this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
 
         this.form.get('fechas').setValue({startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone), endDate: moment.tz(this.viajeupdate.fechas.end.toDate(), this.viajeupdate.timezone)})
@@ -104,7 +105,6 @@ export class NuevoviajeComponent implements OnInit {
       this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         const control = <FormArray> this.form.controls.terceros
           this.totalTerceros=personasSnapshot.length;
-          let primero = true;
           personasSnapshot.forEach(perso => {
             this.personas.push(perso.payload.doc.data() as Persona);
             this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
@@ -114,9 +114,8 @@ export class NuevoviajeComponent implements OnInit {
             pers.get('email').setValue((perso.payload.doc.data() as Persona).email)
             pers.get('id').setValue(perso.payload.doc.ref.id)
 
-            if(primero) {
+            if(this.user.email == (perso.payload.doc.data() as Persona).email) {
               pers.disable();
-              primero=false;
             }
             control.push(pers)
 
