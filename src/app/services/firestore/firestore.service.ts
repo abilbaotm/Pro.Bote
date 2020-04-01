@@ -267,12 +267,10 @@ export class FirestoreService {
       }
 
     });
-
-    return documento.update(
+    return documento.set(
       {
         "descripcion": form.descripcion,
         "permitidos": permitidos,
-        "monedaPrincipal": form.monedaPrincipal,
         "monedasAdicionales": form.monedasAdicionales,
         "fechas": {
           start: form.fechas.startDate.toDate(),
@@ -281,7 +279,7 @@ export class FirestoreService {
         "timezone": moment.tz.guess(),
         "borrado": false,
         "archivado": false
-      }
+      }, {merge: true}
     ).then(
       docRef => {
         for( let pers in personas) {
