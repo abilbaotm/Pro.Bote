@@ -5,6 +5,7 @@ import {FirebaseUserModel} from "../../core/user.model";
 import * as firebase from "firebase";
 import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
+import {Persona} from "../../models/persona.model";
 import {Pago} from "../../models/pago.model";
 
 @Injectable({
@@ -88,6 +89,7 @@ export class FirestoreService {
         permitidos[ter.email] = {
           activo: true,
           owner: false,
+          "nombre": ter.nombre,
         }
       } else {
         ter.email = null
@@ -234,31 +236,43 @@ export class FirestoreService {
 
     var user = firebase.auth().currentUser;
 
-
+    var personas = {};
     var permitidos = {};
+    var nuevasPersonas = [];
     permitidos[user.email] = {
       nombre: user.displayName,
       activo: true,
       owner: true
     };
+    console.log(form)
     form.terceros.forEach(function (ter) {
       if (ter.email!="") {
 
         permitidos[ter.email] = {
           activo: true,
           owner: false,
+          "nombre": ter.nombre,
         }
       } else {
         ter.email = null
       }
+      if (ter.id != "") {
+        personas[ter.id] = {
+          "nombre": ter.nombre,
+          "email": ter.email
+        }
+      } else {
+        nuevasPersonas.push({
+          "nombre": ter.nombre,
+          "email": ter.email
+        })
+      }
+
     });
-
-
-    return documento.update(
+    return documento.set(
       {
         "descripcion": form.descripcion,
         "permitidos": permitidos,
-        "monedaPrincipal": form.monedaPrincipal,
         "monedasAdicionales": form.monedasAdicionales,
         "fechas": {
           start: form.fechas.startDate.toDate(),
@@ -267,6 +281,17 @@ export class FirestoreService {
         "timezone": moment.tz.guess(),
         "borrado": false,
         "archivado": false
+      }, {merge: true}
+    ).then(
+      docRef => {
+        for( let pers in personas) {
+          this.firestore.collection('viajes/' + idViaje + '/personas').doc(pers).update(personas[pers]).then(r => {})
+
+        }
+        for( let pers in nuevasPersonas) {
+          this.firestore.collection( 'viajes/' + idViaje + '/personas').add(nuevasPersonas[pers])
+        }
+        return docRef
       }
     )
   }
