@@ -10,11 +10,13 @@ import {UserComponent} from "./pages/user/user.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {RegisterComponent} from "./register/register.component";
 import {UserResolver} from "./pages/user/user.resolver";
+import {PrivacidadComponent} from "./pages/legal/privacidad/privacidad.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
+  { path: 'politica-privacidad', component: PrivacidadComponent},
   {
     path: "",
     component: AdminLayoutComponent,

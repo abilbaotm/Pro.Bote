@@ -28,6 +28,7 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 import * as moment from 'moment';
 import * as localization from 'moment/locale/es';
+import { PrivacidadComponent } from './pages/legal/privacidad/privacidad.component';
 moment.locale('es', localization);
 
 @NgModule({
@@ -55,7 +56,7 @@ moment.locale('es', localization);
     }),
     NgbModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent, PrivacidadComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
 })
