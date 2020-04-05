@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.izabil.bote" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="net.izabil.bote" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Pro.Bote - Gestor de gastos de viajes</name>
+    <description>Controla gastos generados durante viajes. Pro.Bote hace las cuentas por ti.</description>
+    <author email="servidoresizabil@gmail.com" href="https://izabil.net/">IZABIL.NET</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
