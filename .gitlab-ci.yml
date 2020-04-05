@@ -1,12 +1,24 @@
-image: node:10
+image: node:13
 
-build:
-  stage: build
+prerequisites:
+  stage: .pre
   cache:
     paths:
       - node_modules/
   script:
     - npm install --quiet
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+build_web:
+  stage: build
+  dependencies:
+    - prerequisites
+  cache:
+    paths:
+      - node_modules/
+  script:
     - npm run build-prod
   artifacts:
     paths:
@@ -38,7 +50,7 @@ deploy_prod:
   only:
     - master
   dependencies:
-    - build
+    - build_web
   cache:
     policy: pull
     paths:
@@ -49,3 +61,39 @@ deploy_prod:
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+build_android:
+  stage: build
+  dependencies:
+    - prerequisites
+  cache:
+    paths:
+      - node_modules/
+  variables:
+    ANDROID_COMPILE_SDK: "26"
+    ANDROID_BUILD_TOOLS: "28.0.3"
+  script:
+    - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+    - unzip -q android-sdk.zip -d android-sdk-linux
+    - export ANDROID_SDK_ROOT=$PWD/android-sdk-linux
+    - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+    - apt-get update; apt-get install openjdk-8-jdk gradle -y
+    - android-sdk-linux/tools/bin/sdkmanager --update > update.log
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+    - set +o pipefail
+    - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
+    - set -o pipefail
+    - node_modules/.bin/ng build --prod --base-href . --output-path CordovaMobileApp/www/
+    - cd CordovaMobileApp
+    #FICHEROS PARA FIRMAR
+    - echo $RELEASE_KEYSTORE_BASE64 | base64 -d > android.jks
+    - cp $BUILD_JSON build.json
+    - cp $GOOGLE_SERVICES google-services.json
+    - npm install --quiet
+    - ../node_modules/.bin/cordova platform add android
+    - ../node_modules/.bin/cordova build android
+  artifacts:
+    paths:
+      - CordovaMobileApp/platforms/android/app/build/outputs/apk/

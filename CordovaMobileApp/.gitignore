@@ -1,0 +1,34 @@
+# dependencies
+/node_modules
+/www
+/platforms
+google-services.json
+*keystore
+*jks
+*jks.base64
+build.json
+# Created by https://www.gitignore.io/api/cordova,apachecordova
+# Edit at https://www.gitignore.io/?templates=cordova,apachecordova
+
+### ApacheCordova ###
+# Apache Cordova generated files and directories
+bin/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*
+
+### Cordova ###
+# gitignore template for the Cordova framework
+# website: https://cordova.apache.org/
+#
+# Recommended template: Node.gitignore
+
+# App platform binaries and built files
+/platforms
+
+# Optional to ignore plugin Git clones
+/plugins
+
+# End of https://www.gitignore.io/api/cordova,apachecordova

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../core/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,11 @@ export class RegisterComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
+    firebase.auth().getRedirectResult().then(result => {
+      if (result.user) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
     this.createForm();
    }
 
