@@ -53,7 +53,7 @@ moment.locale('es', localization);
       firstDay: 1,
       applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
     }),
-    NgbModule
+    NgbModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent],
   providers: [AuthService, UserService, AuthGuard, UserResolver],

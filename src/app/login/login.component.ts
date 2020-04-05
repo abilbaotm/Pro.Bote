@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../core/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AngularFireAuth} from "@angular/fire/auth";
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'page-login',
@@ -16,7 +18,8 @@ export class LoginComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public afAuth: AngularFireAuth,
   ) {
     this.createForm();
   }
