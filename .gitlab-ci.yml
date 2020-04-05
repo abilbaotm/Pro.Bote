@@ -77,7 +77,13 @@ build_android:
     - unzip -q android-sdk.zip -d android-sdk-linux
     - export ANDROID_SDK_ROOT=$PWD/android-sdk-linux
     - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
-    - apt-get update; apt-get install openjdk-8-jdk gradle -y
+    - apt-get update; apt-get install openjdk-8-jdk -y
+    #ACTUALIZAR gradle
+    - wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P /tmp
+    - unzip -d /opt/gradle /tmp/gradle-*.zip
+    - export GRADLE_HOME=/opt/gradle/gradle-6.3
+    - export PATH=${GRADLE_HOME}/bin:${PATH}
+    #sdkmanager y licencias
     - android-sdk-linux/tools/bin/sdkmanager --update > update.log
     - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
     - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
@@ -94,6 +100,7 @@ build_android:
     - npm install --quiet
     - ../node_modules/.bin/cordova platform add android
     - ../node_modules/.bin/cordova build android
+    - ../node_modules/.bin/cordova build android --release
   artifacts:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
