@@ -81,7 +81,7 @@ build_android:
     #ACTUALIZAR gradle
     - wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P /tmp
     - unzip -d /opt/gradle /tmp/gradle-*.zip
-    - export GRADLE_HOME=/opt/gradle/gradle-5.0
+    - export GRADLE_HOME=/opt/gradle/gradle-6.3
     - export PATH=${GRADLE_HOME}/bin:${PATH}
     #sdkmanager y licencias
     - android-sdk-linux/tools/bin/sdkmanager --update > update.log
