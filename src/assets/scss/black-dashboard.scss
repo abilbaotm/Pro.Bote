@@ -78,6 +78,7 @@
  @import "black-dashboard/custom/misc.scss";
  @import "black-dashboard/custom/rtl.scss";
  @import "black-dashboard/custom/input-group.scss";
+ @import "src/assets/scss/black-dashboard/custom/styles.scss";
 
 
  // Vendor / Plugins
@@ -100,4 +101,4 @@
 
 // Angular Differences
 
-@import "black-dashboard/angular-differences/angular-differences"
+@import "black-dashboard/angular-differences/angular-differences";
