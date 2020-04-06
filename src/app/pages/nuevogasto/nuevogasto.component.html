@@ -1,60 +1,107 @@
-
+<style>
+  .form-control{
+    background-color: #27293d;
+  }
+  .redondo {
+    border-radius: 0.4285rem;
+    border: 1px solid #2b3553;
+  }
+  .btn-eliminar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f6465d;
+    width: 40px;
+    height: 40px;
+    border-top-right-radius: 0.4285rem;
+    z-index: 1;
+  }
+  .btn-eliminar i {
+    margin: 13px;
+  }
+</style>
 <div class=" content">
-  <div class="row">
-      <div class="col-12">
-        <h1>FORMULARIO GASTO NUEVO</h1>
+  <div class="card card-stats">
         <form (ngSubmit)="nuevoGasto(form.value)" [formGroup]="form">
+          <div class="card-body row">
+            <div class="col-12">
+              <h1>Nuevo gasto</h1>
+            </div>
+            <div class="col-12 col-md-6">
 
 
-
-          Descipcion: <input
+          <label for="descripcion">Descripcion</label>
+          <input
             type="text"
             maxlength="40"
-            formControlName="descripcion" />
+            formControlName="descripcion"
+            id="descripcion" class="form-control"/>
 
-          Fecha: <input type="datetime-local" formControlName="fecha">
-          <br>
-          Cantidad: <input type="number" formControlName="cantidad"/>
-          <br>
-          <input type="checkbox" formControlName="partesIguales" [ngModel]="partesIguales"> partes iguales <br>
-          <select formControlName="moneda">
+            <label for="fecha">Fecha</label>
+            <input type="datetime-local" formControlName="fecha" id="fecha" class="form-control">
+              <label for="cantidad">Cantidad</label>
+              <input type="number" formControlName="cantidad" id="cantidad" class="form-control"/>
+
+          <label for="moneda">Moneda</label>
+          <select formControlName="moneda" class="form-control" id="moneda">
             <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
           </select>
-          Ratio <input type="number" formControlName="ratio"/> {{msgRatio}}
+                <label for="ratio">Ratio</label>
+                <input type="number" formControlName="ratio"  id="ratio" class="form-control"/> {{msgRatio}}
 
-          <br>
-          Paga: <select formControlName="pagador">
+                  <label for="pagador">Paga</label>
+              <select formControlName="pagador" id="pagador" class="form-control">
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
+
+              <div class=" form-check">
+                <label class=" form-check-label">
+                  <input checked="" class=" form-check-input" type="checkbox" formControlName="partesIguales" [ngModel]="partesIguales">
+                  <span class=" form-check-sign">
+                    <span class=" check"></span> partes iguales
+                  </span>
+                </label>
+              </div>
+          </div>
+
+
+          <div class="col-12 col-md-6">
           <div
             formArrayName="terceros"
-            margin-bottom>
+            margin-bottom
+            [hidden]="form.controls.partesIguales.value">
 
 
 
           <section
             [formGroupName]="i"
-            *ngFor="let tech of form.controls.terceros['controls']; let i = index">
+            *ngFor="let tech of form.controls.terceros['controls']; let i = index" class="col-12 redondo form-group">
             <input
               type="hidden"
               formControlName="id" />
-            Ref: <input
+            <label for="refTercero{{i}}">Ref</label>
+            <input
+            id="refTercero{{i}}"
             type="text"
             maxlength="50"
-            formControlName="nombre" />
+            formControlName="nombre" class="form-control" disabled="disabled"/>
 
-            Cantidad (moneda local): <input
+            <label for="cantidadTercero{{i}}">Cantidad (moneda local)</label>
+            <input
+            id="cantidadTercero{{i}}"
             type="number"
             maxlength="50"
-            formControlName="cantidad" [ngModel]="cantidadPersona[i]" disabled="disabled"/>
+            formControlName="cantidad" [ngModel]="cantidadPersona[i]" class="form-control" disabled="disabled"/>
           </section>
           </div>
 
-
-          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
-
-        </form>
+        </div>
+          <div class="col-12 text-center">
+            <input type="submit" class="btn btn-primary" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'">
+          </div>
       </div>
+    </form>
+
   </div>
 
 

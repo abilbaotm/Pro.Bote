@@ -3,23 +3,20 @@ import { Component, OnInit } from "@angular/core";
 declare interface RouteInfo {
   path: string;
   title: string;
-  rtlTitle: string;
   icon: string;
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
   {
     path: "/dashboard",
-    title: "Dashboard",
-    rtlTitle: "لوحة القيادة",
+    title: "Inicio",
     icon: "icon-chart-pie-36",
     class: ""
   },
   {
-    path: "/user",
-    title: "User Profile",
-    rtlTitle: "ملف تعريفي للمستخدم",
-    icon: "icon-single-02",
+    path: "/nuevoviaje",
+    title: "Nuevo viaje",
+    icon: "icon-simple-add",
     class: ""
   },
 ];

@@ -1,44 +1,72 @@
 
+<style>
+  .form-control{
+    background-color: #27293d;
+  }
+  .redondo {
+    border-radius: 0.4285rem;
+    border: 1px solid #2b3553;
+  }
+  .btn-eliminar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f6465d;
+    width: 40px;
+    height: 40px;
+    border-top-right-radius: 0.4285rem;
+    z-index: 1;
+  }
+  .btn-eliminar i {
+    margin: 13px;
+  }
+</style>
 <div class=" content">
-  <div class="row">
-      <div class="col-12">
-        <h1>FORMULARIO PAGO NUEVO</h1>
+  <div class="card card-stats">
         <form (ngSubmit)="nuevoPago(form.value)" [formGroup]="form">
-
-          nota: <input
+          <div class="card-body row">
+            <div class="col-12">
+              <h1>Nuevo pago</h1>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="nota">nota</label>
+            <input
             type="text"
             maxlength="40"
-            formControlName="nota" />
+            formControlName="nota"
+              id="nota"
+            class="form-control"/>
 
-          Fecha: <input type="datetime-local" formControlName="fecha">
-          <br>
-          Cantidad: <input type="number" formControlName="cantidad"/>
-          <br>
+          <label for="fecha">Fecha</label>
+              <input type="datetime-local" formControlName="fecha" id="fecha" class="form-control">
+          <label for="cantidad">Cantidad</label>  <input type="number" formControlName="cantidad" id="cantidad" class="form-control"/>
 
-          <select formControlName="moneda">
-            <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
+          <label for="moneda">Moneda</label>
+          <select formControlName="moneda" id="moneda" class="form-control">
+            <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}" class="form-control">{{moneda}}</option>
           </select>
-          Ratio <input type="number" formControlName="ratio"/> {{msgRatio}}
+          <label for="ratio">Ratio</label>
+          <input type="number" formControlName="ratio" id="ratio" class="form-control"/> {{msgRatio}}
 
-          <br>
-          Pagador:
-          <select formControlName="pagador">
+          <label for="pagador">Pagador</label>
+          <select formControlName="pagador" id="pagador" class="form-control">
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
-          Beneficiario:
-          <select formControlName="beneficiario">
+        <label for="beneficiario">Beneficiario</label>
+          <select id="beneficiario" formControlName="beneficiario" class="form-control">
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
           {{formError}}
 
 
-
-          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
-
-        </form>
+          <div class="col-12 text-center">
+            <input type="submit" class="btn btn-primary" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'">
+          </div>
+        </div>
       </div>
+    </form>
   </div>
 
 
