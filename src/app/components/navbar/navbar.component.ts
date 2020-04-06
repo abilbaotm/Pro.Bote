@@ -172,6 +172,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return this.listTitles[item].title;
       }
     }
+    if(titlee.split('/')[3] == 'nuevogasto') {
+      return 'Viaje / Nuevo gasto'
+    } else if (titlee.split('/')[3] == 'nuevopago') {
+      return 'Viaje / Nuevo pago'
+    } else if (titlee.split('/')[1] == 'viaje') {
+      return 'Viaje'
+    }
     return "Dashboard";
   }
 

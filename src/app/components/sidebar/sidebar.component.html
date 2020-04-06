@@ -9,7 +9,7 @@
   </a>
 </div>
 <div class="sidebar-wrapper">
-  <ul class="nav">
+  <ul class="nav" *ngIf="ruta[1]!='viaje'">
     <li
       routerLinkActive="active"
       *ngFor="let menuItem of menuItems"
@@ -18,6 +18,26 @@
       <a [routerLink]="[menuItem.path]">
         <i class="tim-icons  {{ menuItem.icon }}"></i>
         <p>{{ menuItem.title }}</p>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav" *ngIf="ruta[1]=='viaje'">
+    <li class="nav-item {{ruta[3]?'':'active'}}">
+      <a [routerLink]="'/'+ruta[1]+'/'+ruta[2]+''">
+        <i class="tim-icons icon-zoom-split"></i>
+        <p>Detalles viaje</p>
+      </a>
+    </li>
+    <li class="nav-item  {{ruta[3]=='nuevogasto'?'active':''}}">
+      <a [routerLink]="'/'+ruta[1]+'/'+ruta[2]+'/nuevogasto'">
+        <i class="tim-icons icon-bag-16"></i>
+        <p>Nuevo gasto</p>
+      </a>
+    </li>
+    <li class="nav-item {{ruta[3]=='nuevopago'?'active':''}}">
+      <a [routerLink]="'/'+ruta[1]+'/'+ruta[2]+'/nuevopago'">
+        <i class="tim-icons icon-money-coins"></i>
+        <p>Nuevo pago</p>
       </a>
     </li>
   </ul>
