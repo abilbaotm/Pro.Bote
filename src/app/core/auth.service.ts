@@ -75,7 +75,9 @@ export class AuthService {
 
   doLogout(){
     return new Promise((resolve, reject) => {
-      (<any>window).plugins.googleplus.logout(function (msg) {});
+      if((<any>window).plugins) {
+        (<any>window).plugins.googleplus.logout(function (msg) {});
+      }
       if(firebase.auth().currentUser){
         this.afAuth.auth.signOut();
         resolve();
