@@ -61,9 +61,9 @@
           {{formError}}
 
 
-
-          <input type="submit" class="btn--blue btn--add" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Editar'">
-
+          <div class="col-12 text-center">
+            <input type="submit" class="btn btn-primary" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'">
+          </div>
         </div>
       </div>
     </form>
