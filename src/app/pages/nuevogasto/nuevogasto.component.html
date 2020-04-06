@@ -62,9 +62,14 @@
                   </span>
                 </label>
               </div>
+          </div>
+
+
+          <div class="col-12 col-md-6">
           <div
             formArrayName="terceros"
-            margin-bottom>
+            margin-bottom
+            [hidden]="form.controls.partesIguales.value">
 
 
 
@@ -90,11 +95,10 @@
           </section>
           </div>
 
+        </div>
           <div class="col-12 text-center">
             <input type="submit" class="btn btn-primary" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'">
-
           </div>
-        </div>
       </div>
     </form>
 
