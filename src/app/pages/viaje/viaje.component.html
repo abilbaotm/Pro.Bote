@@ -8,38 +8,9 @@
         <button routerLink="nuevopago" class=" btn btn-link" type="button" >
           Nuevo pago
         </button>
-        <button routerLink="editarviaje" class=" btn btn-link" type="button" >
+        <button routerLink="editarviaje" class=" btn btn-link" type="button" *ngIf="viaje.admin==user.uid">
           Editar
         </button>
-        <button  [swal]="deleteSwal" class=" btn btn-link" type="button" >
-          Borrar
-        </button>
-        <swal
-          #deleteSwal
-          title="Eliminar viaje {{viaje.descripcion}}?"
-          text="Esta acción no se puede deshacer"
-          icon="warning"
-          cancelButtonText="Cancelar"
-          confirmButtonText="Borrar"
-          [showCancelButton]="true"
-          [focusCancel]="true"
-          (confirm)="borrarViaje()">
-        </swal>
-        <button  [swal]="archivarSwal" class=" btn btn-link" type="button" >
-          Archivar
-        </button>
-        <swal
-          #archivarSwal
-          title="¿Archivar {{viaje.descripcion}}?"
-          text=""
-          icon="info"
-          cancelButtonText="Cancelar"
-          confirmButtonText="Archivar"
-          [showCancelButton]="true"
-          [focusCancel]="true"
-          (confirm)="archivarViaje()">
-        </swal>
-
 
       </div>
       <div class="col-12">
@@ -48,10 +19,10 @@
             <div class=" row">
               <div class=" col-12">
                 <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
-                  Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()">Cancelar</a>
+                  Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a *ngIf="viaje.admin==user.uid" class="pointer" (click)="cancelarBorrado()">Cancelar</a>
                 </div>
                 <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
-                  Este viaje ha sido archivado. <a (click)="cancelarArchivado()">Cancelar</a>
+                  Este viaje ha sido archivado. <a *ngIf="viaje.admin==user.uid" class="pointer" (click)="cancelarArchivado()">Cancelar</a>
                 </div>
                 <p class=" cart-title">{{viaje.descripcion}}</p>
                 <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}

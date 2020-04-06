@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import Chart from 'chart.js';
-import {AngularFirestore} from "@angular/fire/firestore";
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -143,4 +141,19 @@ export class NuevoviajeComponent implements OnInit {
       }))
     }
   }
+
+  borrarViaje() {
+    this.firestoreService.borrarViaje(this.idViaje).then(() => {
+        this.router.navigate(['/dashboard'])
+      }
+    )
+  }
+
+  archivarViaje() {
+    this.firestoreService.archivarViaje(this.idViaje).then(() => {
+        this.router.navigate(['/dashboard'])
+      }
+    )
+  }
+
 }
