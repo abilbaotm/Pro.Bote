@@ -9,7 +9,7 @@
   </a>
 </div>
 <div class="sidebar-wrapper">
-  <ul class="nav" *ngIf="ruta[1]!='viaje'">
+  <ul class="nav mt-0" *ngIf="ruta[1]!='viaje'">
     <li
       routerLinkActive="active"
       *ngFor="let menuItem of menuItems"
@@ -21,7 +21,13 @@
       </a>
     </li>
   </ul>
-  <ul class="nav" *ngIf="ruta[1]=='viaje'">
+  <ul class="nav mt-0" *ngIf="ruta[1]=='viaje'">
+    <li class="nav-item barra-horizontal-menu">
+      <a [routerLink]="'/dashboard'">
+        <i class="tim-icons icon-double-left"></i>
+        <p>Todos los viajes</p>
+      </a>
+    </li>
     <li class="nav-item {{ruta[3]?'':'active'}}">
       <a [routerLink]="'/'+ruta[1]+'/'+ruta[2]+''">
         <i class="tim-icons icon-zoom-split"></i>

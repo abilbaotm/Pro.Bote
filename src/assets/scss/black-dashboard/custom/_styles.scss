@@ -19,3 +19,15 @@
   margin: 13px;
 }
 .pointer {cursor: pointer;}
+.barra-horizontal-menu{
+  position: relative;
+}
+.barra-horizontal-menu:after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  height: 1px;
+  width: calc(100% - 30px);
+  background: rgba(255, 255, 255, 0.5);
+}
