@@ -32,7 +32,8 @@
       "cordova-plugin-splashscreen": {},
       "cordova-custom-config": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.53136915015-h9j17t24bj94pimv62o9embcnnfavi4d"
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.53136915015-34hfd7uvqgj5o8jtvo2vsbiekopsj7p4",
+        "PLAY_SERVICES_VERSION": "15.0.1"
       }
     },
     "platforms": [
