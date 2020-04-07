@@ -31,7 +31,9 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-custom-config": {},
-      "cordova-plugin-googleplus": {}
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.53136915015-7cqul5ct1aj0ucl2v4rfihjcvecghdt2"
+      }
     },
     "platforms": [
       "android"
