@@ -455,13 +455,13 @@
     </form>
 
   </div>
-  <div class="card card-stats">
+  <div class="card card-stats" *ngIf="currentStatus == 2">
     <div class="card-body row">
       <div class="col-12">
         <h1>Zona de peligro</h1>
       </div>
-      <div class="col-12 col-md-6">
-        <button  [swal]="deleteSwal" class=" btn btn-danger pull-right" type="button" >
+      <div class="col-12 text-center">
+        <button  [swal]="deleteSwal" class=" btn btn-danger mr-3" type="button" >
           Borrar
         </button>
         <swal
@@ -475,9 +475,7 @@
           [focusCancel]="true"
           (confirm)="borrarViaje()">
         </swal>
-      </div>
-      <div class="col-12 col-md-6">
-        <button  [swal]="archivarSwal" class=" btn btn-danger" type="button" >
+        <button  [swal]="archivarSwal" class=" btn btn-danger ml-3" type="button" >
           Archivar
         </button>
         <swal
