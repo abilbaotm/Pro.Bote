@@ -11,10 +11,33 @@ prerequisites:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
+
+get_version:
+  stage: .pre
+  only:
+    - master
+  script:
+    - mkdir version
+    - 'curl -f -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer ${FB_FUNCTION_API_KEY}" -H "BUILD_ID: ${CI_PIPELINE_IID}" -H "CI_PIPELINE_ID: ${CI_PIPELINE_ID}" https://us-central1-dw-bote.cloudfunctions.net/vPublicacion > version/actual'
+    - APPVERSION=$(cat version/actual)
+    - echo "export const environmentversion = '$APPVERSION';" > src/environments/environmentversion.ts
+    - npm install -g cordova-set-version
+    - cordova-set-version -v $APPVERSION -b $CI_PIPELINE_IID CordovaMobileApp/config.xml
+  artifacts:
+    paths:
+      - version
+      - CordovaMobileApp/config.xml
+      - src/environments/environmentversion.ts
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+
 build_web:
   stage: build
   dependencies:
     - prerequisites
+    - get_version
   cache:
     paths:
       - node_modules/
@@ -66,6 +89,7 @@ build_android:
   stage: build
   dependencies:
     - prerequisites
+    - get_version
   cache:
     paths:
       - node_modules/

@@ -20,6 +20,40 @@ async function validBearer(request) {
 admin.initializeApp();
 const db = admin.firestore();
 
+exports.vPublicacion = functions.https.onRequest(async (request , response) => {
+  const isValidBearer = await validBearer(request);
+  if (!isValidBearer) {
+    response.status(400).json({
+      error: 'Not Authorized'
+    });
+    return;
+  }
+
+  if(request.get("BUILD_ID") && request.get("BUILD_ID") !== '') {
+
+    //get version DB
+    let collectionRef = db.collection('versionado').doc('gitlabCI');
+    let promise = collectionRef.get()
+      .then((snapshot) => {
+        var datos = snapshot.data();
+        ++datos.vMicro;
+        let nuevaVersion = datos.vMayor + "." + datos.vMenor + "." + datos.vMicro;
+        datos['historial'].push({'BUILD_ID': request.get("BUILD_ID"), 'CI_PIPELINE_ID': request.get("CI_PIPELINE_ID"), 'version': nuevaVersion});
+
+        let guardar = db.collection('versionado').doc('gitlabCI');
+        guardar.set(datos);
+
+
+        response.status(200).send(nuevaVersion);
+      });
+  } else {
+    response.status(500).json({
+      error: "Nada que hacer"
+    });
+  }
+});
+
+
 exports.eliminar = functions.https.onRequest(async (request , response) => {
   const isValidBearer = await validBearer(request);
 
