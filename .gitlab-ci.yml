@@ -128,3 +128,19 @@ build_android:
   artifacts:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
+
+deploy_android:
+  image: ruby:2.7
+  stage: deploy
+  only:
+    - fastlane
+  dependencies:
+    - build_android
+  script:
+    - cp $G_PLAY_API CordovaMobileApp/platforms/android/api-ci.json
+    - gem install fastlane -NV
+    - cd CordovaMobileApp/platforms/android
+    - fastlane android deploy
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
