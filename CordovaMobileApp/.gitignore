@@ -1,7 +1,12 @@
+platforms/android/api-ci.json
+!Gemfile
+!Gemfile.lock
 # dependencies
 /node_modules
 /www
 /platforms
+!/platforms/android/fastlane/Appfile
+!/platforms/android/fastlane/Fastfile
 google-services.json
 *keystore
 *jks
