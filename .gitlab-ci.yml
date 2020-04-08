@@ -15,6 +15,7 @@ prerequisites:
 get_version:
   stage: .pre
   only:
+    - fastlane
     - master
   script:
     - mkdir version
