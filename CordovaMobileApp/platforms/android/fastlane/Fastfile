@@ -19,6 +19,6 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    upload_to_play_store track:"internal"
+    upload_to_play_store track:"internal",apk:"app/build/outputs/apk/release/app-release.apk"
   end
 end
