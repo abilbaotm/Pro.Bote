@@ -65,7 +65,7 @@ build_web:
 #    variables:
 #      - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
-deploy_prod:
+deploy_web:
   stage: deploy
   environment:
     name: production
@@ -122,9 +122,26 @@ build_android:
     - cp $BUILD_JSON build.json
     - cp $GOOGLE_SERVICES google-services.json
     - npm install --quiet
+    - ../node_modules/.bin/cordova platform rm android
     - ../node_modules/.bin/cordova platform add android
     - ../node_modules/.bin/cordova build android
     - ../node_modules/.bin/cordova build android --release
   artifacts:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
+
+deploy_android:
+  image: ruby:2.7
+  stage: deploy
+  only:
+    - master
+  dependencies:
+    - build_android
+  script:
+    - cp $G_PLAY_API CordovaMobileApp/platforms/android/api-ci.json
+    - gem install fastlane -NV
+    - cd CordovaMobileApp/platforms/android
+    - fastlane android deploy
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
