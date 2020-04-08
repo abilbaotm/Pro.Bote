@@ -123,7 +123,7 @@ build_android:
     - cp $BUILD_JSON build.json
     - cp $GOOGLE_SERVICES google-services.json
     - npm install --quiet
-    - ../node_modules/.bin/cordova platform add android
+    - ../node_modules/.bin/cordova clean
     - ../node_modules/.bin/cordova build android
     - ../node_modules/.bin/cordova build android --release
   artifacts:
