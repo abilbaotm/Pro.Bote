@@ -15,7 +15,6 @@ prerequisites:
 get_version:
   stage: .pre
   only:
-    - fastlane
     - master
   script:
     - mkdir version
@@ -66,7 +65,7 @@ build_web:
 #    variables:
 #      - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
-deploy_prod:
+deploy_web:
   stage: deploy
   environment:
     name: production
@@ -135,7 +134,7 @@ deploy_android:
   image: ruby:2.7
   stage: deploy
   only:
-    - fastlane
+    - master
   dependencies:
     - build_android
   script:
