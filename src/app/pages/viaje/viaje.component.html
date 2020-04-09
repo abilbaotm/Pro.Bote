@@ -126,51 +126,53 @@
 
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" *ngFor="let persona of personas">
-                  <a [className]="idPersonaCuentasActiva!=persona.id ? 'nav-link' : 'nav-link active'" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" (click)="verCuentasPersona(persona.id)">{{persona.nombre}}</a>
+                  <a [className]="idPersonaCuentasActiva!=persona.id ? 'nav-link' : 'nav-link active'" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" (click)="accordion.closeAll(); verCuentasPersona(persona.id)">{{persona.nombre}}</a>
                 </li>
               </ul>
 
               <p>Cuentas pendientes de todos los participantes a {{personasIndex[idPersonaCuentasActiva]}}...</p>
 
-              <mat-accordion  class="my-headers-align" *ngIf="idPersonaCuentasActiva">
-                <mat-expansion-panel *ngFor="let perso of personas">
-                  <mat-expansion-panel-header *ngIf="perso.id != idPersonaCuentasActiva" class="py-1 py-md-0" style="min-height: 48px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
-                    <div class="row w-100">
-                      <div class="col-md-8 m-auto">{{perso.nombre}}</div>
-                      <div class="col-md-4 m-auto">
-                        {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}
+              <mat-accordion #accordion="matAccordion" [multi]="true" class="my-headers-align">
+                <ng-container *ngIf="idPersonaCuentasActiva">
+                  <mat-expansion-panel *ngFor="let perso of personas">
+                    <mat-expansion-panel-header *ngIf="perso.id != idPersonaCuentasActiva" class="py-1 py-md-0" style="min-height: 48px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                      <div class="row w-100">
+                        <div class="col-md-8 m-auto">{{perso.nombre}}</div>
+                        <div class="col-md-4 m-auto">
+                          {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                        </div>
                       </div>
-                    </div>
 
 
-                  </mat-expansion-panel-header>
+                    </mat-expansion-panel-header>
 
-                  <ng-template matExpansionPanelContent>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <p>Total debido por pago de gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                        <p>Total habido por pago de gastos:{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                        <p>Balance pagos por gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                        <p>Balance pagos directos: {{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                        <p>Pendiente de pago: {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                    <ng-template matExpansionPanelContent>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <p>Total debido por pago de gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                          <p>Total habido por pago de gastos:{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                          <p>Balance pagos por gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                          <p>Balance pagos directos: {{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                          <p>Pendiente de pago: {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
 
+                        </div>
+                        <div class="col-md-6 text-center my-auto">
+                          <h3 class="my-0">
+                          {{personasIndex[idPersonaCuentasActiva]}}
+                          {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0?'>>':'<<'}}
+                          {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) | abs  |  number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                          {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0?'>>':'<<'}}
+                          {{perso.nombre}}
+                          </h3>
+
+                        </div>
                       </div>
-                      <div class="col-md-6 text-center my-auto">
-                        <h3 class="my-0">
-                        {{personasIndex[idPersonaCuentasActiva]}}
-                        {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0?'>>':'<<'}}
-                        {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) | abs  |  number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                        {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] ) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0?'>>':'<<'}}
-                        {{perso.nombre}}
-                        </h3>
-
-                      </div>
-                    </div>
 
 
-                  </ng-template>
+                    </ng-template>
 
-                </mat-expansion-panel>
+                  </mat-expansion-panel>
+                </ng-container>
               </mat-accordion>
 
 
