@@ -1,4 +1,5 @@
 export class Pago {
+  id: string;
   pagador: string;
   beneficiario: string;
   fecha: number;
@@ -8,4 +9,5 @@ export class Pago {
   ratio: number;
   moneda: string;
   nota: string;
+  eliminado: boolean;
 }

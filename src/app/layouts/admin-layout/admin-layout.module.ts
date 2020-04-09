@@ -21,23 +21,25 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatTabsModule} from "@angular/material/tabs";
 import {NgAbsPipeModule} from "angular-pipes";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    ReactiveFormsModule,
-    SweetAlert2Module,
-    NgxDaterangepickerMd,
-    MatExpansionModule,
-    MatListModule,
-    MatTableModule,
-    MatTabsModule,
-    NgAbsPipeModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        ReactiveFormsModule,
+        SweetAlert2Module,
+        NgxDaterangepickerMd,
+        MatExpansionModule,
+        MatListModule,
+        MatTableModule,
+        MatTabsModule,
+        NgAbsPipeModule,
+        MatSlideToggleModule,
+    ],
   declarations: [
     DashboardComponent,
     UserComponent,
