@@ -51,8 +51,8 @@
               <h3>Gastos</h3>
 
               <mat-accordion  class="my-headers-align">
-                <mat-expansion-panel *ngFor="let gasto of gastos" class="py-2">
-                  <mat-expansion-panel-header style="min-height: 30px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                <mat-expansion-panel *ngFor="let gasto of gastos">
+                  <mat-expansion-panel-header class="py-1 py-md-0" style="min-height: 48px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
                     <ng-container *ngIf="false">
                     <mat-panel-title>
                       {{gasto.descripcion}}
