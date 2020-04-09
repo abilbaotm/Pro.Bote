@@ -64,6 +64,7 @@ export class ViajeComponent implements OnInit {
         let nuevoGasto;
         nuevoGasto = gast.payload.doc.data() as Gasto;
         nuevoGasto.fechaLocal = moment.tz(nuevoGasto.fecha, nuevoGasto.timezone).format('HH:mm DD/M/YYYY Z z');
+        nuevoGasto.diaLocal = moment.tz(nuevoGasto.fecha, nuevoGasto.timezone).format('DD/M/YYYY');
 
         this.gastos.push(nuevoGasto)
       });
