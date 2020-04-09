@@ -16,18 +16,28 @@ import {NuevogastoComponent} from "../../pages/nuevogasto/nuevogasto.component";
 import {NuevopagoComponent} from "../../pages/nuevopago/nuevopago.component";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
+import {MatTabsModule} from "@angular/material/tabs";
+import {NgAbsPipeModule} from "angular-pipes";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(AdminLayoutRoutes),
-        FormsModule,
-        HttpClientModule,
-        NgbModule,
-        ReactiveFormsModule,
-        SweetAlert2Module,
-        NgxDaterangepickerMd,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    FormsModule,
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+    SweetAlert2Module,
+    NgxDaterangepickerMd,
+    MatExpansionModule,
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
+    NgAbsPipeModule,
+  ],
   declarations: [
     DashboardComponent,
     UserComponent,
