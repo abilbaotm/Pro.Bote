@@ -8,6 +8,4 @@ export class Pago {
   ratio: number;
   moneda: string;
   nota: string;
-  fechaDia: string;
-  fechaLocal: string;
 }
