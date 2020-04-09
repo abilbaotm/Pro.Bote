@@ -19,6 +19,8 @@ import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
+import {MatTabsModule} from "@angular/material/tabs";
+import {NgAbsPipeModule} from "angular-pipes";
 
 @NgModule({
   imports: [
@@ -33,6 +35,8 @@ import {MatTableModule} from "@angular/material/table";
     MatExpansionModule,
     MatListModule,
     MatTableModule,
+    MatTabsModule,
+    NgAbsPipeModule,
   ],
   declarations: [
     DashboardComponent,
