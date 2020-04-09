@@ -208,7 +208,7 @@ export class FirestoreService {
   nuevopago(idViaje: string, form: any) {
     let pagoForm;
     pagoForm = form ;
-    let pago: Pago;
+    let pago: {};
 
     var user = firebase.auth().currentUser;
     pago = {
@@ -221,6 +221,7 @@ export class FirestoreService {
       "ratio": pagoForm.ratio,
       "moneda":  pagoForm.moneda,
       "nota":  pagoForm.nota,
+      "eliminado": false
 
 
 
@@ -294,5 +295,10 @@ export class FirestoreService {
         return docRef
       }
     )
+  }
+
+  eliminarPago(idViaje: string, idPago: string, accion: boolean) {
+    return this.firestore.collection('viajes/' + idViaje + '/pagos').doc(idPago).set({'eliminado': accion}, {merge: true})
+
   }
 }

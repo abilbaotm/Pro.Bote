@@ -181,47 +181,82 @@
               <br>
 
               <h4>Historico pagos</h4>
+              <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verPagosEliminados" class="mb-3"  color="warn">Ver pagos eliminados</mat-slide-toggle>
+
 
               <mat-accordion  class="my-headers-align">
-                <mat-expansion-panel *ngFor="let pago of pagos">
-                  <mat-expansion-panel-header class="py-1 py-md-0" style="min-height: 48px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
-                    <div class="row w-100">
-                      <div class="col-md-6 m-auto">{{personasIndex[pago.pagador]}} >> {{personasIndex[pago.beneficiario]}}</div>
+                <ng-container *ngFor="let pago of pagos">
+                  <mat-expansion-panel *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) ">
+                    <mat-expansion-panel-header class="py-1 py-md-0" style="min-height: 48px" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                      <div class="row w-100">
+                        <div class="col-md-6 m-auto">{{personasIndex[pago.pagador]}} >> {{personasIndex[pago.beneficiario]}}</div>
 
-                      <div class="col-md-2 m-auto">
-                        <p>{{pago.fechaDia}}</p>
+                        <div class="col-md-2 m-auto">
+                          <p>{{pago.fechaDia}}</p>
+                        </div>
+                        <div class="col-md-4 m-auto">
+                          <p>{{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                        </div>
                       </div>
-                      <div class="col-md-4 m-auto">
-                        <p>{{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                      </div>
-                    </div>
 
 
-                  </mat-expansion-panel-header>
+                    </mat-expansion-panel-header>
 
-                  <ng-template matExpansionPanelContent>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <p>Nota: {{pago.nota}}</p>
-                        <p>Fecha: {{pago.fechaLocal}} ({{pago.timezone}}) </p>
-                        <p>Pagador: {{personasIndex[pago.pagador]}}</p>
-                        <p>Beneficiario: {{personasIndex[pago.beneficiario]}}</p>
-                        <ng-container *ngIf="pago.moneda == viaje.monedaPrincipal || pago.ratio == 1">
-                          <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
-                        </ng-container>
-                        <ng-container *ngIf="pago.moneda != viaje.monedaPrincipal || pago.ratio != 1">
-                          <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
-                          <p>Ratio: {{(pago.ratio) | number : '0.2-2'}}</p>
-                          <p>Cantidad Moneda Principal: {{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                    <ng-template matExpansionPanelContent>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <p>Nota: {{pago.nota}}</p>
+                          <p>Fecha: {{pago.fechaLocal}} ({{pago.timezone}}) </p>
+                          <p>Pagador: {{personasIndex[pago.pagador]}}</p>
+                          <p>Beneficiario: {{personasIndex[pago.beneficiario]}}</p>
+                          <ng-container *ngIf="pago.moneda == viaje.monedaPrincipal || pago.ratio == 1">
+                            <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
+                          </ng-container>
+                          <ng-container *ngIf="pago.moneda != viaje.monedaPrincipal || pago.ratio != 1">
+                            <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
+                            <p>Ratio: {{(pago.ratio) | number : '0.2-2'}}</p>
+                            <p>Cantidad Moneda Principal: {{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
 
-                        </ng-container>
-                      </div>
-                    </div>
+                          </ng-container>
+
+                        </div>
+                        <div class="col-md-6 text-center my-auto">
+                          <button [swal]="EliminarPagoSwal" class="btn btn-danger ml-3" type="button" *ngIf="!pago.eliminado">
+                            Eliminar pago
+                          </button>
+                          <button [swal]="RestaurarPagoSwal" class="btn ml-3" type="button" *ngIf="pago.eliminado">
+                            Restaurar pago
+                          </button>
+                          <swal
+                            #EliminarPagoSwal
+                            title="¿Eliminar pago?"
+                            text="El pago de {{personasIndex[pago.pagador]}} a {{personasIndex[pago.beneficiario]}} será eliminado"
+                            icon="info"
+                            cancelButtonText="Cancelar"
+                            confirmButtonText="Eliminar"
+                            [showCancelButton]="true"
+                            [focusCancel]="true"
+                            (confirm)="eliminarPago(pago)">
+                          </swal>
+                          <swal
+                            #RestaurarPagoSwal
+                            title="¿Restaurar pago?"
+                            text="El pago de {{personasIndex[pago.pagador]}} a {{personasIndex[pago.beneficiario]}} será restaurado"
+                            icon="info"
+                            cancelButtonText="Cancelar"
+                            confirmButtonText="Restaurar"
+                            [showCancelButton]="true"
+                            [focusCancel]="true"
+                            (confirm)="restaurarPago(pago)">
+                          </swal>
+                        </div>
+                        </div>
 
 
-                  </ng-template>
+                    </ng-template>
 
-                </mat-expansion-panel>
+                  </mat-expansion-panel>
+                </ng-container>
               </mat-accordion>
 
 

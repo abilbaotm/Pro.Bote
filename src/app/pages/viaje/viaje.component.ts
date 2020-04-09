@@ -7,6 +7,8 @@ import {Gasto} from "../../models/gasto.model";
 import * as moment from 'moment-timezone';
 import {Pago} from "../../models/pago.model";
 import * as firebase from "firebase";
+import Swal from "sweetalert2";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: "app-dashboard",
@@ -95,6 +97,7 @@ export class ViajeComponent implements OnInit {
       gastosSnapshot.forEach(pag => {
         let nuevoPago;
         nuevoPago = pag.payload.doc.data() as Pago;
+        nuevoPago.id = pag.payload.doc.id;
         nuevoPago.fechaLocal = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('HH:mm DD/M/YYYY Z z');
         nuevoPago.fechaDia = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('DD/M/YYYY');
 
@@ -112,7 +115,9 @@ export class ViajeComponent implements OnInit {
 
       });
       this.pagos.forEach(pago => {
-        this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )
+        if(!pago.eliminado) {
+          this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )
+        }
       });
       console.log(this.resumenPagos)
     })
@@ -131,9 +136,36 @@ export class ViajeComponent implements OnInit {
   }
 
   public idPersonaCuentasActiva: string;
+  verPagosEliminados: boolean;
   verCuentasPersona(id: string) {
     this.idPersonaCuentasActiva = id;
     console.log(id)
+
+  }
+
+  eliminarPago(pago: Pago) {
+    this.firestoreService.eliminarPago(this.idViaje, pago.id, true).then(() => {
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Pago eliminado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+
+  }
+
+  restaurarPago(pago: Pago) {
+    this.firestoreService.eliminarPago(this.idViaje, pago.id, false).then(() => {
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Pago restaurado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
 
   }
 }
