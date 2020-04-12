@@ -152,6 +152,7 @@ export class NuevogastoComponent implements OnInit {
           if (gasto.personas[w.id]) {
             w.cantidad = gasto.personas[w.id].cantidad
           } else {
+            this.form.get('partesIguales').setValue(false);
             w.cantidad = 0
           }
         })
