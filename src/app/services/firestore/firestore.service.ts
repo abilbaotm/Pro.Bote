@@ -301,4 +301,58 @@ export class FirestoreService {
     return this.firestore.collection('viajes/' + idViaje + '/pagos').doc(idPago).set({'eliminado': accion}, {merge: true})
 
   }
+
+  editarGasto(idViaje: string, idGasto: string, form: any, timezone: string) {
+    let gastoForm;
+    gastoForm = form ;
+
+    let gasto;
+    let personas = {};
+    let numPersonas = 0;
+    console.log(gastoForm);
+    for (let personasKey in gastoForm.terceros) {
+      personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
+      numPersonas++;
+    }
+
+    // calcular totales
+    if (gastoForm.partesIguales) {
+      const total = gastoForm.cantidad / numPersonas;
+      console.log("total");
+      console.log(total);
+      for (let personasKey in personas) {
+        personas[personasKey]['cantidad'] = total;
+
+      }
+    } else {
+      let total = 0.00;
+      for (let personasKey in personas) {
+        total += personas[personasKey]['cantidad'];
+      }
+      console.log("total");
+      console.log(total);
+      gastoForm.cantidad = total;
+    }
+
+
+
+    var user = firebase.auth().currentUser;
+    gasto = {
+      "descripcion": gastoForm.descripcion,
+      "fecha":  moment(gastoForm.fecha).unix()* 1000,
+      "timezone": timezone,
+      "cantidad": gastoForm.cantidad,
+      "partesIguales": gastoForm.partesIguales,
+      "moneda":gastoForm.moneda,
+      "ratio": gastoForm.ratio,
+      "personas": personas,
+      "creador": user.uid,
+      "pagador": gastoForm.pagador
+    };
+
+
+
+
+    return this.firestore.collection( 'viajes/'+idViaje+'/gastos').doc(idGasto).set(gasto)
+  }
 }

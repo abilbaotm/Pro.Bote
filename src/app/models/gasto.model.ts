@@ -1,4 +1,5 @@
 export class Gasto {
+  id: string;
   descripcion: string;
   fecha: Date;
   cantidad: number;

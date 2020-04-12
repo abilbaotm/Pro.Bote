@@ -8,9 +8,10 @@ import {Viaje} from "../../models/viaje.model";
 import {map} from "rxjs/operators";
 import {Persona} from "../../models/persona.model";
 import * as firebase from "firebase";
-import * as moment from "moment";
+import * as moment from 'moment-timezone';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {Gasto} from "../../models/gasto.model";
 
 
 @Component({
@@ -25,6 +26,8 @@ export class NuevogastoComponent implements OnInit {
   public personasViaje: Persona[] = new Array<Persona>();
   private ratios: number[] = new Array<number>();
   public msgRatio: string;
+  private idGasto: string;
+  public timezoneForm: string;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -52,6 +55,7 @@ export class NuevogastoComponent implements OnInit {
   ngOnInit() {
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
     this.form.controls['fecha'].setValue( moment().format( moment.HTML5_FMT.DATETIME_LOCAL));
+    this.timezoneForm = moment.tz.guess()
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
@@ -128,6 +132,31 @@ export class NuevogastoComponent implements OnInit {
 
     });
 
+    //editando?
+    this.idGasto = this.route.snapshot.paramMap.get("gasto");
+    if(this.idGasto != null) {
+
+      this.currentStatus = 2;
+      this.firestoreService.getGasto(this.idViaje, this.idGasto).subscribe((gastosSnapshot) => {
+        let gasto = gastosSnapshot.payload.data() as Gasto;
+        this.timezoneForm = gasto.timezone;
+        this.form.get('descripcion').setValue(gasto.descripcion);
+        this.form.controls['fecha'].setValue( moment(gasto.fecha).format( moment.HTML5_FMT.DATETIME_LOCAL));
+        this.form.get('cantidad').setValue(gasto.cantidad);
+        this.form.get('moneda').setValue(gasto.moneda);
+        this.form.get('ratio').setValue(gasto.ratio);
+        this.form.get('pagador').setValue(gasto.pagador);
+        this.form.get('partesIguales').setValue(gasto.partesIguales);
+        let personasForm = this.form.get('terceros').value
+        personasForm.forEach(w=>{
+          w.cantidad = gasto.personas[w.id].cantidad
+        })
+        this.form.get('terceros').setValue(personasForm)
+        this.msgRatio = ""
+      })
+
+    }
+
     //sumas
     this.form.get('cantidad').valueChanges.subscribe(x => {
       if (this.form.get('partesIguales').value) {
@@ -164,9 +193,17 @@ export class NuevogastoComponent implements OnInit {
   partesIguales: boolean = true;
 
   nuevoGasto(form, documentId = this.documentId) {
-    this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
-      this.router.navigate([`/viaje/${this.idViaje}`])
-    } ) )
+    if( this.currentStatus == 1) {
+
+      this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
+        this.router.navigate([`/viaje/${this.idViaje}`])
+      }))
+    } else {
+      this.firestoreService.editarGasto(this.idViaje, this.idGasto, form, this.timezoneForm).then((docRef => {
+        this.router.navigate([`/viaje/${this.idViaje}`])
+      }))
+
+    }
   }
   initTechnologyFields(perso: Persona) : FormGroup
   {
