@@ -82,6 +82,9 @@
 
                         <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
                         <p>Partes iguales: {{gasto.partesIguales?'Sí':'No'}}</p>
+                        <button class="btn ml-3" type="button" *ngIf="viaje.admin==user.uid" [routerLink]="['editargasto/'+gasto.id]">
+                          Editar pago
+                        </button>
                       </div>
                       <div class="col-md-6">
                         <table mat-table [dataSource]="gasto.personas | keyvalue" class="mat-elevation-z8 w-100">

@@ -37,7 +37,7 @@
             formControlName="descripcion"
             id="descripcion" class="form-control"/>
 
-            <label for="fecha">Fecha</label>
+            <label for="fecha">Fecha en {{timezoneForm}}</label>
             <input type="datetime-local" formControlName="fecha" id="fecha" class="form-control">
               <label for="cantidad">Cantidad</label>
               <input type="number" formControlName="cantidad" id="cantidad" class="form-control"/>
@@ -47,7 +47,8 @@
             <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}">{{moneda}}</option>
           </select>
                 <label for="ratio">Ratio</label>
-                <input type="number" formControlName="ratio"  id="ratio" class="form-control"/> {{msgRatio}}
+                <input type="number" formControlName="ratio"  id="ratio" class="form-control"/>
+              <p>{{msgRatio}}</p>
 
                   <label for="pagador">Paga</label>
               <select formControlName="pagador" id="pagador" class="form-control">
