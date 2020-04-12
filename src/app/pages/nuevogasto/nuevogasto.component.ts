@@ -149,7 +149,11 @@ export class NuevogastoComponent implements OnInit {
         this.form.get('partesIguales').setValue(gasto.partesIguales);
         let personasForm = this.form.get('terceros').value
         personasForm.forEach(w=>{
-          w.cantidad = gasto.personas[w.id].cantidad
+          if (gasto.personas[w.id]) {
+            w.cantidad = gasto.personas[w.id].cantidad
+          } else {
+            w.cantidad = 0
+          }
         })
         this.form.get('terceros').setValue(personasForm)
         this.msgRatio = ""
