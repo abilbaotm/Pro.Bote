@@ -16,6 +16,17 @@ export class FooterComponent implements OnInit {
   constructor(private connectionService: ConnectionService,
               private toastr: ToastrService) {
 
+    if(!navigator.onLine) {
+      this.internetStatus = false;
+      this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> No se pudo establecer conexión a internet. Puede haber cambios no sincronizados', '', {
+        disableTimeOut: true,
+        closeButton: true,
+        enableHtml: true,
+        toastClass: "alert alert-danger alert-with-icon",
+        positionClass: 'toast-bottom-right'
+      });
+    }
+
     this.connectionService.monitor().subscribe(currentState => {
       if (currentState) {
         this.internetStatus = true;
