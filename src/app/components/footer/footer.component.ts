@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {environmentversion} from "../../../environments/environmentversion";
+import {ConnectionService} from "ng-connection-service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: "app-footer",
@@ -9,8 +11,35 @@ import {environmentversion} from "../../../environments/environmentversion";
 export class FooterComponent implements OnInit {
   test: Date = new Date();
   actualVersion: string;
+  internetStatus: boolean;
 
-  constructor() {}
+  constructor(private connectionService: ConnectionService,
+              private toastr: ToastrService) {
+
+    this.connectionService.monitor().subscribe(currentState => {
+      if (currentState) {
+        this.internetStatus = true;
+        this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Conexión recuperada.', '', {
+          disableTimeOut: true,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: "alert alert-success alert-with-icon",
+          positionClass: 'toast-bottom-right'
+        });
+      }
+      else {
+        this.internetStatus = false;
+        this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Se ha perdido conexión a internet. Puede haber cambios no sincronizados', '', {
+          disableTimeOut: true,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: "alert alert-danger alert-with-icon",
+          positionClass: 'toast-bottom-right'
+        });
+      }
+      console.log(this.internetStatus)
+    });
+  }
 
   ngOnInit() {
     this.actualVersion = environmentversion
