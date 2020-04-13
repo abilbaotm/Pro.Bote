@@ -135,25 +135,23 @@ export class NuevoviajeComponent implements OnInit {
       this.firestoreService.nuevoViaje(form).then((docRef => {
         this.router.navigate([`/viaje/${docRef.id}`])
       }))
+      this.router.navigate([`/dashboard`])
     } else {
       this.firestoreService.updateViaje(form, this.idViaje).then((docRef => {
-        this.router.navigate([`/viaje/${this.idViaje}`])
       }))
+      this.router.navigate([`/viaje/${this.idViaje}`])
     }
   }
 
   borrarViaje() {
-    this.firestoreService.borrarViaje(this.idViaje).then(() => {
-        this.router.navigate(['/dashboard'])
-      }
-    )
+    this.firestoreService.borrarViaje(this.idViaje).then()
+    this.router.navigate(['/dashboard'])
+
   }
 
   archivarViaje() {
-    this.firestoreService.archivarViaje(this.idViaje).then(() => {
-        this.router.navigate(['/dashboard'])
-      }
-    )
+    this.firestoreService.archivarViaje(this.idViaje).then()
+    this.router.navigate(['/dashboard'])
   }
 
 }
