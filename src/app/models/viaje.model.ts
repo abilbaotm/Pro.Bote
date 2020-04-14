@@ -6,8 +6,7 @@ export class Viaje {
   archivado: boolean;
   descripcion: string;
   admin: string;
-  permitidos: {
-  };
+  permitidos: {};
   monedaPrincipal: string;
   monedasAdicionales: {
     moneda: string;

@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import {environmentversion} from "../../../environments/environmentversion";
-import {ConnectionService} from "ng-connection-service";
-import {ToastrService} from "ngx-toastr";
+import {Component, OnInit} from '@angular/core';
+import {environmentversion} from '../../../environments/environmentversion';
+import {ConnectionService} from 'ng-connection-service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: "app-footer",
-  templateUrl: "./footer.component.html",
-  styleUrls: ["./footer.component.css"]
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
   test: Date = new Date();

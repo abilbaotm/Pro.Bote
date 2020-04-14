@@ -9,7 +9,7 @@ export class Gasto {
   pagador: string;
   creador: string;
   timezone: string;
-  personas: {string: {cantidad: number}};
+  personas: { string: { cantidad: number } };
   diaLocal: string;
 
   constructor() {

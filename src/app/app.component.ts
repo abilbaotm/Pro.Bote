@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-import {AngularFirestore} from "@angular/fire/firestore";
+import {Component} from '@angular/core';
 
 @Component({
   selector: "app-root",

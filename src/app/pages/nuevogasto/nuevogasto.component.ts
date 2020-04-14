@@ -1,60 +1,59 @@
-import { Component, OnInit } from "@angular/core";
-import Chart from 'chart.js';
-import {AngularFirestore} from "@angular/fire/firestore";
-import {FirestoreService} from "../../services/firestore/firestore.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Viaje} from "../../models/viaje.model";
-import {map} from "rxjs/operators";
-import {Persona} from "../../models/persona.model";
-import * as firebase from "firebase";
+import {Component, OnInit} from '@angular/core';
+import {FirestoreService} from '../../services/firestore/firestore.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Viaje} from '../../models/viaje.model';
+import {Persona} from '../../models/persona.model';
 import * as moment from 'moment-timezone';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Gasto} from "../../models/gasto.model";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Gasto} from '../../models/gasto.model';
 
 
 @Component({
-  selector: "app-nuevogasto",
-  templateUrl: "nuevogasto.component.html"
+  selector: 'app-nuevogasto',
+  templateUrl: 'nuevogasto.component.html'
 })
 export class NuevogastoComponent implements OnInit {
-  private idViaje: string;
   public viaje: Viaje;
-  public form 			: FormGroup;
+  public form: FormGroup;
   public monedas: String[] = new Array<String>();
   public personasViaje: Persona[] = new Array<Persona>();
-  private ratios: number[] = new Array<number>();
   public msgRatio: string;
-  private idGasto: string;
   public timezoneForm: string;
+  public documentId = null;
+  public currentStatus = 1;
+  cantidadPersona = [];
+  partesIguales: boolean = true;
+  private idViaje: string;
+  private ratios: number[] = new Array<number>();
+  private idGasto: string;
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router,
-    private _FB          : FormBuilder,
+    private _FB: FormBuilder,
     private httpClient: HttpClient
-
-) {
+  ) {
     this.viaje = new Viaje();
 
     this.form = this._FB.group({
-      descripcion : ['', Validators.required],
-      cantidad : [0, Validators.required],
-      moneda : ['', Validators.required],
+      descripcion: ['', Validators.required],
+      cantidad: [0, Validators.required],
+      moneda: ['', Validators.required],
       ratio: [1.00, Validators.required],
-      fecha:['', Validators.required],
-      partesIguales:[true, Validators.required],
-      terceros     : this._FB.array([]),
+      fecha: ['', Validators.required],
+      partesIguales: [true, Validators.required],
+      terceros: this._FB.array([]),
       pagador: ['', Validators.required]
 
-  });
+    });
   }
 
   ngOnInit() {
-    this.idViaje = this.route.snapshot.paramMap.get("viaje");
-    this.form.controls['fecha'].setValue( moment().format( moment.HTML5_FMT.DATETIME_LOCAL));
+    this.idViaje = this.route.snapshot.paramMap.get('viaje');
+    this.form.controls['fecha'].setValue(moment().format(moment.HTML5_FMT.DATETIME_LOCAL));
     this.timezoneForm = moment.tz.guess()
 
 
@@ -82,12 +81,12 @@ export class NuevogastoComponent implements OnInit {
             this.ratios[this.viaje.monedaPrincipal] = 1.00;
           });
         this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
-          if (this.ratios[monedaSnapshot]!=undefined) {
+          if (this.ratios[monedaSnapshot] != undefined) {
             this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
-            this.msgRatio = "";
+            this.msgRatio = '';
           } else {
             this.form.get('ratio').setValue(1.00);
-            this.msgRatio = "Ratio no disponible para esta divisa";
+            this.msgRatio = 'Ratio no disponible para esta divisa';
           }
         })
 
@@ -104,7 +103,6 @@ export class NuevogastoComponent implements OnInit {
         controla.push(this.initTechnologyFields(persona));
         this.personasViaje.push(persona as Persona);
         this.cantidadPersona.push(0)
-
 
 
       });
@@ -134,21 +132,21 @@ export class NuevogastoComponent implements OnInit {
 
     //editando?
     this.idGasto = this.route.snapshot.paramMap.get("gasto");
-    if(this.idGasto != null) {
+    if (this.idGasto != null) {
 
       this.currentStatus = 2;
       this.firestoreService.getGasto(this.idViaje, this.idGasto).subscribe((gastosSnapshot) => {
         let gasto = gastosSnapshot.payload.data() as Gasto;
         this.timezoneForm = gasto.timezone;
         this.form.get('descripcion').setValue(gasto.descripcion);
-        this.form.controls['fecha'].setValue( moment(gasto.fecha).format( moment.HTML5_FMT.DATETIME_LOCAL));
+        this.form.controls['fecha'].setValue(moment(gasto.fecha).format(moment.HTML5_FMT.DATETIME_LOCAL));
         this.form.get('cantidad').setValue(gasto.cantidad);
         this.form.get('moneda').setValue(gasto.moneda);
         this.form.get('ratio').setValue(gasto.ratio);
         this.form.get('pagador').setValue(gasto.pagador);
         this.form.get('partesIguales').setValue(gasto.partesIguales);
         let personasForm = this.form.get('terceros').value
-        personasForm.forEach(w=>{
+        personasForm.forEach(w => {
           if (gasto.personas[w.id]) {
             w.cantidad = gasto.personas[w.id].cantidad
           } else {
@@ -175,10 +173,8 @@ export class NuevogastoComponent implements OnInit {
     });
 
 
-
-
     this.form.get('partesIguales').valueChanges.subscribe(x => {
-      if (!x)  {
+      if (!x) {
         this.form.get('cantidad').disable();
         for (let tercerosKey in this.form.get('terceros')['controls']) {
           (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').enable()
@@ -192,13 +188,9 @@ export class NuevogastoComponent implements OnInit {
     })
 
   }
-  public documentId = null;
-  public currentStatus = 1;
-  cantidadPersona = [];
-  partesIguales: boolean = true;
 
   nuevoGasto(form, documentId = this.documentId) {
-    if( this.currentStatus == 1) {
+    if (this.currentStatus == 1) {
 
       this.firestoreService.nuevoGasto(this.idViaje, form).then()
     } else {
@@ -206,13 +198,13 @@ export class NuevogastoComponent implements OnInit {
     }
     this.router.navigate([`/viaje/${this.idViaje}`])
   }
-  initTechnologyFields(perso: Persona) : FormGroup
-  {
+
+  initTechnologyFields(perso: Persona): FormGroup {
     return this._FB.group({
       //TODO: controlar tipo de dato
-      id 		: [perso.id, Validators.required],
-      nombre 		: [perso.nombre, Validators.required],
-      cantidad 		: ['', Validators.required]
+      id: [perso.id, Validators.required],
+      nombre: [perso.nombre, Validators.required],
+      cantidad: ['', Validators.required]
     });
   }
 

@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import {FirebaseUserModel} from "../../core/user.model";
-import * as firebase from "firebase";
-import {Gasto} from "../../models/gasto.model";
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {FirebaseUserModel} from '../../core/user.model';
+import * as firebase from 'firebase';
 import * as moment from 'moment-timezone';
-import {Persona} from "../../models/persona.model";
-import {Pago} from "../../models/pago.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +12,24 @@ export class FirestoreService {
 
   constructor(
     private firestore: AngularFirestore
-  ) {}
+  ) {
+  }
+
   //Crea un nuevo gato
-  public createCat(data: {nombre: string, url: string}) {
+  public createCat(data: { nombre: string, url: string }) {
     return this.firestore.collection('cats').add(data);
   }
+
   //Obtiene un gato
   public getCat(documentId: string) {
     return this.firestore.collection('cats').doc(documentId).snapshotChanges();
   }
+
   //Obtiene todos los gatos
   public getCats() {
     return this.firestore.collection('cats').snapshotChanges();
   }
+
   //Actualiza un gato
   public updateCat(documentId: string, data: any) {
     return this.firestore.collection('cats').doc(documentId).set(data);
@@ -39,10 +40,11 @@ export class FirestoreService {
     var user = firebase.auth().currentUser;
 
     return this.firestore.collection('viajes', ref => {
-      var path = new firebase.firestore.FieldPath('permitidos', user.email ,'activo');
+      var path = new firebase.firestore.FieldPath('permitidos', user.email, 'activo');
       return ref.where(path, '==', true);
     }).snapshotChanges();
   }
+
   public getViaje(documentId: string) {
     return this.firestore.collection('viajes').doc(documentId).snapshotChanges();
   }
@@ -52,19 +54,21 @@ export class FirestoreService {
   }
 
   public getGastos(documentId: string) {
-    return this.firestore.collection('viajes').doc(documentId).collection('gastos',ref => {
+    return this.firestore.collection('viajes').doc(documentId).collection('gastos', ref => {
       return ref.orderBy('fecha')
     }).snapshotChanges()
   }
 
   getPagos(documentId: string) {
-    return this.firestore.collection('viajes').doc(documentId).collection('pagos',ref => {
+    return this.firestore.collection('viajes').doc(documentId).collection('pagos', ref => {
       return ref.orderBy('fecha')
     }).snapshotChanges()
   }
+
   public getGasto(documentId: string, id: string) {
     return this.firestore.collection('viajes').doc(documentId).collection("gastos").doc(id).snapshotChanges()
   }
+
   public guardar(data: any) {
     return this.firestore.collection('test').add({"test": data});
   }
@@ -84,12 +88,12 @@ export class FirestoreService {
       "nombre": user.displayName, "email": user.email
     });
     formdata.terceros.forEach(function (ter) {
-      if (ter.email!="") {
+      if (ter.email != '') {
 
         permitidos[ter.email] = {
           activo: true,
           owner: false,
-          "nombre": ter.nombre,
+          'nombre': ter.nombre,
         }
       } else {
         ter.email = null
@@ -100,25 +104,25 @@ export class FirestoreService {
     });
 
 
-    return this.firestore.collection( 'viajes').add(
+    return this.firestore.collection('viajes').add(
       {
-        "admin": user.uid,
-        "descripcion": formdata.descripcion,
-        "permitidos": permitidos,
-        "monedaPrincipal": formdata.monedaPrincipal,
-        "monedasAdicionales": formdata.monedasAdicionales,
-        "fechas": {
-            start: formdata.fechas.startDate.toDate(),
-            end: formdata.fechas.endDate.toDate(),
-          },
-        "timezone": moment.tz.guess(),
-        "borrado": false,
-        "archivado": false
+        'admin': user.uid,
+        'descripcion': formdata.descripcion,
+        'permitidos': permitidos,
+        'monedaPrincipal': formdata.monedaPrincipal,
+        'monedasAdicionales': formdata.monedasAdicionales,
+        'fechas': {
+          start: formdata.fechas.startDate.toDate(),
+          end: formdata.fechas.endDate.toDate(),
+        },
+        'timezone': moment.tz.guess(),
+        'borrado': false,
+        'archivado': false
       }
     ).then(
       docRef => {
-        for( let pers in personas) {
-          this.firestore.collection( 'viajes/' + docRef.id + '/personas').add(personas[pers])
+        for (let pers in personas) {
+          this.firestore.collection('viajes/' + docRef.id + '/personas').add(personas[pers])
         }
         return docRef
       }
@@ -126,7 +130,7 @@ export class FirestoreService {
   }
 
   borrarViaje(id: string) {
-    return this.firestore.collection('viajes').doc(id).set({'borrado': true}, { merge: true })
+    return this.firestore.collection('viajes').doc(id).set({'borrado': true}, {merge: true})
   }
 
   archivarViaje(id: string) {
@@ -134,16 +138,16 @@ export class FirestoreService {
   }
 
   borrarViajeCancelar(idViaje: string) {
-    return this.firestore.collection('viajes').doc(idViaje).set({'borrado': false}, { merge: true })
+    return this.firestore.collection('viajes').doc(idViaje).set({'borrado': false}, {merge: true})
   }
 
   archivarViajeCancelar(idViaje: string) {
-    return this.firestore.collection('viajes').doc(idViaje).set({'archivado': false}, { merge: true })
+    return this.firestore.collection('viajes').doc(idViaje).set({'archivado': false}, {merge: true})
   }
 
   nuevoGasto(idViaje: string, form: any) {
     let gastoForm;
-    gastoForm = form ;
+    gastoForm = form;
 
     let gasto;
     let personas = {};
@@ -174,21 +178,19 @@ export class FirestoreService {
     }
 
 
-
     var user = firebase.auth().currentUser;
     gasto = {
-      "descripcion": gastoForm.descripcion,
-      "fecha":  moment(gastoForm.fecha).unix()* 1000,
-      "timezone": moment.tz.guess(),
-      "cantidad": gastoForm.cantidad,
-      "partesIguales": gastoForm.partesIguales,
-      "moneda":gastoForm.moneda,
-      "ratio": gastoForm.ratio,
-      "personas": personas,
-      "creador": user.uid,
-      "pagador": gastoForm.pagador
+      'descripcion': gastoForm.descripcion,
+      'fecha': moment(gastoForm.fecha).unix() * 1000,
+      'timezone': moment.tz.guess(),
+      'cantidad': gastoForm.cantidad,
+      'partesIguales': gastoForm.partesIguales,
+      'moneda': gastoForm.moneda,
+      'ratio': gastoForm.ratio,
+      'personas': personas,
+      'creador': user.uid,
+      'pagador': gastoForm.pagador
     };
-
 
 
     /* cantidad:
@@ -200,34 +202,33 @@ export class FirestoreService {
 
      */
 
-    return this.firestore.collection( 'viajes/'+idViaje+'/gastos').add(
+    return this.firestore.collection('viajes/' + idViaje + '/gastos').add(
       gasto
     )
   }
 
   nuevopago(idViaje: string, form: any) {
     let pagoForm;
-    pagoForm = form ;
+    pagoForm = form;
     let pago: {};
 
     var user = firebase.auth().currentUser;
     pago = {
-      "pagador": pagoForm.pagador,
-      "beneficiario": pagoForm.beneficiario,
-      "fecha": moment(pagoForm.fecha).unix()* 1000,
-      "creador": user.uid,
-      "timezone": moment.tz.guess(),
-      "cantidad":  pagoForm.cantidad,
-      "ratio": pagoForm.ratio,
-      "moneda":  pagoForm.moneda,
-      "nota":  pagoForm.nota,
-      "eliminado": false
-
+      'pagador': pagoForm.pagador,
+      'beneficiario': pagoForm.beneficiario,
+      'fecha': moment(pagoForm.fecha).unix() * 1000,
+      'creador': user.uid,
+      'timezone': moment.tz.guess(),
+      'cantidad': pagoForm.cantidad,
+      'ratio': pagoForm.ratio,
+      'moneda': pagoForm.moneda,
+      'nota': pagoForm.nota,
+      'eliminado': false
 
 
     };
     console.log(pago)
-    return this.firestore.collection( 'viajes/'+idViaje+'/pagos').add(
+    return this.firestore.collection('viajes/' + idViaje + '/pagos').add(
       pago
     )
   }
@@ -247,17 +248,17 @@ export class FirestoreService {
     };
     console.log(form)
     form.terceros.forEach(function (ter) {
-      if (ter.email!="") {
+      if (ter.email != '') {
 
         permitidos[ter.email] = {
           activo: true,
           owner: false,
-          "nombre": ter.nombre,
+          'nombre': ter.nombre,
         }
       } else {
         ter.email = null
       }
-      if (ter.id != "") {
+      if (ter.id != '') {
         personas[ter.id] = {
           "nombre": ter.nombre,
           "email": ter.email
@@ -305,7 +306,7 @@ export class FirestoreService {
 
   editarGasto(idViaje: string, idGasto: string, form: any, timezone: string) {
     let gastoForm;
-    gastoForm = form ;
+    gastoForm = form;
 
     let gasto;
     let personas = {};
@@ -336,24 +337,21 @@ export class FirestoreService {
     }
 
 
-
     var user = firebase.auth().currentUser;
     gasto = {
-      "descripcion": gastoForm.descripcion,
-      "fecha":  moment(gastoForm.fecha).unix()* 1000,
-      "timezone": timezone,
-      "cantidad": gastoForm.cantidad,
-      "partesIguales": gastoForm.partesIguales,
-      "moneda":gastoForm.moneda,
-      "ratio": gastoForm.ratio,
-      "personas": personas,
-      "creador": user.uid,
-      "pagador": gastoForm.pagador
+      'descripcion': gastoForm.descripcion,
+      'fecha': moment(gastoForm.fecha).unix() * 1000,
+      'timezone': timezone,
+      'cantidad': gastoForm.cantidad,
+      'partesIguales': gastoForm.partesIguales,
+      'moneda': gastoForm.moneda,
+      'ratio': gastoForm.ratio,
+      'personas': personas,
+      'creador': user.uid,
+      'pagador': gastoForm.pagador
     };
 
 
-
-
-    return this.firestore.collection( 'viajes/'+idViaje+'/gastos').doc(idGasto).set(gasto)
+    return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set(gasto)
   }
 }

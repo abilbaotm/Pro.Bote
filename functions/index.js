@@ -16,11 +16,10 @@ async function validBearer(request) {
 }
 
 
-
 admin.initializeApp();
 const db = admin.firestore();
 
-exports.vPublicacion = functions.https.onRequest(async (request , response) => {
+exports.vPublicacion = functions.https.onRequest(async (request, response) => {
   const isValidBearer = await validBearer(request);
   if (!isValidBearer) {
     response.status(400).json({
@@ -29,7 +28,7 @@ exports.vPublicacion = functions.https.onRequest(async (request , response) => {
     return;
   }
 
-  if(request.get("BUILD_ID") && request.get("BUILD_ID") !== '') {
+  if (request.get("BUILD_ID") && request.get("BUILD_ID") !== '') {
 
     //get version DB
     let collectionRef = db.collection('versionado').doc('gitlabCI');
@@ -38,7 +37,11 @@ exports.vPublicacion = functions.https.onRequest(async (request , response) => {
         var datos = snapshot.data();
         ++datos.vMicro;
         let nuevaVersion = datos.vMayor + "." + datos.vMenor + "." + datos.vMicro;
-        datos['historial'].push({'BUILD_ID': request.get("BUILD_ID"), 'CI_PIPELINE_ID': request.get("CI_PIPELINE_ID"), 'version': nuevaVersion});
+        datos['historial'].push({
+          'BUILD_ID': request.get("BUILD_ID"),
+          'CI_PIPELINE_ID': request.get("CI_PIPELINE_ID"),
+          'version': nuevaVersion
+        });
 
         let guardar = db.collection('versionado').doc('gitlabCI');
         guardar.set(datos);
@@ -54,7 +57,7 @@ exports.vPublicacion = functions.https.onRequest(async (request , response) => {
 });
 
 
-exports.eliminar = functions.https.onRequest(async (request , response) => {
+exports.eliminar = functions.https.onRequest(async (request, response) => {
   const isValidBearer = await validBearer(request);
 
   if (!isValidBearer) {
@@ -110,22 +113,21 @@ exports.eliminar = functions.https.onRequest(async (request , response) => {
   }
 
 
-
   let collectionRef = db.collection('viajes');
   let query = collectionRef.where('borrado', '==', true);
   query.get()
     .then((snapshot) => {
-      // When there are no documents left, we are done
-      if (snapshot.size === 0) {
-        response.status(200).json({
-          success: "Nada que hacer"
-        });
-        return;
-      }
+        // When there are no documents left, we are done
+        if (snapshot.size === 0) {
+          response.status(200).json({
+            success: "Nada que hacer"
+          });
+          return;
+        }
         snapshot.docs.forEach((doc) => {
-          deleteCollection(db, doc.ref.path+"/personas", 200 );
-          deleteCollection(db, doc.ref.path+"/pagos", 200);
-          deleteCollection(db, doc.ref.path+"/gastos", 200);
+          deleteCollection(db, doc.ref.path + "/personas", 200);
+          deleteCollection(db, doc.ref.path + "/pagos", 200);
+          deleteCollection(db, doc.ref.path + "/gastos", 200);
           let batch = db.batch();
           snapshot.docs.forEach((doc) => {
             batch.delete(doc.ref);
@@ -136,11 +138,10 @@ exports.eliminar = functions.https.onRequest(async (request , response) => {
         response.status(200).json({
           success: "Procesando..."
         });
-        return;
 
-    }
+
+      }
     );
-
 
 
 });

@@ -1,34 +1,34 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
-import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
+import {ToastrModule} from 'ngx-toastr';
 
-import { AppComponent } from "./app.component";
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import {AppComponent} from './app.component';
+import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { ComponentsModule } from "./components/components.module";
-import {environment} from "../environments/environment";
-import {AngularFireModule} from "@angular/fire";
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import {AngularFireStorageModule} from "@angular/fire/storage";
-import {AngularFireAuthModule} from "@angular/fire/auth";
-import {LoginComponent} from "./login/login.component";
-import {AuthService} from "./core/auth.service";
-import {UserService} from "./core/user.service";
-import {AuthGuard} from "./core/auth.guard";
-import {RegisterComponent} from "./register/register.component";
-import {UserResolver} from "./pages/user/user.resolver";
-import {ViajeComponent} from "./pages/viaje/viaje.component";
-import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
-import {NgxDaterangepickerMd} from "ngx-daterangepicker-material";
+import {AppRoutingModule} from './app-routing.module';
+import {ComponentsModule} from './components/components.module';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {LoginComponent} from './login/login.component';
+import {AuthService} from './core/auth.service';
+import {UserService} from './core/user.service';
+import {AuthGuard} from './core/auth.guard';
+import {RegisterComponent} from './register/register.component';
+import {UserResolver} from './pages/user/user.resolver';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
 import * as moment from 'moment';
 import * as localization from 'moment/locale/es';
-import { PrivacidadComponent } from './pages/legal/privacidad/privacidad.component';
+import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
+
 moment.locale('es', localization);
 
 @NgModule({
@@ -50,7 +50,7 @@ moment.locale('es', localization);
     SweetAlert2Module.forRoot(),
     NgxDaterangepickerMd.forRoot({
       daysOfWeek: ["do", "lu", "ma", "mi", "ju", "vi", "sá"],
-      monthNames: ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."],
+      monthNames: ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sep.', 'oct.', 'nov.', 'dic.'],
       firstDay: 1,
       applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
     }),
@@ -60,4 +60,5 @@ moment.locale('es', localization);
   providers: [AuthService, UserService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

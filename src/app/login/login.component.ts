@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../core/auth.service'
-import { Router, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {AngularFireAuth} from "@angular/fire/auth";
-import * as firebase from 'firebase/app';
+import {Component} from '@angular/core';
+import {AuthService} from '../core/auth.service'
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'page-login',
@@ -26,21 +25,20 @@ export class LoginComponent {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required ],
-      password: ['',Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
 
-
-  tryGoogleLogin(){
+  tryGoogleLogin() {
     this.authService.doGoogleLogin()
       .then(res => {
         this.router.navigate(['/dashboard']);
       })
   }
 
-  tryLogin(value){
+  tryLogin(value) {
     this.authService.doLogin(value)
       .then(res => {
         this.router.navigate(['/dashboard']);

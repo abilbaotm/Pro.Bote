@@ -1,56 +1,56 @@
-import { Component, OnInit } from "@angular/core";
-import Chart from 'chart.js';
-import {AngularFirestore} from "@angular/fire/firestore";
-import {FirestoreService} from "../../services/firestore/firestore.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Viaje} from "../../models/viaje.model";
-import {map} from "rxjs/operators";
-import {Persona} from "../../models/persona.model";
-import * as firebase from "firebase";
-import * as moment from "moment";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {Component, OnInit} from '@angular/core';
+import {FirestoreService} from '../../services/firestore/firestore.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Viaje} from '../../models/viaje.model';
+import {Persona} from '../../models/persona.model';
+import * as moment from 'moment';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 
 @Component({
-  selector: "app-nuevopago",
-  templateUrl: "nuevopago.component.html"
+  selector: 'app-nuevopago',
+  templateUrl: 'nuevopago.component.html'
 })
 export class NuevopagoComponent implements OnInit {
-  private idViaje: string;
   public viaje: Viaje;
-  public form 			: FormGroup;
+  public form: FormGroup;
   public monedas: String[] = new Array<String>();
   public personasViaje: Persona[] = new Array<Persona>();
-  private ratios: number[] = new Array<number>();
   public msgRatio: string;
+  public documentId = null;
+  public currentStatus = 1;
+  cantidadPersona = [];
+  partesIguales: boolean = true;
+  public formError: string;
+  private idViaje: string;
+  private ratios: number[] = new Array<number>();
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router,
-    private _FB          : FormBuilder,
+    private _FB: FormBuilder,
     private httpClient: HttpClient
-
-) {
+  ) {
     this.viaje = new Viaje();
 
     this.form = this._FB.group({
-      nota : [''],
-      cantidad : [0, Validators.required],
-      moneda : ['', Validators.required],
+      nota: [''],
+      cantidad: [0, Validators.required],
+      moneda: ['', Validators.required],
       ratio: [1.00, Validators.required],
-      fecha:['', Validators.required],
+      fecha: ['', Validators.required],
       pagador: ['', Validators.required],
       beneficiario: ['', Validators.required]
 
-  });
+    });
   }
 
   ngOnInit() {
-    this.idViaje = this.route.snapshot.paramMap.get("viaje");
-    this.form.controls['fecha'].setValue( moment().format( moment.HTML5_FMT.DATETIME_LOCAL));
+    this.idViaje = this.route.snapshot.paramMap.get('viaje');
+    this.form.controls['fecha'].setValue(moment().format(moment.HTML5_FMT.DATETIME_LOCAL));
 
 
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
@@ -77,12 +77,12 @@ export class NuevopagoComponent implements OnInit {
             this.ratios[this.viaje.monedaPrincipal] = 1.00;
           });
         this.form.get('moneda').valueChanges.subscribe(monedaSnapshot => {
-          if (this.ratios[monedaSnapshot]!=undefined) {
+          if (this.ratios[monedaSnapshot] != undefined) {
             this.form.get('ratio').setValue(this.ratios[monedaSnapshot]);
-            this.msgRatio = "";
+            this.msgRatio = '';
           } else {
             this.form.get('ratio').setValue(1.00);
-            this.msgRatio = "Ratio no disponible para esta divisa";
+            this.msgRatio = 'Ratio no disponible para esta divisa';
           }
         })
 
@@ -100,29 +100,24 @@ export class NuevopagoComponent implements OnInit {
     });
 
   }
-  public documentId = null;
-  public currentStatus = 1;
-  cantidadPersona = [];
-  partesIguales: boolean = true;
-  public formError: string;
 
   nuevoPago(form, documentId = this.documentId) {
     if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
       this.firestoreService.nuevopago(this.idViaje, form).then()
       this.router.navigate([`/viaje/${this.idViaje}`])
     } else {
-      this.formError = "Pagador y beneficiario no puede ser la misma persona";
+      this.formError = 'Pagador y beneficiario no puede ser la misma persona';
     }
 
 
   }
-  initTechnologyFields(perso: Persona) : FormGroup
-  {
+
+  initTechnologyFields(perso: Persona): FormGroup {
     return this._FB.group({
       //TODO: controlar tipo de dato
-      id 		: [perso.id, Validators.required],
-      nombre 		: [perso.nombre, Validators.required],
-      cantidad 		: ['', Validators.required]
+      id: [perso.id, Validators.required],
+      nombre: [perso.nombre, Validators.required],
+      cantidad: ['', Validators.required]
     });
   }
 

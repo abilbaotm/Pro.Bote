@@ -1,16 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import Chart from 'chart.js';
-import {AngularFirestore} from "@angular/fire/firestore";
-import {FirestoreService} from "../../services/firestore/firestore.service";
-import Unsplash, { toJson } from "unsplash-js";
+import {Component, OnInit} from '@angular/core';
+import {FirestoreService} from '../../services/firestore/firestore.service';
+import Unsplash, {toJson} from 'unsplash-js';
 import * as moment from 'moment-timezone';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "dashboard.component.html"
+  selector: 'app-dashboard',
+  templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  public canvas : any;
+  public canvas: any;
   public ctx;
   public datasets: any;
   public data: any;
@@ -18,10 +16,12 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
   public clicked2: boolean = false;
+  public todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
 
   constructor(
     private firestoreService: FirestoreService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
@@ -29,15 +29,15 @@ export class DashboardComponent implements OnInit {
     this.cargarViajes();
 
   }
+
   public updateOptions() {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();
   }
-  public todosViajes = {"Activos": [],"Futuros": [],"Archivados": [],"Pendientes de Borrar": []};
 
   enviarFirebase() {
     let data;
-    data =  new Date().toString();
+    data = new Date().toString();
 
     this.firestoreService.guardar(this.data);
     /*this.firestoreService.getCats().subscribe((catsSnapshot) => {
@@ -50,40 +50,43 @@ export class DashboardComponent implements OnInit {
       })
     });*/
   }
+
   cargarViajes() {
     this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
-      this.todosViajes = {"Activos": [],"Futuros": [],"Archivados": [],"Pendientes de Borrar": []};
+      this.todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
       viajesSnapshot.forEach((viajeData: any) => {
         var datosViaje = viajeData.payload.doc.data();
         datosViaje.fechasInicio = moment.tz(datosViaje.fechas.start.toDate(), datosViaje.timezone).format('DD/M/YYYY');
         datosViaje.fechasFin = moment.tz(datosViaje.fechas.end.toDate(), datosViaje.timezone).format('DD/M/YYYY');
         if (datosViaje.borrado) {
           this.todosViajes['Pendientes de Borrar'].push({
-            id: viajeData.payload.doc.id,
-            data: datosViaje}
-            )
+              id: viajeData.payload.doc.id,
+              data: datosViaje
+            }
+          )
         } else if (datosViaje.archivado) {
           this.todosViajes['Archivados'].push({
-            id: viajeData.payload.doc.id,
-            data: datosViaje}
+              id: viajeData.payload.doc.id,
+              data: datosViaje
+            }
           )
         } else if (datosViaje.fechas.start.seconds < moment().unix()) {
           console.log(datosViaje.fechas.start.seconds);
           console.log(moment().unix());
           this.todosViajes['Activos'].push({
-            id: viajeData.payload.doc.id,
-            data: datosViaje}
+              id: viajeData.payload.doc.id,
+              data: datosViaje
+            }
           )
         } else {
           this.todosViajes['Futuros'].push({
-            id: viajeData.payload.doc.id,
-            data: datosViaje}
+              id: viajeData.payload.doc.id,
+              data: datosViaje
+            }
           )
         }
 
       })
-
-
 
 
       const unsplash = new Unsplash({
@@ -95,7 +98,7 @@ export class DashboardComponent implements OnInit {
 
         for (let todosViajeKey in this.todosViajes[categorias]) {
 
-          unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1,  {})
+          unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1, {})
             .then(toJson)
             .then(json => {
               console.log(json["results"][0])
@@ -103,12 +106,10 @@ export class DashboardComponent implements OnInit {
             });
 
 
-
         }
 
       }
     });
-
 
 
   }
