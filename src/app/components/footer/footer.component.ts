@@ -16,6 +16,18 @@ export class FooterComponent implements OnInit {
   constructor(private connectionService: ConnectionService,
               private toastr: ToastrService) {
 
+
+    function onOnline() {
+      console.log("ONLINE")
+    }
+
+    function onOffline() {
+      console.log("OFFLINE")
+    }
+    (<any> window).addEventListener("offline", onOffline, false);
+    (<any> window).addEventListener("online", onOnline, false);
+
+
     if(!navigator.onLine) {
       this.internetStatus = false;
       this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> No se pudo establecer conexión a internet. Puede haber cambios no sincronizados', '', {
