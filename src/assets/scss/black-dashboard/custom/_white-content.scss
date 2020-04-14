@@ -80,9 +80,11 @@
   .form-control {
     color: $black;
     border-color: rgba($black-states, 0.5);
+    background-color: white;
 
     &:focus {
       border-color: $primary;
+      background-color: $opacity-gray-3;
     }
   }
 
