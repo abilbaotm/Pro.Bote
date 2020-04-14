@@ -1,13 +1,13 @@
 <div class=" content">
   <div class="row">
-    <div *ngIf="!viaje.archivado && !viaje.borrado" class=" col-12">
+    <div *ngIf="!viaje.archivado && !viaje.borrado && this.nav.permisos" class=" col-12">
       <button class=" btn btn-link" routerLink="nuevogasto" type="button">
         Nuevo gasto
       </button>
       <button class=" btn btn-link" routerLink="nuevopago" type="button">
         Nuevo pago
       </button>
-      <button *ngIf="viaje.admin==user.uid" class=" btn btn-link" routerLink="editarviaje" type="button">
+      <button class=" btn btn-link" routerLink="editarviaje" type="button">
         Editar
       </button>
 

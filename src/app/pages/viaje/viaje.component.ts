@@ -8,6 +8,7 @@ import * as moment from 'moment-timezone';
 import {Pago} from '../../models/pago.model';
 import * as firebase from 'firebase';
 import Swal from 'sweetalert2';
+import {NavServiceService} from "../../services/nav-service/nav-service.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +31,8 @@ export class ViajeComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public nav: NavServiceService,
   ) {
   }
 
@@ -46,6 +48,13 @@ export class ViajeComponent implements OnInit {
       this.viaje = (dbviaje.payload.data()) as Viaje;
       this.fechasInicio = moment.tz(this.viaje.fechas.start.toDate(), this.viaje.timezone).format('DD/M/YYYY');
       this.fechasFin = moment.tz(this.viaje.fechas.end.toDate(), this.viaje.timezone).format('DD/M/YYYY');
+
+      if (this.viaje.admin != this.user.uid) {
+        this.nav.permisos = false;
+      } else {
+        this.nav.permisos = true
+      }
+
     });
 
 
