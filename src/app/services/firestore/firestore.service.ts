@@ -304,6 +304,11 @@ export class FirestoreService {
 
   }
 
+  eliminarGasto(idViaje: string, idGasto: string, accion: boolean) {
+    return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set({'eliminado': accion}, {merge: true})
+
+  }
+
   editarGasto(idViaje: string, idGasto: string, form: any, timezone: string) {
     let gastoForm;
     gastoForm = form;

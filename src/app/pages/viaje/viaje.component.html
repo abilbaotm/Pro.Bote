@@ -52,72 +52,110 @@
           <div class=" row">
             <div class=" col-12">
               <h3>Gastos</h3>
+              <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verGastosEliminados" class="mb-3"
+                                color="warn">Ver gastos eliminados
+              </mat-slide-toggle>
 
               <mat-accordion class="my-headers-align">
-                <mat-expansion-panel *ngFor="let gasto of gastos">
-                  <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'" class="py-1 py-md-0"
-                                              style="min-height: 48px">
-                    <div class="row w-100">
-                      <div class="col-md-6 m-auto">{{gasto.descripcion}}</div>
-                      <div class="col-md-2 m-auto"><p class="m-auto">{{gasto.diaLocal}}</p></div>
-                      <div class="col-md-4 m-auto">
-                        <p class="m-auto">
-                          {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}
-                          <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1"
-                                class="text-right ml-1"> ({{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                            ) </span></p>
+                <ng-container *ngFor="let gasto of gastos">
+                  <mat-expansion-panel
+                    *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) ">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
+                                                class="py-1 py-md-0"
+                                                style="min-height: 48px">
+                      <div class="row w-100">
+                        <div class="col-md-6 m-auto">{{gasto.descripcion}}</div>
+                        <div class="col-md-2 m-auto"><p class="m-auto">{{gasto.diaLocal}}</p></div>
+                        <div class="col-md-4 m-auto">
+                          <p class="m-auto">
+                            {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}
+                            <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1"
+                                  class="text-right ml-1"> ({{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                              ) </span></p>
+                        </div>
                       </div>
-                    </div>
 
 
-                  </mat-expansion-panel-header>
+                    </mat-expansion-panel-header>
 
-                  <ng-template matExpansionPanelContent>
-                    <div class="row pt-3">
-                      <div class="col-md-6">
-                        <p>Descripción: {{gasto.descripcion}}</p>
-                        <p>Fecha: {{gasto.fechaLocal}} ({{gasto.timezone}}) </p>
-                        <ng-container *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
-                          <p>Cantidad (Moneda extranjera): {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
-                          <p>Cantidad (Moneda
-                            principal): {{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                          <p>Ratio de cambio: {{gasto.ratio | number : '0.3-3'}}</p>
-                        </ng-container>
-                        <ng-container *ngIf="gasto.moneda == viaje.monedaPrincipal || gasto.ratio == 1">
-                          <p>Cantidad: {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
-                        </ng-container>
-
-                        <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
-                        <p>Partes iguales: {{gasto.partesIguales ? 'Sí' : 'No'}}</p>
-                        <button *ngIf="viaje.admin==user.uid" [routerLink]="['editargasto/'+gasto.id]" class="btn ml-3"
-                                type="button">
-                          Editar pago
-                        </button>
-                      </div>
-                      <div class="col-md-6">
-                        <table [dataSource]="gasto.personas | keyvalue" class="mat-elevation-z8 w-100" mat-table>
-
-                          <ng-container matColumnDef="persona">
-                            <td *matCellDef="let element" mat-cell> {{personasIndex[element.key]}} </td>
+                    <ng-template matExpansionPanelContent>
+                      <div class="row pt-3">
+                        <div class="col-md-6">
+                          <p>Descripción: {{gasto.descripcion}}</p>
+                          <p>Fecha: {{gasto.fechaLocal}} ({{gasto.timezone}}) </p>
+                          <ng-container *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
+                            <p>Cantidad (Moneda extranjera): {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
+                            <p>Cantidad (Moneda
+                              principal): {{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                            <p>Ratio de cambio: {{gasto.ratio | number : '0.3-3'}}</p>
                           </ng-container>
-                          <ng-container matColumnDef="cantidad">
-                            <td *matCellDef="let element"
-                                mat-cell> {{element.value.cantidad | number : '0.2-2'}} {{gasto.moneda}}
-                              <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
-                                ({{element.value.cantidad / gasto.ratio | number : '0.2-2'}} {{viaje.monedaPrincipal}})
-                              </span>
-                            </td>
+                          <ng-container *ngIf="gasto.moneda == viaje.monedaPrincipal || gasto.ratio == 1">
+                            <p>Cantidad: {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
                           </ng-container>
 
-                          <tr *matRowDef="let row; columns: ['persona', 'cantidad'];" mat-row></tr>
-                        </table>
+                          <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
+                          <p>Partes iguales: {{gasto.partesIguales ? 'Sí' : 'No'}}</p>
+                          <button *ngIf="viaje.admin==user.uid && !gasto.eliminado"
+                                  [routerLink]="['editargasto/'+gasto.id]" class="btn ml-3"
+                                  type="button">
+                            Editar gasto
+                          </button>
+                          <button *ngIf="!gasto.eliminado" [swal]="EliminarGastoSwal" class="btn btn-danger ml-3"
+                                  type="button">
+                            Eliminar gasto
+                          </button>
+                          <button *ngIf="gasto.eliminado" [swal]="RestaurarGastoSwal" class="btn ml-3" type="button">
+                            Restaurar gasto
+                          </button>
+                          <swal
+                            #EliminarGastoSwal
+                            (confirm)="eliminarGasto(gasto)"
+                            [focusCancel]="true"
+                            [showCancelButton]="true"
+                            cancelButtonText="Cancelar"
+                            confirmButtonText="Eliminar"
+                            icon="info"
+                            text=""
+                            title="¿Eliminar gasto?">
+                          </swal>
+                          <swal
+                            #RestaurarGastoSwal
+                            (confirm)="restaurarGasto(gasto)"
+                            [focusCancel]="true"
+                            [showCancelButton]="true"
+                            cancelButtonText="Cancelar"
+                            confirmButtonText="Restaurar"
+                            icon="info"
+                            text=""
+                            title="¿Restaurar gasto?">
+                          </swal>
+                        </div>
+                        <div class="col-md-6">
+                          <table [dataSource]="gasto.personas | keyvalue" class="mat-elevation-z8 w-100" mat-table>
+
+                            <ng-container matColumnDef="persona">
+                              <td *matCellDef="let element" mat-cell> {{personasIndex[element.key]}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="cantidad">
+                              <td *matCellDef="let element"
+                                  mat-cell> {{element.value.cantidad | number : '0.2-2'}} {{gasto.moneda}}
+                                <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
+                                  ({{element.value.cantidad / gasto.ratio | number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                                  )
+                                </span>
+                              </td>
+                            </ng-container>
+
+                            <tr *matRowDef="let row; columns: ['persona', 'cantidad'];" mat-row></tr>
+                          </table>
+
+                        </div>
 
                       </div>
+                    </ng-template>
 
-                    </div>
-                  </ng-template>
-
-                </mat-expansion-panel>
+                  </mat-expansion-panel>
+                </ng-container>
               </mat-accordion>
 
             </div>
