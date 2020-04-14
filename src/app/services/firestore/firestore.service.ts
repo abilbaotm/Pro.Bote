@@ -270,6 +270,13 @@ export class FirestoreService {
       }
 
     });
+    for( let pers in personas) {
+      this.firestore.collection('viajes/' + idViaje + '/personas').doc(pers).update(personas[pers]).then(r => {})
+
+    }
+    for( let pers in nuevasPersonas) {
+      this.firestore.collection( 'viajes/' + idViaje + '/personas').add(nuevasPersonas[pers])
+    }
     return documento.set(
       {
         "descripcion": form.descripcion,
@@ -285,13 +292,7 @@ export class FirestoreService {
       }, {merge: true}
     ).then(
       docRef => {
-        for( let pers in personas) {
-          this.firestore.collection('viajes/' + idViaje + '/personas').doc(pers).update(personas[pers]).then(r => {})
 
-        }
-        for( let pers in nuevasPersonas) {
-          this.firestore.collection( 'viajes/' + idViaje + '/personas').add(nuevasPersonas[pers])
-        }
         return docRef
       }
     )
