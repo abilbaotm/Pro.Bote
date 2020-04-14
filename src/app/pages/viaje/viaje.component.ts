@@ -50,6 +50,8 @@ export class ViajeComponent implements OnInit {
 
 
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
+      this.personas = new Array<Persona>();
+      this.personasIndex = {}
         personasSnapshot.forEach(perso => {
           let persoTemp: Persona = perso.payload.doc.data() as Persona;
           persoTemp.id = perso.payload.doc.ref.id;

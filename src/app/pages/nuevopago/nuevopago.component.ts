@@ -103,10 +103,8 @@ export class NuevopagoComponent implements OnInit {
 
   nuevoPago(form, documentId = this.documentId) {
     if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
-      this.firestoreService.nuevopago(this.idViaje, form).then((docRef => {
-          this.router.navigate([`/viaje/${this.idViaje}`])
-        })
-      )
+      this.firestoreService.nuevopago(this.idViaje, form).then()
+      this.router.navigate([`/viaje/${this.idViaje}`])
     } else {
       this.formError = 'Pagador y beneficiario no puede ser la misma persona';
     }

@@ -192,15 +192,11 @@ export class NuevogastoComponent implements OnInit {
   nuevoGasto(form, documentId = this.documentId) {
     if (this.currentStatus == 1) {
 
-      this.firestoreService.nuevoGasto(this.idViaje, form).then((docRef => {
-        this.router.navigate([`/viaje/${this.idViaje}`])
-      }))
+      this.firestoreService.nuevoGasto(this.idViaje, form).then()
     } else {
-      this.firestoreService.editarGasto(this.idViaje, this.idGasto, form, this.timezoneForm).then((docRef => {
-        this.router.navigate([`/viaje/${this.idViaje}`])
-      }))
-
+      this.firestoreService.editarGasto(this.idViaje, this.idGasto, form, this.timezoneForm).then()
     }
+    this.router.navigate([`/viaje/${this.idViaje}`])
   }
 
   initTechnologyFields(perso: Persona): FormGroup {
