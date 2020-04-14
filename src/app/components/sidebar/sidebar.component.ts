@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {NavServiceService} from "../../services/nav-service/nav-service.service";
 
 declare interface RouteInfo {
   path: string;
@@ -31,9 +32,11 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   public ruta: string[];
+  public permisosEditar = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private nav: NavServiceService
   ) {
   }
 
