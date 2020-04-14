@@ -14,57 +14,47 @@ export class FooterComponent implements OnInit {
   internetStatus: boolean;
 
   constructor(private connectionService: ConnectionService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService) {}
 
-
-    function onOnline() {
-      console.log("ONLINE")
-    }
-
-    function onOffline() {
-      console.log("OFFLINE")
-    }
-    (<any> window).addEventListener("offline", onOffline, false);
-    (<any> window).addEventListener("online", onOnline, false);
-
+  ngOnInit() {
+    this.actualVersion = environmentversion
 
     if(!navigator.onLine) {
       this.internetStatus = false;
-      this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> No se pudo establecer conexión a internet. Puede haber cambios no sincronizados', '', {
-        disableTimeOut: true,
+      this.toastr.clear()
+      this.toastr.info('<span class="tim-icons icon-alert-circle-exc" [data-notify]="icon"></span> No se pudo establecer conexión a internet. Puede haber cambios no sincronizados', '', {
         closeButton: true,
         enableHtml: true,
         toastClass: "alert alert-danger alert-with-icon",
-        positionClass: 'toast-bottom-right'
+        positionClass: 'toast-bottom-right',
+        progressBar: true
       });
     }
 
     this.connectionService.monitor().subscribe(currentState => {
       if (currentState) {
         this.internetStatus = true;
-        this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Conexión recuperada.', '', {
-          disableTimeOut: true,
+        this.toastr.clear()
+        this.toastr.info('<span class="tim-icons icon-spaceship" [data-notify]="icon"></span> Conexión recuperada.', '', {
           closeButton: true,
           enableHtml: true,
           toastClass: "alert alert-success alert-with-icon",
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-bottom-right',
+          progressBar: true
         });
       }
       else {
         this.internetStatus = false;
-        this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Se ha perdido conexión a internet. Puede haber cambios no sincronizados', '', {
-          disableTimeOut: true,
+        this.toastr.clear()
+        this.toastr.info('<span class="tim-icons icon-alert-circle-exc" [data-notify]="icon"></span> Se ha perdido conexión a internet. Puede haber cambios no sincronizados', '', {
           closeButton: true,
           enableHtml: true,
           toastClass: "alert alert-danger alert-with-icon",
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-bottom-right',
+          progressBar: true
         });
       }
       console.log(this.internetStatus)
     });
-  }
-
-  ngOnInit() {
-    this.actualVersion = environmentversion
   }
 }
