@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../core/auth.service'
-import { Router, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as firebase from "firebase";
+import {Component} from '@angular/core';
+import {AuthService} from '../core/auth.service'
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-register',
@@ -26,37 +26,36 @@ export class RegisterComponent {
       }
     });
     this.createForm();
-   }
+  }
 
-   createForm() {
-     this.registerForm = this.fb.group({
-       displayName: ['',Validators.required],
-       email: ['', Validators.required ],
-       password: ['',Validators.required]
-     });
-   }
+  createForm() {
+    this.registerForm = this.fb.group({
+      displayName: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
 
+  tryGoogleLogin() {
+    this.authService.doGoogleLogin()
+      .then(res => {
+          this.router.navigate(['/dashboard']);
+        }, err => console.log(err)
+      )
+  }
 
-   tryGoogleLogin(){
-     this.authService.doGoogleLogin()
-     .then(res =>{
-       this.router.navigate(['/dashboard']);
-     }, err => console.log(err)
-     )
-   }
-
-   tryRegister(value){
-     this.authService.doRegister(value)
-     .then(res => {
-       console.log(res);
-       this.errorMessage = "";
-       this.successMessage = "Your account has been created";
-     }, err => {
-       console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
-     })
-   }
+  tryRegister(value) {
+    this.authService.doRegister(value)
+      .then(res => {
+        console.log(res);
+        this.errorMessage = '';
+        this.successMessage = 'Your account has been created';
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+        this.successMessage = '';
+      })
+  }
 
 }

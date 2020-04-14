@@ -1,19 +1,19 @@
 <div class="logo">
-  <a routerLink="/" class="simple-text logo-mini">
+  <a class="simple-text logo-mini" routerLink="/">
     <div class="logo-img">
-      <img src="./assets/img/angular2-logo-white.png" />
+      <img src="./assets/img/angular2-logo-white.png"/>
     </div>
   </a>
-  <a routerLink="/" class="simple-text logo-normal">
+  <a class="simple-text logo-normal" routerLink="/">
     Pro.Bote
   </a>
 </div>
 <div class="sidebar-wrapper">
-  <ul class="nav mt-0" *ngIf="ruta[1]!='viaje'">
+  <ul *ngIf="ruta[1]!='viaje'" class="nav mt-0">
     <li
-      routerLinkActive="active"
       *ngFor="let menuItem of menuItems"
       class="{{ menuItem.class }} nav-item"
+      routerLinkActive="active"
     >
       <a [routerLink]="[menuItem.path]">
         <i class="tim-icons  {{ menuItem.icon }}"></i>
@@ -21,7 +21,7 @@
       </a>
     </li>
   </ul>
-  <ul class="nav mt-0" *ngIf="ruta[1]=='viaje'">
+  <ul *ngIf="ruta[1]=='viaje'" class="nav mt-0">
     <li class="nav-item barra-horizontal-menu">
       <a [routerLink]="'/dashboard'">
         <i class="tim-icons icon-double-left"></i>

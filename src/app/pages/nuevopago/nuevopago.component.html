@@ -1,12 +1,13 @@
-
 <style>
-  .form-control{
+  .form-control {
     background-color: #27293d;
   }
+
   .redondo {
     border-radius: 0.4285rem;
     border: 1px solid #2b3553;
   }
+
   .btn-eliminar {
     position: absolute;
     top: 0;
@@ -17,44 +18,47 @@
     border-top-right-radius: 0.4285rem;
     z-index: 1;
   }
+
   .btn-eliminar i {
     margin: 13px;
   }
 </style>
 <div class=" content">
   <div class="card card-stats">
-        <form (ngSubmit)="nuevoPago(form.value)" [formGroup]="form">
-          <div class="card-body row">
-            <div class="col-12">
-              <h1>Nuevo pago</h1>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="nota">nota</label>
-            <input
-            type="text"
-            maxlength="40"
+    <form (ngSubmit)="nuevoPago(form.value)" [formGroup]="form">
+      <div class="card-body row">
+        <div class="col-12">
+          <h1>Nuevo pago</h1>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="nota">nota</label>
+          <input
+            class="form-control"
             formControlName="nota"
-              id="nota"
-            class="form-control"/>
+            id="nota"
+            maxlength="40"
+            type="text"/>
 
           <label for="fecha">Fecha</label>
-              <input type="datetime-local" formControlName="fecha" id="fecha" class="form-control">
-          <label for="cantidad">Cantidad</label>  <input type="number" formControlName="cantidad" id="cantidad" class="form-control"/>
+          <input class="form-control" formControlName="fecha" id="fecha" type="datetime-local">
+          <label for="cantidad">Cantidad</label> <input class="form-control" formControlName="cantidad" id="cantidad"
+                                                        type="number"/>
 
           <label for="moneda">Moneda</label>
-          <select formControlName="moneda" id="moneda" class="form-control">
-            <option *ngFor="let moneda of monedas" value="{{moneda}}" label="{{moneda}}" class="form-control">{{moneda}}</option>
+          <select class="form-control" formControlName="moneda" id="moneda">
+            <option *ngFor="let moneda of monedas" class="form-control" label="{{moneda}}"
+                    value="{{moneda}}">{{moneda}}</option>
           </select>
           <label for="ratio">Ratio</label>
-          <input type="number" formControlName="ratio" id="ratio" class="form-control"/> {{msgRatio}}
+          <input class="form-control" formControlName="ratio" id="ratio" type="number"/> {{msgRatio}}
 
           <label for="pagador">Pagador</label>
-          <select formControlName="pagador" id="pagador" class="form-control">
+          <select class="form-control" formControlName="pagador" id="pagador">
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
-        <label for="beneficiario">Beneficiario</label>
-          <select id="beneficiario" formControlName="beneficiario" class="form-control">
+          <label for="beneficiario">Beneficiario</label>
+          <select class="form-control" formControlName="beneficiario" id="beneficiario">
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
@@ -62,13 +66,14 @@
 
 
           <div class="col-12 text-center">
-            <input type="submit" class="btn btn-primary" [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'">
+            <input [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'"
+                   class="btn btn-primary"
+                   type="submit">
           </div>
         </div>
       </div>
     </form>
   </div>
-
 
 
 </div>

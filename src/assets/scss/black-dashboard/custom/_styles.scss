@@ -1,10 +1,12 @@
-.form-control{
+.form-control {
   background-color: #27293d !important;
 }
+
 .redondo {
   border-radius: 0.4285rem;
   border: 1px solid #2b3553;
 }
+
 .btn-eliminar {
   position: absolute;
   top: 0;
@@ -15,14 +17,20 @@
   border-top-right-radius: 0.4285rem;
   z-index: 1;
 }
+
 .btn-eliminar i {
   margin: 13px;
 }
-.pointer {cursor: pointer;}
-.barra-horizontal-menu{
+
+.pointer {
+  cursor: pointer;
+}
+
+.barra-horizontal-menu {
   position: relative;
 }
-.barra-horizontal-menu:after{
+
+.barra-horizontal-menu:after {
   content: "";
   position: absolute;
   bottom: 0;

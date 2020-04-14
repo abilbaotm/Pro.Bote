@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import {FirebaseUserModel} from "../../core/user.model";
-import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../core/user.service";
+import {Component, OnInit} from '@angular/core';
+import {FirebaseUserModel} from '../../core/user.model';
+import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../core/user.service';
 
 @Component({
-  selector: "app-user",
-  templateUrl: "user.component.html"
+  selector: 'app-user',
+  templateUrl: 'user.component.html'
 })
 export class UserComponent implements OnInit {
   user: FirebaseUserModel = new FirebaseUserModel();
@@ -17,9 +17,10 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     public userService: UserService,
     private fb: FormBuilder,
-) {}
+  ) {
+  }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
       if (data) {
@@ -31,15 +32,15 @@ export class UserComponent implements OnInit {
 
   createForm(name) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required ]
+      name: [name, Validators.required]
     });
   }
 
 
-  save(value){
+  save(value) {
     this.userService.updateCurrentUser(value)
       .then(res => {
-        this.user.name=value.name;
+        this.user.name = value.name;
         console.log(res);
       }, err => console.log(err))
   }

@@ -1,22 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import {FirestoreService} from "../../services/firestore/firestore.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Viaje} from "../../models/viaje.model";
-import {Persona} from "../../models/persona.model";
-import {Gasto} from "../../models/gasto.model";
+import {Component, OnInit} from '@angular/core';
+import {FirestoreService} from '../../services/firestore/firestore.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Viaje} from '../../models/viaje.model';
+import {Persona} from '../../models/persona.model';
+import {Gasto} from '../../models/gasto.model';
 import * as moment from 'moment-timezone';
-import {Pago} from "../../models/pago.model";
-import * as firebase from "firebase";
-import Swal from "sweetalert2";
-import {ThemePalette} from "@angular/material/core";
+import {Pago} from '../../models/pago.model';
+import * as firebase from 'firebase';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "viaje.component.html"
+  selector: 'app-dashboard',
+  templateUrl: 'viaje.component.html'
 })
 export class ViajeComponent implements OnInit {
   public user: any;
-  private idViaje: string;
   public viaje: Viaje = new Viaje();
   public personas = new Array<Persona>();
   public personasIndex = {};
@@ -24,16 +22,17 @@ export class ViajeComponent implements OnInit {
   fechasFin: String;
   fechasInicio: String;
   public pagos = new Array<Pago>();
-
   public resumenPagos = {};
+  public idPersonaCuentasActiva: string;
+  verPagosEliminados: boolean;
+  private idViaje: string;
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     private router: Router
-
-
-) { }
+  ) {
+  }
 
   ngOnInit() {
     this.user = firebase.auth().currentUser;
@@ -52,7 +51,7 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         personasSnapshot.forEach(perso => {
-          let persoTemp: Persona= perso.payload.doc.data() as Persona;
+          let persoTemp: Persona = perso.payload.doc.data() as Persona;
           persoTemp.id = perso.payload.doc.ref.id;
           this.personas.push(persoTemp);
           this.personasIndex[perso.payload.doc.ref.id] = (persoTemp).nombre
@@ -73,12 +72,12 @@ export class ViajeComponent implements OnInit {
       });
       console.log(this.gastos);
 
-      this.personas.forEach( persoA => {
+      this.personas.forEach(persoA => {
         if (this.resumenPagos[persoA.id] == undefined) {
           this.resumenPagos[persoA.id] = {}
         }
         this.resumenPagos[persoA.id].debe = {};
-        this.personas.forEach( persoB => {
+        this.personas.forEach(persoB => {
           this.resumenPagos[persoA.id].debe[persoB.id] = 0
         })
 
@@ -86,7 +85,7 @@ export class ViajeComponent implements OnInit {
 
       this.gastos.forEach(gasto => {
         for (let personasKey in gasto.personas) {
-          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio )
+          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
         }
 
       })
@@ -105,19 +104,19 @@ export class ViajeComponent implements OnInit {
         this.pagos.push(nuevoPago)
       });
 
-      this.personas.forEach( persoA => {
+      this.personas.forEach(persoA => {
         if (this.resumenPagos[persoA.id] == undefined) {
           this.resumenPagos[persoA.id] = {}
         }
         this.resumenPagos[persoA.id].pagos = {};
-        this.personas.forEach( persoB => {
+        this.personas.forEach(persoB => {
           this.resumenPagos[persoA.id].pagos[persoB.id] = 0
         })
 
       });
       this.pagos.forEach(pago => {
-        if(!pago.eliminado) {
-          this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio )
+        if (!pago.eliminado) {
+          this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio)
         }
       });
       console.log(this.resumenPagos)
@@ -127,17 +126,17 @@ export class ViajeComponent implements OnInit {
   }
 
   cancelarBorrado() {
-    this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {}
+    this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {
+      }
     )
   }
 
   cancelarArchivado() {
-    this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {}
+    this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {
+      }
     )
   }
 
-  public idPersonaCuentasActiva: string;
-  verPagosEliminados: boolean;
   verCuentasPersona(id: string) {
     this.idPersonaCuentasActiva = id;
     console.log(id)
