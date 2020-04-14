@@ -189,7 +189,8 @@ export class FirestoreService {
       'ratio': gastoForm.ratio,
       'personas': personas,
       'creador': user.uid,
-      'pagador': gastoForm.pagador
+      'pagador': gastoForm.pagador,
+      'eliminado': false
     };
 
 
@@ -301,6 +302,11 @@ export class FirestoreService {
 
   eliminarPago(idViaje: string, idPago: string, accion: boolean) {
     return this.firestore.collection('viajes/' + idViaje + '/pagos').doc(idPago).set({'eliminado': accion}, {merge: true})
+
+  }
+
+  eliminarGasto(idViaje: string, idGasto: string, accion: boolean) {
+    return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set({'eliminado': accion}, {merge: true})
 
   }
 

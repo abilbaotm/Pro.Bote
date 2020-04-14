@@ -26,6 +26,7 @@ export class ViajeComponent implements OnInit {
   public resumenPagos = {};
   public idPersonaCuentasActiva: string;
   verPagosEliminados: boolean;
+  verGastosEliminados: boolean;
   private idViaje: string;
 
   constructor(
@@ -95,8 +96,10 @@ export class ViajeComponent implements OnInit {
       });
 
       this.gastos.forEach(gasto => {
-        for (let personasKey in gasto.personas) {
-          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
+        if (!gasto.eliminado) {
+          for (let personasKey in gasto.personas) {
+            this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
+          }
         }
 
       })
@@ -156,26 +159,52 @@ export class ViajeComponent implements OnInit {
 
   eliminarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, true).then(() => {
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        title: 'Pago eliminado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+    })
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Pago eliminado',
+      showConfirmButton: false,
+      timer: 1500
     })
 
   }
 
   restaurarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, false).then(() => {
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        title: 'Pago restaurado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+    })
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Pago restaurado',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+  }
+
+  eliminarGasto(gasto: Gasto) {
+    this.firestoreService.eliminarGasto(this.idViaje, gasto.id, true).then(() => {
+    })
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Gasto eliminado',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+  }
+
+  restaurarGasto(gasto: Gasto) {
+    this.firestoreService.eliminarGasto(this.idViaje, gasto.id, false).then(() => {
+    })
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Gasto restaurado',
+      showConfirmButton: false,
+      timer: 1500
     })
 
   }
