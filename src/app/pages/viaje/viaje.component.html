@@ -29,16 +29,17 @@
               <p class=" cart-title">{{viaje.descripcion}}</p>
               <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
               </p>
-              <p class=" card-description">Usuarios permitidos:<br>
-                <span *ngFor="let usuario of viaje.permitidos | keyvalue">
-                    - {{usuario.value["nombre"]}} <{{usuario["key"]}}> <span *ngIf="usuario.value['owner']"
-                                                                             class="label label-primary">Creador</span><br>
-                  </span>
-              </p>
               <p class=" card-description">Participantes:<br>
-                <span *ngFor="let persona of personas">
-                    - {{persona.nombre}} <{{persona.email | lowercase}}> <br>
-                  </span>
+                <ng-container *ngFor="let persona of personas">
+                  <mat-card>
+                    {{persona.nombre}}
+                    <ng-container *ngIf="persona.email"><{{persona.email | lowercase}}></ng-container>
+                    <span *ngIf="viaje.permitidos[persona.email]"
+                          class="badge badge-secondary mx-1">Permiso de lectura</span>
+                    <span *ngIf="viaje.permitidos[persona.email] && viaje.permitidos[persona.email].owner"
+                          class="badge badge-primary mx-1">Creador del viaje</span>
+                  </mat-card>
+                </ng-container>
               </p>
             </div>
           </div>
