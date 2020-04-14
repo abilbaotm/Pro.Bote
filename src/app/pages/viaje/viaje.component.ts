@@ -87,8 +87,10 @@ export class ViajeComponent implements OnInit {
       });
 
       this.gastos.forEach(gasto => {
-        for (let personasKey in gasto.personas) {
-          this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
+        if (!gasto.eliminado) {
+          for (let personasKey in gasto.personas) {
+            this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
+          }
         }
 
       })

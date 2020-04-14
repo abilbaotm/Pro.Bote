@@ -11,6 +11,7 @@ export class Gasto {
   timezone: string;
   personas: { string: { cantidad: number } };
   diaLocal: string;
+  eliminado: Boolean;
 
   constructor() {
     this.fecha = new Date();

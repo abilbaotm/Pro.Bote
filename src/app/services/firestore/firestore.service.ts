@@ -189,7 +189,8 @@ export class FirestoreService {
       'ratio': gastoForm.ratio,
       'personas': personas,
       'creador': user.uid,
-      'pagador': gastoForm.pagador
+      'pagador': gastoForm.pagador,
+      'eliminado': false
     };
 
 
