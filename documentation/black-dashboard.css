@@ -2004,7 +2004,6 @@ pre code {
   font-size: 0.875rem;
   line-height: 1.428571;
   color: rgba(255, 255, 255, 0.8);
-  background-color: transparent;
   background-clip: padding-box;
   border: 1px solid #cad1d7;
   border-radius: 0.25rem;
@@ -2025,7 +2024,6 @@ pre code {
 
 .form-control:focus {
   color: rgba(255, 255, 255, 0.8);
-  background-color: #ffffff;
   border-color: rgba(50, 151, 211, 0.25);
   outline: 0;
   box-shadow: none, none;
@@ -2044,7 +2042,6 @@ pre code {
 
 select.form-control:focus::-ms-value {
   color: rgba(255, 255, 255, 0.8);
-  background-color: transparent;
 }
 
 .form-control-file,

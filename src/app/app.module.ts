@@ -28,6 +28,8 @@ import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
 import * as moment from 'moment';
 import * as localization from 'moment/locale/es';
 import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
+import {NavServiceService} from "./services/nav-service/nav-service.service";
+import {ThemeService} from "./services/theme/theme.service";
 
 moment.locale('es', localization);
 
@@ -57,7 +59,7 @@ moment.locale('es', localization);
     NgbModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent, PrivacidadComponent],
-  providers: [AuthService, UserService, AuthGuard, UserResolver],
+  providers: [AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
