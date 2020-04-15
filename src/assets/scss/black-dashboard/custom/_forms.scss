@@ -10,7 +10,7 @@
 
   &:focus {
     border-color: $primary;
-    background-color: $input-bg;
+    background-color: #32436E;
     @include box-shadow(none);
 
     & + .input-group-append .input-group-text,

@@ -1,28 +1,3 @@
-<style>
-  .form-control {
-    background-color: #27293d;
-  }
-
-  .redondo {
-    border-radius: 0.4285rem;
-    border: 1px solid #2b3553;
-  }
-
-  .btn-eliminar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #f6465d;
-    width: 40px;
-    height: 40px;
-    border-top-right-radius: 0.4285rem;
-    z-index: 1;
-  }
-
-  .btn-eliminar i {
-    margin: 13px;
-  }
-</style>
 <div class=" content">
   <div class="card card-stats">
     <form (ngSubmit)="nuevoGasto(form.value)" [formGroup]="form">
