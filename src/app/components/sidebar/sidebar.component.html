@@ -34,7 +34,7 @@
         <p>Detalles viaje</p>
       </a>
     </li>
-    <ng-container *ngIf="nav.permisos">
+    <ng-container *ngIf="nav.permisos!==undefined && nav.permisos">
       <li class="nav-item  {{ruta[3]=='nuevogasto'?'active':''}}">
         <a [routerLink]="'/'+ruta[1]+'/'+ruta[2]+'/nuevogasto'">
           <i class="tim-icons icon-bag-16"></i>

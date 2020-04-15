@@ -1,6 +1,6 @@
 <div class=" content">
   <div class="row">
-    <div *ngIf="!viaje.archivado && !viaje.borrado && this.nav.permisos" class=" col-12">
+    <div *ngIf="!viaje.archivado && !viaje.borrado && viaje.admin==user.uid" class=" col-12">
       <button class=" btn btn-link" routerLink="nuevogasto" type="button">
         Nuevo gasto
       </button>
