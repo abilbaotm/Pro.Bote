@@ -9,7 +9,7 @@ import {ThemeService} from "../../services/theme/theme.service";
 export class AdminLayoutComponent implements OnInit {
   public sidebarColor: string = 'red';
 
-  constructor(private themeService: ThemeService) {
+  constructor(public themeService: ThemeService) {
   }
 
   changeSidebarColor(color) {
