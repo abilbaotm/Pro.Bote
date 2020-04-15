@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ThemeService} from "../../services/theme/theme.service";
 
 @Component({
   selector: 'app-admin-layout',
@@ -8,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 export class AdminLayoutComponent implements OnInit {
   public sidebarColor: string = 'red';
 
-  constructor() {
+  constructor(private themeService: ThemeService) {
   }
 
   changeSidebarColor(color) {

@@ -3,6 +3,7 @@ import {FirebaseUserModel} from '../../core/user.model';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../core/user.service';
+import {ThemeService} from "../../services/theme/theme.service";
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,7 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     public userService: UserService,
     private fb: FormBuilder,
+    private themeService: ThemeService
   ) {
   }
 
@@ -53,5 +55,18 @@ export class UserComponent implements OnInit {
     } else if (body.classList.contains('white-content')) {
       body.classList.remove('white-content');
     }
+    if (body && color === 'white-content') {
+      this.themeService.setDark(false)
+    } else {
+      this.themeService.setDark(true)
+    }
+  }
+
+  cambiar() {
+    console.log("aaa")
+  }
+
+  invertColor() {
+    return true
   }
 }
