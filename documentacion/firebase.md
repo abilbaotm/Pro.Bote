@@ -61,6 +61,20 @@ Tras el despliegue comprueba que se han creado las funciones desde la consola de
 | vPublicacion | Función usada por CI/CD para consultar el siguiente numero de version para generar la version de producción de la APP |
 
 
+Para hacer uso de estas funciones se recomendá el uso de [Postman](https://www.postman.com/). Para realizar cualquier llamada
+es necesario que se incluya la [clave de autorización](https://gitlab.com/pabil/bote-dw/-/blob/ee77c1e4bac35837abd474c8ad898f7b9873db12/functions/index.js#L7) en la cabecera de la llamada (ver ejemplo).
+#### `eliminar`
+
+Los viajes marcados para eliminar desde la aplicación serán eliminados tras la ejecución de esta llamada.
+
+![22](images/22.PNG)
+
+![23](images/23.PNG)
+
+#### `vPublicacion`
+
+Esta llamada es usada exclusivamente por gitlab-ci. Ver llamada y uso en [.gitlab-ci.yaml](https://gitlab.com/pabil/bote-dw/-/blob/ee77c1e4bac35837abd474c8ad898f7b9873db12/.gitlab-ci.yml#L21)
+
 ## Hosting
 
 Firebase permite hostear nuestro poryecto. Para ello ejectua los siguientes comandos (necesario configurar firebase):
