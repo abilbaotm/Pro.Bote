@@ -11,7 +11,7 @@ aproximado durante tus viajes para conocer con claridad todo lo que has gastado 
 
 Versión publica del proyecto disponible en: https://bote.izabil.net
 
-Consulta las instrucciones para ejecutar este proyecto en local en [documentación](documentacion/web.md)
+Consulta las instrucciones para ejecutar este proyecto en local en [documentación](documentacion)
 
 ## Android
 
