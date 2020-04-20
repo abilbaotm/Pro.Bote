@@ -7,4 +7,4 @@ Actualmente existen varios procesos documentados.
 3. Habilitar Firebase (`Firestore`, `Functions`, `Hosting`) en un nuevo proyecto. [firebase.md](firebase.md)
 
 
-La documentación #2 y #3 son relevantes para hacer un nuevo despliegue de producción.
+La documentación 2. y 3. son relevantes para hacer un nuevo despliegue de producción.
