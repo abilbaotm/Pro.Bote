@@ -1,3 +1,14 @@
+<style>
+  .sticky {
+    background: #fff;
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .08);
+    position: fixed;
+    top: 0;
+    height: 120px;
+    width: 100%;
+  }
+</style>
+
 <div class=" content">
   <div class="row">
     <div *ngIf="!viaje.archivado && !viaje.borrado && viaje.admin==user.uid" class=" col-12">
@@ -12,6 +23,8 @@
       </button>
 
     </div>
+
+
     <div class="col-12">
       <div class=" card card-stats">
         <div class=" card-body">
