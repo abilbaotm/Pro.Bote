@@ -180,6 +180,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       return 'Viaje / Nuevo pago'
     } else if (titlee.split('/')[3] == 'editarviaje') {
       return 'Viaje / Editar viaje'
+    } else if (titlee.split('/')[3] == 'editargasto') {
+      return 'Viaje / Editar gasto'
     } else if (titlee.split('/')[1] == 'viaje') {
       return 'Viaje'
     }

@@ -3,7 +3,8 @@
     <form (ngSubmit)="nuevoGasto(form.value)" [formGroup]="form">
       <div class="card-body row">
         <div class="col-12">
-          <h1>Nuevo gasto</h1>
+          <h1 *ngIf="currentStatus==1">Nuevo gasto</h1>
+          <h1 *ngIf="currentStatus==2">Editar gasto</h1>
         </div>
         <div class="col-12 col-md-6">
 
