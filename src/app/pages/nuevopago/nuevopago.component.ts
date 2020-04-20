@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 
+//Componente NuevoPago
 
 @Component({
   selector: 'app-nuevopago',
@@ -21,7 +22,6 @@ export class NuevopagoComponent implements OnInit {
   public msgRatio: string;
   public documentId = null;
   public currentStatus = 1;
-  cantidadPersona = [];
   partesIguales: boolean = true;
   public formError: string;
   private idViaje: string;
@@ -53,10 +53,9 @@ export class NuevopagoComponent implements OnInit {
     this.form.controls['fecha'].setValue(moment().format(moment.HTML5_FMT.DATETIME_LOCAL));
 
 
+    //Recoger la informacion del viaje
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
-      console.log(this.viaje);
       this.viaje = dbviaje.payload.data() as Viaje;
-      console.log(this.viaje);
 
       this.monedas.push(this.viaje.monedaPrincipal);
       for (let monedasAdicionalesKey in this.viaje.monedasAdicionales) {
@@ -72,7 +71,6 @@ export class NuevopagoComponent implements OnInit {
         this.httpClient
           .get(url)
           .subscribe(apiData => {
-            console.log(apiData)
             this.ratios = apiData['rates'];
             this.ratios[this.viaje.monedaPrincipal] = 1.00;
           });
@@ -90,6 +88,7 @@ export class NuevopagoComponent implements OnInit {
 
     });
 
+    //Recoger la informacion de las personas del viaje
     this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       personasSnapshot.forEach((viajeData: any) => {
         let persona;
@@ -101,6 +100,7 @@ export class NuevopagoComponent implements OnInit {
 
   }
 
+  //Crear el nuevo pago
   nuevoPago(form, documentId = this.documentId) {
     if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
       this.firestoreService.nuevopago(this.idViaje, form).then()
@@ -109,19 +109,6 @@ export class NuevopagoComponent implements OnInit {
       this.formError = 'Pagador y beneficiario no puede ser la misma persona';
     }
 
-
-  }
-
-  initTechnologyFields(perso: Persona): FormGroup {
-    return this._FB.group({
-      //TODO: controlar tipo de dato
-      id: [perso.id, Validators.required],
-      nombre: [perso.nombre, Validators.required],
-      cantidad: ['', Validators.required]
-    });
-  }
-
-  removeInputField(i: number) {
 
   }
 }

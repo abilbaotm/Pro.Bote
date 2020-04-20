@@ -1,9 +1,12 @@
+<!-- Nuevo pago  -->
 <div class=" content">
   <div class="card card-stats">
     <form (ngSubmit)="nuevoPago(form.value)" [formGroup]="form">
       <div class="card-body row">
+        <!-- Sacar un titulo u otro en base a lo que se este haciendo -->
         <div class="col-12">
-          <h1>Nuevo pago</h1>
+          <h1 *ngIf="currentStatus==1">Nuevo pago</h1>
+          <h1 *ngIf="currentStatus==2">Editar pago</h1>
         </div>
         <div class="col-12 col-md-6">
           <label for="nota">nota</label>
@@ -21,6 +24,7 @@
 
           <label for="moneda">Moneda</label>
           <select class="form-control" formControlName="moneda" id="moneda">
+            <!-- Sacar todas las monedas disponibles -->
             <option *ngFor="let moneda of monedas" class="form-control" label="{{moneda}}"
                     value="{{moneda}}">{{moneda}}</option>
           </select>
@@ -29,17 +33,20 @@
 
           <label for="pagador">Pagador</label>
           <select class="form-control" formControlName="pagador" id="pagador">
+            <!-- Sacar las personas del viaje -->
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
           <label for="beneficiario">Beneficiario</label>
           <select class="form-control" formControlName="beneficiario" id="beneficiario">
+            <!-- Sacar las personas del viaje -->
             <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
           </select>
 
           {{formError}}
 
 
+          <!-- Cambiar el boton en base a lo que se esta haciendo -->
           <div class="col-12 text-center">
             <input [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'"
                    class="btn btn-primary"

@@ -3,7 +3,7 @@ import {AuthService} from '../core/auth.service'
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
-
+//Componente Login
 @Component({
   selector: 'page-login',
   templateUrl: 'login.component.html',
@@ -23,6 +23,7 @@ export class LoginComponent {
     this.createForm();
   }
 
+  //Crear formulario de acceso
   createForm() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -31,6 +32,7 @@ export class LoginComponent {
   }
 
 
+  //Usar Google Auth para loguearse
   tryGoogleLogin() {
     this.authService.doGoogleLogin()
       .then(res => {
@@ -38,6 +40,7 @@ export class LoginComponent {
       })
   }
 
+  //Usar login Firebase para loguearse
   tryLogin(value) {
     this.authService.doLogin(value)
       .then(res => {

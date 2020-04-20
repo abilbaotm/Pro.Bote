@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Gasto} from '../../models/gasto.model';
 
-
+//Componente Nuevogasto
 @Component({
   selector: 'app-nuevogasto',
   templateUrl: 'nuevogasto.component.html'
@@ -57,10 +57,9 @@ export class NuevogastoComponent implements OnInit {
     this.timezoneForm = moment.tz.guess()
 
 
+    //Sacar la informacion del viaje
     this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
-      console.log(this.viaje);
       this.viaje = dbviaje.payload.data() as Viaje;
-      console.log(this.viaje);
 
       this.monedas.push(this.viaje.monedaPrincipal);
       for (let monedasAdicionalesKey in this.viaje.monedasAdicionales) {
@@ -76,7 +75,6 @@ export class NuevogastoComponent implements OnInit {
         this.httpClient
           .get(url)
           .subscribe(apiData => {
-            console.log(apiData)
             this.ratios = apiData['rates'];
             this.ratios[this.viaje.monedaPrincipal] = 1.00;
           });
@@ -94,6 +92,7 @@ export class NuevogastoComponent implements OnInit {
 
     });
 
+    //Sacar las personas de un viaje
     this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       const controla = <FormArray>this.form.controls.terceros;
       personasSnapshot.forEach((viajeData: any) => {
@@ -108,10 +107,9 @@ export class NuevogastoComponent implements OnInit {
       });
 
 
-      // sumas
+      // Sumas
       (this.form.get('terceros') as FormArray).valueChanges.subscribe(elemento => {
         if (!this.form.get('partesIguales').value) {
-          console.log(elemento);
           let total = 0.00;
           for (let elementoKey in elemento) {
             total += elemento[elementoKey].cantidad
@@ -119,18 +117,9 @@ export class NuevogastoComponent implements OnInit {
           this.form.get('cantidad').setValue(total);
         }
       });
-      /*
-      (this.form.get('terceros') as FormArray).controls.forEach( elemento => {
-        elemento.get('cantidad').valueChanges.subscribe(subCantidad => {
-          console.log(subCantidad)
-        })
-      });
-
-       */
-
     });
 
-    //editando?
+    //Sabes si se esta editando o no y actuar en consecuencia
     this.idGasto = this.route.snapshot.paramMap.get("gasto");
     if (this.idGasto != null) {
 
@@ -160,7 +149,7 @@ export class NuevogastoComponent implements OnInit {
 
     }
 
-    //sumas
+    //Sumas
     this.form.get('cantidad').valueChanges.subscribe(x => {
       if (this.form.get('partesIguales').value) {
 
@@ -168,7 +157,6 @@ export class NuevogastoComponent implements OnInit {
         for (let tercerosKey in this.form.get('terceros')['controls']) {
           (this.form.get('terceros')['controls'][tercerosKey] as FormControl).get('cantidad').setValue(x / totalADividir)
         }
-        console.log(x / totalADividir)
       }
     });
 
@@ -189,6 +177,7 @@ export class NuevogastoComponent implements OnInit {
 
   }
 
+  //Crear un nuevo gasto
   nuevoGasto(form, documentId = this.documentId) {
     if (this.currentStatus == 1) {
 
@@ -208,7 +197,4 @@ export class NuevogastoComponent implements OnInit {
     });
   }
 
-  removeInputField(i: number) {
-
-  }
 }

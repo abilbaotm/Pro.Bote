@@ -9,7 +9,7 @@ import {AuthGuard} from './core/auth.guard';
 import {RegisterComponent} from './register/register.component';
 import {UserResolver} from './pages/user/user.resolver';
 import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
-
+//Enrutamientos a las paginas
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -28,36 +28,6 @@ const routes: Routes = [
       }
     ],
   }
-  /*
-  {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
-  {
-    path: "",
-    component: AdminLayoutComponent,
-    children: [
-      {
-        path: "",
-        loadChildren:
-          "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
-      }
-    ]
-  }, {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
-      }
-    ]
-  },
-  {
-    path: "**",
-    redirectTo: "dashboard"
-  }*/
 ];
 
 @NgModule({

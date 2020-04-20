@@ -21,7 +21,6 @@ export class AuthService {
       provider.addScope('email');
 
       if (!(<any>window).cordova) {
-        console.log('no cordova');
         return this.afAuth.auth.signInWithPopup(provider).then(res => {
           resolve(res);
         }, err => {
@@ -34,7 +33,6 @@ export class AuthService {
             'webClientId': environment.WEBCLIENTID
           },
           function (obj) {
-            console.log(obj.idToken); // do something useful instead of alerting
             return firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(obj.idToken)).then(res => {
               resolve(res)
             });

@@ -10,6 +10,8 @@ import * as firebase from 'firebase';
 import Swal from 'sweetalert2';
 import {NavServiceService} from "../../services/nav-service/nav-service.service";
 
+//Componente Viaje
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'viaje.component.html'
@@ -40,11 +42,11 @@ export class ViajeComponent implements OnInit {
   ngOnInit() {
     this.user = firebase.auth().currentUser;
 
-    console.log(this.user.provider)
 
     this.idViaje = this.route.snapshot.paramMap.get("viaje");
 
 
+    //Datos del viaje
     this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
       this.viaje = (dbviaje.payload.data()) as Viaje;
       this.fechasInicio = moment.tz(this.viaje.fechas.start.toDate(), this.viaje.timezone).format('DD/M/YYYY');
@@ -59,6 +61,7 @@ export class ViajeComponent implements OnInit {
     });
 
 
+    //Datos de las personas del viaje
     this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
       this.personas = new Array<Persona>();
       this.personasIndex = {}
@@ -71,6 +74,7 @@ export class ViajeComponent implements OnInit {
       }
     );
 
+    //Datos de los gastos del viaje
     this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
       this.gastos = new Array<Gasto>();
       gastosSnapshot.forEach(gast => {
@@ -82,7 +86,6 @@ export class ViajeComponent implements OnInit {
 
         this.gastos.push(nuevoGasto)
       });
-      console.log(this.gastos);
 
       this.personas.forEach(persoA => {
         if (this.resumenPagos[persoA.id] == undefined) {
@@ -106,6 +109,7 @@ export class ViajeComponent implements OnInit {
 
     });
 
+    //Datos de los pagos del viaje
     this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
       this.pagos = new Array<Pago>();
       gastosSnapshot.forEach(pag => {
@@ -133,30 +137,32 @@ export class ViajeComponent implements OnInit {
           this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio)
         }
       });
-      console.log(this.resumenPagos)
     })
 
 
   }
 
+  //Cancelar el borrado de un viaje
   cancelarBorrado() {
     this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {
       }
     )
   }
 
+  //Cancelar el archivado de un viaje
   cancelarArchivado() {
     this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {
       }
     )
   }
 
+  //Ver las cuentas de las personas
   verCuentasPersona(id: string) {
     this.idPersonaCuentasActiva = id;
-    console.log(id)
 
   }
 
+  //Eliminar un pago
   eliminarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, true).then(() => {
     })
@@ -170,6 +176,7 @@ export class ViajeComponent implements OnInit {
 
   }
 
+  //Restaurar un pago
   restaurarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, false).then(() => {
     })
@@ -183,6 +190,7 @@ export class ViajeComponent implements OnInit {
 
   }
 
+  //Eliminar un gasto
   eliminarGasto(gasto: Gasto) {
     this.firestoreService.eliminarGasto(this.idViaje, gasto.id, true).then(() => {
     })
@@ -196,6 +204,7 @@ export class ViajeComponent implements OnInit {
 
   }
 
+  //Restaurar un gasto
   restaurarGasto(gasto: Gasto) {
     this.firestoreService.eliminarGasto(this.idViaje, gasto.id, false).then(() => {
     })

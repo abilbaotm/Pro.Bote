@@ -2,20 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import Unsplash, {toJson} from 'unsplash-js';
 import * as moment from 'moment-timezone';
-
+//Componente Dashboard
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  public canvas: any;
-  public ctx;
-  public datasets: any;
   public data: any;
-  public myChartData;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
-  public clicked2: boolean = false;
   public todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
 
   constructor(
@@ -30,27 +23,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  public updateOptions() {
-    this.myChartData.data.datasets[0].data = this.data;
-    this.myChartData.update();
-  }
-
-  enviarFirebase() {
-    let data;
-    data = new Date().toString();
-
-    this.firestoreService.guardar(this.data);
-    /*this.firestoreService.getCats().subscribe((catsSnapshot) => {
-      this.cats = [];
-      catsSnapshot.forEach((catData: any) => {
-        this.cats.push({
-          id: catData.payload.doc.id,
-          data: catData.payload.doc.data()
-        });
-      })
-    });*/
-  }
-
+  //Cargar los viajes en sus respectivas categorias para poder visualizarlos en la pagina
   cargarViajes() {
     this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
       this.todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
@@ -71,8 +44,6 @@ export class DashboardComponent implements OnInit {
             }
           )
         } else if (datosViaje.fechas.start.seconds < moment().unix()) {
-          console.log(datosViaje.fechas.start.seconds);
-          console.log(moment().unix());
           this.todosViajes['Activos'].push({
               id: viajeData.payload.doc.id,
               data: datosViaje
@@ -101,7 +72,6 @@ export class DashboardComponent implements OnInit {
           unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1, {})
             .then(toJson)
             .then(json => {
-              console.log(json["results"][0])
               this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
             });
 
