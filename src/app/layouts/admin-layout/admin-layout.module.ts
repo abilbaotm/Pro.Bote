@@ -21,8 +21,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {NgAbsPipeModule} from 'angular-pipes';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatChipsModule} from "@angular/material/chips";
 import {MatCardModule} from "@angular/material/card";
-import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   imports: [
@@ -40,8 +40,8 @@ import {MatRadioModule} from "@angular/material/radio";
     MatTabsModule,
     NgAbsPipeModule,
     MatSlideToggleModule,
+    MatChipsModule,
     MatCardModule,
-    MatRadioModule,
   ],
   declarations: [
     DashboardComponent,
