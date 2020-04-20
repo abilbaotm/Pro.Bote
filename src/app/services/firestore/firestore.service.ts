@@ -4,6 +4,8 @@ import {FirebaseUserModel} from '../../core/user.model';
 import * as firebase from 'firebase';
 import * as moment from 'moment-timezone';
 
+//Servicios del Firestore
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,27 +17,7 @@ export class FirestoreService {
   ) {
   }
 
-  //Crea un nuevo gato
-  public createCat(data: { nombre: string, url: string }) {
-    return this.firestore.collection('cats').add(data);
-  }
-
-  //Obtiene un gato
-  public getCat(documentId: string) {
-    return this.firestore.collection('cats').doc(documentId).snapshotChanges();
-  }
-
-  //Obtiene todos los gatos
-  public getCats() {
-    return this.firestore.collection('cats').snapshotChanges();
-  }
-
-  //Actualiza un gato
-  public updateCat(documentId: string, data: any) {
-    return this.firestore.collection('cats').doc(documentId).set(data);
-  }
-
-
+  //Obtiene los viajes
   public getViajes() {
     var user = firebase.auth().currentUser;
 
@@ -45,34 +27,36 @@ export class FirestoreService {
     }).snapshotChanges();
   }
 
+  //Obtiene un viaje
   public getViaje(documentId: string) {
     return this.firestore.collection('viajes').doc(documentId).snapshotChanges();
   }
 
+  //Obtiene una persona
   public getPersonas(documentId: string) {
     return this.firestore.collection('viajes').doc(documentId).collection("personas").snapshotChanges()
   }
 
+  //Obtiene los gastos de un viaje
   public getGastos(documentId: string) {
     return this.firestore.collection('viajes').doc(documentId).collection('gastos', ref => {
       return ref.orderBy('fecha')
     }).snapshotChanges()
   }
 
+  //Obtiene los pagos de un viaje
   getPagos(documentId: string) {
     return this.firestore.collection('viajes').doc(documentId).collection('pagos', ref => {
       return ref.orderBy('fecha')
     }).snapshotChanges()
   }
 
+  //Obtiene el gasto de un viaje
   public getGasto(documentId: string, id: string) {
     return this.firestore.collection('viajes').doc(documentId).collection("gastos").doc(id).snapshotChanges()
   }
 
-  public guardar(data: any) {
-    return this.firestore.collection('test').add({"test": data});
-  }
-
+  //Crea un viaje
   nuevoViaje(formdata: any) {
     var user = firebase.auth().currentUser;
 
@@ -130,22 +114,27 @@ export class FirestoreService {
     )
   }
 
+  //Borra un viaje
   borrarViaje(id: string) {
     return this.firestore.collection('viajes').doc(id).set({'borrado': true}, {merge: true})
   }
 
+  //Archiva un viaje
   archivarViaje(id: string) {
     return this.firestore.collection('viajes').doc(id).set({'archivado': true}, {merge: true})
   }
 
+  //Cancela el borrado de un viaje
   borrarViajeCancelar(idViaje: string) {
     return this.firestore.collection('viajes').doc(idViaje).set({'borrado': false}, {merge: true})
   }
 
+  //Cancela el archivado de un viaje
   archivarViajeCancelar(idViaje: string) {
     return this.firestore.collection('viajes').doc(idViaje).set({'archivado': false}, {merge: true})
   }
 
+  //Crea un nuevo gasto
   nuevoGasto(idViaje: string, form: any) {
     let gastoForm;
     gastoForm = form;
@@ -153,7 +142,6 @@ export class FirestoreService {
     let gasto;
     let personas = {};
     let numPersonas = 0;
-    console.log(gastoForm);
     for (let personasKey in gastoForm.terceros) {
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
       numPersonas++;
@@ -162,8 +150,6 @@ export class FirestoreService {
     // calcular totales
     if (gastoForm.partesIguales) {
       const total = gastoForm.cantidad / numPersonas;
-      console.log("total");
-      console.log(total);
       for (let personasKey in personas) {
         personas[personasKey]['cantidad'] = total;
 
@@ -173,8 +159,6 @@ export class FirestoreService {
       for (let personasKey in personas) {
         total += personas[personasKey]['cantidad'];
       }
-      console.log("total");
-      console.log(total);
       gastoForm.cantidad = total;
     }
 
@@ -194,21 +178,12 @@ export class FirestoreService {
       'eliminado': false
     };
 
-
-    /* cantidad:
-    partesIguales:
-    ratio:
-    moneda:
-    pagador:
-    personas
-
-     */
-
     return this.firestore.collection('viajes/' + idViaje + '/gastos').add(
       gasto
     )
   }
 
+  //Crea un nuevo pago
   nuevopago(idViaje: string, form: any) {
     let pagoForm;
     pagoForm = form;
@@ -229,12 +204,12 @@ export class FirestoreService {
 
 
     };
-    console.log(pago)
     return this.firestore.collection('viajes/' + idViaje + '/pagos').add(
       pago
     )
   }
 
+  //Actualiza un viaje
   updateViaje(form: any, idViaje: string) {
     let documento = this.firestore.collection('viajes').doc(idViaje);
 
@@ -248,7 +223,6 @@ export class FirestoreService {
       activo: true,
       owner: true
     };
-    console.log(form)
     form.terceros.forEach(function (ter) {
       if (ter.email != '') {
 
@@ -302,16 +276,19 @@ export class FirestoreService {
     )
   }
 
+  //Elimina un pago
   eliminarPago(idViaje: string, idPago: string, accion: boolean) {
     return this.firestore.collection('viajes/' + idViaje + '/pagos').doc(idPago).set({'eliminado': accion}, {merge: true})
 
   }
 
+  //Elimina un gasto
   eliminarGasto(idViaje: string, idGasto: string, accion: boolean) {
     return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set({'eliminado': accion}, {merge: true})
 
   }
 
+  //Edita un gasto
   editarGasto(idViaje: string, idGasto: string, form: any, timezone: string) {
     let gastoForm;
     gastoForm = form;
@@ -319,7 +296,6 @@ export class FirestoreService {
     let gasto;
     let personas = {};
     let numPersonas = 0;
-    console.log(gastoForm);
     for (let personasKey in gastoForm.terceros) {
       personas[gastoForm.terceros[personasKey].id] = {"cantidad": gastoForm.terceros[personasKey].cantidad}
       numPersonas++;
@@ -328,8 +304,6 @@ export class FirestoreService {
     // calcular totales
     if (gastoForm.partesIguales) {
       const total = gastoForm.cantidad / numPersonas;
-      console.log("total");
-      console.log(total);
       for (let personasKey in personas) {
         personas[personasKey]['cantidad'] = total;
 
@@ -339,8 +313,6 @@ export class FirestoreService {
       for (let personasKey in personas) {
         total += personas[personasKey]['cantidad'];
       }
-      console.log("total");
-      console.log(total);
       gastoForm.cantidad = total;
     }
 

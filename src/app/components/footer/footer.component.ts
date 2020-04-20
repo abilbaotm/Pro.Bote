@@ -3,6 +3,8 @@ import {environmentversion} from '../../../environments/environmentversion';
 import {ConnectionService} from 'ng-connection-service';
 import {ToastrService} from 'ngx-toastr';
 
+//Componente Footer revisa si hay conexion a internet o no y saca un mensaje
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -54,7 +56,6 @@ export class FooterComponent implements OnInit {
           progressBar: true
         });
       }
-      console.log(this.internetStatus)
     });
   }
 }

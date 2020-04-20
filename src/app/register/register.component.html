@@ -1,36 +1,32 @@
-<h1 class="header">Create an account with Firebase or Social Providers</h1>
+<!-- Pagina de registro -->
+<h1 class="header">Crea una cuenta con Firebase o Con Google</h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12 col-md-offset-3">
       <form [formGroup]="registerForm">
         <div class="form-group">
           <label>Nombre de usuario</label>
           <input class="form-control" formControlName="displayName" type="text">
         </div>
         <div class="form-group">
-          <label>Email address</label>
+          <label>Correo electronico</label>
           <input class="form-control" formControlName="email" type="email">
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>Contraseña</label>
           <input class="form-control" formControlName="password" type="password">
           <label class="error">{{errorMessage}}</label>
           <label class="success">{{successMessage}}</label>
         </div>
-        <button (click)="tryRegister(registerForm.value)" class="w-100 btn btn-default" type="submit">Register</button>
+        <button (click)="tryRegister(registerForm.value)" class="w-100 btn btn-default" type="submit">Registrarse</button>
       </form>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <button (click)="tryGoogleLogin()" class="btn btn-danger btn-block" type="button">Register with Google</button>
+    <div class="col-md-12 col-md-offset-4 text-center">
+      <button (click)="tryGoogleLogin()" class="btn btn-danger btn-block" type="button">Registrarse con Google</button>
       <p>Al registrarse acepta la <a routerLink="/politica-privacidad">Política de privacidad</a></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <p>Already have an account? <a routerLink="/login">Login</a></p>
-
+      <p>¿Ya tienes una cuenta? <a routerLink="/login">Logueate</a></p>
     </div>
   </div>
 </div>
