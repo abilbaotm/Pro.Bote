@@ -28,6 +28,17 @@ export class ViajeComponent implements OnInit {
   verPagosEliminados: boolean;
   verGastosEliminados: boolean;
   private idViaje: string;
+  public optionsGastadoViaje = {
+    hasNeedle: true,
+    needleColor: 'gray',
+    needleUpdateSpeed: 1000,
+    arcColors: ['rgb(44, 151, 222)', 'rgb(234,33,33)'],
+    arcDelimiters: [],
+    rangeLabel: ['', ''],
+    needleStartValue: 0,
+  }
+  public totalGastadoViaje = 0;
+  public porcenPresupuesto = 0;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -73,6 +84,7 @@ export class ViajeComponent implements OnInit {
 
     this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
       this.gastos = new Array<Gasto>();
+      this.totalGastadoViaje = 0;
       gastosSnapshot.forEach(gast => {
         let nuevoGasto;
         nuevoGasto = gast.payload.doc.data() as Gasto;
@@ -97,12 +109,33 @@ export class ViajeComponent implements OnInit {
 
       this.gastos.forEach(gasto => {
         if (!gasto.eliminado) {
+          // actualizar grafico de gastos
+          this.totalGastadoViaje += (gasto.cantidad / gasto.ratio)
           for (let personasKey in gasto.personas) {
             this.resumenPagos[personasKey].debe[gasto.pagador] += (gasto.personas[personasKey].cantidad / gasto.ratio)
           }
         }
 
       })
+
+
+      if (this.viaje.presupuesto == undefined) {
+        this.porcenPresupuesto = 100
+        this.optionsGastadoViaje.arcDelimiters = []
+        this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.totalGastadoViaje * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
+
+      } else if (this.viaje.presupuesto < this.totalGastadoViaje) {
+        // presupuesto excedido
+        this.porcenPresupuesto = this.totalGastadoViaje * 100 / this.viaje.presupuesto
+        this.optionsGastadoViaje.arcDelimiters = [10000 / this.porcenPresupuesto]
+        this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.totalGastadoViaje * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
+
+      } else {
+        // presupuesto correcto
+        this.porcenPresupuesto = this.totalGastadoViaje * 100 / this.viaje.presupuesto
+        this.optionsGastadoViaje.arcDelimiters = []
+        this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.viaje.presupuesto * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
+      }
 
     });
 
