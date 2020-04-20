@@ -15,6 +15,7 @@
     </div>
     <div class="col-12">
       <mat-tab-group dynamicHeight>
+        <!-- resumen de pagos -->
         <mat-tab label="Resumen">
           <div class=" card card-stats">
             <div class=" card-body">
@@ -50,11 +51,11 @@
             </div>
           </div>
         </mat-tab>
+        <!-- Ver los gastos -->
         <mat-tab label="Gastos">
           <div class=" card card-stats">
             <div class=" card-body">
               <div class=" row">
-            <!-- Ver los gastos -->
                 <div class=" col-12">
                   <h3>Histórico de Gastos</h3>
                   <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verGastosEliminados" class="mb-3"
@@ -171,6 +172,7 @@
             </div>
           </div>
         </mat-tab>
+        <!-- Ver el historico de pagos -->
         <mat-tab label="Pagos">
           <div class=" card card-stats">
             <div class=" card-body">
@@ -267,6 +269,7 @@
         </div>
       </div>
         </mat-tab>
+        <!-- resumen de cuentas -->
         <mat-tab label="Resumen cuentas">
           <div class=" card card-stats">
             <div class=" card-body">
