@@ -111,6 +111,7 @@ export class FirestoreService {
         'permitidos': permitidos,
         'monedaPrincipal': formdata.monedaPrincipal,
         'monedasAdicionales': formdata.monedasAdicionales,
+        'presupuesto': formdata.presupuesto,
         'fechas': {
           start: formdata.fechas.startDate.toDate(),
           end: formdata.fechas.endDate.toDate(),
@@ -284,6 +285,7 @@ export class FirestoreService {
         "descripcion": form.descripcion,
         "permitidos": permitidos,
         "monedasAdicionales": form.monedasAdicionales,
+        'presupuesto': form.presupuesto,
         "fechas": {
           start: form.fechas.startDate.toDate(),
           end: form.fechas.endDate.toDate(),

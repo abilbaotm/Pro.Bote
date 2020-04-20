@@ -31,6 +31,19 @@
                   <p class=" cart-title">{{viaje.descripcion}}</p>
                   <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
                   </p>
+
+                  <div class="gauge-row">
+                    <rg-gauge-chart
+                      [needleValue]="porcenPresupuesto"
+                      [options]="optionsGastadoViaje"
+                      bottomLabel="{{totalGastadoViaje | number : '0.2-2'}} {{viaje.monedaPrincipal}}"
+                      canvasWidth="300"
+                      centralLabel=""
+                      name="Gastos Totales"></rg-gauge-chart>
+
+                  </div>
+
+
                   <p class=" card-description">Participantes:<br>
                     <ng-container *ngFor="let persona of personas">
                       <mat-card>

@@ -42,6 +42,7 @@ export class NuevoviajeComponent implements OnInit {
       descripcion: ['', Validators.required],
       monedaPrincipal: ['EUR', Validators.required],
       monedasAdicionales: [],
+      presupuesto: [''],
       terceros: this._FB.array([]),
       fechas: ['', Validators.required],
     });
@@ -93,6 +94,7 @@ export class NuevoviajeComponent implements OnInit {
         this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
         this.form.controls['monedaPrincipal'].disable();
         this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
+        this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
 
         this.form.get('fechas').setValue({
           startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone),

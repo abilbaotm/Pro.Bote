@@ -36,3 +36,13 @@
   width: calc(100% - 30px);
   background: rgba(255, 255, 255, 0.5);
 }
+
+
+.gauge-row {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
