@@ -69,4 +69,12 @@
   border-bottom-right-radius: 0rem;
   border-bottom-left-radius: 0rem;
   object-fit: cover;
+  
+.gauge-row {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
 }

@@ -23,6 +23,7 @@ import {NgAbsPipeModule} from 'angular-pipes';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatCardModule} from "@angular/material/card";
+import {GaugeChartModule} from "angular-gauge-chart";
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import {MatCardModule} from "@angular/material/card";
     MatSlideToggleModule,
     MatChipsModule,
     MatCardModule,
+    GaugeChartModule,
   ],
   declarations: [
     DashboardComponent,
