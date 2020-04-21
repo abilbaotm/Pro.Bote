@@ -6,9 +6,8 @@ import {environment} from "../../../environments/environment";
 
 const rollbarConfig = {
   accessToken: environment.ROLLBAR_ACCESS_TOKEN,
-  captureUncaught: false,
-  captureUnhandledRejections: false,
-  hostWhiteList: environment.ROLLBAR_hostWhiteList
+  captureUncaught: true,
+  captureUnhandledRejections: true,
 };
 
 export const RollbarService = new InjectionToken<Rollbar>('rollbar');
@@ -20,7 +19,9 @@ export class RollbarErrorHandler implements ErrorHandler {
 
   handleError(err: any): void {
     console.error(err.originalError || err)
-    this.rollbar.error(err.originalError || err);
+    if (environment.production) {
+      this.rollbar.error(err.originalError || err);
+    }
   }
 }
 
