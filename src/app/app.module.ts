@@ -40,7 +40,8 @@ const rollbarConfig = {
   accessToken: '26913d6cce88472a87ad2714a4e54bab',
   captureUncaught: true,
   captureUnhandledRejections: true,
-  verbose: true
+  verbose: true,
+  hostWhiteList: ['localhost']
 };
 
 @Injectable()
