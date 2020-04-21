@@ -1,5 +1,5 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, Inject, Injectable, InjectionToken, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
@@ -30,8 +30,35 @@ import * as localization from 'moment/locale/es';
 import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
 import {NavServiceService} from "./services/nav-service/nav-service.service";
 import {ThemeService} from "./services/theme/theme.service";
+import * as Rollbar from 'rollbar';
 
 moment.locale('es', localization);
+
+
+// rollbar
+const rollbarConfig = {
+  accessToken: '26913d6cce88472a87ad2714a4e54bab',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+  verbose: true
+};
+
+@Injectable()
+export class RollbarErrorHandler implements ErrorHandler {
+  constructor(@Inject(RollbarService) private rollbar: Rollbar) {
+  }
+
+  handleError(err: any): void {
+    this.rollbar.error(err.originalError || err);
+  }
+}
+
+export function rollbarFactory() {
+  return new Rollbar(rollbarConfig);
+}
+
+export const RollbarService = new InjectionToken<Rollbar>('rollbar');
+
 
 @NgModule({
   imports: [
@@ -59,7 +86,10 @@ moment.locale('es', localization);
     NgbModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent, PrivacidadComponent],
-  providers: [AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
+  providers: [
+    {provide: ErrorHandler, useClass: RollbarErrorHandler},
+    {provide: RollbarService, useFactory: rollbarFactory},
+    AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
