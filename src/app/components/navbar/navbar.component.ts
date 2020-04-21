@@ -4,7 +4,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../core/auth.service';
-
+//Componente Navbar
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.sidebarVisible = false;
   }
 
-  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
+  //Añadir el color blanco/transparente a la navbar al cambiar de tamaño
   updateColor = () => {
     var navbar = document.getElementsByClassName('navbar')[0];
     if (window.innerWidth < 993 && !this.isCollapsed) {
@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
+  //Cambiar las clases en base a si navbar esta colapsada o no
   collapse() {
     this.isCollapsed = !this.isCollapsed;
     const navbar = document.getElementsByTagName("nav")[0];
@@ -69,6 +70,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  //Desplegar la sidebar
   sidebarOpen() {
     const toggleButton = this.toggleButton;
     const mainPanel = <HTMLElement>(
@@ -88,6 +90,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.sidebarVisible = true;
   }
 
+  //Retraer la sidebar
   sidebarClose() {
     const html = document.getElementsByTagName("html")[0];
     this.toggleButton.classList.remove("toggled");
@@ -104,9 +107,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     html.classList.remove("nav-open");
   }
 
+  //Cambiar entre los dos modos de la sidebar
   sidebarToggle() {
-    // const toggleButton = this.toggleButton;
-    // const html = document.getElementsByTagName('html')[0];
     var $toggle = document.getElementsByClassName("navbar-toggler")[0];
 
     if (this.sidebarVisible === false) {
@@ -163,6 +165,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  //Obtener el titulo de la pagina y lo cambia segun la url de la misma
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === "#") {
@@ -180,6 +183,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       return 'Viaje / Nuevo pago'
     } else if (titlee.split('/')[3] == 'editarviaje') {
       return 'Viaje / Editar viaje'
+    } else if (titlee.split('/')[3] == 'editargasto') {
+      return 'Viaje / Editar gasto'
     } else if (titlee.split('/')[1] == 'viaje') {
       return 'Viaje'
     }
@@ -198,11 +203,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     window.removeEventListener('resize', this.updateColor);
   }
 
+  //Cerrar sesion
   logOut() {
     this.authService.doLogout().then(r => this.router.navigate(['/login']))
 
   }
 
+  //Navegar al perfil del usuario
   verPerfil() {
     this.router.navigate(['/user'])
   }

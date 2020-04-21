@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SidebarComponent} from './sidebar.component';
-
+//Especificaciones de componentes del Sidebar
 describe("SidebarComponent", () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;

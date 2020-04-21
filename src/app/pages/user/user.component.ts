@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../core/user.service';
 import {ThemeService} from "../../services/theme/theme.service";
 
+//Componente user
+
 @Component({
   selector: 'app-user',
   templateUrl: 'user.component.html'
@@ -32,6 +34,7 @@ export class UserComponent implements OnInit {
     })
   }
 
+  //Crear formulario
   createForm(name) {
     this.profileForm = this.fb.group({
       name: [name, Validators.required]
@@ -39,16 +42,16 @@ export class UserComponent implements OnInit {
   }
 
 
+  //Guardar los valores
   save(value) {
     this.userService.updateCurrentUser(value)
       .then(res => {
         this.user.name = value.name;
-        console.log(res);
       }, err => console.log(err))
   }
 
+  //Alternar color Oscuro/Claro
   changeDashboardColor(color) {
-    console.log(color)
     var body = document.getElementsByTagName('body')[0];
     if (body && color === 'white-content') {
       body.classList.add(color);
@@ -60,13 +63,5 @@ export class UserComponent implements OnInit {
     } else {
       this.themeService.setDark(true)
     }
-  }
-
-  cambiar() {
-    console.log("aaa")
-  }
-
-  invertColor() {
-    return true
   }
 }

@@ -1,9 +1,12 @@
+<!-- Nuevo / Editar gastos -->
 <div class=" content">
   <div class="card card-stats">
     <form (ngSubmit)="nuevoGasto(form.value)" [formGroup]="form">
       <div class="card-body row">
+        <!-- Pone un titulo u otro en funcion de que se este haciendo -->
         <div class="col-12">
-          <h1>Nuevo gasto</h1>
+          <h1 *ngIf="currentStatus==1">Nuevo gasto</h1>
+          <h1 *ngIf="currentStatus==2">Editar gasto</h1>
         </div>
         <div class="col-12 col-md-6">
 
@@ -75,6 +78,7 @@
           </div>
 
         </div>
+        <!-- El boton cambia en funcion de lo que se este haciendo -->
         <div class="col-12 text-center">
           <input [disabled]="!form.valid" [value]="(currentStatus == 1) ? 'Guardar' : 'Editar'" class="btn btn-primary"
                  type="submit">

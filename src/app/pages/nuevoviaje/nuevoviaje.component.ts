@@ -8,6 +8,8 @@ import {Moment} from 'moment';
 import {Viaje} from '../../models/viaje.model';
 import {Persona} from '../../models/persona.model';
 
+//Coponente Nuevoviaje
+
 @Component({
   selector: 'app-nuevoviaje',
   templateUrl: 'nuevoviaje.component.html'
@@ -30,7 +32,6 @@ export class NuevoviajeComponent implements OnInit {
   public currentStatus = 1;
 
   public form: FormGroup;
-  selected: { start: Moment, end: Moment };
 
   constructor(
     private firestoreService: FirestoreService,
@@ -42,6 +43,7 @@ export class NuevoviajeComponent implements OnInit {
       descripcion: ['', Validators.required],
       monedaPrincipal: ['EUR', Validators.required],
       monedasAdicionales: [],
+      presupuesto: [''],
       terceros: this._FB.array([]),
       fechas: ['', Validators.required],
     });
@@ -56,18 +58,16 @@ export class NuevoviajeComponent implements OnInit {
     });
   }
 
+  //Añadir campo input
   addNewInputField(): void {
     const control = <FormArray>this.form.controls.terceros;
     control.push(this.initTechnologyFields());
   }
 
+  //Eliminar campo input
   removeInputField(i: number): void {
     const control = <FormArray>this.form.controls.terceros;
     control.removeAt(i);
-  }
-
-  manage(val: any): void {
-    console.dir(val);
   }
 
   ngOnInit() {
@@ -83,6 +83,7 @@ export class NuevoviajeComponent implements OnInit {
 
       this.currentStatus = 2;
 
+      //Recibir datos del viaje
       this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
         this.viajeupdate = (dbviaje.payload.data()) as Viaje;
         this.fechasInicio = moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone).format('DD/M/YYYY');
@@ -93,6 +94,7 @@ export class NuevoviajeComponent implements OnInit {
         this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
         this.form.controls['monedaPrincipal'].disable();
         this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
+        this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
 
         this.form.get('fechas').setValue({
           startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone),
@@ -102,6 +104,7 @@ export class NuevoviajeComponent implements OnInit {
 
       });
 
+      //Recibir datos de las personas del viaje
       this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
         const control = <FormArray>this.form.controls.terceros
         this.totalTerceros = personasSnapshot.length;
@@ -130,6 +133,7 @@ export class NuevoviajeComponent implements OnInit {
 
   }
 
+  //Crear viaje
   nuevoViaje(form, documentId = this.documentId) {
     if (this.currentStatus == 1) {
       this.firestoreService.nuevoViaje(form).then((docRef => {
@@ -143,12 +147,14 @@ export class NuevoviajeComponent implements OnInit {
     }
   }
 
+  //Borrar viaje
   borrarViaje() {
     this.firestoreService.borrarViaje(this.idViaje).then()
     this.router.navigate(['/dashboard'])
 
   }
 
+  //Archivar viaje
   archivarViaje() {
     this.firestoreService.archivarViaje(this.idViaje).then()
     this.router.navigate(['/dashboard'])

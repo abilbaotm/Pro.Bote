@@ -1,7 +1,9 @@
+<!-- Nuevo viaje -->
 <div class=" content">
   <div class="card card-stats">
     <form (ngSubmit)="nuevoViaje(form.value)" [formGroup]="form">
       <div class="card-body row">
+        <!-- Sale un titulo u otro en base a lo que se haga -->
         <div class="col-12">
           <h1 *ngIf="currentStatus == 1">Nuevo viaje</h1>
           <h1 *ngIf="currentStatus == 2">Editar viaje</h1>
@@ -189,6 +191,10 @@
               <option label="Zimbabwean bonds" value="ZWB">ZWB</option>
             </select>
           </div>
+
+          <label for="presupuesto">Presupuesto del viaje (en moneda principal)</label>
+          <input class="form-control" formControlName="presupuesto" id="presupuesto" type="number"/>
+
           <div class="form-group">
             <label for="monedasAdicionales">Otras monedas</label>
             <select class="form-control form-multiple" formControlName="monedasAdicionales" id="monedasAdicionales"
@@ -439,7 +445,7 @@
           </div>
 
 
-          <!-- Allow new input field to be generated/added -->
+          <!-- Permite crear inputs-->
           <div class="text-center">
             <input (click)="addNewInputField()" class="btn" type="button" value="Añadir persona">
           </div>
@@ -454,6 +460,7 @@
     </form>
 
   </div>
+  <!-- Si se esta editando el viaje saldrán estos botones -->
   <div *ngIf="currentStatus == 2" class="card card-stats">
     <div class="card-body row">
       <div class="col-12">

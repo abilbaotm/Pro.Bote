@@ -3,7 +3,7 @@ import {AuthService} from '../core/auth.service'
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as firebase from 'firebase';
-
+//Componente Registro
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -28,6 +28,7 @@ export class RegisterComponent {
     this.createForm();
   }
 
+  //Crear formulario
   createForm() {
     this.registerForm = this.fb.group({
       displayName: ['', Validators.required],
@@ -37,6 +38,7 @@ export class RegisterComponent {
   }
 
 
+  //Registro con Google
   tryGoogleLogin() {
     this.authService.doGoogleLogin()
       .then(res => {
@@ -45,14 +47,13 @@ export class RegisterComponent {
       )
   }
 
+  //Registro con Firebase
   tryRegister(value) {
     this.authService.doRegister(value)
       .then(res => {
-        console.log(res);
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
       }, err => {
-        console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
       })

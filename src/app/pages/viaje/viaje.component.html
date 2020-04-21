@@ -1,14 +1,4 @@
-<style>
-  .sticky {
-    background: #fff;
-    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .08);
-    position: fixed;
-    top: 0;
-    height: 120px;
-    width: 100%;
-  }
-</style>
-
+<!--Componente viaje -->
 <div class=" content">
   <div class="row">
     <div *ngIf="!viaje.archivado && !viaje.borrado && viaje.admin==user.uid" class=" col-12">
@@ -26,286 +16,239 @@
 
 
     <div class="col-12">
-      <div class=" card card-stats">
-        <div class=" card-body">
-          <div class=" row">
+      <mat-tab-group dynamicHeight>
+        <!-- resumen de pagos -->
+        <mat-tab label="Resumen">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <!-- Para cancelar los viajes archivados/borrados -->
             <div class=" col-12">
-              <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
-                Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()"
-                                                                                       *ngIf="viaje.admin==user.uid"
-                                                                                       class="pointer">Cancelar</a>
+                  <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
+                    Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()"
+                                                                                           *ngIf="viaje.admin==user.uid"
+                                                                                           class="pointer">Cancelar</a>
+                  </div>
+                  <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
+                    Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
+                                                     class="pointer">Cancelar</a>
+                  </div>
+                  <p class=" cart-title">{{viaje.descripcion}}</p>
+                  <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
+                  </p>
+
+                  <div class="gauge-row">
+                    <rg-gauge-chart
+                      [needleValue]="porcenPresupuesto"
+                      [options]="optionsGastadoViaje"
+                      bottomLabel="{{totalGastadoViaje | number : '0.2-2'}} {{viaje.monedaPrincipal}}"
+                      canvasWidth="300"
+                      centralLabel=""
+                      name="Gastos Totales"></rg-gauge-chart>
+
+                  </div>
+
+
+                  <p class=" card-description">Participantes:<br>
+                    <ng-container *ngFor="let persona of personas">
+                      <mat-card>
+                        {{persona.nombre}}
+                        <ng-container *ngIf="persona.email"><{{persona.email | lowercase}}></ng-container>
+                        <span *ngIf="viaje.permitidos[persona.email]"
+                              class="badge badge-secondary mx-1">Permiso de lectura</span>
+                        <span *ngIf="viaje.permitidos[persona.email] && viaje.permitidos[persona.email].owner"
+                              class="badge badge-primary mx-1">Creador del viaje</span>
+                      </mat-card>
+                    </ng-container>
+                  </p>
+                </div>
               </div>
-              <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
-                Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
-                                                 class="pointer">Cancelar</a>
-              </div>
-              <p class=" cart-title">{{viaje.descripcion}}</p>
-              <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
-              </p>
-              <p class=" card-description">Usuarios permitidos:<br>
-                <span *ngFor="let usuario of viaje.permitidos | keyvalue">
-                    - {{usuario.value["nombre"]}} <{{usuario["key"]}}> <span *ngIf="usuario.value['owner']"
-                                                                             class="label label-primary">Creador</span><br>
-                  </span>
-              </p>
-              <p class=" card-description">Participantes:<br>
-                <span *ngFor="let persona of personas">
-                    - {{persona.nombre}} <{{persona.email | lowercase}}> <br>
-                  </span>
-              </p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12">
+        </mat-tab>
+        <!-- Ver los gastos -->
+        <mat-tab label="Gastos">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col-12">
+                  <h3>Histórico de Gastos</h3>
+                  <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verGastosEliminados" class="mb-3"
+                                    color="warn">Ver gastos eliminados
+                  </mat-slide-toggle>
 
-      <div class=" card card-stats">
-        <div class=" card-body">
-          <div class=" row">
-            <div class=" col-12">
-              <h3>Gastos</h3>
-              <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verGastosEliminados" class="mb-3"
-                                color="warn">Ver gastos eliminados
-              </mat-slide-toggle>
-
-              <mat-accordion class="my-headers-align">
-                <ng-container *ngFor="let gasto of gastos">
-                  <mat-expansion-panel
-                    *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) ">
-                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
-                                                class="py-1 py-md-0"
-                                                style="min-height: 48px">
-                      <div class="row w-100">
-                        <div class="col-md-6 m-auto">{{gasto.descripcion}}</div>
-                        <div class="col-md-2 m-auto"><p class="m-auto">{{gasto.diaLocal}}</p></div>
-                        <div class="col-md-4 m-auto">
-                          <p class="m-auto">
-                            {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}
-                            <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1"
-                                  class="text-right ml-1"> ({{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                              ) </span></p>
-                        </div>
-                      </div>
+                  <mat-accordion class="my-headers-align">
+                    <ng-container *ngFor="let gasto of gastos">
+                      <mat-expansion-panel
+                        *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) ">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
+                                                    class="py-1 py-md-0"
+                                                    style="min-height: 48px">
+                          <div class="row w-100">
+                            <div class="col-md-6 m-auto">{{gasto.descripcion}}</div>
+                            <div class="col-md-2 m-auto"><p class="m-auto">{{gasto.diaLocal}}</p></div>
+                            <div class="col-md-4 m-auto">
+                              <p class="m-auto">
+                                {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}
+                                <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1"
+                                      class="text-right ml-1"> ({{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                                  ) </span></p>
+                            </div>
+                          </div>
 
 
-                    </mat-expansion-panel-header>
+                        </mat-expansion-panel-header>
 
+                        <!-- Restaurar / Eliminar / Editar gasto -->
                     <ng-template matExpansionPanelContent>
-                      <div class="row pt-3">
-                        <div class="col-md-6">
-                          <p>Descripción: {{gasto.descripcion}}</p>
-                          <p>Fecha: {{gasto.fechaLocal}} ({{gasto.timezone}}) </p>
-                          <ng-container *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
-                            <p>Cantidad (Moneda extranjera): {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
-                            <p>Cantidad (Moneda
-                              principal): {{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                            <p>Ratio de cambio: {{gasto.ratio | number : '0.3-3'}}</p>
-                          </ng-container>
-                          <ng-container *ngIf="gasto.moneda == viaje.monedaPrincipal || gasto.ratio == 1">
-                            <p>Cantidad: {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
-                          </ng-container>
+                          <div class="row pt-3">
+                            <div class="col-md-6">
+                              <p>Descripción: {{gasto.descripcion}}</p>
+                              <p>Fecha: {{gasto.fechaLocal}} ({{gasto.timezone}}) </p>
+                              <ng-container *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
+                                <p>Cantidad (Moneda
+                                  extranjera): {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
+                                <p>Cantidad (Moneda
+                                  principal): {{(gasto.cantidad / gasto.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                                <p>Ratio de cambio: {{gasto.ratio | number : '0.3-3'}}</p>
+                              </ng-container>
+                              <ng-container *ngIf="gasto.moneda == viaje.monedaPrincipal || gasto.ratio == 1">
+                                <p>Cantidad: {{gasto.cantidad | number : '0.2-2'}} {{gasto.moneda}}</p>
+                              </ng-container>
 
-                          <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
-                          <p>Partes iguales: {{gasto.partesIguales ? 'Sí' : 'No'}}</p>
-                          <button *ngIf="viaje.admin==user.uid && !gasto.eliminado"
-                                  [routerLink]="['editargasto/'+gasto.id]" class="btn ml-3"
-                                  type="button">
-                            Editar gasto
-                          </button>
-                          <button *ngIf="!gasto.eliminado" [swal]="EliminarGastoSwal" class="btn btn-danger ml-3"
-                                  type="button">
-                            Eliminar gasto
-                          </button>
-                          <button *ngIf="gasto.eliminado" [swal]="RestaurarGastoSwal" class="btn ml-3" type="button">
-                            Restaurar gasto
-                          </button>
-                          <swal
-                            #EliminarGastoSwal
-                            (confirm)="eliminarGasto(gasto)"
-                            [focusCancel]="true"
-                            [showCancelButton]="true"
-                            cancelButtonText="Cancelar"
-                            confirmButtonText="Eliminar"
-                            icon="info"
-                            text=""
-                            title="¿Eliminar gasto?">
-                          </swal>
-                          <swal
-                            #RestaurarGastoSwal
-                            (confirm)="restaurarGasto(gasto)"
-                            [focusCancel]="true"
-                            [showCancelButton]="true"
-                            cancelButtonText="Cancelar"
-                            confirmButtonText="Restaurar"
-                            icon="info"
-                            text=""
-                            title="¿Restaurar gasto?">
-                          </swal>
-                        </div>
-                        <div class="col-md-6">
-                          <table [dataSource]="gasto.personas | keyvalue" class="mat-elevation-z8 w-100" mat-table>
+                              <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
+                              <p>Partes iguales: {{gasto.partesIguales ? 'Sí' : 'No'}}</p>
+                              <button *ngIf="viaje.admin==user.uid && !gasto.eliminado"
+                                      [routerLink]="['editargasto/'+gasto.id]" class="btn ml-3"
+                                      type="button">
+                                Editar gasto
+                              </button>
+                              <button *ngIf="viaje.admin==user.uid && !gasto.eliminado" [swal]="EliminarGastoSwal" class="btn btn-danger ml-3"
+                                      type="button">
+                                Eliminar gasto
+                              </button>
+                              <button *ngIf="viaje.admin==user.uid && gasto.eliminado" [swal]="RestaurarGastoSwal" class="btn ml-3"
+                                      type="button">
+                                Restaurar gasto
+                              </button>
+                              <swal
+                                #EliminarGastoSwal
+                                (confirm)="eliminarGasto(gasto)"
+                                [focusCancel]="true"
+                                [showCancelButton]="true"
+                                cancelButtonText="Cancelar"
+                                confirmButtonText="Eliminar"
+                                icon="info"
+                                text=""
+                                title="¿Eliminar gasto?">
+                              </swal>
+                              <swal
+                                #RestaurarGastoSwal
+                                (confirm)="restaurarGasto(gasto)"
+                                [focusCancel]="true"
+                                [showCancelButton]="true"
+                                cancelButtonText="Cancelar"
+                                confirmButtonText="Restaurar"
+                                icon="info"
+                                text=""
+                                title="¿Restaurar gasto?">
+                              </swal>
+                            </div>
+                            <div class="col-md-6">
+                              <table [dataSource]="gasto.personas | keyvalue" class="mat-elevation-z8 w-100" mat-table>
 
-                            <ng-container matColumnDef="persona">
-                              <td *matCellDef="let element" mat-cell> {{personasIndex[element.key]}} </td>
-                            </ng-container>
-                            <ng-container matColumnDef="cantidad">
-                              <td *matCellDef="let element"
-                                  mat-cell> {{element.value.cantidad | number : '0.2-2'}} {{gasto.moneda}}
-                                <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
+                                <ng-container matColumnDef="persona">
+                                  <td *matCellDef="let element" mat-cell> {{personasIndex[element.key]}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="cantidad">
+                                  <td *matCellDef="let element"
+                                      mat-cell> {{element.value.cantidad | number : '0.2-2'}} {{gasto.moneda}}
+                                    <span *ngIf="gasto.moneda != viaje.monedaPrincipal || gasto.ratio != 1">
                                   ({{element.value.cantidad / gasto.ratio | number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                                  )
+                                      )
                                 </span>
-                              </td>
-                            </ng-container>
+                                  </td>
+                                </ng-container>
 
-                            <tr *matRowDef="let row; columns: ['persona', 'cantidad'];" mat-row></tr>
-                          </table>
+                                <tr *matRowDef="let row; columns: ['persona', 'cantidad'];" mat-row></tr>
+                              </table>
 
-                        </div>
+                            </div>
 
-                      </div>
-                    </ng-template>
+                          </div>
+                        </ng-template>
 
-                  </mat-expansion-panel>
-                </ng-container>
-              </mat-accordion>
+                      </mat-expansion-panel>
+                    </ng-container>
+                  </mat-accordion>
 
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </mat-tab>
+        <!-- Ver el historico de pagos -->
+        <mat-tab label="Pagos">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col-12">
+                  <h3>Histórico de Pagos</h3>
+
+                  <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verPagosEliminados" class="mb-3"
+                                    color="warn">Ver pagos eliminados
+                  </mat-slide-toggle>
 
 
-    <div class="col-12">
+                  <mat-accordion class="my-headers-align">
+                    <ng-container *ngFor="let pago of pagos">
+                      <mat-expansion-panel
+                        *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) ">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
+                                                    class="py-1 py-md-0"
+                                                    style="min-height: 48px">
+                          <div class="row w-100">
+                            <div class="col-md-6 m-auto">{{personasIndex[pago.pagador]}}
+                              >> {{personasIndex[pago.beneficiario]}}</div>
 
-      <div class=" card card-stats">
-        <div class=" card-body">
-          <div class=" row">
-            <div class=" col-12">
-              <h3>Pagos</h3>
-              <h4>Cuentas pendientes</h4>
-
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li *ngFor="let persona of personas" class="nav-item">
-                  <a (click)="accordion.closeAll(); verCuentasPersona(persona.id)"
-                     [className]="idPersonaCuentasActiva!=persona.id ? 'nav-link' : 'nav-link active'"
-                     aria-controls="home" aria-selected="true" data-toggle="tab" id="home-tab"
-                     role="tab">{{persona.nombre}}</a>
-                </li>
-              </ul>
-
-              <p>Cuentas pendientes de todos los participantes a {{personasIndex[idPersonaCuentasActiva]}}...</p>
-
-              <mat-accordion #accordion="matAccordion" [multi]="true" class="my-headers-align">
-                <ng-container *ngIf="idPersonaCuentasActiva">
-                  <mat-expansion-panel *ngFor="let perso of personas">
-                    <mat-expansion-panel-header *ngIf="perso.id != idPersonaCuentasActiva" [collapsedHeight]="'auto'"
-                                                [expandedHeight]="'auto'" class="py-1 py-md-0"
-                                                style="min-height: 48px">
-                      <div class="row w-100">
-                        <div class="col-md-8 m-auto">{{perso.nombre}}</div>
-                        <div class="col-md-4 m-auto">
-                          {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                        </div>
-                      </div>
+                            <div class="col-md-2 m-auto">
+                              <p>{{pago.fechaDia}}</p>
+                            </div>
+                            <div class="col-md-4 m-auto">
+                              <p>{{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                            </div>
+                          </div>
 
 
-                    </mat-expansion-panel-header>
+                        </mat-expansion-panel-header>
 
-                    <ng-template matExpansionPanelContent>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <p>Total debido por pago de
-                            gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                          <p>Total habido por pago de
-                            gastos:{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                          <p>Balance pagos por
-                            gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                          <p>Balance pagos
-                            directos: {{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                          <p>Pendiente de
-                            pago: {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                        <ng-template matExpansionPanelContent>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <p>Nota: {{pago.nota}}</p>
+                              <p>Fecha: {{pago.fechaLocal}} ({{pago.timezone}}) </p>
+                              <p>Pagador: {{personasIndex[pago.pagador]}}</p>
+                              <p>Beneficiario: {{personasIndex[pago.beneficiario]}}</p>
+                              <ng-container *ngIf="pago.moneda == viaje.monedaPrincipal || pago.ratio == 1">
+                                <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
+                              </ng-container>
+                              <ng-container *ngIf="pago.moneda != viaje.monedaPrincipal || pago.ratio != 1">
+                                <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
+                                <p>Ratio: {{(pago.ratio) | number : '0.2-2'}}</p>
+                                <p>Cantidad Moneda
+                                  Principal: {{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
 
-                        </div>
-                        <div class="col-md-6 text-center my-auto">
-                          <h3 class="my-0">
-                            {{personasIndex[idPersonaCuentasActiva]}}
-                            {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0 ? '>>' : '<<'}}
-                            {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) | abs  |  number : '0.2-2'}} {{viaje.monedaPrincipal}}
-                            {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0 ? '>>' : '<<'}}
-                            {{perso.nombre}}
-                          </h3>
-
-                        </div>
-                      </div>
+                              </ng-container>
 
 
-                    </ng-template>
-
-                  </mat-expansion-panel>
-                </ng-container>
-              </mat-accordion>
-
-
-              <p>* Los importes son mostrados en {{viaje.monedaPrincipal}}. Ratio de conversión de divisa aplicado. Este
-                resumen está sujeto a cambios por ratio de divisa.</p>
-              <br>
-
-              <h4>Historico pagos</h4>
-              <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verPagosEliminados" class="mb-3"
-                                color="warn">Ver pagos eliminados
-              </mat-slide-toggle>
-
-
-              <mat-accordion class="my-headers-align">
-                <ng-container *ngFor="let pago of pagos">
-                  <mat-expansion-panel
-                    *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) ">
-                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
-                                                class="py-1 py-md-0"
-                                                style="min-height: 48px">
-                      <div class="row w-100">
-                        <div class="col-md-6 m-auto">{{personasIndex[pago.pagador]}}
-                          >> {{personasIndex[pago.beneficiario]}}</div>
-
-                        <div class="col-md-2 m-auto">
-                          <p>{{pago.fechaDia}}</p>
-                        </div>
-                        <div class="col-md-4 m-auto">
-                          <p>{{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-                        </div>
-                      </div>
-
-
-                    </mat-expansion-panel-header>
-
-                    <ng-template matExpansionPanelContent>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <p>Nota: {{pago.nota}}</p>
-                          <p>Fecha: {{pago.fechaLocal}} ({{pago.timezone}}) </p>
-                          <p>Pagador: {{personasIndex[pago.pagador]}}</p>
-                          <p>Beneficiario: {{personasIndex[pago.beneficiario]}}</p>
-                          <ng-container *ngIf="pago.moneda == viaje.monedaPrincipal || pago.ratio == 1">
-                            <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
-                          </ng-container>
-                          <ng-container *ngIf="pago.moneda != viaje.monedaPrincipal || pago.ratio != 1">
-                            <p>Cantidad: {{(pago.cantidad) | number : '0.2-2'}} {{pago.moneda}}</p>
-                            <p>Ratio: {{(pago.ratio) | number : '0.2-2'}}</p>
-                            <p>Cantidad Moneda
-                              Principal: {{(pago.cantidad / pago.ratio) | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
-
-                          </ng-container>
-
+                        <!-- Eliminar / Restaurar pagos -->
                         </div>
                         <div class="col-md-6 text-center my-auto">
-                          <button *ngIf="!pago.eliminado" [swal]="EliminarPagoSwal" class="btn btn-danger ml-3"
+                          <button *ngIf="viaje.admin==user.uid && !pago.eliminado" [swal]="EliminarPagoSwal" class="btn btn-danger ml-3"
                                   type="button">
                             Eliminar pago
                           </button>
-                          <button *ngIf="pago.eliminado" [swal]="RestaurarPagoSwal" class="btn ml-3" type="button">
+                          <button *ngIf="viaje.admin==user.uid && pago.eliminado" [swal]="RestaurarPagoSwal" class="btn ml-3" type="button">
                             Restaurar pago
                           </button>
                           <swal
@@ -332,23 +275,98 @@
                           </swal>
                         </div>
                       </div>
-
-
                     </ng-template>
-
                   </mat-expansion-panel>
                 </ng-container>
               </mat-accordion>
-
-
             </div>
           </div>
         </div>
       </div>
+        </mat-tab>
+        <!-- resumen de cuentas -->
+        <mat-tab label="Resumen cuentas">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col-12">
+                  <h3>Resumen cuentas pendientes</h3>
+
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li *ngFor="let persona of personas" class="nav-item">
+                      <a (click)="accordion.closeAll(); verCuentasPersona(persona.id)"
+                         [className]="idPersonaCuentasActiva!=persona.id ? 'nav-link' : 'nav-link active'"
+                         aria-controls="home" aria-selected="true" data-toggle="tab" id="home-tab"
+                         role="tab">{{persona.nombre}}</a>
+                    </li>
+                  </ul>
+
+                  <p>Cuentas pendientes de todos los participantes a {{personasIndex[idPersonaCuentasActiva]}}...</p>
+
+                  <mat-accordion #accordion="matAccordion" [multi]="true" class="my-headers-align">
+                    <ng-container *ngIf="idPersonaCuentasActiva">
+                      <mat-expansion-panel *ngFor="let perso of personas">
+                        <mat-expansion-panel-header *ngIf="perso.id != idPersonaCuentasActiva"
+                                                    [collapsedHeight]="'auto'"
+                                                    [expandedHeight]="'auto'" class="py-1 py-md-0"
+                                                    style="min-height: 48px">
+                          <div class="row w-100">
+                            <div class="col-md-8 m-auto">{{perso.nombre}}</div>
+                            <div class="col-md-4 m-auto">
+                              {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                            </div>
+                          </div>
+
+
+                        </mat-expansion-panel-header>
+
+                        <ng-template matExpansionPanelContent>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <p>Total debido por pago de
+                                gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                              <p>Total habido por pago de
+                                gastos:{{resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                              <p>Balance pagos por
+                                gastos: {{resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                              <p>Balance pagos
+                                directos: {{resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva] | number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+                              <p>Pendiente de
+                                pago: {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva])| number : '0.2-2'}} {{viaje.monedaPrincipal}}</p>
+
+                            </div>
+                            <div class="col-md-6 text-center my-auto">
+                              <h3 class="my-0">
+                                {{personasIndex[idPersonaCuentasActiva]}}
+                                {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0 ? '>>' : '<<'}}
+                                {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) | abs  |  number : '0.2-2'}} {{viaje.monedaPrincipal}}
+                                {{(resumenPagos[idPersonaCuentasActiva].debe[perso.id] - resumenPagos[perso.id].debe[idPersonaCuentasActiva]) - (resumenPagos[idPersonaCuentasActiva].pagos[perso.id] - resumenPagos[perso.id].pagos[idPersonaCuentasActiva]) > 0 ? '>>' : '<<'}}
+                                {{perso.nombre}}
+                              </h3>
+
+                            </div>
+                          </div>
+
+
+                        </ng-template>
+
+                      </mat-expansion-panel>
+                    </ng-container>
+                  </mat-accordion>
+
+
+                  <p>* Los importes son mostrados en {{viaje.monedaPrincipal}}. Ratio de conversión de divisa aplicado.
+                    Este
+                    resumen está sujeto a cambios por ratio de divisa.</p>
+                  <br>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-
-
   </div>
-
-
 </div>
