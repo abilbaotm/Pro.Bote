@@ -1,5 +1,5 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ErrorHandler, Inject, Injectable, InjectionToken, NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
@@ -30,35 +30,10 @@ import * as localization from 'moment/locale/es';
 import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
 import {NavServiceService} from "./services/nav-service/nav-service.service";
 import {ThemeService} from "./services/theme/theme.service";
-import * as Rollbar from 'rollbar';
+import {RollbarErrorHandler, rollbarFactory, RollbarService} from './services/rollbar/rollbar';
 
 moment.locale('es', localization);
 
-
-// rollbar
-const rollbarConfig = {
-  accessToken: '26913d6cce88472a87ad2714a4e54bab',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-  verbose: true,
-  hostWhiteList: ['localhost']
-};
-
-@Injectable()
-export class RollbarErrorHandler implements ErrorHandler {
-  constructor(@Inject(RollbarService) private rollbar: Rollbar) {
-  }
-
-  handleError(err: any): void {
-    this.rollbar.error(err.originalError || err);
-  }
-}
-
-export function rollbarFactory() {
-  return new Rollbar(rollbarConfig);
-}
-
-export const RollbarService = new InjectionToken<Rollbar>('rollbar');
 
 
 @NgModule({
