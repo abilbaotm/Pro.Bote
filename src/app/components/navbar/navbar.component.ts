@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../core/auth.service';
+
 //Componente Navbar
 @Component({
   selector: 'app-navbar',
@@ -78,7 +79,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
     const html = document.getElementsByTagName("html")[0];
     if (window.innerWidth < 991) {
-      mainPanel.style.position = "fixed";
+      if (mainPanel != undefined) {
+        mainPanel.style.position = "fixed";
+      }
     }
 
     setTimeout(function () {
@@ -100,7 +103,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     if (window.innerWidth < 991) {
       setTimeout(function () {
-        mainPanel.style.position = '';
+        if (mainPanel != undefined) {
+          mainPanel.style.position = '';
+        }
       }, 500);
     }
     this.sidebarVisible = false;
