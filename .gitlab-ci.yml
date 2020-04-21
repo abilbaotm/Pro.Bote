@@ -42,7 +42,7 @@ build_web:
     paths:
       - node_modules/
   script:
-    - npm run build-prod
+    - npm run build-prod --prod
   artifacts:
     paths:
       - dist/
