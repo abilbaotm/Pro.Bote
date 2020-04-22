@@ -94,7 +94,10 @@ export class NuevoviajeComponent implements OnInit, OnDestroy {
         this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
         this.form.controls['monedaPrincipal'].disable();
         this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
-        this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
+        if (this.viajeupdate.presupuesto) {
+          //Tolerar viajes creados antes de la v 0.2.26
+          this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
+        }
 
         this.form.get('fechas').setValue({
           startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone),
