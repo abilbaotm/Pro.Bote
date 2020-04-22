@@ -121,8 +121,7 @@ export class ViajeComponent implements OnInit {
 
       })
 
-
-      if (this.viaje.presupuesto == undefined) {
+      if (this.viaje.presupuesto == undefined || typeof (this.viaje.presupuesto) == 'string') {
         this.porcenPresupuesto = 100
         this.optionsGastadoViaje.arcDelimiters = []
         this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.totalGastadoViaje * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
