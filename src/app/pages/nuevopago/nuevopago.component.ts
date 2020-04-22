@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -14,7 +14,8 @@ import {environment} from '../../../environments/environment';
   selector: 'app-nuevopago',
   templateUrl: 'nuevopago.component.html'
 })
-export class NuevopagoComponent implements OnInit {
+export class NuevopagoComponent implements OnInit, OnDestroy {
+  private FBSuscribers = []
   public viaje: Viaje;
   public form: FormGroup;
   public monedas: String[] = new Array<String>();
@@ -54,7 +55,7 @@ export class NuevopagoComponent implements OnInit {
 
 
     //Recoger la informacion del viaje
-    this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
+    this.FBSuscribers.push(this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
       this.viaje = dbviaje.payload.data() as Viaje;
 
       this.monedas.push(this.viaje.monedaPrincipal);
@@ -86,17 +87,17 @@ export class NuevopagoComponent implements OnInit {
 
       }
 
-    });
+    }));
 
     //Recoger la informacion de las personas del viaje
-    this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
+    this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       personasSnapshot.forEach((viajeData: any) => {
         let persona;
         persona = viajeData.payload.doc.data() as Persona;
         persona.id = viajeData.payload.doc.id;
         this.personasViaje.push(persona as Persona);
       });
-    });
+    }));
 
   }
 
@@ -110,5 +111,12 @@ export class NuevopagoComponent implements OnInit {
     }
 
 
+  }
+
+  ngOnDestroy(): void {
+    // destruir todas las suscripciones de firestore.
+    this.FBSuscribers.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 }
