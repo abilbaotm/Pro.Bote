@@ -339,4 +339,11 @@ export class FirestoreService {
 
     return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set(gasto)
   }
+
+  unsuscribe(FBSuscribers: any[]) {
+    FBSuscribers.forEach(sub => {
+      sub.unsubscribe();
+    })
+
+  }
 }

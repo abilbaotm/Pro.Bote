@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -14,7 +14,8 @@ import {Gasto} from '../../models/gasto.model';
   selector: 'app-nuevogasto',
   templateUrl: 'nuevogasto.component.html'
 })
-export class NuevogastoComponent implements OnInit {
+export class NuevogastoComponent implements OnInit, OnDestroy {
+  private FBSuscribers = []
   public viaje: Viaje;
   public form: FormGroup;
   public monedas: String[] = new Array<String>();
@@ -58,7 +59,7 @@ export class NuevogastoComponent implements OnInit {
 
 
     //Sacar la informacion del viaje
-    this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
+    this.FBSuscribers.push(this.firestoreService.getViaje(this.idViaje).subscribe(dbviaje => {
       this.viaje = dbviaje.payload.data() as Viaje;
 
       this.monedas.push(this.viaje.monedaPrincipal);
@@ -90,10 +91,10 @@ export class NuevogastoComponent implements OnInit {
 
       }
 
-    });
+    }));
 
     //Sacar las personas de un viaje
-    this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
+    this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
       const controla = <FormArray>this.form.controls.terceros;
       personasSnapshot.forEach((viajeData: any) => {
         let persona;
@@ -117,14 +118,14 @@ export class NuevogastoComponent implements OnInit {
           this.form.get('cantidad').setValue(total);
         }
       });
-    });
+    }));
 
     //Sabes si se esta editando o no y actuar en consecuencia
     this.idGasto = this.route.snapshot.paramMap.get("gasto");
     if (this.idGasto != null) {
 
       this.currentStatus = 2;
-      this.firestoreService.getGasto(this.idViaje, this.idGasto).subscribe((gastosSnapshot) => {
+      this.FBSuscribers.push(this.firestoreService.getGasto(this.idViaje, this.idGasto).subscribe((gastosSnapshot) => {
         let gasto = gastosSnapshot.payload.data() as Gasto;
         this.timezoneForm = gasto.timezone;
         this.form.get('descripcion').setValue(gasto.descripcion);
@@ -145,7 +146,7 @@ export class NuevogastoComponent implements OnInit {
         })
         this.form.get('terceros').setValue(personasForm)
         this.msgRatio = ""
-      })
+      }))
 
     }
 
@@ -195,6 +196,11 @@ export class NuevogastoComponent implements OnInit {
       nombre: [perso.nombre, Validators.required],
       cantidad: ['', Validators.required]
     });
+  }
+
+  ngOnDestroy(): void {
+    // destruir todas las suscripciones de firestore.
+    this.firestoreService.unsuscribe(this.FBSuscribers)
   }
 
 }

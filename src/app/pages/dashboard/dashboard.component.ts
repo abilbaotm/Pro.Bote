@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import Unsplash, {toJson} from 'unsplash-js';
 import * as moment from 'moment-timezone';
+
 //Componente Dashboard
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  private FBSuscribers = []
   public data: any;
   public todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
 
@@ -25,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   //Cargar los viajes en sus respectivas categorias para poder visualizarlos en la pagina
   cargarViajes() {
-    this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
+    this.FBSuscribers.push(this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
       this.todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
       viajesSnapshot.forEach((viajeData: any) => {
         var datosViaje = viajeData.payload.doc.data();
@@ -79,9 +81,16 @@ export class DashboardComponent implements OnInit {
         }
 
       }
-    });
+    }));
 
 
+  }
+
+  ngOnDestroy(): void {
+    // destruir todas las suscripciones de firestore.
+    this.FBSuscribers.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 
 
