@@ -6,7 +6,7 @@ version=$(git rev-parse --short HEAD)
 
 # Use the post_server_time access token, you can
 # find one in your project access token settings
-post_server_item=$ROLLBAR_POST_SERVER_ITEM
+post_server_item=${ROLLBAR_AT}
 
 echo "Uploading source maps for version $version!"
 

@@ -72,6 +72,7 @@ deploy_web:
     url: $FIREBASE_URL
   only:
     - master
+    - sourcemaps-rollbar
   dependencies:
     - build_web
   cache:
