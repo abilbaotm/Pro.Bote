@@ -82,7 +82,7 @@ deploy_web:
   script:
     - cd functions && npm install && cd -
     # deploy sourcemaps a rollbar para post-debug
-    - chmod +x ./rollbar-sourcemaps.sh & ./rollbar-sourcemaps.sh
+    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh
     - npm run deploy
   except:
     variables:
