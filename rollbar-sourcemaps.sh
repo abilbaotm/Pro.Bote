@@ -2,7 +2,7 @@
 
 # Save a short git hash, must be run from a git
 # repository (or a child directory)
-version=$(git rev-parse --short HEAD)
+version=$(cat version/actual)
 
 # Use the post_server_time access token, you can
 # find one in your project access token settings
