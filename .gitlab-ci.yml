@@ -82,7 +82,8 @@ deploy_web:
   script:
     - cd functions && npm install && cd -
     # deploy sourcemaps a rollbar para post-debug
-    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh
+    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh dist "https://bote.izabil.net/"
+    - rm dist/*.map
     - npm run deploy
   except:
     variables:
@@ -128,6 +129,9 @@ build_android:
     - set -o pipefail
     - node_modules/.bin/ng build --prod --base-href . --output-path CordovaMobileApp/www/
     - cd CordovaMobileApp
+    - mkdir -p www_tmp_maps
+    - cp www/*.js www_tmp_maps
+    - mv www/*.map www_tmp_maps
     #FICHEROS PARA FIRMAR
     - echo $RELEASE_KEYSTORE_BASE64 | base64 -d > android.jks
     - cp $BUILD_JSON build.json
@@ -149,6 +153,9 @@ deploy_android:
   dependencies:
     - build_android
   script:
+    # deploy sourcemaps a rollbar para post-debug
+    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh "CordovaMobileApp/www_tmp_maps/" "file:///android_asset/www/"
+    # end
     - cp $G_PLAY_API CordovaMobileApp/platforms/android/api-ci.json
     - gem install fastlane -NV
     - cd CordovaMobileApp/platforms/android

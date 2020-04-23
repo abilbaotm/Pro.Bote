@@ -12,12 +12,11 @@ echo "Uploading source maps for version $version!"
 
 # We upload a source map for each resulting JavaScript
 # file; the path depends on your build config
-cd dist
+cd $1
 #for path in $(find dist -name "*.js"); do
 for path in *.js; do
   # URL of the JavaScript file on the web server
-  url=https://bote.izabil.net/${path}
-  url_android=file:///android_asset/www/${path}
+  url=$2${path}
   # a path to a corresponding source map file
   source_map="@$path.map"
 
@@ -28,9 +27,5 @@ for path in *.js; do
     -F version=$version \
     -F minified_url=$url \
     -F source_map=$source_map
-  curl --show-error https://api.rollbar.com/api/1/sourcemap \
-    -F access_token=$post_server_item \
-    -F version=$version \
-    -F minified_url=$url_android \
-    -F source_map=$source_map
+
 done
