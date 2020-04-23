@@ -152,6 +152,7 @@ deploy_android:
     - master
   dependencies:
     - build_android
+    - get_version
   script:
     # deploy sourcemaps a rollbar para post-debug
     - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh "CordovaMobileApp/www_tmp_maps/" "file:///android_asset/www/"
