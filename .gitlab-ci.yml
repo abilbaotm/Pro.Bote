@@ -74,6 +74,7 @@ deploy_web:
     - master
   dependencies:
     - build_web
+    - get_version
   cache:
     policy: pull
     paths:
@@ -92,7 +93,6 @@ build_android:
   stage: build
   dependencies:
     - prerequisites
-    - get_version
   cache:
     paths:
       - node_modules/
@@ -155,6 +155,9 @@ deploy_android:
     - get_version
   script:
     # deploy sourcemaps a rollbar para post-debug
+    - ls
+    - pwd
+    - cat version/actual
     - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh "CordovaMobileApp/www_tmp_maps/" "file:///android_asset/www/"
     # end
     - cp $G_PLAY_API CordovaMobileApp/platforms/android/api-ci.json
