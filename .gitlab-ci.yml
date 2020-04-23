@@ -143,6 +143,7 @@ build_android:
   artifacts:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
+      - CordovaMobileApp/www_tmp_maps/
 
 deploy_android:
   image: ruby:2.7
