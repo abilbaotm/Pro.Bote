@@ -9,7 +9,8 @@ const rollbarConfig: Rollbar.Configuration = {
   accessToken: environment.ROLLBAR_ACCESS_TOKEN,
   captureUncaught: true,
   captureUnhandledRejections: true,
-  codeVersion: environmentversion
+  codeVersion: environmentversion,
+  code_version: environmentversion,
 };
 
 export const RollbarService = new InjectionToken<Rollbar>('rollbar');
