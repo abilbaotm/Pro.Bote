@@ -1,5 +1,5 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
@@ -30,8 +30,11 @@ import * as localization from 'moment/locale/es';
 import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component';
 import {NavServiceService} from "./services/nav-service/nav-service.service";
 import {ThemeService} from "./services/theme/theme.service";
+import {RollbarErrorHandler, rollbarFactory, RollbarService} from './services/rollbar/rollbar';
 
 moment.locale('es', localization);
+
+
 
 @NgModule({
   imports: [
@@ -59,7 +62,10 @@ moment.locale('es', localization);
     NgbModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent, PrivacidadComponent],
-  providers: [AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
+  providers: [
+    {provide: ErrorHandler, useClass: RollbarErrorHandler},
+    {provide: RollbarService, useFactory: rollbarFactory},
+    AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

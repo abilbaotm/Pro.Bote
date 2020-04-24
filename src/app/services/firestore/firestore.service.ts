@@ -223,30 +223,35 @@ export class FirestoreService {
       activo: true,
       owner: true
     };
-    form.terceros.forEach(function (ter) {
-      if (ter.email != '') {
 
-        permitidos[ter.email] = {
-          activo: true,
-          owner: false,
-          'nombre': ter.nombre,
-        }
-      } else {
-        ter.email = null
-      }
-      if (ter.id != '') {
-        personas[ter.id] = {
-          "nombre": ter.nombre,
-          "email": ter.email
-        }
-      } else {
-        nuevasPersonas.push({
-          "nombre": ter.nombre,
-          "email": ter.email
-        })
-      }
+    // verifica si hay terceros y luego procesarlos. Puede que sean solo personas participates del viaje.
+    // Añadirlo a permitidos si tienen de un email
+    if (form.terceros != undefined) {
+      form.terceros.forEach(function (ter) {
+        if (ter.email != '') {
 
-    });
+          permitidos[ter.email] = {
+            activo: true,
+            owner: false,
+            'nombre': ter.nombre,
+          }
+        } else {
+          ter.email = null
+        }
+        if (ter.id != '') {
+          personas[ter.id] = {
+            "nombre": ter.nombre,
+            "email": ter.email
+          }
+        } else {
+          nuevasPersonas.push({
+            "nombre": ter.nombre,
+            "email": ter.email
+          })
+        }
+
+      });
+    }
     for( let pers in personas) {
       this.firestore.collection('viajes/' + idViaje + '/personas').doc(pers).update(personas[pers]).then(r => {})
 
@@ -333,5 +338,12 @@ export class FirestoreService {
 
 
     return this.firestore.collection('viajes/' + idViaje + '/gastos').doc(idGasto).set(gasto)
+  }
+
+  unsuscribe(FBSuscribers: any[]) {
+    FBSuscribers.forEach(sub => {
+      sub.unsubscribe();
+    })
+
   }
 }

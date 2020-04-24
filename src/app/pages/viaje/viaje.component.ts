@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Viaje} from '../../models/viaje.model';
@@ -16,7 +16,8 @@ import {NavServiceService} from "../../services/nav-service/nav-service.service"
   selector: 'app-dashboard',
   templateUrl: 'viaje.component.html'
 })
-export class ViajeComponent implements OnInit {
+export class ViajeComponent implements OnInit, OnDestroy {
+  private FBSuscribers = []
   public user: any;
   public viaje: Viaje = new Viaje();
   public personas = new Array<Persona>();
@@ -58,7 +59,7 @@ export class ViajeComponent implements OnInit {
 
 
     //Datos del viaje
-    this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
+    this.FBSuscribers.push(this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
       this.viaje = (dbviaje.payload.data()) as Viaje;
       this.fechasInicio = moment.tz(this.viaje.fechas.start.toDate(), this.viaje.timezone).format('DD/M/YYYY');
       this.fechasFin = moment.tz(this.viaje.fechas.end.toDate(), this.viaje.timezone).format('DD/M/YYYY');
@@ -69,24 +70,24 @@ export class ViajeComponent implements OnInit {
         this.nav.permisos = true
       }
 
-    });
+    }));
 
 
     //Datos de las personas del viaje
-    this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
-      this.personas = new Array<Persona>();
-      this.personasIndex = {}
+    this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
+        this.personas = new Array<Persona>();
+        this.personasIndex = {}
         personasSnapshot.forEach(perso => {
           let persoTemp: Persona = perso.payload.doc.data() as Persona;
           persoTemp.id = perso.payload.doc.ref.id;
           this.personas.push(persoTemp);
           this.personasIndex[perso.payload.doc.ref.id] = (persoTemp).nombre
         })
-      }
+      })
     );
 
     //Datos de los gastos del viaje
-    this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
+    this.FBSuscribers.push(this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
       this.gastos = new Array<Gasto>();
       this.totalGastadoViaje = 0;
       gastosSnapshot.forEach(gast => {
@@ -121,8 +122,7 @@ export class ViajeComponent implements OnInit {
 
       })
 
-
-      if (this.viaje.presupuesto == undefined) {
+      if (this.viaje.presupuesto == undefined || typeof (this.viaje.presupuesto) == 'string') {
         this.porcenPresupuesto = 100
         this.optionsGastadoViaje.arcDelimiters = []
         this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.totalGastadoViaje * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
@@ -140,10 +140,10 @@ export class ViajeComponent implements OnInit {
         this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.viaje.presupuesto * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
       }
 
-    });
+    }));
 
     //Datos de los pagos del viaje
-    this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
+    this.FBSuscribers.push(this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
       this.pagos = new Array<Pago>();
       gastosSnapshot.forEach(pag => {
         let nuevoPago;
@@ -170,7 +170,7 @@ export class ViajeComponent implements OnInit {
           this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio)
         }
       });
-    })
+    }))
 
 
   }
@@ -250,4 +250,10 @@ export class ViajeComponent implements OnInit {
     })
 
   }
+
+  ngOnDestroy(): void {
+    // destruir todas las suscripciones de firestore.
+    this.firestoreService.unsuscribe(this.FBSuscribers)
+  }
+
 }

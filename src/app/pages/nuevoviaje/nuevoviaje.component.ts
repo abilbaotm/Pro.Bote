@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreService} from '../../services/firestore/firestore.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FirebaseUserModel} from '../../core/user.model';
 import * as moment from 'moment-timezone';
-import {Moment} from 'moment';
 import {Viaje} from '../../models/viaje.model';
 import {Persona} from '../../models/persona.model';
 
@@ -14,7 +13,8 @@ import {Persona} from '../../models/persona.model';
   selector: 'app-nuevoviaje',
   templateUrl: 'nuevoviaje.component.html'
 })
-export class NuevoviajeComponent implements OnInit {
+export class NuevoviajeComponent implements OnInit, OnDestroy {
+  private FBSuscribers = []
   user: FirebaseUserModel = new FirebaseUserModel();
   public idViaje: string;
   public viaje = [];
@@ -84,7 +84,7 @@ export class NuevoviajeComponent implements OnInit {
       this.currentStatus = 2;
 
       //Recibir datos del viaje
-      this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
+      this.FBSuscribers.push(this.firestoreService.getViaje(this.idViaje).subscribe((dbviaje) => {
         this.viajeupdate = (dbviaje.payload.data()) as Viaje;
         this.fechasInicio = moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone).format('DD/M/YYYY');
         this.fechasFin = moment.tz(this.viajeupdate.fechas.end.toDate(), this.viajeupdate.timezone).format('DD/M/YYYY');
@@ -94,7 +94,10 @@ export class NuevoviajeComponent implements OnInit {
         this.form.get('monedaPrincipal').setValue(this.viajeupdate.monedaPrincipal);
         this.form.controls['monedaPrincipal'].disable();
         this.form.get('monedasAdicionales').setValue(this.viajeupdate.monedasAdicionales);
-        this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
+        if (this.viajeupdate.presupuesto) {
+          //Tolerar viajes creados antes de la v 0.2.26
+          this.form.get('presupuesto').setValue(this.viajeupdate.presupuesto);
+        }
 
         this.form.get('fechas').setValue({
           startDate: moment.tz(this.viajeupdate.fechas.start.toDate(), this.viajeupdate.timezone),
@@ -102,29 +105,29 @@ export class NuevoviajeComponent implements OnInit {
         })
 
 
-      });
+      }));
 
       //Recibir datos de las personas del viaje
-      this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
-        const control = <FormArray>this.form.controls.terceros
-        this.totalTerceros = personasSnapshot.length;
-        personasSnapshot.forEach(perso => {
-          this.personas.push(perso.payload.doc.data() as Persona);
-          this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
+      this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
+          const control = <FormArray>this.form.controls.terceros
+          this.totalTerceros = personasSnapshot.length;
+          personasSnapshot.forEach(perso => {
+            this.personas.push(perso.payload.doc.data() as Persona);
+            this.personasIndex[perso.payload.doc.ref.id] = (perso.payload.doc.data() as Persona).nombre
 
-          let pers = this.initTechnologyFields();
-          pers.get('nombre').setValue((perso.payload.doc.data() as Persona).nombre)
-          pers.get('email').setValue((perso.payload.doc.data() as Persona).email)
-          pers.get('id').setValue(perso.payload.doc.ref.id)
+            let pers = this.initTechnologyFields();
+            pers.get('nombre').setValue((perso.payload.doc.data() as Persona).nombre)
+            pers.get('email').setValue((perso.payload.doc.data() as Persona).email)
+            pers.get('id').setValue(perso.payload.doc.ref.id)
 
-          if (this.user.email == (perso.payload.doc.data() as Persona).email) {
-            pers.disable();
-          }
+            if (this.user.email == (perso.payload.doc.data() as Persona).email) {
+              pers.disable();
+            }
             control.push(pers)
 
 
           })
-        }
+        })
       );
 
 
@@ -158,6 +161,13 @@ export class NuevoviajeComponent implements OnInit {
   archivarViaje() {
     this.firestoreService.archivarViaje(this.idViaje).then()
     this.router.navigate(['/dashboard'])
+  }
+
+  ngOnDestroy(): void {
+    // destruir todas las suscripciones de firestore.
+    this.FBSuscribers.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 
 }

@@ -42,7 +42,7 @@ build_web:
     paths:
       - node_modules/
   script:
-    - npm run build-prod
+    - npm run build-prod --prod
   artifacts:
     paths:
       - dist/
@@ -74,12 +74,16 @@ deploy_web:
     - master
   dependencies:
     - build_web
+    - get_version
   cache:
     policy: pull
     paths:
       - node_modules/
   script:
     - cd functions && npm install && cd -
+    # deploy sourcemaps a rollbar para post-debug
+    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh dist "https://bote.izabil.net/"
+    - rm dist/*.map
     - npm run deploy
   except:
     variables:
@@ -125,6 +129,9 @@ build_android:
     - set -o pipefail
     - node_modules/.bin/ng build --prod --base-href . --output-path CordovaMobileApp/www/
     - cd CordovaMobileApp
+    - mkdir -p www_tmp_maps
+    - cp www/*.js www_tmp_maps
+    - mv www/*.map www_tmp_maps
     #FICHEROS PARA FIRMAR
     - echo $RELEASE_KEYSTORE_BASE64 | base64 -d > android.jks
     - cp $BUILD_JSON build.json
@@ -137,6 +144,7 @@ build_android:
   artifacts:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
+      - CordovaMobileApp/www_tmp_maps/
 
 deploy_android:
   image: ruby:2.7
@@ -145,7 +153,14 @@ deploy_android:
     - master
   dependencies:
     - build_android
+    - get_version
   script:
+    # deploy sourcemaps a rollbar para post-debug
+    - ls
+    - pwd
+    - cat version/actual
+    - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh "CordovaMobileApp/www_tmp_maps/" "file:///android_asset/www/"
+    # end
     - cp $G_PLAY_API CordovaMobileApp/platforms/android/api-ci.json
     - gem install fastlane -NV
     - cd CordovaMobileApp/platforms/android
