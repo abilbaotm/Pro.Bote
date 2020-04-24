@@ -6,12 +6,12 @@ servidores de firebase con una llamada HTTP. Actualmente el proyecto dispone de 
 
 Para poder habilitar Firebase Functions accede a la consola
 de Firebase
-![16](images/16.PNG)
+![16](../images/16.PNG)
 
 Sigue las instrucciones, necesitaras tener [Node.js](https://nodejs.org/en/) instalado en tu sistema y ejecutar el siguiente comando:
 `npm install -g firebase-tools`
 
-![17](images/17.PNG)
+![17](../images/17.PNG)
 
 Situá la línea de comandos en la carpeta del proyecto y ejecuta los siguientes comandos:
 
@@ -26,7 +26,7 @@ IMPORTANTE: Eliminar fichero [.firebaserc](/.firebaserc) para poder configurar e
 
 Usa las siguientes opciones durante el proceso de init. 
 
-![21](images/21.PNG)
+![21](../images/21.PNG)
 
 ```
 ? Are you ready to proceed? Yes
@@ -45,13 +45,13 @@ Despliega las funciones del proyecto:
 
 ` firebase deploy --only functions`
 
-![19](images/19.PNG)
+![19](../images/19.PNG)
 
 
 
 Tras el despliegue comprueba que se han creado las funciones desde la consola de Firebase
 
-![20](images/20.PNG)
+![20](../images/20.PNG)
 
 ### Funciones disponibles
 
@@ -67,38 +67,14 @@ es necesario que se incluya la [clave de autorización](https://gitlab.com/pabil
 
 Los viajes marcados para eliminar desde la aplicación serán eliminados tras la ejecución de esta llamada.
 
-![22](images/22.PNG)
+![22](../images/22.PNG)
 
-![23](images/23.PNG)
+![23](../images/23.PNG)
 
 #### `vPublicacion`
 
 Esta llamada es usada exclusivamente por gitlab-ci. Ver llamada y uso en [.gitlab-ci.yaml](https://gitlab.com/pabil/bote-dw/-/blob/ee77c1e4bac35837abd474c8ad898f7b9873db12/.gitlab-ci.yml#L21)
 
-## Hosting
+---
 
-Firebase permite hostear nuestro poryecto. Para ello ejectua los siguientes comandos (necesario configurar firebase):
-
-Compila el sitio web:
-```
-ng build
-? What do you want to use as your public directory? dist
-? Configure as a single-page app (rewrite all urls to /index.html)? No
-```
-
-Inicializa `Hosting` en el proyecto local:
-
-```
-firebase init
-? Are you ready to proceed? Yes
-? Which Firebase CLI features do you want to set up for this folder? Hosting: Configure and deploy Firebase Hosting sites
-? What do you want to use as your public directory? dist
-? Configure as a single-page app (rewrite all urls to /index.html)? No
-? File dist/index.html already exists. Overwrite? No
-```
-Despliega el sitio web, este comando devolverá la URL donde se encuentra el sitio hosteado.
-
-```
-firebase deploy --only hosting
-```
-
+[Inicio documentación](../README.md)

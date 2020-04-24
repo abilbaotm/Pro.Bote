@@ -11,13 +11,15 @@ aproximado durante tus viajes para conocer con claridad todo lo que has gastado 
 
 Versión publica del proyecto disponible en: https://bote.izabil.net
 
-Consulta las instrucciones para ejecutar este proyecto en local en [documentación](documentacion)
-
 ## Android
-
-CI/CD están generando APKs para instalar en dispositivos Android. Consulta la última APK generada en 
-[gitlab-ci](https://gitlab.com/pabil/bote-dw/pipelines). Las APK se generan como artefactos en el stage `build_android`.
 
 Sí eres un usuario participante de la fase de `acceso anticipado` o `acceso anticipado interno` en Google Play podrás 
 acceder a la última versión de la aplicación en
  [Google Play](https://play.google.com/store/apps/details?id=net.izabil.bote)
+
+CI/CD están generando APKs para instalar en dispositivos Android. Consulta la última APK generada en 
+[gitlab-ci](https://gitlab.com/pabil/bote-dw/pipelines). Las APK se generan como artefactos en el stage `build_android`.
+
+## Documentación
+
+Consulta la documentación de este proyecto en el apartado de [Documentación](documentacion/README.md).
