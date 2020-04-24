@@ -30,7 +30,7 @@ El servidor de pruebas estará disponible en http://localhost:8080/
 ## Base de datos
 
 Hay que tener en cuenta que por defecto se usara la base de datos de `dw-bote.firebaseapp.com`. Para poder usar una base 
-de datos propia consulta el documento [basededatos.md](documentacion/despliegue/basededatos.md)
+de datos propia consulta el apartado de [Despliegue](../README.md#manual-de-despliegue)
 
 ---
 
