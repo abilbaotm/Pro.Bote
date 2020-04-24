@@ -11,6 +11,9 @@ const rollbarConfig: Rollbar.Configuration = {
   captureUnhandledRejections: true,
   codeVersion: environmentversion,
   code_version: environmentversion,
+  payload: {
+    code_version: environment
+  }
 };
 
 export const RollbarService = new InjectionToken<Rollbar>('rollbar');
