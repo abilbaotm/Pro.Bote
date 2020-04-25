@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private FBSuscribers = []
   public data: any;
   public todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
+  public ningunViaje = true;
 
   constructor(
     private firestoreService: FirestoreService
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.FBSuscribers.push(this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
       this.todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
       viajesSnapshot.forEach((viajeData: any) => {
+        this.ningunViaje = false;
         var datosViaje = viajeData.payload.doc.data();
         datosViaje.fechasInicio = moment.tz(datosViaje.fechas.start.toDate(), datosViaje.timezone).format('DD/M/YYYY');
         datosViaje.fechasFin = moment.tz(datosViaje.fechas.end.toDate(), datosViaje.timezone).format('DD/M/YYYY');

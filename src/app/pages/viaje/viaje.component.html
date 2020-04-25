@@ -1,18 +1,6 @@
 <!--Componente viaje -->
 <div class=" content">
   <div class="row">
-    <div *ngIf="!viaje.archivado && !viaje.borrado && viaje.admin==user.uid" class=" col-12">
-      <button class=" btn btn-link" routerLink="nuevogasto" type="button">
-        Nuevo gasto
-      </button>
-      <button class=" btn btn-link" routerLink="nuevopago" type="button">
-        Nuevo pago
-      </button>
-      <button class=" btn btn-link" routerLink="editarviaje" type="button">
-        Editar
-      </button>
-
-    </div>
     <div class="col-12">
       <mat-tab-group dynamicHeight>
         <!-- resumen de pagos -->
@@ -22,29 +10,43 @@
               <div class=" row">
                 <!-- Para cancelar los viajes archivados/borrados -->
             <div class=" col-12">
-                  <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
-                    Este viaje ha sido marcado para borrar. Desaparecera en unas horas. <a (click)="cancelarBorrado()"
-                                                                                           *ngIf="viaje.admin==user.uid"
-                                                                                           class="pointer">Cancelar</a>
-                  </div>
-                  <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
-                    Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
-                                                     class="pointer">Cancelar</a>
-                  </div>
-                  <p class=" cart-title">{{viaje.descripcion}}</p>
-                  <p class=" card-description">Fechas: {{fechasInicio}} ->  {{fechasFin}}
-                  </p>
+              <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
+                Este viaje ha sido marcado para borrar. Desaparecerá en unas horas. <a (click)="cancelarBorrado()"
+                                                                                       *ngIf="viaje.admin==user.uid"
+                                                                                       class="pointer">Cancelar</a>
+              </div>
+              <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
+                Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
+                                                 class="pointer">Cancelar</a>
+              </div>
+              <h3 class="cart-title text-center mb-1">{{viaje.descripcion}}</h3>
+              <h4
+                class=" card-description text-center">{{fechasInicio == fechasFin ? fechasInicio : 'Del ' + fechasInicio + ' al ' + fechasFin}}
+              </h4>
 
-                  <div class="gauge-row">
-                    <rg-gauge-chart
-                      [needleValue]="porcenPresupuesto"
-                      [options]="optionsGastadoViaje"
-                      bottomLabel="{{totalGastadoViaje | number : '0.2-2'}} {{viaje.monedaPrincipal}}"
-                      canvasWidth="300"
-                      centralLabel=""
-                      name="Gastos Totales"></rg-gauge-chart>
+              <div *ngIf="!viaje.archivado && !viaje.borrado && viaje.admin==user.uid" class="col-12 text-center">
+                <button class="btn btn-danger" routerLink="nuevogasto" type="button">
+                  Nuevo gasto
+                </button>
+                <button class="btn btn-danger" routerLink="nuevopago" type="button">
+                  Nuevo pago
+                </button>
+                <button class="btn btn-default" routerLink="editarviaje" type="button">
+                  Editar viaje
+                </button>
 
-                  </div>
+              </div>
+
+              <div class="gauge-row">
+                <rg-gauge-chart
+                  [needleValue]="porcenPresupuesto"
+                  [options]="optionsGastadoViaje"
+                  bottomLabel="{{totalGastadoViaje | number : '0.2-2'}} {{viaje.monedaPrincipal}}"
+                  canvasWidth="300"
+                  centralLabel=""
+                  name="Gastos Totales"></rg-gauge-chart>
+
+              </div>
 
 
                   <p class=" card-description">Participantes:<br>
@@ -75,10 +77,17 @@
                                     color="warn">Ver gastos eliminados
                   </mat-slide-toggle>
 
+
+                  <mat-card *ngIf="gastos.length == 0">No hay ningún gasto</mat-card>
+
+
                   <mat-accordion class="my-headers-align">
                     <ng-container *ngFor="let gasto of gastos">
+                      <ng-template #ningunGasto>
+                        <mat-card>No hay ningún gasto en esta categoría</mat-card>
+                      </ng-template>
                       <mat-expansion-panel
-                        *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) ">
+                        *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) else ningunGasto">
                         <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
                                                     class="py-1 py-md-0"
                                                     style="min-height: 48px">
@@ -116,19 +125,23 @@
 
                               <p>Pagado por: {{personasIndex[gasto.pagador]}}</p>
                               <p>Partes iguales: {{gasto.partesIguales ? 'Sí' : 'No'}}</p>
-                              <button *ngIf="viaje.admin==user.uid && !gasto.eliminado"
-                                      [routerLink]="['editargasto/'+gasto.id]" class="btn ml-3"
-                                      type="button">
-                                Editar gasto
-                              </button>
-                              <button *ngIf="viaje.admin==user.uid && !gasto.eliminado" [swal]="EliminarGastoSwal" class="btn btn-danger ml-3"
-                                      type="button">
-                                Eliminar gasto
-                              </button>
-                              <button *ngIf="viaje.admin==user.uid && gasto.eliminado" [swal]="RestaurarGastoSwal" class="btn ml-3"
-                                      type="button">
-                                Restaurar gasto
-                              </button>
+                              <div class="text-center">
+                                <button *ngIf="viaje.admin==user.uid && !gasto.eliminado"
+                                        [routerLink]="['editargasto/'+gasto.id]" class="btn mx-2"
+                                        type="button">
+                                  Editar gasto
+                                </button>
+                                <button *ngIf="viaje.admin==user.uid && !gasto.eliminado" [swal]="EliminarGastoSwal"
+                                        class="btn btn-danger mx-2"
+                                        type="button">
+                                  Eliminar gasto
+                                </button>
+                                <button *ngIf="viaje.admin==user.uid && gasto.eliminado" [swal]="RestaurarGastoSwal"
+                                        class="btn mx-2"
+                                        type="button">
+                                  Restaurar gasto
+                                </button>
+                              </div>
                               <swal
                                 #EliminarGastoSwal
                                 (confirm)="eliminarGasto(gasto)"
@@ -196,12 +209,16 @@
                   <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verPagosEliminados" class="mb-3"
                                     color="warn">Ver pagos eliminados
                   </mat-slide-toggle>
+                  <mat-card *ngIf="pagos.length == 0">No hay ningún pago entre terceros</mat-card>
 
 
                   <mat-accordion class="my-headers-align">
+                    <ng-template #ningunPago>
+                      <mat-card>No hay ningún pago entre terceros en esta categoría</mat-card>
+                    </ng-template>
                     <ng-container *ngFor="let pago of pagos">
                       <mat-expansion-panel
-                        *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) ">
+                        *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) else ningunPago">
                         <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
                                                     class="py-1 py-md-0"
                                                     style="min-height: 48px">
@@ -242,11 +259,13 @@
                         <!-- Eliminar / Restaurar pagos -->
                         </div>
                         <div class="col-md-6 text-center my-auto">
-                          <button *ngIf="viaje.admin==user.uid && !pago.eliminado" [swal]="EliminarPagoSwal" class="btn btn-danger ml-3"
+                          <button *ngIf="viaje.admin==user.uid && !pago.eliminado" [swal]="EliminarPagoSwal"
+                                  class="btn btn-danger mx-2"
                                   type="button">
                             Eliminar pago
                           </button>
-                          <button *ngIf="viaje.admin==user.uid && pago.eliminado" [swal]="RestaurarPagoSwal" class="btn ml-3" type="button">
+                          <button *ngIf="viaje.admin==user.uid && pago.eliminado" [swal]="RestaurarPagoSwal"
+                                  class="btn mx-2" type="button">
                             Restaurar pago
                           </button>
                           <swal
@@ -300,6 +319,10 @@
                   </ul>
 
                   <p>Cuentas pendientes de todos los participantes a {{personasIndex[idPersonaCuentasActiva]}}...</p>
+
+                  <mat-card *ngIf="!idPersonaCuentasActiva">Seleccione un tercero para ver sus cuentas pendientes entre
+                    terceros
+                  </mat-card>
 
                   <mat-accordion #accordion="matAccordion" [multi]="true" class="my-headers-align">
                     <ng-container *ngIf="idPersonaCuentasActiva">

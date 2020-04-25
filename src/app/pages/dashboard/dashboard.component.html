@@ -2,6 +2,18 @@
 
 <!-- Bucle de las categorias -->
 <div class=" content">
+  <div *ngIf="ningunViaje">
+    <div class="container h-100">
+      <div class="row align-items-center h-100">
+        <div class="col-md-6 mx-auto">
+          <div class="jumbotron text-center">
+            <p>Parece que no tienes ningún viaje programado.</p>
+            <input class="btn" routerLink="/nuevoviaje" type="button" value="Crear viaje">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngFor="let categoria of ['Activos','Futuros','Archivados','Pendientes de Borrar']" class="row">
     <div *ngIf="todosViajes[categoria].length > 0" class="col-12">
       <h3>{{categoria}}</h3>
