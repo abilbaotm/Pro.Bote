@@ -53,6 +53,7 @@ Prueba el nuevo proyecto de Firebase usando los pasos especificados en [docker.m
 | 6 | [viajes.md](usuario/viajes.md) | Gestionar viajes  |
 | 7 | [gastos.md](usuario/gastos.md) | Gestionar gastos |
 | 8 | [pagos.md](usuario/pagos.md) | Gestionar pagos |
+| 9 | [extra.md](usuario/extra.md) | Informacion adicional |
 
 ## Registro de pruebas
 
