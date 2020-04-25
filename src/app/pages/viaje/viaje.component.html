@@ -9,17 +9,28 @@
             <div class=" card-body">
               <div class=" row">
                 <!-- Para cancelar los viajes archivados/borrados -->
-            <div class=" col-12">
-              <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
-                Este viaje ha sido marcado para borrar. Desaparecerá en unas horas. <a (click)="cancelarBorrado()"
-                                                                                       *ngIf="viaje.admin==user.uid"
-                                                                                       class="pointer">Cancelar</a>
-              </div>
-              <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
-                Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
-                                                 class="pointer">Cancelar</a>
-              </div>
-              <h3 class="cart-title text-center mb-1">{{viaje.descripcion}}</h3>
+                <ng-container *ngIf="!viaje">
+                  <div class="container h-100">
+                    <div class="row align-items-center h-100">
+                      <div class="col-md-6 mx-auto">
+                        <div class="jumbotron text-center">
+                          <p>No se ha podido cargar el viaje</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <div *ngIf="viaje" class=" col-12">
+                  <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
+                    Este viaje ha sido marcado para borrar. Desaparecerá en unas horas. <a (click)="cancelarBorrado()"
+                                                                                           *ngIf="viaje.admin==user.uid"
+                                                                                           class="pointer">Cancelar</a>
+                  </div>
+                  <div *ngIf="viaje.archivado" class="alert alert-danger" role="alert">
+                    Este viaje ha sido archivado. <a (click)="cancelarArchivado()" *ngIf="viaje.admin==user.uid"
+                                                     class="pointer">Cancelar</a>
+                  </div>
+                  <h3 class="cart-title text-center mb-1">{{viaje.descripcion}}</h3>
               <h4
                 class=" card-description text-center">{{fechasInicio == fechasFin ? fechasInicio : 'Del ' + fechasInicio + ' al ' + fechasFin}}
               </h4>
