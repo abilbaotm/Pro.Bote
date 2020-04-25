@@ -42,6 +42,8 @@ export class ViajeComponent implements OnInit, OnDestroy {
   }
   public totalGastadoViaje = 0;
   public porcenPresupuesto = 0;
+  public ningunGasto = {eliminado: true, activo: true};
+  public ningunPago = {eliminado: true, activo: true};
 
   constructor(
     private firestoreService: FirestoreService,
@@ -93,12 +95,21 @@ export class ViajeComponent implements OnInit, OnDestroy {
     this.FBSuscribers.push(this.firestoreService.getGastos(this.idViaje).subscribe((gastosSnapshot) => {
       this.gastos = new Array<Gasto>();
       this.totalGastadoViaje = 0;
+      this.ningunGasto['activo'] = true
+      this.ningunGasto['eliminado'] = true
       gastosSnapshot.forEach(gast => {
         let nuevoGasto;
         nuevoGasto = gast.payload.doc.data() as Gasto;
         nuevoGasto.fechaLocal = moment.tz(nuevoGasto.fecha, nuevoGasto.timezone).format('HH:mm DD/M/YYYY Z z');
         nuevoGasto.diaLocal = moment.tz(nuevoGasto.fecha, nuevoGasto.timezone).format('DD/M/YYYY');
         nuevoGasto.id = gast.payload.doc.id
+
+        // check eliminado. Esto es para el mensaje de que no hay gastos en esta categoría
+        if (nuevoGasto.eliminado) {
+          this.ningunGasto['eliminado'] = false
+        } else {
+          this.ningunGasto['activo'] = false
+        }
 
         this.gastos.push(nuevoGasto)
       });
@@ -146,14 +157,23 @@ export class ViajeComponent implements OnInit, OnDestroy {
     }));
 
     //Datos de los pagos del viaje
-    this.FBSuscribers.push(this.firestoreService.getPagos(this.idViaje).subscribe((gastosSnapshot) => {
+    this.FBSuscribers.push(this.firestoreService.getPagos(this.idViaje).subscribe((pagosSnapshot) => {
       this.pagos = new Array<Pago>();
-      gastosSnapshot.forEach(pag => {
+      this.ningunPago['activo'] = true
+      this.ningunPago['eliminado'] = true
+      pagosSnapshot.forEach(pag => {
         let nuevoPago;
         nuevoPago = pag.payload.doc.data() as Pago;
         nuevoPago.id = pag.payload.doc.id;
         nuevoPago.fechaLocal = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('HH:mm DD/M/YYYY Z z');
         nuevoPago.fechaDia = moment.tz(nuevoPago.fecha, nuevoPago.timezone).format('DD/M/YYYY');
+
+        // check eliminado. Esto es para el mensaje de que no hay gastos en esta categoría
+        if (nuevoPago.eliminado) {
+          this.ningunPago['eliminado'] = false
+        } else {
+          this.ningunPago['activo'] = false
+        }
 
         this.pagos.push(nuevoPago)
       });
