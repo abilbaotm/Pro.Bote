@@ -44,7 +44,7 @@ El artefacto resultante del comando anterior aparecerá en la siguiente ruta: `C
 
 ## Login Google Nativo
 
-Es posible que el Login nativo no este disponible en APKs generadas de manera local. Por motivos de seguridad las llamadas a la API de OAuth de Google solo son vilidas
+Es posible que el Login nativo no este disponible en APKs generadas de manera local. Por motivos de seguridad las llamadas a la API de OAuth de Google solo son válidas
 por las aplicaciones generadas y firmadas vía CI.
 Para una implementación propia necesitara los siguientes recursos/tareas:
 
