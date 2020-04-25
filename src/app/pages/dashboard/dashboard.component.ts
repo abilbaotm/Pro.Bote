@@ -76,7 +76,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
           unsplash.search.photos(this.todosViajes[categorias][todosViajeKey].data.descripcion, 1, 1, {})
             .then(toJson)
             .then(json => {
-              this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+              if (json['total'] == 0) {
+                unsplash.search.photos("Trip", 1, 1, {})
+                  .then(toJson)
+                  .then(json => {
+                    this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+
+                  })
+              } else {
+                this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+              }
             });
 
 
