@@ -78,16 +78,14 @@
                   </mat-slide-toggle>
 
 
-                  <mat-card *ngIf="gastos.length == 0">No hay ningún gasto</mat-card>
-
+                  <mat-card *ngIf="!verGastosEliminados && ningunGasto.activo">No hay ningún gasto</mat-card>
+                  <mat-card *ngIf="verGastosEliminados && ningunGasto.eliminado">No hay ningún gasto eliminado
+                  </mat-card>
 
                   <mat-accordion class="my-headers-align">
                     <ng-container *ngFor="let gasto of gastos">
-                      <ng-template #ningunGasto>
-                        <mat-card>No hay ningún gasto en esta categoría</mat-card>
-                      </ng-template>
                       <mat-expansion-panel
-                        *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado) else ningunGasto">
+                        *ngIf="(!verGastosEliminados && !gasto.eliminado) || (verGastosEliminados && gasto.eliminado)">
                         <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
                                                     class="py-1 py-md-0"
                                                     style="min-height: 48px">
@@ -209,16 +207,17 @@
                   <mat-slide-toggle *ngIf="viaje.admin==user.uid" [(ngModel)]="verPagosEliminados" class="mb-3"
                                     color="warn">Ver pagos eliminados
                   </mat-slide-toggle>
-                  <mat-card *ngIf="pagos.length == 0">No hay ningún pago entre terceros</mat-card>
+                  <mat-card *ngIf="!verPagosEliminados && ningunPago.activo">No hay ningún pago entre terceros
+                  </mat-card>
+                  <mat-card *ngIf="verPagosEliminados && ningunPago.eliminado">No hay ningún pago entre terceros
+                    eliminado
+                  </mat-card>
 
 
                   <mat-accordion class="my-headers-align">
-                    <ng-template #ningunPago>
-                      <mat-card>No hay ningún pago entre terceros en esta categoría</mat-card>
-                    </ng-template>
                     <ng-container *ngFor="let pago of pagos">
                       <mat-expansion-panel
-                        *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado) else ningunPago">
+                        *ngIf="(!verPagosEliminados && !pago.eliminado) || (verPagosEliminados && pago.eliminado)">
                         <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'"
                                                     class="py-1 py-md-0"
                                                     style="min-height: 48px">
