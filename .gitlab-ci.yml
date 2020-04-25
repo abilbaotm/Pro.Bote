@@ -145,6 +145,9 @@ build_android:
     paths:
       - CordovaMobileApp/platforms/android/app/build/outputs/apk/
       - CordovaMobileApp/www_tmp_maps/
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
 deploy_android:
   image: ruby:2.7
