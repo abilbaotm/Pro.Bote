@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../core/auth.service';
+import {NavServiceService} from "../../services/nav-service/nav-service.service";
 
 //Componente Navbar
 @Component({
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: NgbModal,
     public authService: AuthService,
+    private nav: NavServiceService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -182,16 +184,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return this.listTitles[item].title;
       }
     }
+    let titulo = ''
+    if (this.nav.tituloViaje != null) {
+      titulo = '/ ' + this.nav.tituloViaje
+    }
     if (titlee.split('/')[3] == 'nuevogasto') {
-      return 'Viaje / Nuevo gasto'
+      return 'Viaje ' + titulo + ' / Nuevo gasto'
     } else if (titlee.split('/')[3] == 'nuevopago') {
-      return 'Viaje / Nuevo pago'
+      return 'Viaje ' + titulo + ' / Nuevo pago'
     } else if (titlee.split('/')[3] == 'editarviaje') {
-      return 'Viaje / Editar viaje'
+      return 'Viaje ' + titulo + ' / Editar viaje'
     } else if (titlee.split('/')[3] == 'editargasto') {
-      return 'Viaje / Editar gasto'
+      return 'Viaje ' + titulo + ' / Editar gasto'
     } else if (titlee.split('/')[1] == 'viaje') {
-      return 'Viaje'
+      return 'Viaje ' + titulo
     }
     return "Dashboard";
   }

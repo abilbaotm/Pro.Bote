@@ -69,6 +69,8 @@ export class ViajeComponent implements OnInit, OnDestroy {
       } else {
         this.nav.permisos = true
       }
+      // dar a NavServiceService el titulo del viaje para header
+      this.nav.tituloViaje = this.viaje.descripcion
 
     }));
 
