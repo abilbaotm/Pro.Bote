@@ -43,17 +43,21 @@ Prueba el nuevo proyecto de Firebase usando los pasos especificados en [docker.m
 
 ## Manual de usuario
 
+Las siguientes instrucciones son útiles para conocer el funcionamiento de la aplicación web. Estas referencias son validas para la version de navegador
+así como la aplicación para dispositivos moviles.
+
+
 | # | documento | Resumen |
 |---| --------- | ------- |
 | 1 | [registro.md](usuario/registro.md) | Registrarse en el aplicativo  |
-| 2 | [login.md](usuario/login.md) | Loguearse en el aplicativo | 
+| 2 | [login.md](usuario/login.md) | Login en el aplicativo | 
 | 3 | [inicio.md](usuario/resumen.md) | Página inicio del aplicativo | 
 | 4 | [perfil.md](usuario/perfil.md) | Cambios en el perfil de usuario | 
 | 5 | [resumen.md](usuario/resumen.md) | Resumen de un viaje | 
 | 6 | [viajes.md](usuario/viajes.md) | Gestionar viajes  |
 | 7 | [gastos.md](usuario/gastos.md) | Gestionar gastos |
 | 8 | [pagos.md](usuario/pagos.md) | Gestionar pagos |
-| 9 | [extra.md](usuario/extra.md) | Informacion adicional |
+| 9 | [extra.md](usuario/extra.md) | Información adicional |
 
 ## Registro de pruebas
 

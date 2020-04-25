@@ -4,9 +4,9 @@ Los pagos representan a las transacciones de dinero efectuadas entre los diferen
 
 ##Crear un pago
 
-Para empezar tendremos que crear un pago mediante el boton "NUEVO pago" situado en el menu lateral en la pagina de un viaje. Para mas informacion visitar [resumen.md](resumen.md)
+Para empezar tendremos que crear un pago mediante el botón "NUEVO pago" situado en el menu lateral en la pagina de un viaje. Para más información visitar [resumen.md](resumen.md)
 
-Al hacer click en el boton aparecera lo siguiente.
+Al hacer click en el botón aparecerá lo siguiente:
 
 ![41](../images/41.PNG)
 
@@ -14,6 +14,8 @@ El campo nota representa el concepto del pago.
 
 El campo ratio representa el cambio de divisa respecto a la divisa principal del viaje.
 
-Al acabar de rellenar los campos basta con hacer click en el boton "Guardar" para crear el pago.
+Al acabar de rellenar los campos basta con hacer click en el botón "Guardar" para crear el pago.
+
+---
 
 [Inicio documentación](../README.md)

@@ -1,14 +1,15 @@
 # LOGIN
 
-Para poder usar este aplicativo web es necesario loguearse. Se puede hacer de dos formas diferentes.
+Para poder usar este aplicativo web es necesario tener sesión iniciada. Se puede hacer de dos formas diferentes.
 
-##Login nativo
+## Login nativo
 
 Puedes hacer login mediante Firestore Auth usando tu email y tu contraseña para entrar. Si no tienes cuenta revisa el apartado [registro](registro.md).
 
-##Login via Google
+## Login via Google
 
-Tambien es posible loguearse usando tu cuenta de google como meto de autentificación. Para loguearte de esta forma pulsa el boton "Log in con Google".
+También es posible iniciar sesión usando tu cuenta de google como meto de autentificación. Para iniciar sesión de esta forma pulsa el botón "Log in con Google".
 
+---
 
 [Inicio documentación](../README.md)
