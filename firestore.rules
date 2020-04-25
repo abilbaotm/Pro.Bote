@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	function isSignedIn() {
+      return request.auth != null;
+    }
+    match /test/{algo} {
+    	allow read, write: if true;
+    }
+    match /viajes/{idviaje} {
+    	allow create: if isSignedIn();
+      allow read, write: if isSignedIn() && request.auth.uid == resource.data.admin;
+      //allow read: if isSignedIn() && resource.data.permitidos.hasChildren(request.auth.token.email)
+      allow read: if isSignedIn() && resource.data.permitidos.get(request.auth.token.email, false).activo
+
+
+      match /gastos/{gasto} {
+        function recipeData() {
+            return get(/databases/$(database)/documents/viajes/$(idviaje)).data
+        }
+        allow read: if isSignedIn() && recipeData().permitidos.get(request.auth.token.email, false).activo;
+      	allow read, write: if isSignedIn() && request.auth.uid == recipeData().admin;
+      }
+
+      match /personas/{persona} {
+        function recipeData() {
+            return get(/databases/$(database)/documents/viajes/$(idviaje)).data
+        }
+        allow read: if isSignedIn() && recipeData().permitidos.get(request.auth.token.email, false).activo;
+      	allow read, write: if isSignedIn() && request.auth.uid == recipeData().admin;
+
+      }
+
+
+      match /pagos/{pago} {
+        function recipeData() {
+            return get(/databases/$(database)/documents/viajes/$(idviaje)).data
+        }
+        allow read: if isSignedIn() && recipeData().permitidos.get(request.auth.token.email, false).activo;
+      	allow read, write: if isSignedIn() && request.auth.uid == recipeData().admin;
+
+      }
+
+    }
+	}
+
+}
