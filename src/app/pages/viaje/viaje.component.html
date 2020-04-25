@@ -8,7 +8,6 @@
           <div class=" card card-stats">
             <div class=" card-body">
               <div class=" row">
-                <!-- Para cancelar los viajes archivados/borrados -->
                 <ng-container *ngIf="!viaje">
                   <div class="container h-100">
                     <div class="row align-items-center h-100">
@@ -21,6 +20,7 @@
                   </div>
                 </ng-container>
                 <div *ngIf="viaje" class=" col-12">
+                  <!-- Para cancelar los viajes archivados/borrados -->
                   <div *ngIf="viaje.borrado" class="alert alert-danger" role="alert">
                     Este viaje ha sido marcado para borrar. Desaparecerá en unas horas. <a (click)="cancelarBorrado()"
                                                                                            *ngIf="viaje.admin==user.uid"
