@@ -31,11 +31,14 @@
         <div class=" card-body">
           <div class=" row">
             <div class=" col-12">
-              <p class=" cart-title">{{viaje.data.descripcion}} <span *ngIf="viaje.data.borrado"
-                                                                      class="label label-primary">Pendiente de borrar</span>
+              <p class=" cart-title">{{viaje.data.descripcion}}
+                <span *ngIf="viaje.data.borrado" class="badge badge-primary mx-1">Pendiente de borrar</span>
+                <span *ngIf="viaje.data.archivado" class="badge badge-danger mx-1">Archivado</span>
               </p>
-              <p class=" card-description">Fechas: {{viaje.data.fechasInicio}} -> {{viaje.data.fechasFin}}
+              <p
+                class="card-description">{{viaje.data.fechasInicio == viaje.data.fechasFin ? viaje.data.fechasInicio : 'Del ' + viaje.data.fechasInicio + ' al ' + viaje.data.fechasFin}}
               </p>
+
               <p class=" card-category">Usuarios:
                 <span *ngFor="let usuario of viaje.data.permitidos | keyvalue">
                     {{usuario.value["nombre"]}}
