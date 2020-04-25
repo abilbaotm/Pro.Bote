@@ -36,7 +36,7 @@ desplegar el proyecto a un entorno de desarrollo.
 | 5 | [functions.md](despliegue/functions.md) | Habilitar funciones del proyecto (`Firebase Functions`) |
 
 Para poder ejecutar de manera local usando un nuevo proyecto de Firebase deberá de seguir como mínimo los pasos de despliegue números 1, 2 y 3.
-Prueba el nuevo proyecto de Firebase usando los pasos especificados en [docker.md](../desarrollo/docker.md) o [local.md](../desarrollo/local.md) del [Manual de desarrollo](#manual-de-desarrollo).
+Prueba el nuevo proyecto de Firebase usando los pasos especificados en [docker.md](desarrollo/docker.md) o [local.md](desarrollo/local.md) del [Manual de desarrollo](#manual-de-desarrollo).
                                                                                                                                                      
 
 
