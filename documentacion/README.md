@@ -8,7 +8,7 @@ en el [README.md](/README.md) de la raíz del proyecto.
 
 El manual de implantación se divide en dos manules en funcion de los intereses de la implantación:
 - [Manual de desarrollo](#manual-de-desarrollo): incluye instrucciones para poder recreear de manera local el proyecto.
-- [Manual de despliegue](manual-de-despliegue): incluye instrucciones para poder deplegar la aplicacion en un entorno real de producción. Para poder efectuar este manual es necesario
+- [Manual de despliegue](#manual-de-despliegue): incluye instrucciones para poder deplegar la aplicacion en un entorno real de producción. Para poder efectuar este manual es necesario
 disponer de un entorno [local](desarrollo/local.md) la aplicación web.
 
 ### Manual de desarrollo
