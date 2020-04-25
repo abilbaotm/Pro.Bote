@@ -23,3 +23,10 @@ CI/CD están generando APKs para instalar en dispositivos Android. Consulta la �
 ## Documentación
 
 Consulta la documentación de este proyecto en el apartado de [Documentación](documentacion/README.md).
+
+
+## Recursos
+
+Este proyecto incluye los siguientes recursos de terceros:
+- MIT: [Black Dashboard Angular](https://demos.creative-tim.com/black-dashboard-angular/#/dashboard?ref=bda-readme) 
+- MIT: [Bootstrap](https://getbootstrap.com/docs/4.0/about/license/)
