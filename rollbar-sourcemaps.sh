@@ -2,7 +2,8 @@
 
 # Save a short git hash, must be run from a git
 # repository (or a child directory)
-version=$(cat version/actual)
+#version=$(cat version/actual)
+version=unknown
 
 # Use the post_server_time access token, you can
 # find one in your project access token settings

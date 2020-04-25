@@ -67,8 +67,11 @@ export class ViajeComponent implements OnInit, OnDestroy {
       if (this.viaje.admin != this.user.uid) {
         this.nav.permisos = false;
       } else {
-        this.nav.permisos = true
+        // eliminado o archivado
+        this.nav.permisos = !(this.viaje.archivado || this.viaje.borrado);
       }
+      // dar a NavServiceService el titulo del viaje para header
+      this.nav.tituloViaje = this.viaje.descripcion
 
     }));
 
