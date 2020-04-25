@@ -61,4 +61,4 @@ así como la aplicación para dispositivos moviles.
 
 ## Registro de pruebas
 
-TODO
+TODO https://gitlab.com/pabil/bote-dw/-/issues/43
