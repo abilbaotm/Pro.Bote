@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class NavServiceService {
   permisos = false;
+  tituloViaje = null;
 
   constructor() {
   }
