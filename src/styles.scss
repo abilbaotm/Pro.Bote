@@ -53,3 +53,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+// fix https://gitlab.com/pabil/bote-dw/-/issues/52
+svg text {
+  fill: $dark-primary-text;
+}
+
+.dark-theme {
+  svg text {
+    fill: $light-primary-text;
+  }
+}
