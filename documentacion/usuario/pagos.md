@@ -1,8 +1,8 @@
-##PAGOS
+## PAGOS
 
 Los pagos representan a las transacciones de dinero efectuadas entre los diferentes participantes de un viaje
 
-##Crear un pago
+## Crear un pago
 
 Para empezar tendremos que crear un pago mediante el botón "NUEVO pago" situado en el menu lateral en la pagina de un viaje. Para más información visitar [resumen.md](resumen.md)
 
