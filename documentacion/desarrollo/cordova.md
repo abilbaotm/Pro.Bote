@@ -1,6 +1,6 @@
 # Aplicaciones moviles (Apache Cordova)
 
-NOTA: No recomendamos este método para generar las versiones moviles. Usar los artefactos generado con el servicio de CI/CD. Más info en [README.md](/README.md#Android)
+NOTA: No recomendamos este método para generar las versiones móviles. Usar los artefactos generado con el servicio de CI/CD. Más info en [README.md](/README.md#Android)
 
 NOTA 2: El login con Google *no* está disponible en las APKs generadas con este método, [más info](#login-google-nativo).
 
