@@ -51,7 +51,7 @@ Desde el menu de aplicaciones seleccionar el `Firebase SDK snippet` `Configuraci
 ![14](../images/14.PNG)
 
 Modifica los valores de [environment.prod.ts](/src/environments/environment.prod.ts) y 
-[environment.ts](/src/environments/environment.ts) con los facilitados por la consola de firebase.
+[environment.ts](/src/environments/environment.ts) con los facilitados por la consola de firebase. Ten en cuenta que no hay que reemplazar todo el contenido de los documentos.
 
 ![15](../images/15.PNG)
 
