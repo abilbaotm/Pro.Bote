@@ -47,7 +47,7 @@ moment.locale('es', localization);
     AppRoutingModule,
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
+    AngularFirestoreModule.enablePersistence({synchronizeTabs: true}), // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
     ReactiveFormsModule,
