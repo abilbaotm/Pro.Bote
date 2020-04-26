@@ -11,6 +11,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import Swal from 'sweetalert2';
 import {NavServiceService} from "../../services/nav-service/nav-service.service";
+import {ToastrService} from "ngx-toastr";
 
 //Componente Viaje
 
@@ -52,6 +53,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     public nav: NavServiceService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -78,7 +80,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
       // DESHABILITADO: el texto se desborda en la UI y no aporta mucho
       //this.nav.tituloViaje = this.viaje.descripcion
 
-    }));
+    }, error => this.firestoreService.alzarError()));
 
 
     //Datos de las personas del viaje
@@ -91,7 +93,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
           this.personas.push(persoTemp);
           this.personasIndex[perso.payload.doc.ref.id] = (persoTemp).nombre
         })
-      })
+      }, error => this.firestoreService.alzarError())
     );
 
     //Datos de los gastos del viaje
@@ -157,7 +159,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
         this.optionsGastadoViaje.rangeLabel = ['', (Math.round(this.viaje.presupuesto * 100) / 100).toFixed(2) + ' ' + this.viaje.monedaPrincipal]
       }
 
-    }));
+    }, error => this.firestoreService.alzarError()));
 
     //Datos de los pagos del viaje
     this.FBSuscribers.push(this.firestoreService.getPagos(this.idViaje).subscribe((pagosSnapshot) => {
@@ -196,7 +198,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
           this.resumenPagos[pago.pagador].pagos[pago.beneficiario] += (pago.cantidad / pago.ratio)
         }
       });
-    }))
+    }, error => this.firestoreService.alzarError()))
 
 
   }
@@ -204,14 +206,14 @@ export class ViajeComponent implements OnInit, OnDestroy {
   //Cancelar el borrado de un viaje
   cancelarBorrado() {
     this.firestoreService.borrarViajeCancelar(this.idViaje).then(() => {
-      }
+      }, error => this.firestoreService.alzarError()
     )
   }
 
   //Cancelar el archivado de un viaje
   cancelarArchivado() {
     this.firestoreService.archivarViajeCancelar(this.idViaje).then(() => {
-      }
+      }, error => this.firestoreService.alzarError()
     )
   }
 
@@ -224,7 +226,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
   //Eliminar un pago
   eliminarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, true).then(() => {
-    })
+    }, error => this.firestoreService.alzarError())
     Swal.fire({
       position: 'top',
       icon: 'success',
@@ -238,7 +240,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
   //Restaurar un pago
   restaurarPago(pago: Pago) {
     this.firestoreService.eliminarPago(this.idViaje, pago.id, false).then(() => {
-    })
+    }, error => this.firestoreService.alzarError())
     Swal.fire({
       position: 'top',
       icon: 'success',
@@ -252,7 +254,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
   //Eliminar un gasto
   eliminarGasto(gasto: Gasto) {
     this.firestoreService.eliminarGasto(this.idViaje, gasto.id, true).then(() => {
-    })
+    }, error => this.firestoreService.alzarError())
     Swal.fire({
       position: 'top',
       icon: 'success',
@@ -266,7 +268,7 @@ export class ViajeComponent implements OnInit, OnDestroy {
   //Restaurar un gasto
   restaurarGasto(gasto: Gasto) {
     this.firestoreService.eliminarGasto(this.idViaje, gasto.id, false).then(() => {
-    })
+    }, error => this.firestoreService.alzarError())
     Swal.fire({
       position: 'top',
       icon: 'success',

@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import * as moment from 'moment-timezone';
+import {ToastrService} from "ngx-toastr";
 
 //Servicios del Firestore
 
@@ -15,7 +16,8 @@ export class FirestoreService {
   user: FirebaseUserModel = new FirebaseUserModel();
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private toastr: ToastrService
   ) {
   }
 
@@ -347,5 +349,18 @@ export class FirestoreService {
       sub.unsubscribe();
     })
 
+  }
+
+  public alzarError() {
+    this.toastr.clear()
+    this.toastr.error('<span class="tim-icons icon-alert-circle-exc" [data-notify]="icon"></span> Error al procesar la solicitud', 'ERROR', {
+      closeButton: true,
+      enableHtml: true,
+      toastClass: "alert alert-danger alert-with-icon",
+      positionClass: 'toast-bottom-right',
+      progressBar: false,
+      disableTimeOut: true,
+      tapToDismiss: true
+    });
   }
 }

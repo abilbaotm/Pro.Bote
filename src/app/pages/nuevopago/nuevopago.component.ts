@@ -87,7 +87,7 @@ export class NuevopagoComponent implements OnInit, OnDestroy {
 
       }
 
-    }));
+    }, error => this.firestoreService.alzarError()));
 
     //Recoger la informacion de las personas del viaje
     this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
@@ -97,14 +97,15 @@ export class NuevopagoComponent implements OnInit, OnDestroy {
         persona.id = viajeData.payload.doc.id;
         this.personasViaje.push(persona as Persona);
       });
-    }));
+    }, error => this.firestoreService.alzarError()));
 
   }
 
   //Crear el nuevo pago
   nuevoPago(form, documentId = this.documentId) {
     if (this.form.get('pagador').value != this.form.get('beneficiario').value) {
-      this.firestoreService.nuevopago(this.idViaje, form).then()
+      this.firestoreService.nuevopago(this.idViaje, form).then(() => {
+      }, error => this.firestoreService.alzarError())
       this.router.navigate([`/viaje/${this.idViaje}`])
     } else {
       this.formError = 'Pagador y beneficiario no puede ser la misma persona';

@@ -105,7 +105,7 @@ export class NuevoviajeComponent implements OnInit, OnDestroy {
         })
 
 
-      }));
+      }, error => this.firestoreService.alzarError()));
 
       //Recibir datos de las personas del viaje
       this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe((personasSnapshot) => {
@@ -127,7 +127,7 @@ export class NuevoviajeComponent implements OnInit, OnDestroy {
 
 
           })
-        })
+        }, error => this.firestoreService.alzarError())
       );
 
 
@@ -141,25 +141,27 @@ export class NuevoviajeComponent implements OnInit, OnDestroy {
     if (this.currentStatus == 1) {
       this.firestoreService.nuevoViaje(form).then((docRef => {
         this.router.navigate([`/viaje/${docRef.id}`])
-      }))
+      }), error => this.firestoreService.alzarError())
       this.router.navigate([`/dashboard`])
     } else {
       this.firestoreService.updateViaje(form, this.idViaje).then((docRef => {
-      }))
+      }), error => this.firestoreService.alzarError())
       this.router.navigate([`/viaje/${this.idViaje}`])
     }
   }
 
   //Borrar viaje
   borrarViaje() {
-    this.firestoreService.borrarViaje(this.idViaje).then()
+    this.firestoreService.borrarViaje(this.idViaje).then(() => {
+    }, error => this.firestoreService.alzarError())
     this.router.navigate(['/dashboard'])
 
   }
 
   //Archivar viaje
   archivarViaje() {
-    this.firestoreService.archivarViaje(this.idViaje).then()
+    this.firestoreService.archivarViaje(this.idViaje).then(() => {
+    }, error => this.firestoreService.alzarError())
     this.router.navigate(['/dashboard'])
   }
 

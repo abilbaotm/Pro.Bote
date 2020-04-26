@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
 
       }
-    }));
+    }, error => this.firestoreService.alzarError()));
 
 
   }
