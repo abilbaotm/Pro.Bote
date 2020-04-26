@@ -1,6 +1,6 @@
-The MIT License (MIT)
+MIT License
 
-Copyright (c) 2020 Asier Bilbao and Pablo Fernandez.
+Copyright (c) 2017 Creative Tim (www.creative-tim.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
