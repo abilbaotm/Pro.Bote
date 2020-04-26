@@ -20,6 +20,10 @@ acceder a la última versión de la aplicación en
 CI/CD están generando APKs para instalar en dispositivos Android. Consulta la última APK generada en 
 [gitlab-ci](https://gitlab.com/pabil/bote-dw/pipelines). Las APK se generan como artefactos en el stage `build_android`.
 
+## Compatibilidad
+
+Esta aplicación requiere Android +6.0 y/o un navegador evergreen (Firefox; Chrome; Edge; Opera)
+
 ## Documentación
 
 Consulta la documentación de este proyecto en el apartado de [Documentación](documentacion/README.md).
