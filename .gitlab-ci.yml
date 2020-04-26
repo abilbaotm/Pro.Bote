@@ -43,6 +43,8 @@ build_web:
       - node_modules/
   script:
     - npm run build-prod --prod
+    # crear fichero cordova.js, evitamos error 404. Este fichero para este deploy NO es necesario
+    - touch dist/cordova.js
   artifacts:
     paths:
       - dist/
