@@ -24,7 +24,6 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
   public timezoneForm: string;
   public documentId = null;
   public currentStatus = 1;
-  cantidadPersona = [];
   partesIguales: boolean = true;
   private idViaje: string;
   private ratios: number[] = new Array<number>();
@@ -101,8 +100,7 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
         persona = viajeData.payload.doc.data() as Persona;
         persona.id = viajeData.payload.doc.id;
         controla.push(this.initTechnologyFields(persona));
-        this.personasViaje.push(persona as Persona);
-        this.cantidadPersona.push(0)
+        this.personasViaje[persona.id] = persona as Persona;
 
 
       });
@@ -135,7 +133,10 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
         this.form.get('ratio').setValue(gasto.ratio);
         this.form.get('pagador').setValue(gasto.pagador);
         this.form.get('partesIguales').setValue(gasto.partesIguales);
+
         let personasForm = this.form.get('terceros').value
+        console.log(personasForm)
+
         personasForm.forEach(w => {
           if (gasto.personas[w.id]) {
             w.cantidad = gasto.personas[w.id].cantidad
@@ -143,6 +144,7 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
             this.form.get('partesIguales').setValue(false);
             w.cantidad = 0
           }
+          w.nombre = this.personasViaje[w.id].nombre
         })
         this.form.get('terceros').setValue(personasForm)
         this.msgRatio = ""
@@ -190,12 +192,14 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
   }
 
   initTechnologyFields(perso: Persona): FormGroup {
-    return this._FB.group({
+    let grup = this._FB.group({
       //TODO: controlar tipo de dato
       id: [perso.id, Validators.required],
-      nombre: [perso.nombre, Validators.required],
+      nombre: [perso.nombre],
       cantidad: ['', Validators.required]
     });
+    grup.get('nombre').disable({onlySelf: true})
+    return grup;
   }
 
   ngOnDestroy(): void {

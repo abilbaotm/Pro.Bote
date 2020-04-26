@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FirebaseUserModel} from '../../core/user.model';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import * as moment from 'moment-timezone';
 
 //Servicios del Firestore

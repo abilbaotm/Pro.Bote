@@ -2,7 +2,10 @@ import {Component} from '@angular/core';
 import {AuthService} from '../core/auth.service'
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+
 //Componente Registro
 @Component({
   selector: 'app-register',

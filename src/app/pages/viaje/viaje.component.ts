@@ -6,7 +6,9 @@ import {Persona} from '../../models/persona.model';
 import {Gasto} from '../../models/gasto.model';
 import * as moment from 'moment-timezone';
 import {Pago} from '../../models/pago.model';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import Swal from 'sweetalert2';
 import {NavServiceService} from "../../services/nav-service/nav-service.service";
 
