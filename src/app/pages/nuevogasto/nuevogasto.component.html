@@ -33,12 +33,13 @@
 
           <label for="pagador">Paga</label>
           <select class="form-control" formControlName="pagador" id="pagador">
-            <option *ngFor="let persona of personasViaje" value="{{persona.id}}">{{persona.nombre}}</option>
+            <option *ngFor="let persona of personasViaje | keyvalue "
+                    value="{{persona.key}}">{{persona.value['nombre']}}</option>
           </select>
 
           <div class=" form-check">
             <label class=" form-check-label">
-              <input [ngModel]="partesIguales" checked="" class=" form-check-input" formControlName="partesIguales"
+              <input checked="" class=" form-check-input" formControlName="partesIguales"
                      type="checkbox">
               <span class=" form-check-sign">
                     <span class=" check"></span> partes iguales
@@ -64,15 +65,12 @@
               <label for="refTercero{{i}}">Ref</label>
               <input
                 class="form-control"
-                disabled="disabled"
                 formControlName="nombre"
                 id="refTercero{{i}}" maxlength="50" type="text"/>
 
               <label for="cantidadTercero{{i}}">Cantidad (moneda local)</label>
               <input
-                [ngModel]="cantidadPersona[i]"
                 class="form-control"
-                disabled="disabled"
                 formControlName="cantidad" id="cantidadTercero{{i}}" maxlength="50" type="number"/>
             </section>
           </div>
