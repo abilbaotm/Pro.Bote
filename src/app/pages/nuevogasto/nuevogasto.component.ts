@@ -90,7 +90,7 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
 
       }
 
-    }));
+    }, error => this.firestoreService.alzarError()));
 
     //Sacar las personas de un viaje
     this.FBSuscribers.push(this.firestoreService.getPersonas(this.idViaje).subscribe(personasSnapshot => {
@@ -116,7 +116,7 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
           this.form.get('cantidad').setValue(total);
         }
       });
-    }));
+    }, error => this.firestoreService.alzarError()));
 
     //Sabes si se esta editando o no y actuar en consecuencia
     this.idGasto = this.route.snapshot.paramMap.get("gasto");
@@ -148,7 +148,7 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
         })
         this.form.get('terceros').setValue(personasForm)
         this.msgRatio = ""
-      }))
+      }, error => this.firestoreService.alzarError()))
 
     }
 
@@ -184,9 +184,11 @@ export class NuevogastoComponent implements OnInit, OnDestroy {
   nuevoGasto(form, documentId = this.documentId) {
     if (this.currentStatus == 1) {
 
-      this.firestoreService.nuevoGasto(this.idViaje, form).then()
+      this.firestoreService.nuevoGasto(this.idViaje, form).then(() => {
+      }, error => this.firestoreService.alzarError())
     } else {
-      this.firestoreService.editarGasto(this.idViaje, this.idGasto, form, this.timezoneForm).then()
+      this.firestoreService.editarGasto(this.idViaje, this.idGasto, form, this.timezoneForm).then(() => {
+      }, error => this.firestoreService.alzarError())
     }
     this.router.navigate([`/viaje/${this.idViaje}`])
   }
