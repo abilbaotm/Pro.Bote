@@ -77,14 +77,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
             .then(toJson)
             .then(json => {
               if (json['total'] == 0) {
+                // Si no hay resultados, buscar una imagen cualquiera
                 unsplash.search.photos("Trip", 1, 1, {})
                   .then(toJson)
                   .then(json => {
-                    this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+                    // este proceso es asíncrono. puede que el viaje sea eliminado por firebase, check si sigue existiendo
+                    if (this.todosViajes[categorias][todosViajeKey] != undefined) {
+                      this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+                    }
 
                   })
               } else {
-                this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+                // este proceso es asíncrono. puede que el viaje sea eliminado por firebase, check si sigue existiendo
+                if (this.todosViajes[categorias][todosViajeKey] != undefined) {
+                  this.todosViajes[categorias][todosViajeKey].data.foto = json["results"][0];
+                }
               }
             });
 
