@@ -84,6 +84,8 @@ deploy_web:
     # deploy sourcemaps a rollbar para post-debug
     - chmod +x ./rollbar-sourcemaps.sh ; ./rollbar-sourcemaps.sh dist "https://bote.izabil.net/"
     - rm dist/*.map
+    # crear fichero cordova.js, evitamos error 404. Este fichero para este deploy NO es necesario
+    - touch dist/cordova.js
     - npm run deploy
   except:
     variables:
