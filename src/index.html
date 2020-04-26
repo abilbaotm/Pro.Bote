@@ -44,6 +44,12 @@
 <app-root></app-root>
 </body>
 <script>
+  // validar si soy IE
+  if (navigator.userAgent.indexOf('MSIE') !== -1
+    || navigator.appVersion.indexOf('Trident/') > -1) {
+    alert("ES: IE 6-11 DETECTADO. IE NO ES COMPATIBLE CON ESTA APLICACIÓN. \nEN: IE 6-11 DETECTED. IE IS NOT COMPATIBLE WITH THIS APPLICATION.")
+  }
+  // arreglar botones retroceso físico en android
   window.addEventListener = function () {
     (window.EventTarget || Window).prototype.addEventListener.apply(this, arguments);
   };
