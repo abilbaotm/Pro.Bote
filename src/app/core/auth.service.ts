@@ -21,7 +21,7 @@ export class AuthService {
       provider.addScope('email');
 
       if (!(<any>window).cordova) {
-        return this.afAuth.auth.signInWithPopup(provider).then(res => {
+        return this.afAuth.signInWithPopup(provider).then(res => {
           resolve(res);
         }, err => {
           console.log(err);
@@ -79,7 +79,7 @@ export class AuthService {
         });
       }
       if (firebase.auth().currentUser) {
-        this.afAuth.auth.signOut();
+        this.afAuth.signOut();
         resolve();
       } else {
         reject();
