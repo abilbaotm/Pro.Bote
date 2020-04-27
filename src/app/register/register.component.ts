@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../core/auth.service'
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import {UserService} from "../core/user.service";
 
 //Componente Registro
 @Component({
@@ -12,7 +13,7 @@ import 'firebase/firestore';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   errorMessage: string = '';
@@ -21,7 +22,8 @@ export class RegisterComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public userService: UserService,
   ) {
     firebase.auth().getRedirectResult().then(result => {
       if (result.user) {
@@ -59,6 +61,14 @@ export class RegisterComponent {
       }, err => {
         this.errorMessage = err.message;
         this.successMessage = '';
+      })
+  }
+
+  ngOnInit(): void {
+    this.userService.getCurrentUser()
+      .then(user => {
+        this.router.navigate(['/dashboard'])
+      }, err => {
       })
   }
 
