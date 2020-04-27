@@ -55,9 +55,10 @@ export class RegisterComponent {
     this.authService.doRegister(value)
       .then(res => {
         this.errorMessage = '';
-        this.successMessage = 'Your account has been created';
+        this.successMessage = 'Tu cuenta ha sido creada';
       }, err => {
-        this.errorMessage = err.message;
+        console.log(err)
+        this.errorMessage = this.authService.FireBaseErrors[err.code];
         this.successMessage = '';
       })
   }

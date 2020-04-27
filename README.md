@@ -24,6 +24,8 @@ CI/CD están generando APKs para instalar en dispositivos Android. Consulta la �
 
 Esta aplicación requiere Android +6.0 y/o un navegador evergreen (Firefox; Chrome; Edge; Opera)
 
+Para ejecutar la aplicacion en un entorno local es necesario tener las coockies de terceros habilitadas en el navegador
+
 ## Documentación
 
 Consulta la documentación de este proyecto en el apartado de [Documentación](documentacion/README.md).

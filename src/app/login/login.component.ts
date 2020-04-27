@@ -47,7 +47,7 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       }, err => {
         console.log(err);
-        this.errorMessage = err.message;
+        this.errorMessage = this.authService.FireBaseErrors[err.code];
       })
   }
 }

@@ -7,6 +7,10 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
+  public FireBaseErrors = {
+    'auth/invalid-email' : 'El mail no esta bien formado',
+    'auth/email-already-in-use' : 'Email ya registrado'
+  }
 
   constructor(
     public afAuth: AngularFireAuth,
