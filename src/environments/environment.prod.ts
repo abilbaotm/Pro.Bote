@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   firebaseConfig: {
     apiKey: "AIzaSyBCYfRAt78hMiH0z3Bow0OU5oSfPBBCAmE",
-    authDomain: "dw-bote.firebaseapp.com",
+    authDomain: "bote.izabil.net",
     databaseURL: "https://dw-bote.firebaseio.com",
     projectId: "dw-bote",
     storageBucket: "dw-bote.appspot.com",
