@@ -65,10 +65,13 @@
                       <mat-card>
                         {{persona.nombre}}
                         <ng-container *ngIf="persona.email"><{{persona.email | lowercase}}></ng-container>
-                        <span *ngIf="viaje.permitidos[persona.email]"
-                              class="badge badge-secondary mx-1">Permiso de lectura</span>
-                        <span *ngIf="viaje.permitidos[persona.email] && viaje.permitidos[persona.email].owner"
-                              class="badge badge-primary mx-1">Creador del viaje</span>
+                        <!-- verificar antes de nada que permitidos exista en viaje -->
+                        <ng-container *ngIf="viaje.permitidos != undefined">
+                          <span *ngIf="viaje.permitidos[persona.email]"
+                                class="badge badge-secondary mx-1">Permiso de lectura</span>
+                          <span *ngIf="viaje.permitidos[persona.email] && viaje.permitidos[persona.email].owner"
+                                class="badge badge-primary mx-1">Creador del viaje</span>
+                        </ng-container>
                       </mat-card>
                     </ng-container>
                   </p>
