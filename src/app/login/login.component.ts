@@ -1,15 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../core/auth.service'
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {UserService} from "../core/user.service";
+
 //Componente Login
 @Component({
   selector: 'page-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -19,6 +21,7 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     public afAuth: AngularFireAuth,
+    public userService: UserService,
   ) {
     this.createForm();
   }
@@ -48,6 +51,14 @@ export class LoginComponent {
       }, err => {
         console.log(err);
         this.errorMessage = err.message;
+      })
+  }
+
+  ngOnInit(): void {
+    this.userService.getCurrentUser()
+      .then(user => {
+        this.router.navigate(['/dashboard'])
+      }, err => {
       })
   }
 }
