@@ -53,8 +53,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       }, err => {
-        console.log(err);
-        this.errorMessage = this.authService.FireBaseErrors[err.code];
+        if (this.authService.FireBaseErrors[err.code]) {
+          this.errorMessage = this.authService.FireBaseErrors[err.code];
+        } else {
+          this.errorMessage = err.message
+        }
       })
   }
 

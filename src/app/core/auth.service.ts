@@ -8,8 +8,10 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthService {
   public FireBaseErrors = {
-    'auth/invalid-email' : 'El mail no esta bien formado',
-    'auth/email-already-in-use' : 'Email ya registrado'
+    'auth/invalid-email': 'El mail no esta bien formado',
+    'auth/email-already-in-use': 'Email ya registrado',
+    'auth/user-not-found': 'La combinación usuario/contraseña no son validas o el usuario no tiene contraseña',
+    'auth/wrong-password': 'La combinación usuario/contraseña no son validas o el usuario no tiene contraseña'
   }
 
   constructor(
