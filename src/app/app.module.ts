@@ -31,6 +31,7 @@ import {PrivacidadComponent} from './pages/legal/privacidad/privacidad.component
 import {NavServiceService} from "./services/nav-service/nav-service.service";
 import {ThemeService} from "./services/theme/theme.service";
 import {RollbarErrorHandler, rollbarFactory, RollbarService} from './services/rollbar/rollbar';
+import {CookieLawModule} from "angular2-cookie-law";
 
 moment.locale('es', localization);
 
@@ -60,6 +61,7 @@ moment.locale('es', localization);
       applyLabel: 'ok', format: 'DD/MM/YYYY', separator: ' -> '
     }),
     NgbModule,
+    CookieLawModule,
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent, RegisterComponent, PrivacidadComponent],
   providers: [
