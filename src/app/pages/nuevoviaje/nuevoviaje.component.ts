@@ -53,7 +53,7 @@ export class NuevoviajeComponent implements OnInit, OnDestroy {
     return this._FB.group({
       //TODO: controlar tipo de dato
       nombre: ['', Validators.required],
-      email: [''],
+      email: ['', Validators.email],
       id: ['']
     });
   }
