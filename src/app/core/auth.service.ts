@@ -52,6 +52,14 @@ export class AuthService {
     })
   }
 
+  public enviarCorreoActivacion() {
+    var actionCodeSettings = {
+      url: 'https://' + environment.BASE_DOMAIN + '/',
+      handleCodeInApp: false
+    };
+    firebase.auth().currentUser.sendEmailVerification(actionCodeSettings).then()
+  }
+
   doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
@@ -59,9 +67,8 @@ export class AuthService {
           var user = firebase.auth().currentUser;
           user.updateProfile({
             displayName: value.displayName
-          }).then(function () {
-            // Update successful.
-            firebase.auth().currentUser.sendEmailVerification().then()
+          }).then(() => {
+            this.enviarCorreoActivacion()
           }, function (error) {
             // An error happened.
           });
@@ -95,4 +102,17 @@ export class AuthService {
   }
 
 
+  passOlvidada(ultimoCorreo: string) {
+    var actionCodeSettings = {
+      url: 'https://' + environment.BASE_DOMAIN + '/',
+      handleCodeInApp: false
+    };
+    return new Promise((resolve, reject) => {
+      if (this.afAuth.sendPasswordResetEmail(ultimoCorreo, actionCodeSettings)) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+  }
 }
