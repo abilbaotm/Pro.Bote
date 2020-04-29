@@ -12,6 +12,8 @@
           <label>Contraseña</label>
           <input class="form-control" formControlName="password" type="password">
           <label class="error">{{errorMessage}}</label>
+          <label *ngIf="mostarMsgPassword" class="error">&nbsp;<a (click)="enviarRecoveryEmail()" class="pointer">¿Olvido
+            la contraseña?</a></label>
         </div>
         <button (click)="tryLogin(loginForm.value)" class="w-100 btn btn-default" type="submit">Log in</button>
       </form>

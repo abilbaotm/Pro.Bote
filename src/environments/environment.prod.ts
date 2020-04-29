@@ -13,4 +13,5 @@ export const environment = {
   URLEXTAPI: 'https://api.exchangeratesapi.io/latest',
   WEBCLIENTID: '53136915015-bs2smeqikt7qv64rcj51ta3oba5virds.apps.googleusercontent.com',
   ROLLBAR_ACCESS_TOKEN: '26913d6cce88472a87ad2714a4e54bab',
+  BASE_DOMAIN: 'bote.izabil.net',
 };

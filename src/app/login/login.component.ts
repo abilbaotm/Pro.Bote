@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errorMessage: string = '';
+  public mostarMsgPassword: boolean;
+  public ultimoCorreo: string;
 
   constructor(
     public authService: AuthService,
@@ -47,11 +49,32 @@ export class LoginComponent implements OnInit {
   tryLogin(value) {
     this.authService.doLogin(value)
       .then(res => {
-        this.router.navigate(['/dashboard']);
+        if (res.user.emailVerified !== true) {
+          this.authService.enviarCorreoActivacion()
+          this.errorMessage = "Cuenta desactivada, se ha mandado un link de activación a tu cuenta."
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       }, err => {
-        console.log(err);
-        this.errorMessage = this.authService.FireBaseErrors[err.code];
+        if (this.authService.FireBaseErrors[err.code]) {
+          this.errorMessage = this.authService.FireBaseErrors[err.code];
+          // no demos muchas pistas si el mail es valido
+          if (err.code == 'auth/wrong-password' || err.code == 'auth/user-not-found') {
+            this.ultimoCorreo = value.email
+            this.mostarMsgPassword = true
+          }
+        } else {
+          this.errorMessage = err.message
+        }
       })
+  }
+
+
+  enviarRecoveryEmail() {
+    this.authService.passOlvidada(this.ultimoCorreo).then(() => {
+      this.mostarMsgPassword = false;
+      this.errorMessage = "Si la cuenta existiera, un link con instrucciones para cambiar su contraseña fue enviado a " + this.ultimoCorreo
+    })
   }
 
   ngOnInit(): void {
