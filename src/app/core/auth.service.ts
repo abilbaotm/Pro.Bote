@@ -59,6 +59,7 @@ export class AuthService {
             displayName: value.displayName
           }).then(function () {
             // Update successful.
+            firebase.auth().currentUser.sendEmailVerification().then()
           }, function (error) {
             // An error happened.
           });

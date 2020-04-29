@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
     this.authService.doRegister(value)
       .then(res => {
         this.errorMessage = '';
-        this.successMessage = 'Tu cuenta ha sido creada';
+        this.successMessage = 'Tu cuenta ha sido creada. Comprueba tu email para verificar la cuenta.';
       }, err => {
         console.log(err)
         this.errorMessage = this.authService.FireBaseErrors[err.code];

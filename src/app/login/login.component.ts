@@ -47,7 +47,11 @@ export class LoginComponent implements OnInit {
   tryLogin(value) {
     this.authService.doLogin(value)
       .then(res => {
-        this.router.navigate(['/dashboard']);
+        if (res.user.emailVerified !== true) {
+          this.errorMessage = "Cuenta desactivada, se ha mandado un link de activación a tu cuenta."
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       }, err => {
         console.log(err);
         this.errorMessage = this.authService.FireBaseErrors[err.code];
