@@ -11,9 +11,9 @@ import {Persona} from '../../models/persona.model';
 
 @Component({
   selector: 'app-nuevoviaje',
-  templateUrl: 'nuevoviaje.component.html'
+  templateUrl: 'gestorviaje.component.html'
 })
-export class NuevoviajeComponent implements OnInit, OnDestroy {
+export class GestorviajeComponent implements OnInit, OnDestroy {
   private FBSuscribers = []
   user: FirebaseUserModel = new FirebaseUserModel();
   public idViaje: string;
