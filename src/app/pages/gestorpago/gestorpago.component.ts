@@ -12,9 +12,9 @@ import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-nuevopago',
-  templateUrl: 'nuevopago.component.html'
+  templateUrl: 'gestorpago.component.html'
 })
-export class NuevopagoComponent implements OnInit, OnDestroy {
+export class GestorpagoComponent implements OnInit, OnDestroy {
   private FBSuscribers = []
   public viaje: Viaje;
   public form: FormGroup;

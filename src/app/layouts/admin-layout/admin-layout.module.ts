@@ -10,9 +10,9 @@ import {UserComponent} from '../../pages/user/user.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ViajeComponent} from '../../pages/viaje/viaje.component';
-import {NuevoviajeComponent} from '../../pages/nuevoviaje/nuevoviaje.component';
-import {NuevogastoComponent} from '../../pages/nuevogasto/nuevogasto.component';
-import {NuevopagoComponent} from '../../pages/nuevopago/nuevopago.component';
+import {GestorviajeComponent} from '../../pages/gestorviaje/gestorviaje.component';
+import {GestorgastoComponent} from '../../pages/gestorgasto/gestorgasto.component';
+import {GestorpagoComponent} from '../../pages/gestorpago/gestorpago.component';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -49,9 +49,9 @@ import {GaugeChartModule} from "angular-gauge-chart";
     DashboardComponent,
     UserComponent,
     ViajeComponent,
-    NuevoviajeComponent,
-    NuevogastoComponent,
-    NuevopagoComponent,
+    GestorviajeComponent,
+    GestorgastoComponent,
+    GestorpagoComponent,
     // RtlComponent
   ]
 })

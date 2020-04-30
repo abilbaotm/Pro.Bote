@@ -12,9 +12,9 @@ import {Gasto} from '../../models/gasto.model';
 //Componente Nuevogasto
 @Component({
   selector: 'app-nuevogasto',
-  templateUrl: 'nuevogasto.component.html'
+  templateUrl: 'gestorgasto.component.html'
 })
-export class NuevogastoComponent implements OnInit, OnDestroy {
+export class GestorgastoComponent implements OnInit, OnDestroy {
   private FBSuscribers = []
   public viaje: Viaje;
   public form: FormGroup;
