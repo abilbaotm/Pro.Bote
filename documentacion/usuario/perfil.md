@@ -16,6 +16,22 @@ Es posible poner la página en dos estilos de paletas de colores diferentes, a g
 
 ![26](../images/26.PNG)
 
+## Cambio de contraseña
+
+Es posible cambiar la contraseña de tu usuario. Para ello pulsa el boton "Solicitar cambio de contraseña" que se muestra en la imagen inferior
+
+![43](../images/43.PNG)
+
+Se le enviara un correo electronico a su email con un enlace para cambiar la contraseña. Al hacer click le dirigira a una pagina. Rellene el campo con su nueva contraseña y pulse "GUARDAR".
+
+![44](../images/44.PNG)
+
+Una vez cambiada, saldra un mensaje comunicando el exito del cambio de contraseña. Pulse "CONTINUAR" para volver.
+
+![45](../images/45.PNG)
+
+Tenga en cuenta que su sesión se cerrará y tendrá que volver a iniciarla.
+
 ---
 
 [Inicio documentación](../README.md)
