@@ -48,5 +48,15 @@
         </div>
       </div>
     </div>
+    <div class=" col-12 col-lg-8">
+      <div class=" card">
+        <div class=" card-header"><h5 class=" title">Cambiar contraseña</h5></div>
+        <div class=" card-body text-center">
+          <button (click)="cambiarPassword()" *ngIf="!passMsg" class=" btn btn-danger"> Solicitar cambio de contraseña
+          </button>
+          {{passMsg}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
