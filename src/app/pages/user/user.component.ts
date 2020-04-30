@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../core/user.service';
 import {ThemeService} from "../../services/theme/theme.service";
+import {AuthService} from "../../core/auth.service";
 
 //Componente user
 
@@ -16,13 +17,7 @@ export class UserComponent implements OnInit {
   profileForm: FormGroup;
 
 
-  constructor(
-    private route: ActivatedRoute,
-    public userService: UserService,
-    private fb: FormBuilder,
-    private themeService: ThemeService
-  ) {
-  }
+  passMsg: string;
 
   ngOnInit(): void {
     this.route.data.subscribe(routeData => {
@@ -63,5 +58,20 @@ export class UserComponent implements OnInit {
     } else {
       this.themeService.setDark(true)
     }
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    public userService: UserService,
+    private fb: FormBuilder,
+    private themeService: ThemeService,
+    public authService: AuthService,
+  ) {
+  }
+
+  cambiarPassword() {
+    this.authService.passOlvidada(this.user.email).then(() => {
+      this.passMsg = "Se ha solicitado el cambio de contraseña. Verifique su email para poder realizar la operación de cambio de contraseña."
+    })
   }
 }
