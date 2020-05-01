@@ -11,9 +11,9 @@ Esta documentación describe pruebas internas efectuadas por los miembros del eq
 ## Pruebas internas
 ### Prueba 1: Registro y login usuarios (user/pass)
 
-| Fecha | 01/05/2020  | | |  Autor | ASIER |
+| Fecha | 01/05/2020  | **Versión** | 0.2.62 |  Autor | ASIER |
 | --- | --- | --- | --- | --- | --- |
-| **Plataforma** | Android Web | **Versión** | 0.2.62 | **Estado** | Completada |
+| **SO** | Android | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Se valida que es posible crear un usuario desde el formulario de login
