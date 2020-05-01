@@ -8,7 +8,7 @@ Puedes registrarte mediante Firestore Auth rellenando los campos en la página d
 
 ### Confirmar correo
 
-Una vez te hayas registrado le llegará un mensaje a la cuenta de correo para verificarla. Pulse el enlace para asegurar de que es un correo real.
+Una vez registrado le llegará un mensaje a la cuenta de correo para verificarla. Pulse el enlace para asegurar de que es un correo real.
 
 ## Login via Google
 
