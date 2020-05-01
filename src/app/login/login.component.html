@@ -24,7 +24,8 @@
               </div>
               <div class="form-label-group">
                 <label for="inputPassword">Contraseña</label>
-                <input class="form-control" id="inputPassword" placeholder="Contraseña" required type="password">
+                <input class="form-control" formControlName="password" id="inputPassword" placeholder="Contraseña"
+                       required type="password">
               </div>
               <label class="error">{{errorMessage}}</label>
               <label *ngIf="mostarMsgPassword" class="error">&nbsp;<a (click)="enviarRecoveryEmail()" class="pointer">¿Olvido
