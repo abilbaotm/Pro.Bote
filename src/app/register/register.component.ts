@@ -6,6 +6,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import {UserService} from "../core/user.service";
+import {environmentversion} from "../../environments/environmentversion";
 
 //Componente Registro
 @Component({
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  public version: string = '';
 
   constructor(
     public authService: AuthService,
@@ -69,6 +71,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.version = environmentversion;
+
     this.userService.getCurrentUser()
       .then(user => {
         this.router.navigate(['/dashboard'])
