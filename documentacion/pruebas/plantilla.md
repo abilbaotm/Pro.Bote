@@ -8,9 +8,9 @@
 ## Pruebas internas
 ### Prueba n+1: {{titulo}}
 
-| Fecha | DD/MM/AAAA  | Author | ASIER/PABLO |
-| --- | --- | --- | --- |
-| Plataforma | Web+Android | Estado | Completada |
+| Fecha | DD/MM/AAAA  | | |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **Plataforma** | Android Web | **Versión** | 0.0.0 | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus lorem sit amet justo ullamcorper, et dapibus dui imperdiet. Phasellus nec dictum eros. Nam mollis tortor non ligula tempus, pharetra malesuada enim fermentum. Nullam maximus, magna blandit tristique ultrices, tellus orci dictum sapien.
