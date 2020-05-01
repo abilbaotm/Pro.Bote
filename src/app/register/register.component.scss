@@ -12,6 +12,23 @@
   color: red;
 }
 
-.success {
-  color: green;
+.fondo {
+  display: flex;
+  background: url(../login/images/splash.svg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.vertical-center {
+  margin: auto;
+}
+
+.badge {
+  vertical-align: middle;
+}
+
+.h-100 {
+  min-height: 100vh;
 }

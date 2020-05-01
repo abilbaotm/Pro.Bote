@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from "../core/user.service";
+import {environmentversion} from "../../environments/environmentversion";
 
 //Componente Login
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   public mostarMsgPassword: boolean;
   public ultimoCorreo: string;
+  public version: string = '';
 
   constructor(
     public authService: AuthService,
@@ -78,6 +80,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.version = environmentversion;
+
     this.userService.getCurrentUser()
       .then(user => {
         this.router.navigate(['/dashboard'])

@@ -1,29 +1,49 @@
 <!-- Pagina de Log in -->
-<h1 class="header">Log in con Firebase o Google Account</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-12">
-      <form [formGroup]="loginForm">
-        <div class="form-group">
-          <label>Correo electrónico</label>
-          <input class="form-control" formControlName="email" type="email">
+<div class="fondo h-100">
+  <div class="container vertical-center">
+    <div class="card card-signin align-middle">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto my-auto d-lg-block d-none">
+          <div class="card-body">
+            <h1>Pro.Bote </h1>
+            <p class="py-0">Gestión de gastos de viaje.</p>
+            <h3><i class="fa fa-bed mr-2"></i><i class="fa fa-beer mr-2"></i><i class="fa fa-coffee mr-2"></i><i
+              class="fa fa-hamburger mr-2"></i><i class="fa fa-pizza-slice mr-2"></i></h3>
+            <p>Versión {{version}} <span class="badge badge-primary ">Beta</span></p>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input class="form-control" formControlName="password" type="password">
-          <label class="error">{{errorMessage}}</label>
-          <label *ngIf="mostarMsgPassword" class="error">&nbsp;<a (click)="enviarRecoveryEmail()" class="pointer">¿Olvido
-            la contraseña?</a></label>
+
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card-body">
+            <h5 class="card-title text-center">Inicio de sesión</h5>
+            <form [formGroup]="loginForm" class="form-signin">
+              <div class="form-label-group">
+                <label for="inputEmail">Correo electrónico</label>
+                <input class="form-control" formControlName="email" id="inputEmail" placeholder="Correo electrónico"
+                       required type="email">
+              </div>
+              <div class="form-label-group">
+                <label for="inputPassword">Contraseña</label>
+                <input class="form-control" id="inputPassword" placeholder="Contraseña" required type="password">
+              </div>
+              <label class="error">{{errorMessage}}</label>
+              <label *ngIf="mostarMsgPassword" class="error">&nbsp;<a (click)="enviarRecoveryEmail()" class="pointer">¿Olvido
+                la contraseña?</a></label>
+
+              <button (click)="tryLogin(loginForm.value)" class="w-100 btn btn-default" type="submit">Log in</button>
+              <hr class="my-4">
+              <button (click)="tryGoogleLogin()" class="btn btn-lg btn-google btn-block text-uppercase" type="button"><i
+                class="fab fa-google mr-2"></i> Log in con Google
+              </button>
+              <hr class="my-4">
+              <p class="text-center">Al registrarse acepta la <a routerLink="/politica-privacidad">Política de
+                privacidad</a></p>
+              <p class="text-center">¿No tienes cuenta? <a routerLink="/register">Creala ahora</a></p>
+            </form>
+          </div>
         </div>
-        <button (click)="tryLogin(loginForm.value)" class="w-100 btn btn-default" type="submit">Log in</button>
-      </form>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-md-12 text-center">
-      <button (click)="tryGoogleLogin()" class="btn btn-danger btn-block" type="button">Log in con Google</button>
-      <p>Al registrarse acepta la <a routerLink="/politica-privacidad">Política de privacidad</a></p>
-      <p>¿No tienes cuenta? <a routerLink="/register">Creala ahora</a></p>
+      </div>
+
     </div>
   </div>
 </div>
