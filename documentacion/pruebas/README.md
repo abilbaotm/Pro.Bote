@@ -36,3 +36,238 @@ El usuario ha podido registrarse y ha podido iniciar sesión. Sus datos son corr
 
 ---
 
+### Prueba 2: Login con Google Web
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible iniciar sesión via Google en la Web.
+
+**Proceso**:
+(1) Se hace click en el boton "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google; (3) El usuario inicia sesión usando su nombre y correo de google;
+ 
+**Resultado esperado**:
+El puede iniciar sesion usando su cuenta de Google.
+
+**Resultado final**:
+El usuario ha iniciado sesion mediante Google Auth.
+
+**Imágenes**
+
+| ![imagenes/t2/1.PNG](imagenes/t2/1.PNG) | ![imagenes/t2/2.PNG](imagenes/t2/2.PNG) | ![imagenes/t2/3.PNG](imagenes/t2/3.PNG) | 
+| :---: | :---: | :---: | 
+| Pantalla de login | Gestion de login de google | Inicio de sesión correcto | 
+
+---
+
+### Prueba 3: Login con Google Android
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android | **Plataforma** | App | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible iniciar sesión via Google en la aplicación de Android.
+
+**Proceso**:
+(1) Se hace click en el boton "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google. Elegimos con que usuario de google queremos inicar sesión; (3) El usuario inicia sesión usando su nombre y correo de google;
+ 
+**Resultado esperado**:
+El puede iniciar sesion usando su cuenta de Google.
+
+**Resultado final**:
+El usuario ha iniciado sesion mediante Google Auth.
+
+**Imágenes**
+
+| ![imagenes/t3/1.PNG](imagenes/t3/1.jpg) | ![imagenes/t3/2.PNG](imagenes/t3/2.jpg) | ![imagenes/t3/3.PNG](imagenes/t3/3.jpg) | 
+| :---: | :---: | :---: | 
+| Pantalla de login | Gestion de login de google | Inicio de sesión correcto | 
+
+---
+
+### Prueba 4: Logout funcional
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android | **Plataforma** | App | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible cerrar sesión una vez dentro de tu cuenta.
+
+**Proceso**:
+(1) Se hace click en el botón representado como tres puntos verticales; (2) Se hace click en el icono del perfil representado con una persona; (3) Se hace click en el boton "Log out"; (4) El usuario ha cerrado sesión satisfactoriamente.
+ 
+**Resultado esperado**:
+El puede cerrar sesion.
+
+**Resultado final**:
+El usuario ha cerrado sesion.
+
+**Imágenes**
+
+| ![imagenes/t4/1.PNG](imagenes/t4/1.jpg) | ![imagenes/t4/2.PNG](imagenes/t4/2.jpg) | ![imagenes/t4/3.PNG](imagenes/t4/3.jpg) | ![imagenes/t4/4.PNG](imagenes/t4/4.jpg) | 
+| :---: | :---: | :---: | :---: |
+| Pantalla de la aplicación | Menu representado por tres puntos verticales | Botón de Log out | Log out correcto |
+
+---
+
+### Prueba 5: Crear un nuevo viaje
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible crear un viaje.
+
+**Proceso**:
+(1) Se hace click en el botón "NUEVO VIAJE" situado en la barra lateral; (2) Se abre el formulario correspondiente al viaje; (3) Se rellena con la información del viaje necesaria y se hace click en el botón "CREAR"; (4) El usuario ha creado un viaje; (5) El viaje creado sale en la feed del usuario y de todos los participantes registrados que estén en el viaje.
+ 
+**Resultado esperado**:
+El usuario puede crear un viaje.
+
+**Resultado final**:
+El usuario ha creado un viaje.
+
+**Imágenes**
+
+| ![imagenes/t5/1.PNG](imagenes/t5/1.PNG) | ![imagenes/t5/2.PNG](imagenes/t5/2.PNG) | ![imagenes/t5/3.PNG](imagenes/t5/3.PNG) | ![imagenes/t5/4.PNG](imagenes/t5/4.PNG) | ![imagenes/t5/5.PNG](imagenes/t5/5.PNG) | 
+| :---: | :---: | :---: | :---: | :---: | 
+| Pantalla de feed del usuario | Formulario de creación de viaje | Campos del formulario rellenos | Viaje creado correctamente | Feed del usuario |
+
+---
+
+### Prueba 6: Editar un viaje
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible editar un viaje.
+
+**Proceso**:
+(1) Se hace click en el viaje que se quiera editar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos; (4) El usuario cambia los datos y le hace click al botón "Editar"; (5) El viaje se ha cambiado.
+ 
+**Resultado esperado**:
+El usuario puede editar un viaje.
+
+**Resultado final**:
+El usuario ha editado un viaje.
+
+**Imágenes**
+
+| ![imagenes/t6/1.PNG](imagenes/t6/1.PNG) | ![imagenes/t6/2.PNG](imagenes/t6/2.PNG) | ![imagenes/t6/3.PNG](imagenes/t6/3.PNG) | ![imagenes/t6/4.PNG](imagenes/t6/4.PNG) | ![imagenes/t6/5.PNG](imagenes/t6/5.PNG) | 
+| :---: | :---: | :---: | :---: | :---: | 
+| Pantalla de feed del usuario | Resumen del viaje | Campos del formulario rellenos | Viaje editado | Resumen del viaje editado |
+
+---
+
+### Prueba 7: Borrar un viaje
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible borrar un viaje.
+
+**Proceso**:
+(1) Se hace click en el viaje que se quiera borrar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Borrar"; (4) Se pide confirmación del borrado; (5) El viaje pasa a pendiente de borrar hasta que se haga el borrado diario de viajes.
+ 
+**Resultado esperado**:
+El usuario puede borrar un viaje.
+
+**Resultado final**:
+El usuario ha borrado un viaje.
+
+**Imágenes**
+
+| ![imagenes/t7/1.PNG](imagenes/t7/1.PNG) | ![imagenes/t7/2.PNG](imagenes/t7/2.PNG) | ![imagenes/t7/3.PNG](imagenes/t7/3.PNG) | ![imagenes/t7/4.PNG](imagenes/t7/4.PNG) | ![imagenes/t7/5.PNG](imagenes/t7/5.PNG) | 
+| :---: | :---: | :---: | :---: | :---: | 
+| Pantalla de feed del usuario | Resumen del viaje | Botón de borrado | Confirmacion del borrado | Viaje en pendiente de borrar |
+
+---
+
+### Prueba 8: Archivar un viaje
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible archivar un viaje.
+
+**Proceso**:
+(1) Se hace click en el viaje que se quiera archivar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Archivar"; (4) Se pide confirmación del archivado; (5) El viaje pasa a archivado.
+ 
+**Resultado esperado**:
+El usuario puede archivar un viaje.
+
+**Resultado final**:
+El usuario ha archivado un viaje.
+
+**Imágenes**
+
+| ![imagenes/t8/1.PNG](imagenes/t8/1.PNG) | ![imagenes/t8/2.PNG](imagenes/t8/2.PNG) | ![imagenes/t8/3.PNG](imagenes/t8/3.PNG) | ![imagenes/t8/4.PNG](imagenes/t8/4.PNG) | ![imagenes/t8/5.PNG](imagenes/t8/5.PNG) | 
+| :---: | :---: | :---: | :---: | :---: | 
+| Pantalla de feed del usuario | Resumen del viaje | Botón de archivado | Confirmacion del archivado | Viaje archivado |
+
+---
+
+### Prueba 9: Restaurar un viaje
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible restaurar un viaje borrado/archivado.
+
+**Proceso**:
+(1) Se hace click en el viaje que se quiera restaurar; (2) En el resumen del viaje saldra un mensaje avisando de que el viaje está pediente de borrar/archivado. Hacemos click en "Cancelar" situado al final del mensaje; (3)(4) El viaje pasa a estar activo de nuevo.
+ 
+**Resultado esperado**:
+El usuario puede restaurar un viaje borrado/archivado.
+
+**Resultado final**:
+El usuario ha restaurado un viaje.
+
+**Imágenes**
+
+| ![imagenes/t9/1.PNG](imagenes/t9/1.PNG) | ![imagenes/t9/2.PNG](imagenes/t9/2.PNG) | ![imagenes/t9/3.PNG](imagenes/t9/3.PNG) | ![imagenes/t9/4.PNG](imagenes/t9/4.PNG) | 
+| :---: | :---: | :---: | :---: |
+| Feed del usuario. Viaje borrado | Resumen del viaje | Viaje restaurado | Feed del usuario. Viaje restaurado |
+
+---
+
+### Prueba 10: Añadir usuario existente un viaje ya creado
+
+| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web | **Estado** | Completada |
+
+**Descripción del escenario inicial**:
+Se valida que es posible añadir un usuario existente en la BBDD a un viaje y que al mismo le salga en su propia feed.
+
+**Proceso**:
+(1) Se hace click en el viaje al que se quiera añadir una persona; (2) Hacemos click en "Editar viaje" para añadir la persona nueva; (3) Añadimos el nuevo participante usando el correo con el que se ha registrado; (4) Iniciamos sesión con ese usuario y observamos su feed. Entramos en el viaje; (5) Vemos que sale el viaje creado por el otro usuario.
+ 
+**Resultado esperado**:
+El usuario puede añadir un usuario existente y que salga en su feed.
+
+**Resultado final**:
+El usuario ha añadido a otro usuario existente satisfactoriamente.
+
+**Imágenes**
+
+| ![imagenes/t10/1.PNG](imagenes/t10/1.PNG) | ![imagenes/t10/2.PNG](imagenes/t10/2.PNG) | ![imagenes/t10/3.PNG](imagenes/t10/3.PNG) | ![imagenes/t10/4.PNG](imagenes/t10/4.PNG) | ![imagenes/t10/5.PNG](imagenes/t10/5.PNG) | 
+| :---: | :---: | :---: | :---: | :---: |
+| Feed del usuario | Resumen del viaje | Añadir participante | Feed del segundo usuario | Resumen en el que se ve el viaje al que esta invitado |
+
+---
+
+
