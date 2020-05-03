@@ -68,4 +68,7 @@ así como la aplicación para dispositivos moviles.
 
 ## Registro de pruebas
 
-TODO https://gitlab.com/pabil/bote-dw/-/issues/43
+Durante el proceso final de desarrollo se ejecutaron multiples test para validar que 
+todas las funciones y características del proyecto funcionaban.
+
+Las pruebas realizadas se encuentran el la sección de [pruebas](pruebas).
