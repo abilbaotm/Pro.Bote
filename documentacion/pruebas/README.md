@@ -272,232 +272,262 @@ El usuario ha añadido a otro usuario existente satisfactoriamente.
 
 ### Prueba 11: Crear un nuevo gasto
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Teniendo un viaje creado, añadir un gasto vinculado a dicho viaje.
 
 **Proceso**:
+(1) Se hace click en el viaje; (2) Se hace click en el botón "Nuevo gasto"; (3) Aparece el formulario en pantalla; (4) Se rellena el formulario. En este caso cada persona paga una cantidad; (5) Se revisa en la pestaña de gastos.
 
 **Resultado esperado**:
 El gasto es creado y se ve reflejado en el resumen del viaje.
 
 **Resultado final**:
+Se crea el gasto correctamente
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t11/1.PNG](imagenes/t11/1.PNG) | ![imagenes/t11/2.PNG](imagenes/t11/2.PNG) | ![imagenes/t11/3.PNG](imagenes/t11/3.PNG) | ![imagenes/t11/4.PNG](imagenes/t11/4.PNG) | ![imagenes/t11/5.PNG](imagenes/t11/5.PNG) |
+| :---: | :---: | :---: | :---: | :---: |
+| Click en el viaje | Nuevo gasto | Formulario nuevo gasto | Rellenar campos | Revisar que esté bien formado
 
 ---
 
 ### Prueba 12: Editar un gasto
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Existe un viaje con uno o varios gastos previamente creados.
 
 **Proceso**:
+(1) En el gasto hacemos click en "Editar gasto"; (2) Se abre el formulario gasto con los campos rellenos; (3) Se edita el gasto y se hace click en "Editar"; (4) Se revisa el gasto.
 
 **Resultado esperado**:
 El gasto es editado y los cambios se ven reflejados en el resumen del viaje.
 
 **Resultado final**:
+El gasto se ha editado correctamente
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t12/1.PNG](imagenes/t12/1.PNG) | ![imagenes/t12/2.PNG](imagenes/t12/2.PNG) | ![imagenes/t12/3.PNG](imagenes/t12/3.PNG) | ![imagenes/t12/4.PNG](imagenes/t12/4.PNG) |
+| :---: | :---: | :---: | :---: |
+| Click en editar gasto | Formulario sin cambios | Formulario con cambios | Gasto editado
 
 ---
 
 ### Prueba 13: Borrar/Restaurar un gasto
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Existe un viaje creado donde se disponen de uno o varios gastos.
 
 **Proceso**:
+(1) Se hace click en el botón "Eliminar gasto"; (2) Se confirma el borrado; (3) Se va a gastos borrados; (4) Se hace click en "Restaurar gasto"; (5) Se comprueba que se ha restaurado.
 
 **Resultado esperado**:
 Los gastos pueden ser borrados, una vez borrados pueden ser restaurados correctamente.
 
 **Resultado final**:
+El gasto se ha borrado/restaurado correctamente
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t13/1.PNG](imagenes/t13/1.PNG) | ![imagenes/t13/2.PNG](imagenes/t13/2.PNG) | ![imagenes/t13/3.PNG](imagenes/t13/3.PNG) | ![imagenes/t13/4.PNG](imagenes/t13/4.PNG) | ![imagenes/t13/5.PNG](imagenes/t13/5.PNG) |
+| :---: | :---: | :---: | :---: | :---: |
+| Click en eliminar gasto | Confirmación | Gastos eliminados. Click en restaurar | Confirmación de restaurado | Gasto restaurado |
 
 ---
 
 ### Prueba 14: Crear un nuevo pago
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Se dispone de un viaje con multiples participantes.
 
 **Proceso**:
+(1) Se hace click en el viaje; (2) Se hace click en "Nuevo pago"; (3) Se abre el formulario; (4) Se rellena el formulario; (5) Se comprueba el pago.
 
 **Resultado esperado**:
 Es posible crear un pago entre dos participantes y esté se ve reflejado en el resumen del viaje.
 
 **Resultado final**:
+El pago ha sido creado correctamente
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t14/1.PNG](imagenes/t14/1.PNG) | ![imagenes/t14/2.PNG](imagenes/t14/2.PNG) | ![imagenes/t14/3.PNG](imagenes/t14/3.PNG) | ![imagenes/t14/4.PNG](imagenes/t14/4.PNG) | ![imagenes/t14/5.PNG](imagenes/t14/5.PNG) |
+| :---: | :---: | :---: | :---: | :---: |
+| Click en el viaje | Nuevo gasto | Formulario de gasto | Formulario relleno | Gasto creado
 
 ---
 
-### Prueba 15: Borrar un pago
+### Prueba 15: Borrar/Restaurar un pago
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Se dispone de un viaje con un pago.
 
 **Proceso**:
+(1) Se hace click en "Eliminar pago"; (2) Se confirma el borrado; (3) Se hace click en "Restaurar pago" en el pago eliminado; (4) Se confirma la restaración; (5) Se comprueba que se ha restaurado.
 
 **Resultado esperado**:
 El pago puede ser borrado y aparece en el apartado de viajes borrados. El pago puede ser restaurado.
 
 **Resultado final**:
+El pago ha sido borrado y restaurado
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t15/1.PNG](imagenes/t15/1.PNG) | ![imagenes/t15/2.PNG](imagenes/t15/2.PNG) | ![imagenes/t15/3.PNG](imagenes/t15/3.PNG) | ![imagenes/t15/4.PNG](imagenes/t15/4.PNG) | ![imagenes/t15/5.PNG](imagenes/t15/5.PNG) |
+| :---: | :---: | :---: | :---: | :---: |
+| Click en borrar | Confirmar borrado | Click en restaurar | Confirmar restauración | Gasto borrado y restaurado
 
 ---
 
 ### Prueba 16: Resumen de cuentas correcto
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Se dispone de un viaje con multiples gastos y pagos.
 
 **Proceso**:
+(1) Se crean gastos; (2) Se crean gastos eliminados; (3) Se crean pagos; (4) Se crean pagos eliminados; (5) Se comprueban las cuentas de un participante; (6) Se comprueban las cuentas de un segundo participante.
 
 **Resultado esperado**:
 El resumen de cuentas pendientes entre participantes es correcto y se actualiza sin tener en cuenta gastos y pagos eliminados.
 
 **Resultado final**:
+El resumen de cuentas es correcto y se actualiza
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t16/1.PNG](imagenes/t16/1.PNG) | ![imagenes/t16/2.PNG](imagenes/t16/2.PNG) | ![imagenes/t16/3.PNG](imagenes/t16/3.PNG) | ![imagenes/t16/4.PNG](imagenes/t16/4.PNG) | ![imagenes/t16/5.PNG](imagenes/t16/5.PNG) | ![imagenes/t16/6.PNG](imagenes/t16/6.PNG) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Gastos | Gastos eliminados | Pagos | Pagos eliminados | Comprobación 1 | Comprobación 2 |
 
 ---
 
 ### Prueba 17: Cambiar entre temas
 
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
+(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el tema que se quiera en los botones "Dark/Light"; (4) La página cambia de color; (5) Los cambios de color se mantienen.
 
 **Resultado esperado**:
 El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cambio es valido solo para el navegador actual.
 
 **Resultado final**:
+Es posible cambiar entre temas
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t17/1.PNG](imagenes/t17/1.PNG) | ![imagenes/t17/2.PNG](imagenes/t17/2.PNG) | ![imagenes/t17/3.PNG](imagenes/t17/3.PNG) | ![imagenes/t17/4.PNG](imagenes/t17/4.PNG) | ![imagenes/t17/5.PNG](imagenes/t17/5.PNG) |
+| :---: | :---: | :---: | :---: | :---: |
+| Click en icono | Click en perfil | Botón de cambiar tema| El tema cambia | El tema se mantiene
 
 ---
 
 ### Prueba 18: Cambiar nombre de usuario
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
+(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se ven los datos del perfil; (4) Se cambia el nombre y se da a "Guardar".
 
 **Resultado esperado**:
 El usuario puede cambiar el nombre de su cuenta.
 
 **Resultado final**:
+Es posible cambiar el nombre de usuario
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t18/1.PNG](imagenes/t18/1.PNG) | ![imagenes/t18/2.PNG](imagenes/t18/2.PNG) | ![imagenes/t18/3.PNG](imagenes/t18/3.PNG) | ![imagenes/t18/4.PNG](imagenes/t18/4.PNG) |
+| :---: | :---: | :---: | :---: |
+| Click en icono | Click en perfil | Perfil | El nombre se cambia |
 
 ---
 
 ### Prueba 19: Cambiar contraseña
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
+(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el botón "Solicitar cambio de contraseña"; (4) Sale que ha sido solicitado; (5) Se va al correo y se hace click en el enlace; (6) Se pide nueva contraseña; (7) Contraseña cambiada; (8) Se vuelve a iniciar sesión; (9) Inicio de sesión correcto.
 
 **Resultado esperado**:
 El usuario puede solicitar y cambiar su contraseña.
 
 **Resultado final**:
+Es posible cambiar la contraseña
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t19/1.PNG](imagenes/t19/1.PNG) | ![imagenes/t19/2.PNG](imagenes/t19/2.PNG) | ![imagenes/t19/3.PNG](imagenes/t19/3.PNG) | ![imagenes/t19/4.PNG](imagenes/t19/4.PNG) | ![imagenes/t19/5.PNG](imagenes/t19/5.PNG) | ![imagenes/t19/6.PNG](imagenes/t19/6.PNG) | ![imagenes/t19/7.PNG](imagenes/t19/7.PNG) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Click en cambio contraseña | Cambio solicitado | Correo | Contraseña nueva | Contraseña cambiada | Volver a iniciar sesión | Inicio correcto |
 
 ---
 
 
 ### Prueba 20: Presupuesto
 
-| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
-| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+| **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
 Un viaje sin un presupuesto asignado con gastos.
 
 **Proceso**:
+(1) Se crea viaje in presupuesto; (2) Se rellena con gastos; (3) Se comprueban los gastos; (4) Se edita el viaje; (5) Se añade presupuesto; (6) Se comrpueba el presupuesto si se refleja.
 
 **Resultado esperado**:
 Es posible asignar un presupuesto a un viaje y el grafico de presupuesto es actualizado con los gastos no eliminados.
 
 **Resultado final**:
+El presupuesto se adecua correctamente
 
 **Imágenes**
 
-| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
-| --- | --- | --- | --- |
+| ![imagenes/t20/1.PNG](imagenes/t20/1.PNG) | ![imagenes/t20/2.PNG](imagenes/t20/2.PNG) | ![imagenes/t20/3.PNG](imagenes/t20/3.PNG) | ![imagenes/t20/4.PNG](imagenes/t20/4.PNG) | ![imagenes/t20/5.PNG](imagenes/t20/5.PNG) | ![imagenes/t20/6.PNG](imagenes/t20/6.PNG) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Sin presupuesto vacio | Sin presupuesto relleno | Gastos | Editar Viaje | Añadir presupuesto | Presupuesto reflejado |
 
 ---
