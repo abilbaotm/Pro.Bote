@@ -272,7 +272,7 @@ El usuario ha añadido a otro usuario existente satisfactoriamente.
 
 ### Prueba 11: Crear un nuevo gasto
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -298,7 +298,7 @@ Se crea el gasto correctamente
 
 ### Prueba 12: Editar un gasto
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -324,7 +324,7 @@ El gasto se ha editado correctamente
 
 ### Prueba 13: Borrar/Restaurar un gasto
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -350,7 +350,7 @@ El gasto se ha borrado/restaurado correctamente
 
 ### Prueba 14: Crear un nuevo pago
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -376,7 +376,7 @@ El pago ha sido creado correctamente
 
 ### Prueba 15: Borrar/Restaurar un pago
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -384,7 +384,7 @@ El pago ha sido creado correctamente
 Se dispone de un viaje con un pago.
 
 **Proceso**:
-(1) Se hace click en "Eliminar pago"; (2) Se confirma el borrado; (3) Se hace click en "Restaurar pago" en el pago eliminado; (4) Se confirma la restaración; (5) Se comprueba que se ha restaurado.
+(1) Se hace click en "Eliminar pago"; (2) Se confirma el borrado; (3) Se hace click en "Restaurar pago" en el pago eliminado; (4) Se confirma la restauración; (5) Se comprueba que se ha restaurado.
 
 **Resultado esperado**:
 El pago puede ser borrado y aparece en el apartado de viajes borrados. El pago puede ser restaurado.
@@ -402,7 +402,7 @@ El pago ha sido borrado y restaurado
 
 ### Prueba 16: Resumen de cuentas correcto
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -429,7 +429,7 @@ El resumen de cuentas es correcto y se actualiza
 ### Prueba 17: Cambiar entre temas
 
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -437,7 +437,7 @@ El resumen de cuentas es correcto y se actualiza
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
-(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el tema que se quiera en los botones "Dark/Light"; (4) La página cambia de color; (5) Los cambios de color se mantienen.
+(1) Se hace click botón arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el tema que se quiera en los botones "Dark/Light"; (4) La página cambia de color; (5) Los cambios de color se mantienen.
 
 **Resultado esperado**:
 El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cambio es valido solo para el navegador actual.
@@ -455,7 +455,7 @@ Es posible cambiar entre temas
 
 ### Prueba 18: Cambiar nombre de usuario
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -463,7 +463,7 @@ Es posible cambiar entre temas
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
-(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se ven los datos del perfil; (4) Se cambia el nombre y se da a "Guardar".
+(1) Se hace click botón arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se ven los datos del perfil; (4) Se cambia el nombre y se da a "Guardar".
 
 **Resultado esperado**:
 El usuario puede cambiar el nombre de su cuenta.
@@ -481,7 +481,7 @@ Es posible cambiar el nombre de usuario
 
 ### Prueba 19: Cambiar contraseña
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -489,7 +489,7 @@ Es posible cambiar el nombre de usuario
 Un usuario de la aplicación con sesión iniciada.
 
 **Proceso**:
-(1) Se hace click boton arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el botón "Solicitar cambio de contraseña"; (4) Sale que ha sido solicitado; (5) Se va al correo y se hace click en el enlace; (6) Se pide nueva contraseña; (7) Contraseña cambiada; (8) Se vuelve a iniciar sesión; (9) Inicio de sesión correcto.
+(1) Se hace click botón arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el botón "Solicitar cambio de contraseña"; (4) Sale que ha sido solicitado; (5) Se va al correo y se hace click en el enlace; (6) Se pide nueva contraseña; (7) Contraseña cambiada; (8) Se vuelve a iniciar sesión; (9) Inicio de sesión correcto.
 
 **Resultado esperado**:
 El usuario puede solicitar y cambiar su contraseña.
@@ -508,7 +508,7 @@ Es posible cambiar la contraseña
 
 ### Prueba 20: Presupuesto
 
-| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER/PABLO |
+| **Fecha** | 03/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -516,18 +516,18 @@ Es posible cambiar la contraseña
 Un viaje sin un presupuesto asignado con gastos.
 
 **Proceso**:
-(1) Se crea viaje in presupuesto; (2) Se rellena con gastos; (3) Se comprueban los gastos; (4) Se edita el viaje; (5) Se añade presupuesto; (6) Se comrpueba el presupuesto si se refleja.
+(1) Se crea viaje in presupuesto; (2) Se rellena con gastos; (3) Se comprueban los gastos; (4) Se edita el viaje; (5) Se añade presupuesto; (6) Se comprueba el presupuesto si se refleja.
 
 **Resultado esperado**:
 Es posible asignar un presupuesto a un viaje y el grafico de presupuesto es actualizado con los gastos no eliminados.
 
 **Resultado final**:
-El presupuesto se adecua correctamente
+El presupuesto se adecuá correctamente
 
 **Imágenes**
 
 | ![imagenes/t20/1.PNG](imagenes/t20/1.PNG) | ![imagenes/t20/2.PNG](imagenes/t20/2.PNG) | ![imagenes/t20/3.PNG](imagenes/t20/3.PNG) | ![imagenes/t20/4.PNG](imagenes/t20/4.PNG) | ![imagenes/t20/5.PNG](imagenes/t20/5.PNG) | ![imagenes/t20/6.PNG](imagenes/t20/6.PNG) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| Sin presupuesto vacio | Sin presupuesto relleno | Gastos | Editar Viaje | Añadir presupuesto | Presupuesto reflejado |
+| Sin presupuesto vació | Sin presupuesto relleno | Gastos | Editar Viaje | Añadir presupuesto | Presupuesto reflejado |
 
 ---
