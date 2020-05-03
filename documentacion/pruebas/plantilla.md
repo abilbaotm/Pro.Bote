@@ -8,7 +8,7 @@
 ## Pruebas internas
 ### Prueba n+1: {{titulo}}
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Completada |
 

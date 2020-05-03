@@ -11,7 +11,7 @@ Esta documentación describe pruebas internas efectuadas por los miembros del eq
 ## Pruebas internas
 ### Prueba 1: Registro y login usuarios (user/pass)
 
-| Fecha | 01/05/2020  | **Versión** | 0.2.62 |  Autor | ASIER |
+| **Fecha** | 01/05/2020  | **Versión** | 0.2.62 |  **Autor** | ASIER |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android | **Plataforma** | Web | **Estado** | Completada |
 
@@ -38,7 +38,7 @@ El usuario ha podido registrarse y ha podido iniciar sesión. Sus datos son corr
 
 ### Prueba 2: Login con Google Web
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -64,7 +64,7 @@ El usuario ha iniciado sesion mediante Google Auth.
 
 ### Prueba 3: Login con Google Android
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android | **Plataforma** | App | **Estado** | Completada |
 
@@ -90,7 +90,7 @@ El usuario ha iniciado sesion mediante Google Auth.
 
 ### Prueba 4: Logout funcional
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android | **Plataforma** | App | **Estado** | Completada |
 
@@ -116,7 +116,7 @@ El usuario ha cerrado sesion.
 
 ### Prueba 5: Crear un nuevo viaje
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -142,7 +142,7 @@ El usuario ha creado un viaje.
 
 ### Prueba 6: Editar un viaje
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -168,7 +168,7 @@ El usuario ha editado un viaje.
 
 ### Prueba 7: Borrar un viaje
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -194,7 +194,7 @@ El usuario ha borrado un viaje.
 
 ### Prueba 8: Archivar un viaje
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -220,7 +220,7 @@ El usuario ha archivado un viaje.
 
 ### Prueba 9: Restaurar un viaje
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -246,7 +246,7 @@ El usuario ha restaurado un viaje.
 
 ### Prueba 10: Añadir usuario existente un viaje ya creado
 
-| Fecha | 02/05/2020  | **Versión** | 0.2.62 |  Autor | PABLO |
+| **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web | **Estado** | Completada |
 
@@ -272,7 +272,7 @@ El usuario ha añadido a otro usuario existente satisfactoriamente.
 
 ### Prueba 11: Crear un nuevo gasto
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -295,7 +295,7 @@ El gasto es creado y se ve reflejado en el resumen del viaje.
 
 ### Prueba 12: Editar un gasto
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -318,7 +318,7 @@ El gasto es editado y los cambios se ven reflejados en el resumen del viaje.
 
 ### Prueba 13: Borrar/Restaurar un gasto
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -341,7 +341,7 @@ Los gastos pueden ser borrados, una vez borrados pueden ser restaurados correcta
 
 ### Prueba 14: Crear un nuevo pago
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -364,7 +364,7 @@ Es posible crear un pago entre dos participantes y esté se ve reflejado en el r
 
 ### Prueba 15: Borrar un pago
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -387,7 +387,7 @@ El pago puede ser borrado y aparece en el apartado de viajes borrados. El pago p
 
 ### Prueba 16: Resumen de cuentas correcto
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -411,7 +411,7 @@ El resumen de cuentas pendientes entre participantes es correcto y se actualiza 
 ### Prueba 17: Cambiar entre temas
 
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -434,7 +434,7 @@ El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cam
 
 ### Prueba 18: Cambiar nombre de usuario
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -457,7 +457,7 @@ El usuario puede cambiar el nombre de su cuenta.
 
 ### Prueba 19: Cambiar contraseña
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
@@ -481,7 +481,7 @@ El usuario puede solicitar y cambiar su contraseña.
 
 ### Prueba 20: Presupuesto
 
-| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| **Fecha** | MM/DD/AAAA  | **Versión** | 0.0.0 |  **Autor** | ASIER/PABLO |
 | --- | --- | --- | --- | --- | --- |
 | **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
 
