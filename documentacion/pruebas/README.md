@@ -270,4 +270,234 @@ El usuario ha añadido a otro usuario existente satisfactoriamente.
 
 ---
 
+### Prueba 11: Crear un nuevo gasto
 
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Teniendo un viaje creado, añadir un gasto vinculado a dicho viaje.
+
+**Proceso**:
+
+**Resultado esperado**:
+El gasto es creado y se ve reflejado en el resumen del viaje.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 12: Editar un gasto
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Existe un viaje con uno o varios gastos previamente creados.
+
+**Proceso**:
+
+**Resultado esperado**:
+El gasto es editado y los cambios se ven reflejados en el resumen del viaje.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 13: Borrar/Restaurar un gasto
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Existe un viaje creado donde se disponen de uno o varios gastos.
+
+**Proceso**:
+
+**Resultado esperado**:
+Los gastos pueden ser borrados, una vez borrados pueden ser restaurados correctamente.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 14: Crear un nuevo pago
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Se dispone de un viaje con multiples participantes.
+
+**Proceso**:
+
+**Resultado esperado**:
+Es posible crear un pago entre dos participantes y esté se ve reflejado en el resumen del viaje.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 15: Borrar un pago
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Se dispone de un viaje con un pago.
+
+**Proceso**:
+
+**Resultado esperado**:
+El pago puede ser borrado y aparece en el apartado de viajes borrados. El pago puede ser restaurado.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 16: Resumen de cuentas correcto
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Se dispone de un viaje con multiples gastos y pagos.
+
+**Proceso**:
+
+**Resultado esperado**:
+El resumen de cuentas pendientes entre participantes es correcto y se actualiza sin tener en cuenta gastos y pagos eliminados.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 17: Cambiar entre temas
+
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Un usuario de la aplicación con sesión iniciada.
+
+**Proceso**:
+
+**Resultado esperado**:
+El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cambio es valido solo para el navegador actual.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 18: Cambiar nombre de usuario
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Un usuario de la aplicación con sesión iniciada.
+
+**Proceso**:
+
+**Resultado esperado**:
+El usuario puede cambiar el nombre de su cuenta.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+### Prueba 19: Cambiar contraseña
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Un usuario de la aplicación con sesión iniciada.
+
+**Proceso**:
+
+**Resultado esperado**:
+El usuario puede solicitar y cambiar su contraseña.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
+
+
+### Prueba 20: Presupuesto
+
+| Fecha | MM/DD/AAAA  | **Versión** | 0.0.0 |  Autor | ASIER/PABLO |
+| --- | --- | --- | --- | --- | --- |
+| **SO** | Android/Windows | **Plataforma** | Web/App | **Estado** | Pendiente |
+
+**Descripción del escenario inicial**:
+Un viaje sin un presupuesto asignado con gastos.
+
+**Proceso**:
+
+**Resultado esperado**:
+Es posible asignar un presupuesto a un viaje y el grafico de presupuesto es actualizado con los gastos no eliminados.
+
+**Resultado final**:
+
+**Imágenes**
+
+| ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) | ![imagenes/800x800.png](imagenes/800x800.png) |
+| --- | --- | --- | --- |
+
+---
