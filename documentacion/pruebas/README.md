@@ -43,22 +43,22 @@ El usuario ha podido registrarse y ha podido iniciar sesión. Sus datos son corr
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
-Se valida que es posible iniciar sesión via Google en la Web.
+Se valida que es posible iniciar sesión vía Google en la Web.
 
 **Proceso**:
-(1) Se hace click en el boton "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google; (3) El usuario inicia sesión usando su nombre y correo de google;
+(1) Se hace click en el botón "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google; (3) El usuario inicia sesión usando su nombre y correo de google;
  
 **Resultado esperado**:
-El puede iniciar sesion usando su cuenta de Google.
+Él puede iniciar sesión usando su cuenta de Google.
 
 **Resultado final**:
-El usuario ha iniciado sesion mediante Google Auth.
+El usuario ha iniciado sesión mediante Google Auth.
 
 **Imágenes**
 
 | ![imagenes/t2/1.PNG](imagenes/t2/1.PNG) | ![imagenes/t2/2.PNG](imagenes/t2/2.PNG) | ![imagenes/t2/3.PNG](imagenes/t2/3.PNG) | 
 | :---: | :---: | :---: | 
-| Pantalla de login | Gestion de login de google | Inicio de sesión correcto | 
+| Pantalla de login | Gestión de login de google | Inicio de sesión correcto | 
 
 ---
 
@@ -69,22 +69,22 @@ El usuario ha iniciado sesion mediante Google Auth.
 | **SO** | Android | **Plataforma** | App | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
-Se valida que es posible iniciar sesión via Google en la aplicación de Android.
+Se valida que es posible iniciar sesión vía Google en la aplicación de Android.
 
 **Proceso**:
-(1) Se hace click en el boton "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google. Elegimos con que usuario de google queremos inicar sesión; (3) El usuario inicia sesión usando su nombre y correo de google;
+(1) Se hace click en el botón "LOG IN CON GOOGLE"; (2) Aparece una ventana emergente que gestiona el inicio de sesión de google. Elegimos con que usuario de google queremos iniciar sesión; (3) El usuario inicia sesión usando su nombre y correo de google;
  
 **Resultado esperado**:
-El puede iniciar sesion usando su cuenta de Google.
+Él puede iniciar sesión usando su cuenta de Google.
 
 **Resultado final**:
-El usuario ha iniciado sesion mediante Google Auth.
+El usuario ha iniciado sesión mediante Google Auth.
 
 **Imágenes**
 
 | ![imagenes/t3/1.PNG](imagenes/t3/1.jpg) | ![imagenes/t3/2.PNG](imagenes/t3/2.jpg) | ![imagenes/t3/3.PNG](imagenes/t3/3.jpg) | 
 | :---: | :---: | :---: | 
-| Pantalla de login | Gestion de login de google | Inicio de sesión correcto | 
+| Pantalla de login | Gestión de login de google | Inicio de sesión correcto | 
 
 ---
 
@@ -98,13 +98,13 @@ El usuario ha iniciado sesion mediante Google Auth.
 Se valida que es posible cerrar sesión una vez dentro de tu cuenta.
 
 **Proceso**:
-(1) Se hace click en el botón representado como tres puntos verticales; (2) Se hace click en el icono del perfil representado con una persona; (3) Se hace click en el boton "Log out"; (4) El usuario ha cerrado sesión satisfactoriamente.
+(1) Se hace click en el botón representado como tres puntos verticales; (2) Se hace click en el icono del perfil representado con una persona; (3) Se hace click en el botón "Log out"; (4) El usuario ha cerrado sesión satisfactoriamente.
  
 **Resultado esperado**:
-El puede cerrar sesion.
+Él puede cerrar sesión.
 
 **Resultado final**:
-El usuario ha cerrado sesion.
+El usuario ha cerrado sesión.
 
 **Imágenes**
 
@@ -150,7 +150,7 @@ El usuario ha creado un viaje.
 Se valida que es posible editar un viaje.
 
 **Proceso**:
-(1) Se hace click en el viaje que se quiera editar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos; (4) El usuario cambia los datos y le hace click al botón "Editar"; (5) El viaje se ha cambiado.
+(1) Se hace click en el viaje que se quiera editar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los datos en sus respectivos campos; (4) El usuario cambia los datos y le hace click al botón "Editar"; (5) El viaje se ha cambiado.
  
 **Resultado esperado**:
 El usuario puede editar un viaje.
@@ -176,7 +176,7 @@ El usuario ha editado un viaje.
 Se valida que es posible borrar un viaje.
 
 **Proceso**:
-(1) Se hace click en el viaje que se quiera borrar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Borrar"; (4) Se pide confirmación del borrado; (5) El viaje pasa a pendiente de borrar hasta que se haga el borrado diario de viajes.
+(1) Se hace click en el viaje que se quiera borrar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Borrar"; (4) Se pide confirmación del borrado; (5) El viaje pasa a pendiente de borrar hasta que se haga el borrado diario de viajes.
  
 **Resultado esperado**:
 El usuario puede borrar un viaje.
@@ -188,7 +188,7 @@ El usuario ha borrado un viaje.
 
 | ![imagenes/t7/1.PNG](imagenes/t7/1.PNG) | ![imagenes/t7/2.PNG](imagenes/t7/2.PNG) | ![imagenes/t7/3.PNG](imagenes/t7/3.PNG) | ![imagenes/t7/4.PNG](imagenes/t7/4.PNG) | ![imagenes/t7/5.PNG](imagenes/t7/5.PNG) | 
 | :---: | :---: | :---: | :---: | :---: | 
-| Pantalla de feed del usuario | Resumen del viaje | Botón de borrado | Confirmacion del borrado | Viaje en pendiente de borrar |
+| Pantalla de feed del usuario | Resumen del viaje | Botón de borrado | Confirmación del borrado | Viaje en pendiente de borrar |
 
 ---
 
@@ -202,7 +202,7 @@ El usuario ha borrado un viaje.
 Se valida que es posible archivar un viaje.
 
 **Proceso**:
-(1) Se hace click en el viaje que se quiera archivar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Archivar"; (4) Se pide confirmación del archivado; (5) El viaje pasa a archivado.
+(1) Se hace click en el viaje que se quiera archivar; (2) En el resumen del viaje se hace click en el botón "Editar viaje"; (3) Se abre el formulario de viaje con los datos en sus respectivos campos. En la parte inferior aparecen los botones para borrar/archivar el viaje. Se hace click en el botón "Archivar"; (4) Se pide confirmación del archivado; (5) El viaje pasa ha archivado.
  
 **Resultado esperado**:
 El usuario puede archivar un viaje.
@@ -214,7 +214,7 @@ El usuario ha archivado un viaje.
 
 | ![imagenes/t8/1.PNG](imagenes/t8/1.PNG) | ![imagenes/t8/2.PNG](imagenes/t8/2.PNG) | ![imagenes/t8/3.PNG](imagenes/t8/3.PNG) | ![imagenes/t8/4.PNG](imagenes/t8/4.PNG) | ![imagenes/t8/5.PNG](imagenes/t8/5.PNG) | 
 | :---: | :---: | :---: | :---: | :---: | 
-| Pantalla de feed del usuario | Resumen del viaje | Botón de archivado | Confirmacion del archivado | Viaje archivado |
+| Pantalla de feed del usuario | Resumen del viaje | Botón de archivado | Confirmación del archivado | Viaje archivado |
 
 ---
 
@@ -228,7 +228,7 @@ El usuario ha archivado un viaje.
 Se valida que es posible restaurar un viaje borrado/archivado.
 
 **Proceso**:
-(1) Se hace click en el viaje que se quiera restaurar; (2) En el resumen del viaje saldra un mensaje avisando de que el viaje está pediente de borrar/archivado. Hacemos click en "Cancelar" situado al final del mensaje; (3)(4) El viaje pasa a estar activo de nuevo.
+(1) Se hace click en el viaje que se quiera restaurar; (2) En el resumen del viaje saldrá un mensaje avisando de que el viaje está pendiente de borrar/archivado. Hacemos click en "Cancelar" situado al final del mensaje; (3)(4) El viaje pasa a estar activo de nuevo.
  
 **Resultado esperado**:
 El usuario puede restaurar un viaje borrado/archivado.
