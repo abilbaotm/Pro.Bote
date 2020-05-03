@@ -531,3 +531,46 @@ El presupuesto se adecuá correctamente
 | Sin presupuesto vació | Sin presupuesto relleno | Gastos | Editar Viaje | Añadir presupuesto | Presupuesto reflejado |
 
 ---
+
+## Pruebas externas
+
+En esta fase se incluye un resumen del feedback obtenido de posibles usuarios de la aplicación.
+El formulario usado es el siguiente: https://forms.gle/UdqMDLPismvTzduZ9
+
+| Pregunta | Respuesta | 
+| --- | --- |
+| Plataforma | xx% PC Escritorio <br> xx% Navegador móvil <br> xx% App Android |
+| Valoración media del sitio | |
+| Valoración media de facilidad de uso | |
+| Valoración media de utilidad del sitio web  | |
+
+Problemas detectados: 
+- NA
+
+Resumen de sugerencias:
+- NA
+
+
+### Tracking de errores
+
+Durante la fase final del proyecto sé implemento un sistema de tracking de errores. El servicio se llama [Rollbar](https://rollbar.com/) y permite
+auditar en la aplicación en tiempo de ejecución. El funcionamiento es sencillo, al generarse un error este es enviado a la API de Rollbar donde 
+los desarrolladores del proyecto obtienen un resumen detallado para poder darle solución. 
+
+Durante este proceso se han detectado los siguientes errores en la aplicación gracias a Rollbar:
+
+| Issue | Resumen error | Notas adicionales | Estado | 
+| --- | --- | --- | --- |
+| #46 | TypeError: Cannot read property 'data' of undefined | | Solucionado |
+| #47 | TypeError: Cannot read property 'style' of undefined | | Solucionado |
+| #48 | FirebaseError: Missing or insufficient permissions. | | Solucionado |
+| #50 | FirebaseError: Function DocumentReference.set() called with invalid data. | | Solucionado |
+| #53 | TypeError: undefined is not a function | Solucionado de manera indirecta | Solucionado |
+| #55 | FIRESTORE (7.13.2) INTERNAL ASSERTION FAILED | | Solucionado |
+| #56 | ReferenceError: Proxy is not defined | IE no esta soportado (Limitado por Angular) | Solucionado |
+| #57 | Error: This browser is not supported or 3rd party cookies and data may be disabled. | | Solucionado |
+| #59 | TypeError: Cannot read property '********@gmail.com' of undefined | | Solucionado |
+| #60 | Firebase: No Firebase App '[DEFAULT]' has been created | | Solucionado |
+
+Los detalles como autor, fechas y solución se encuentran disponibles dentro del issue. 
+Todos los issues generado vía Rollbar disponen de la etiqueta [Rollbar](https://gitlab.com/pabil/bote-dw/-/issues?scope=all&utf8=%E2%9C%93&state=all&label_name[]=Rollbar)
