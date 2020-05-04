@@ -567,7 +567,7 @@ Durante este proceso se han detectado los siguientes errores en la aplicación g
 | #50 | FirebaseError: Function DocumentReference.set() called with invalid data. | | Solucionado |
 | #53 | TypeError: undefined is not a function | Solucionado de manera indirecta | Solucionado |
 | #55 | FIRESTORE (7.13.2) INTERNAL ASSERTION FAILED | | Solucionado |
-| #56 | ReferenceError: Proxy is not defined | IE no esta soportado (Limitado por Angular) | Solucionado |
+| #56 | ReferenceError: Proxy is not defined | IE no está soportado (Limitado por Angular) | Solucionado |
 | #57 | Error: This browser is not supported or 3rd party cookies and data may be disabled. | | Solucionado |
 | #59 | TypeError: Cannot read property '********@gmail.com' of undefined | | Solucionado |
 | #60 | Firebase: No Firebase App '[DEFAULT]' has been created | | Solucionado |
