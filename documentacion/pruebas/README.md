@@ -551,7 +551,7 @@ Resumen de sugerencias:
 - NA
 
 
-### Tracking de errores
+## Tracking de errores
 
 Durante la fase final del proyecto sé implemento un sistema de tracking de errores. El servicio se llama [Rollbar](https://rollbar.com/) y permite
 auditar en la aplicación en tiempo de ejecución. El funcionamiento es sencillo, al generarse un error este es enviado a la API de Rollbar donde 
