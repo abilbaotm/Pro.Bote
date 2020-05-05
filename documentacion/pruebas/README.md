@@ -539,16 +539,19 @@ El formulario usado es el siguiente: https://forms.gle/UdqMDLPismvTzduZ9
 
 | Pregunta | Respuesta | 
 | --- | --- |
-| Plataforma | xx% PC Escritorio <br> xx% Navegador móvil <br> xx% App Android |
-| Valoración media del sitio | |
-| Valoración media de facilidad de uso | |
-| Valoración media de utilidad del sitio web  | |
+| Plataforma | 80% PC Escritorio <br> 20% Navegador móvil <br> 0% App Android |
+| Valoración media del sitio | 4,8/5.0 |
+| Valoración media de facilidad de uso | 4.4/5.0|
+| Valoración media de utilidad del sitio web  | 4,2/5.0 |
 
 Problemas detectados: 
-- NA
+- La conversion de moneda no funciona en la suma total. Ya que se use la moneda que se use, la toma en cuenta como euro.
+- Existen en el mercado otras soluciones que ofrecen una solución similar a este proyecto.
 
 Resumen de sugerencias:
-- NA
+- Poder salir/ocultar los viajes creados por otros usuarios
+- Vincular cuentas de paypal y que te cree las transferencias para pagar las deudas, foto de facturas
+- Un mapa para ver el viaje
 
 
 ## Tracking de errores
