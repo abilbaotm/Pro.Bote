@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   }
 
-  //Cargar los viajes en sus respectivas categorias para poder visualizarlos en la pagina
+  //Cargar los viajes en sus respectivas categorías para poder visualizarlos en la pagina
   cargarViajes() {
     this.FBSuscribers.push(this.firestoreService.getViajes().subscribe((viajesSnapshot) => {
       this.todosViajes = {'Activos': [], 'Futuros': [], 'Archivados': [], 'Pendientes de Borrar': []};
