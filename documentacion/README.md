@@ -72,3 +72,16 @@ Durante el proceso final de desarrollo se ejecutaron multiples test para validar
 todas las funciones y características del proyecto funcionaban.
 
 Las pruebas realizadas se encuentran el la sección de [pruebas](pruebas).
+
+## Bibliografía
+
+Durante el desarrollo del proyecto se consultaron los siguientes recursos:
+- [Angular 8 y Firestore](https://medium.com/angular-chile/angular-6-y-firestore-b7f270adcc96)
+- [Cloud Scheduler API](https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com?_ga=2.106107008.24171351.1585506820-2022136465.1579352491&project=dw-bote&folder&organizationId)
+- [Integrating Google Sign-In into your web app](https://developers.google.com/identity/sign-in/web/sign-in)
+- [How to create a signed APK file using Cordova command line interface?](https://stackoverflow.com/questions/26449512/how-to-create-a-signed-apk-file-using-cordova-command-line-interface)
+- [fix(android): Back button fix for SDK28](https://github.com/apache/cordova-plugin-splashscreen/pull/225)
+- [Continuous Delivery en Android con Gitlab CI, Fabric Beta, Google Play y Fastlane.](https://medium.com/@harttyn/continuous-delivery-en-android-con-gitlab-ci-fabric-beta-google-play-y-fastlane-9d2dca0c7077)
+- [Abiro PhoneGap Image Generator](https://pgicons.abiro.com/)
+- [Protect Your HTTP Firebase Cloud Functions](https://dev.to/daviddalbusco/protect-your-http-firebase-cloud-functions-1ii6)
+- [How to create signed android apk with Apache Cordova](https://www.linkedin.com/pulse/how-create-signed-android-apk-apache-cordovausing-cordova-ghatul/)
