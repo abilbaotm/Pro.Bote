@@ -65,7 +65,7 @@ exports.vPublicacion = functions.https.onRequest(async (request, response) => {
   }
 });
 
-// funcion eliminar
+// función eliminar
 exports.eliminar = functions.https.onRequest(async (request, response) => {
   // validar login Bearer
 
