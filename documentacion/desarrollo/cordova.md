@@ -1,6 +1,6 @@
-# Aplicaciones moviles (Apache Cordova)
+# Aplicaciones móviles (Apache Cordova)
 
-NOTA: No recomendamos este método para generar las versiones móviles. Usar los artefactos generado con el servicio de CI/CD. Más info en [README.md](/README.md#Android)
+NOTA: No recomendamos este método para generar las versiones móviles. Usar los artefactos generados con el servicio de CI/CD. Más info en [README.md](/README.md#Android)
 
 NOTA 2: El login con Google *no* está disponible en las APKs generadas con este método, [más info](#login-google-nativo).
 
@@ -44,9 +44,9 @@ El artefacto resultante del comando anterior aparecerá en la siguiente ruta: `C
 
 ## Login Google Nativo
 
-Es posible que el Login nativo no este disponible en APKs generadas de manera local. Por motivos de seguridad las llamadas a la API de OAuth de Google solo son válidas
+Es posible que el Login nativo no esté disponible en APKs generadas de manera local. Por motivos de seguridad las llamadas a la API de OAuth de Google solo son válidas
 por las aplicaciones generadas y firmadas vía CI.
-Para una implementación propia necesitara los siguientes recursos/tareas:
+Para una implementación propia necesitará los siguientes recursos/tareas:
 
 - https://developers.google.com/identity/protocols/oauth2
 - https://github.com/EddyVerbruggen/cordova-plugin-googleplus#3-google-api-setup

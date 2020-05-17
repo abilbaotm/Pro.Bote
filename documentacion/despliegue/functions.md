@@ -8,12 +8,12 @@ Para poder habilitar Firebase Functions accede a la consola
 de Firebase
 ![16](../images/16.PNG)
 
-Sigue las instrucciones, necesitaras tener [Node.js](https://nodejs.org/en/) instalado en tu sistema y ejecutar el siguiente comando:
+Sigue las instrucciones, necesitarás tener [Node.js](https://nodejs.org/en/) instalado en tu sistema y ejecutar el siguiente comando:
 `npm install -g firebase-tools`
 
 ![17](../images/17.PNG)
 
-Situá la línea de comandos en la carpeta del proyecto y ejecuta los siguientes comandos:
+Situa la línea de comandos en la carpeta del proyecto y ejecuta los siguientes comandos:
 
 Es posible que tengas que iniciar sesión con tu cuenta de google.
 
@@ -58,10 +58,10 @@ Tras el despliegue comprueba que se han creado las funciones desde la consola de
 | Nombre | Acción | 
 | --- | --- |
 | eliminar | Elimina los viajes pendientes de borrar |
-| vPublicacion | Función usada por CI/CD para consultar el siguiente numero de version para generar la version de producción de la APP |
+| vPublicacion | Función usada por CI/CD para consultar el siguiente número de version para generar la version de producción de la APP |
 
 
-Para hacer uso de estas funciones se recomendá el uso de [Postman](https://www.postman.com/). Para realizar cualquier llamada
+Para hacer uso de estas funciones se recomienda el uso de [Postman](https://www.postman.com/). Para realizar cualquier llamada
 es necesario que se incluya la [clave de autorización](https://gitlab.com/pabil/bote-dw/-/blob/ee77c1e4bac35837abd474c8ad898f7b9873db12/functions/index.js#L7) en la cabecera de la llamada (ver ejemplo).
 #### `eliminar`
 

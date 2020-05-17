@@ -3,7 +3,7 @@
 Aquí veremos los diferentes apartados que componen la información total de un viaje.
 
 ## Resumen
-Lo primero que nos encontramos en con la información general proporcionada al crear el viaje junto a un grafico que resume los gastos totales del mismo.
+Lo primero que nos encontramos es con la información general proporcionada al crear el viaje junto a un gráfico que resume los gastos totales del mismo.
 
 ![28](../images/28.PNG)
 
@@ -29,9 +29,9 @@ Aquí podremos ver los gastos ordenados en una lista. Si hacemos click en uno de
 
 ![29](../images/29.PNG)
 
-Si eres el creador del gasto te dara la opción de poder borrarlo. Al borrar un gasto, pasara a la lista de gastos eliminados del viaje.
+Si eres el creador del gasto te dará la opción de poder borrarlo. Al borrar un gasto, pasará a la lista de gastos eliminados del viaje.
 
-Si accionamos el botón "Ver gastos eliminados" se podrán ver que gastos han sido eliminados del viaje. Al hacer click en un gasto eliminado, nos dara la posibilidad de restaurarlo para que vuelva a estar como activo. Para saber más a cerca de los gastos visita [gastos.md](gastos.md)
+Si accionamos el botón "Ver gastos eliminados" se podrán ver que gastos han sido eliminados del viaje. Al hacer click en un gasto eliminado, nos dará la posibilidad de restaurarlo para que vuelva a estar como activo. Para saber más a cerca de los gastos visita [gastos.md](gastos.md)
 
 ![33](../images/33.PNG)
 
@@ -41,9 +41,9 @@ Aquí podremos ver los pagos ordenados en una lista. Si hacemos click en uno de 
 
 ![30](../images/30.PNG)
 
-Si eres el creador del pago te dara la opción de poder borrarlo. Al borrar un pago, pasara a la lista de pagos eliminados del viaje.
+Si eres el creador del pago te dará la opción de poder borrarlo. Al borrar un pago, pasará a la lista de pagos eliminados del viaje.
  
- Si accionamos el botón "Ver pagos eliminados" se podrán ver que pagos han sido eliminados del viaje. Al hacer click en un pago eliminado, nos dara la posibilidad de restaurarlo para que vuelva a ser un pago activo. Para saber más a cerca de los pagos visita [pagos.md](pagos.md)
+Si accionamos el botón "Ver pagos eliminados" se podrán ver que pagos han sido eliminados del viaje. Al hacer click en un pago eliminado, nos dará la posibilidad de restaurarlo para que vuelva a ser un pago activo. Para saber más a cerca de los pagos visita [pagos.md](pagos.md)
 
 ![34](../images/34.PNG)
 

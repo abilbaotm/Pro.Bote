@@ -15,7 +15,7 @@ Seleccionar ubicación dee Cloud Firestore
 
 #### Reglas
 
-Es necesario determinar los permisos para la base de datos. Para ello desde el menu reglas, incluir las reglas del archivo
+Es necesario determinar los permisos para la base de datos. Para ello desde el menú reglas, incluir las reglas del archivo
 [firestore.rules](/firestore.rules)
 
 ![13](../images/13.PNG)

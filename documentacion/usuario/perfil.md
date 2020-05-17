@@ -22,7 +22,7 @@ Es posible cambiar la contraseña de tu usuario. Para ello pulsa el botón "Soli
 
 ![43](../images/43.PNG)
 
-Se enviara un correo electrónico a su email con un enlace para cambiar la contraseña. Al hacer click un sitio web aparecerá. Rellene el campo con su nueva contraseña y pulse "GUARDAR".
+Se enviará un correo electrónico a su email con un enlace para cambiar la contraseña. Al hacer click un sitio web aparecerá. Rellene el campo con su nueva contraseña y pulse "GUARDAR".
 
 ![44](../images/44.PNG)
 
