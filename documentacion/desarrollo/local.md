@@ -1,6 +1,6 @@
 # Ejecutar código en local de manera nativa
 
-Para poder ejecutar el proyecto de manera nativa el sistema host necesitara las siguientes tecnologías: 
+Para poder ejecutar el proyecto de manera nativa el sistema host necesitará las siguientes tecnologías: 
 - Git
 - Node.js
 
@@ -14,7 +14,7 @@ cd bote-dw
 
 ## Instalar dependencias del proyecto
 
-Este proyecto requiere de multiples dependencias descritas en el paquete [pacakage.json](package.json), para proceder a 
+Este proyecto requiere de múltiples dependencias descritas en el paquete [pacakage.json](package.json), para proceder a 
 la instalación es necesario el siguiente comando:
 ```
 npm install
@@ -24,7 +24,7 @@ Este proceso creara la carpeta `node_modules`.
 ## Ejecutar proyecto
 
 Angular pone a nuestra disposicion con la ayuda de node.js un servidor diseñado para desarrollar y probar este proyecto en local.
-Es posible lanzar el servidor con esta aplicacion web con el siguiente comando:
+Es posible lanzar el servidor con esta aplicación web con el siguiente comando:
 
 ```
 ng serve

@@ -244,7 +244,7 @@ El usuario ha restaurado un viaje.
 
 ---
 
-### Prueba 10: Añadir usuario existente un viaje ya creado
+### Prueba 10: Añadir usuario existente a un viaje ya creado
 
 | **Fecha** | 02/05/2020  | **Versión** | 0.2.62 |  **Autor** | PABLO |
 | --- | --- | --- | --- | --- | --- |
@@ -266,7 +266,7 @@ El usuario ha añadido a otro usuario existente satisfactoriamente.
 
 | ![imagenes/t10/1.PNG](imagenes/t10/1.PNG) | ![imagenes/t10/2.PNG](imagenes/t10/2.PNG) | ![imagenes/t10/3.PNG](imagenes/t10/3.PNG) | ![imagenes/t10/4.PNG](imagenes/t10/4.PNG) | ![imagenes/t10/5.PNG](imagenes/t10/5.PNG) | 
 | :---: | :---: | :---: | :---: | :---: |
-| Feed del usuario | Resumen del viaje | Añadir participante | Feed del segundo usuario | Resumen en el que se ve el viaje al que esta invitado |
+| Feed del usuario | Resumen del viaje | Añadir participante | Feed del segundo usuario | Resumen en el que se ve el viaje al que está invitado |
 
 ---
 
@@ -355,7 +355,7 @@ El gasto se ha borrado/restaurado correctamente
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
-Se dispone de un viaje con multiples participantes.
+Se dispone de un viaje con múltiples participantes.
 
 **Proceso**:
 (1) Se hace click en el viaje; (2) Se hace click en "Nuevo pago"; (3) Se abre el formulario; (4) Se rellena el formulario; (5) Se comprueba el pago.
@@ -396,7 +396,7 @@ El pago ha sido borrado y restaurado
 
 | ![imagenes/t15/1.PNG](imagenes/t15/1.PNG) | ![imagenes/t15/2.PNG](imagenes/t15/2.PNG) | ![imagenes/t15/3.PNG](imagenes/t15/3.PNG) | ![imagenes/t15/4.PNG](imagenes/t15/4.PNG) | ![imagenes/t15/5.PNG](imagenes/t15/5.PNG) |
 | :---: | :---: | :---: | :---: | :---: |
-| Click en borrar | Confirmar borrado | Click en restaurar | Confirmar restauración | Gasto borrado y restaurado
+| Click en borrar | Confirmar borrado | Click en restaurar | Confirmar restauración | Pago borrado y restaurado
 
 ---
 
@@ -407,7 +407,7 @@ El pago ha sido borrado y restaurado
 | **SO** | Windows | **Plataforma** | Web | **Estado** | Completada |
 
 **Descripción del escenario inicial**:
-Se dispone de un viaje con multiples gastos y pagos.
+Se dispone de un viaje con múltiples gastos y pagos.
 
 **Proceso**:
 (1) Se crean gastos; (2) Se crean gastos eliminados; (3) Se crean pagos; (4) Se crean pagos eliminados; (5) Se comprueban las cuentas de un participante; (6) Se comprueban las cuentas de un segundo participante.
@@ -440,7 +440,7 @@ Un usuario de la aplicación con sesión iniciada.
 (1) Se hace click botón arriba a la derecha representado con una persona; (2) Se hace click en perfil; (3) Se hace click en el tema que se quiera en los botones "Dark/Light"; (4) La página cambia de color; (5) Los cambios de color se mantienen.
 
 **Resultado esperado**:
-El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cambio es valido solo para el navegador actual.
+El usuario puede alternar entre los dos temas disponibles (Claro/Oscuro). El cambio es válido solo para el navegador actual.
 
 **Resultado final**:
 Es posible cambiar entre temas
@@ -519,7 +519,7 @@ Un viaje sin un presupuesto asignado con gastos.
 (1) Se crea viaje in presupuesto; (2) Se rellena con gastos; (3) Se comprueban los gastos; (4) Se edita el viaje; (5) Se añade presupuesto; (6) Se comprueba el presupuesto si se refleja.
 
 **Resultado esperado**:
-Es posible asignar un presupuesto a un viaje y el grafico de presupuesto es actualizado con los gastos no eliminados.
+Es posible asignar un presupuesto a un viaje y el gráfico de presupuesto es actualizado con los gastos no eliminados.
 
 **Resultado final**:
 El presupuesto se adecuá correctamente
@@ -545,7 +545,7 @@ El formulario usado es el siguiente: https://forms.gle/UdqMDLPismvTzduZ9
 | Valoración media de utilidad del sitio web  | 4,2/5.0 |
 
 Problemas detectados: 
-- La conversion de moneda no funciona en la suma total. Ya que se use la moneda que se use, la toma en cuenta como euro.
+- La conversión de moneda no funciona en la suma total. Ya que se use la moneda que se use, la toma en cuenta como euro.
 - Existen en el mercado otras soluciones que ofrecen una solución similar a este proyecto.
 
 Resumen de sugerencias:
@@ -556,7 +556,7 @@ Resumen de sugerencias:
 
 ## Tracking de errores
 
-Durante la fase final del proyecto sé implemento un sistema de tracking de errores. El servicio se llama [Rollbar](https://rollbar.com/) y permite
+Durante la fase final del proyecto se implementó un sistema de tracking de errores. El servicio se llama [Rollbar](https://rollbar.com/) y permite
 auditar en la aplicación en tiempo de ejecución. El funcionamiento es sencillo, al generarse un error este es enviado a la API de Rollbar donde 
 los desarrolladores del proyecto obtienen un resumen detallado para poder darle solución. 
 

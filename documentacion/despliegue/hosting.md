@@ -1,7 +1,7 @@
 # Firebase 
 ## Hosting
 
-Firebase permite hostear nuestro proyecto. Para ello ejectua los siguientes comandos desde una linea de comandos en la carpeta del proyecto (necesario configurar firebase):
+Firebase permite hostear nuestro proyecto. Para ello ejecuta los siguientes comandos desde una línea de comandos en la carpeta del proyecto (necesario configurar firebase):
 
 IMPORTANTE: Eliminar fichero .firebaserc incluido en este proyecto para poder configurar el proyecto con un proyecto Firebase diferente
 
@@ -12,14 +12,14 @@ ng build
 ? Configure as a single-page app (rewrite all urls to /index.html)? No
 ```
 
-Inicia sesion en `Firebase`:
+Inicia sesión en `Firebase`:
 
 ```
 firebase login
 ? Allow Firebase to collect CLI usage and error reporting information? No
 
 ```
-Te redirigira a la pagina de verificacion de google para que des permisos para que pueda acceder a firebase
+Te redirigirá a la página de verificación de google para que des permisos para que pueda acceder a firebase
 
 Inicializa `Hosting` en el proyecto local:
 

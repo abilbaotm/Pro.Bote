@@ -6,7 +6,7 @@ en el [README.md](/README.md) de la raíz del proyecto.
 
 ## Manual de implantación
 
-El manual de implantación se divide en dos manules en funcion de los intereses de la implantación:
+El manual de implantación se divide en dos manuales en función de los intereses de la implantación:
 - [Manual de desarrollo](#manual-de-desarrollo): incluye instrucciones para poder recreear de manera local el proyecto.
 - [Manual de despliegue](#manual-de-despliegue): incluye instrucciones para poder deplegar la aplicacion en un entorno real de producción. Para poder efectuar este manual es necesario
 disponer de un entorno [local](desarrollo/local.md) la aplicación web.
@@ -22,7 +22,7 @@ Las siguientes instrucciones son útiles para poder recreear de manera local el 
 | 3 | [cordova.md](desarrollo/cordova.md) | Crear aplicación android de manera local | 
 | 4 | [cicd.md](desarrollo/cicd.md) | Uso de CI/CD | 
  
-NOTA 1: Para ejecutar el proyecto de manera local existen dos metidos: [docker.md](desarrollo/docker.md) o [local.md](desarrollo/local.md). Solo es necesario usar uno de ellos. 
+NOTA 1: Para ejecutar el proyecto de manera local existen dos métodos: [docker.md](desarrollo/docker.md) o [local.md](desarrollo/local.md). Solo es necesario usar uno de ellos. 
 
 NOTA 2: Este proyecto por defecto está configurado para usar la base de datos `dw-bote.firebaseio.com` tal y como se especifica en los archivos de entorno 
 [environment.prod.ts](/src/environments/environment.prod.ts) y [environment.ts](/src/environments/environment.ts). El procedimiento para usar una solución
@@ -50,8 +50,8 @@ Prueba el nuevo proyecto de Firebase usando los pasos especificados en [docker.m
 
 ## Manual de usuario
 
-Las siguientes instrucciones son útiles para conocer el funcionamiento de la aplicación web. Estas referencias son validas para la version de navegador
-así como la aplicación para dispositivos moviles.
+Las siguientes instrucciones son útiles para conocer el funcionamiento de la aplicación web. Estas referencias son válidas para la versión de navegador
+así como la aplicación para dispositivos móviles.
 
 
 | # | documento | Resumen |

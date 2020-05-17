@@ -12,7 +12,7 @@ Para acceder a un viaje simplemente deberemos hacer click en el viaje del que qu
 
 ## Crear un nuevo viaje
 
-Para crear un nuevo viaje pulsaremos el botón "NUEVO VIAJE" situado en el menu izquierdo, tal y como se puede ver en la imagen superior. Para más información consultar [viajes.md](viajes.md)
+Para crear un nuevo viaje pulsaremos el botón "NUEVO VIAJE" situado en el menú izquierdo, tal y como se puede ver en la imagen superior. Para más información consultar [viajes.md](viajes.md)
 
 ---
 

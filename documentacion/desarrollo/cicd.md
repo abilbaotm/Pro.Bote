@@ -8,8 +8,8 @@ que se ejecutan en este servicio
 | stage | nombre | tarea | ramas |
 | ----- | ------ | ----- | ----- |
 | .pre | prerequisites | Instalar todas las dependencias necesarias | Todas | 
-| .pre | get_version | Solicitar a función [vPublicacion](../despliegue/functions.md#vpublicacion) la version de publicación a usar en esta build | Exclusiva `master` |
-| build | build_web | Genera la version web del proyecto | Todas |
+| .pre | get_version | Solicitar a función [vPublicacion](../despliegue/functions.md#vpublicacion) la versión de publicación a usar en esta build | Exclusiva `master` |
+| build | build_web | Genera la versión web del proyecto | Todas |
 | build | build_android | Genera el proyecto para Android | Todas |
 | deploy | deploy_web | Despliega el sitio web generado por `build_web`  | Exclusiva `master` |
 | deploy | deploy_android | Despliega la aplicación generada por `build_android` | Exclusiva `master` |

@@ -4,7 +4,7 @@ En este documento se detalla el proceso necesario para crear y usar un proyecto 
 
 ### Requisitos
 
-Para poder efectuar esta tarea necesitaras las siguientes herramientas:
+Para poder efectuar esta tarea necesitarás las siguientes herramientas:
 - Cuenta de Google
 - Acceso a https://console.firebase.google.com/
 
@@ -25,7 +25,7 @@ Actualmente el proyecto no tiene soporte para Google Analytics. Por lo que no es
 
 ### Añadir aplicación web
 
-Este proceso nos facilitara las credenciales necesarias para el proyecto.
+Este proceso nos facilitará las credenciales necesarias para el proyecto.
 Seleccionar la opción web, representada como `</>`
 
 ![4](../images/4.PNG)
@@ -46,7 +46,7 @@ Para ello, desde la consola del proyecto pulsaremos en los ajustes de la aplicac
 
 ![6](../images/6.PNG)
 
-Desde el menu de aplicaciones seleccionar el `Firebase SDK snippet` `Configuración`.
+Desde el menú de aplicaciones seleccionar el `Firebase SDK snippet` `Configuración`.
 
 ![14](../images/14.PNG)
 
