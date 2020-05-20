@@ -13,7 +13,7 @@ Sigue las instrucciones, necesitarás tener [Node.js](https://nodejs.org/en/) in
 
 ![17](../images/17.PNG)
 
-Situa la línea de comandos en la carpeta del proyecto y ejecuta los siguientes comandos:
+Sitúa la línea de comandos en la carpeta del proyecto y ejecuta los siguientes comandos:
 
 Es posible que tengas que iniciar sesión con tu cuenta de google.
 
