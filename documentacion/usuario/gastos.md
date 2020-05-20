@@ -14,7 +14,7 @@ Todos los campos son bastante intuitivos asique no tendría que haber problemas 
 
 ### Partes iguales
 
-Abajo del todo hay un checker llamado partes iguales. Esto lo que hace es que divide la cantidad en partes iguales entre todos los participantes del viaje. Si le clickamos, se quitará el check y aparecera lo siguiente.
+Abajo del todo hay un checker llamado partes iguales. Esto lo que hace es que divide la cantidad en partes iguales entre todos los participantes del viaje. Si le clickamos, se quitará el check y aparecerá lo siguiente.
 
 ![39](../images/39.PNG)
 

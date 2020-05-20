@@ -19,7 +19,7 @@ la instalación es necesario el siguiente comando:
 ```
 npm install
 ```
-Este proceso creara la carpeta `node_modules`.
+Este proceso creará la carpeta `node_modules`.
 
 ## Ejecutar proyecto
 
