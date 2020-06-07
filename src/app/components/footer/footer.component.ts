@@ -92,7 +92,7 @@ export class FooterComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if (result.value) {
-        this.cookieService.set('nota-desarrollador', 'ocultar')
+        this.cookieService.set('nota-desarrollador', 'ocultar', 20)
       }
     })
   }
