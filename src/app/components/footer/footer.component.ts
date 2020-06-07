@@ -86,6 +86,7 @@ export class FooterComponent implements OnInit {
         '<li>La aplicación es de código abierto bajo licencia MIT</li>' +
         '<li><a href="https://gitlab.com/pabil/bote-dw" target="_blank"> Puedes consultar el código fuente en GitLab</a></li>' +
         '<li><a href="https://gitlab.com/pabil/bote-dw/-/tree/master/documentacion" target="_blank">Dispones del \'Manual de implantación\' y \'Manual de usuario\' en GitLab</a></li>' +
+        '<li>La aplicación Pro.Bote está disponible para <a href="https://play.google.com/store/apps/details?id=net.izabil.bote" target="_blank">Android</a> y <a href="https://bote.izabil.net/" target="_blank">versión web</a></li>' +
         '<li>Los desarrolladores principales de este proyecto (<a href="https://www.linkedin.com/in/asier-bilbao-790a88130/" target="_blank">@abilbaotm</a> y <a href="https://www.linkedin.com/in/redlayer/" target="_blank">@RedLayer</a>) buscan trabajo.</li>' +
         '</ul>' +
         'Gracias por su atención y buen viaje</p></div>',
