@@ -32,6 +32,7 @@ import {NavServiceService} from "./services/nav-service/nav-service.service";
 import {ThemeService} from "./services/theme/theme.service";
 import {RollbarErrorHandler, rollbarFactory, RollbarService} from './services/rollbar/rollbar';
 import {CookieLawModule} from "angular2-cookie-law";
+import {CookieService} from "ngx-cookie-service";
 
 moment.locale('es', localization);
 
@@ -67,7 +68,7 @@ moment.locale('es', localization);
   providers: [
     {provide: ErrorHandler, useClass: RollbarErrorHandler},
     {provide: RollbarService, useFactory: rollbarFactory},
-    AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService],
+    AuthService, UserService, AuthGuard, UserResolver, ThemeService, NavServiceService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

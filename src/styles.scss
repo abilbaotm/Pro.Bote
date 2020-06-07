@@ -68,3 +68,26 @@ $accent: mat-palette($mat-pink, A200, A100, A400);
 $theme: mat-light-theme($primary, $accent);
 
 @include date-range-picker-theme($theme);
+
+
+#nota-desarrollador {
+
+  p, li {
+    color: black;
+    font-size: 0.875rem;
+  }
+
+  p {
+    text-align: left;
+  }
+
+  li {
+    text-align: left;
+  }
+
+  span {
+    font-size: 1rem;
+    font-weight: bold;
+
+  }
+}
